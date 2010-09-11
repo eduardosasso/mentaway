@@ -51,8 +51,10 @@ add_placemarks_on_the_map = function(callback){
 	})
 }
 
+//google.maps.event.trigger(markers[0], 'click'); 
+
 $(document).ready(function() {
-		map_elem = $('#map_canvas').get(0);
+		map_elem = $('#map').get(0);
 		
 		add_placemarks_on_the_map(function(placemarks){
 			most_recent_location = {
