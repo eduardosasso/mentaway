@@ -1,7 +1,7 @@
 <?php 
-$root = realpath($_SERVER["DOCUMENT_ROOT"]);
-require_once("./Placemark.class.php");
-require_once("./Foursquare.class.php");
+require_once("Placemark.class.php");
+require_once("Foursquare.class.php");
+require_once("Posterous.class.php");
 
 //Esta classe deve abstrair toda a comunicacao com o banco de dados
 class Backend { 
@@ -12,6 +12,13 @@ class Backend {
 		// 
 		return $placemarks;
 	}
+	
+	public function get_posts() {
+		$posterous = new Posterous();
+		$posts = $posterous->get_updates();
+		return $posts;
+	}
+	
 }
 
 ?> 

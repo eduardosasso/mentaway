@@ -46,10 +46,17 @@ create_marker = function(placemark){
 }
 
 add_placemarks_on_the_map = function(callback){
-	$.getJSON('model/markers.php', function(data) {
+	$.getJSON('model/Controller.php?a=markers', function(data) {
 		callback(data);
 	})
 }
+
+get_post = function(callback){
+	$.getJSON('model/Controller.php?a=posts', function(data) {
+		callback(data);
+	})
+}
+
 
 add_markers_external_navigation = function(){
 	var idx = 0;
