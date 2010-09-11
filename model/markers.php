@@ -20,6 +20,7 @@ require_once("./Placemark.class.php");
 	
 	$backend = new Backend();
 	$placemarks = $backend->get_placemarks();
-	print json_encode($placemarks);
+	//print json_encode($placemarks);
+	print $placemarks;
 
 ?>

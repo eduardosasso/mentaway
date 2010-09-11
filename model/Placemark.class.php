@@ -9,5 +9,6 @@ class Placemark {
 	public $date;
 	public $service;
 	public $user;
+	public $trip;
 }
 ?>
