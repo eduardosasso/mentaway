@@ -51,7 +51,38 @@ add_placemarks_on_the_map = function(callback){
 	})
 }
 
-//google.maps.event.trigger(markers[0], 'click'); 
+add_markers_external_navigation = function(){
+	var idx = 0;
+	$('#navigation #next').hide();
+	
+	$('#navigation #previous').click(function(){
+		$('#navigation #next').show();
+
+		if (++idx < markers.length) {
+			google.maps.event.trigger(markers[idx], 'click'); 
+		} else {
+			$(this).hide();
+		}
+		
+	});
+	
+	$('#navigation #next').click(function(){
+		$('#navigation #previous').show();
+		
+		if (--idx >= 0) {
+			google.maps.event.trigger(markers[idx], 'click'); 
+		} else {
+			$(this).hide();
+		}
+		
+	});
+	
+}
+
+highlight_last_position = function(){
+	google.maps.event.trigger(markers[0], 'click'); 
+}
+
 
 $(document).ready(function() {
 		map_elem = $('#map').get(0);
@@ -68,6 +99,12 @@ $(document).ready(function() {
 			$.each(placemarks, function(i,placemark) {
 				create_marker(placemark);
 			});
+			
+			//faz com que o ultimo lugar visitado ja fiquei aparecendo
+			highlight_last_position();
+			
+			//adciona navegacao nas marcacoes via links anterior e proximo
+			add_markers_external_navigation();
 			
 		});		
 });
