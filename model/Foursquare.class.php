@@ -1,11 +1,11 @@
 <?php 
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
-require_once("$root/model/AbstractService.class.php");
-require_once("$root/model/Placemark.class.php");
+require_once("./AbstractService.class.php");
+require_once("./Placemark.class.php");
 
-require_once("$root/lib/foursquare/EpiCurl.php");
-require_once("$root/lib/foursquare/EpiOAuth.php");
-require_once("$root/lib/foursquare/EpiFoursquare.php");
+require_once("./lib/foursquare/EpiCurl.php");
+require_once("./lib/foursquare/EpiOAuth.php");
+require_once("./lib/foursquare/EpiFoursquare.php");
 
 class Foursquare extends AbstractService { 
 	public function get_updates(){
@@ -30,7 +30,7 @@ class Foursquare extends AbstractService {
 			$placemark->date = $checkin->created;
 			$placemark->lat = $checkin->venue->geolat;
 			$placemark->long = $checkin->venue->geolong;
-			$placemark->service = "Foursquare"
+			$placemark->service = "Foursquare";
 			
 			$placemarks[] = $placemark;
 		}
