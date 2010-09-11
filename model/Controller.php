@@ -29,7 +29,7 @@ class Controller {
 	
 	function print_posts(){
 		$posts = $this->backend->get_posts();
-		print $posts;
+		print json_encode($posts);
 	}
 }
 

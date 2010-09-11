@@ -209,6 +209,19 @@ body { height: 100%; margin: 0px; padding: 0px }
 	background-color: white;	
 }
 
+#post {
+	margin: 12px 0px 12px 0px;	
+}
+
+#post #title {
+	margin: 0px 0px 12px 0px;
+	font-size: 18px;
+}
+
+#post #body p {
+	margin: 0px 0px 8px 0px;
+}
+
 /* 
  * print styles
  * inlined to avoid required HTTP connection www.phpied.com/delay-loading-your-print-css/ 

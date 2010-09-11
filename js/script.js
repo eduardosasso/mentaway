@@ -90,15 +90,24 @@ highlight_last_position = function(){
 	google.maps.event.trigger(markers[0], 'click'); 
 }
 
-
 $(document).ready(function() {
 		map_elem = $('#map').get(0);
+		post = $('#post');
 		
 		add_placemarks_on_the_map(function(placemarks){
 			most_recent_location = {
 				lat: placemarks[0]['lat'], 
 				long: placemarks[0]['long']
 			}
+			
+			get_post(function(post){
+				console.log(post);
+				title = post[0]['title'];
+				body = post[0]['body'];
+				
+				$('#post #title').html(title);
+				$('#post #body').html(body);
+			});
 			
 			//inicia o map sempre na ultima localizacao do usuario
 			init_map(most_recent_location.lat, most_recent_location.long, map_elem);
