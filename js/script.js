@@ -46,13 +46,23 @@ create_marker = function(placemark){
 }
 
 add_placemarks_on_the_map = function(callback){
-	$.getJSON('model/Controller.php?a=markers', function(data) {
+	args = {
+		a: "markers", 
+		uid: user
+	}
+	
+	$.getJSON('model/Controller.php?', args, function(data) {		
 		callback(data);
 	})
 }
 
 get_post = function(callback){
-	$.getJSON('model/Controller.php?a=posts', function(data) {
+	args = {
+		a: "posts", 
+		uid: user
+	}
+	
+	$.getJSON('model/Controller.php', args, function(data) {		
 		callback(data);
 	})
 }
@@ -101,7 +111,6 @@ $(document).ready(function() {
 			}
 			
 			get_post(function(post){
-				console.log(post);
 				title = post[0]['title'];
 				body = post[0]['body'];
 				

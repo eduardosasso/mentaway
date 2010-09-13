@@ -21,14 +21,14 @@ class Controller {
 		$this->backend = new Backend();
 	}
 	
-	function print_placemarks(){
-		$placemarks = $this->backend->get_placemarks();
+	function print_placemarks($user){
+		$placemarks = $this->backend->get_placemarks($user);
 		//print json_encode($placemarks);
 		print $placemarks;
 	}
 	
-	function print_posts(){
-		$posts = $this->backend->get_posts();
+	function print_posts($user){
+		$posts = $this->backend->get_posts($user);
 		print json_encode($posts);
 	}
 }
@@ -36,13 +36,14 @@ class Controller {
 $controller = new Controller();
 
 $action = $_REQUEST['a'];
+$user = $_REQUEST['uid'];
 
 switch ($action) {
 	case "markers":
-		$controller->print_placemarks();
+		$controller->print_placemarks($user);
 		break;
 	case "posts":
-		$controller->print_posts();
+		$controller->print_posts($user);
 		break;
 }
 
