@@ -8,7 +8,7 @@ require_once("./lib/foursquare/EpiOAuth.php");
 require_once("./lib/foursquare/EpiFoursquare.php");
 
 class Foursquare extends AbstractService { 
-	public function get_updates(){
+	public function get_updates($user){
 		$user = 'eduardo.sasso@gmail.com';
 		$pass = 'pasek07';
 		

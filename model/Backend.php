@@ -5,7 +5,7 @@ require_once("Posterous.class.php");
 
 //Esta classe deve abstrair toda a comunicacao com o banco de dados
 class Backend { 
-	public function get_placemarks(){
+	public function get_placemarks($user){
 		$placemarks = file_get_contents("../temp/markers.json");
 		// $object = new Foursquare;
 		// 		$placemarks = $object->get_updates();
@@ -13,7 +13,7 @@ class Backend {
 		return $placemarks;
 	}
 	
-	public function get_posts() {
+	public function get_posts($user) {
 		$posterous = new Posterous();
 		$posts = $posterous->get_updates();
 		return $posts;
