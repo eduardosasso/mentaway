@@ -1,10 +1,15 @@
 <?php 
-require_once("MongoDatabase.php");
+require_once("CouchDB.php");
 
-//Factory basico para abstrair o banco de dados utilizado pelo resto da app
+//Singleton Factory basico para abstrair o banco de dados utilizado pelo resto da app
 class DatabaseFactory {
 	public static function get_provider() {
-		return new MongoDatabase();
+		static $db = null;
+		
+		if ( $db == null )
+			$db = new CouchDB();
+			
+		return $db;
 	}
 }	
 ?>

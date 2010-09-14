@@ -8,7 +8,10 @@ class DatabaseTest extends PHPUnit_Framework_TestCase {
 		public function testAll() {	
 			$db = DatabaseFactory::get_provider();
 			
-			echo $db->get_placemarks();
+			$placemarks = $db->get_placemarks('eduardosasso');
+			
+			print_r($placemarks);
+
 		}
 }
 ?>
