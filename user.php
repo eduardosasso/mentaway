@@ -66,6 +66,11 @@
 
 	<div id="user">
 		<h1>User Page</h1> 
+		
+		<!--
+			TODO quando entrar valida o argumento pra ver se eh nome do usuario, editando
+		-->
+		
 	</div>
 		
 
