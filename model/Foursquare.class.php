@@ -25,8 +25,8 @@ class Foursquare extends AbstractService {
 		foreach ($history->checkins as $key => $checkin) {
 			$placemark = new Placemark();
 			$placemark->name = $checkin->venue->name;
-			$placemark->image = $checkin->venue->primarycategory->iconurl;
-			$placemark->description = $checkin->shout;
+			//$placemark->image = $checkin->venue->primarycategory->iconurl;
+			//$placemark->description = $checkin->shout;
 			$placemark->date = $checkin->created;
 			$placemark->lat = $checkin->venue->geolat;
 			$placemark->long = $checkin->venue->geolong;
