@@ -11,8 +11,9 @@ header("Content-type: application/json");
 // ini_set('display_errors', TRUE);
 // ini_set('display_startup_errors', TRUE);
 
-require_once("./Backend.php");
-require_once("./Placemark.class.php");
+require_once("Backend.php");
+require_once("Placemark.class.php");
+require_once("DatabaseFactory.php");
 
 class Controller {
 	private $backend;
@@ -22,9 +23,14 @@ class Controller {
 	}
 	
 	function print_placemarks($user){
-		$placemarks = $this->backend->get_placemarks($user);
+		$db = DatabaseFactory::get_provider();
+		$placemarks = $db->get_placemarks($user);
+		
+		//$placemarks = $this->backend->get_placemarks($user);
 		//print json_encode($placemarks);
-		print $placemarks;
+
+		print_r($placemarks);
+
 	}
 	
 	function print_posts($user){

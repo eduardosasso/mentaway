@@ -33,7 +33,7 @@ class Foursquare extends AbstractService {
 			$placemark->service = "Foursquare";
 			
 			$placemarks[] = $placemark;
-			
+
 			parent::save($placemark);
 		}
 		

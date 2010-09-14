@@ -17,15 +17,16 @@ class CouchDB implements DatabaseInterface {
 	}
 	
 	public function save($document) {
-		$info = $this->db->getDatabaseInfos();
+		$response = $this->db->storeDoc($document);
 		
-		print_r($info);
+		print_r($response);
 	}
 	
 	public function get_placemarks($user, $trip = '') {
-		$info = $this->db->getDatabaseInfos();
+		//$all_docs = $this->db->getAllDocs();
+		$all_docs = $this->db->getDoc("87276b6df9c3520308602ca1260212c6");
 		
-		return $info;
+		return $all_docs;
 	}
 	
 	public function save_user($user) {
