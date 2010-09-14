@@ -9,7 +9,7 @@ class Backend {
 		$placemarks = file_get_contents("../temp/markers.json");
 		// $object = new Foursquare;
 		// 		$placemarks = $object->get_updates();
-		// 
+		
 		return $placemarks;
 	}
 	

@@ -43,6 +43,26 @@
 		TODO primeira versao tosca de controle de usuarios, melhorar.
 	*/
 		$user = $_REQUEST['q'];
+		
+
+		$mongo = new Mongo(); // connects to localhost:27017
+		$db = $mongo->mentaway;
+		
+		$collection = $db->user;
+		
+		$person = array(
+		 'name' => 'Cesar Rodas',
+		 'email' => 'crodas@php.net');
+		
+		$safe_insert = true;
+		$collection->insert($person, $safe_insert);
+		$person_identifier = $person['_id'];
+
+		echo $person_identifier;
+		// echo '<pre>';
+		// print_r($person_identifier);
+		// echo '</pre>';
+
 
 		/*
 			TODO procurar user...
