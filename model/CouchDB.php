@@ -17,9 +17,12 @@ class CouchDB implements DatabaseInterface {
 	}
 	
 	public function save($document) {
+		/*
+			TODO Tem q tratar o retorno e excecoes
+		*/
 		$response = $this->db->storeDoc($document);
 		
-		print_r($response);
+		return $response;
 	}
 	
 	public function get_placemarks($user, $trip = '') {
@@ -40,11 +43,12 @@ class CouchDB implements DatabaseInterface {
 	}
 	
 	public function save_user($user) {
-		return "c";
+		return $this->save($user);
 	}
 	
-	public function get_user($user) {
-		return "d";
+	public function get_user($username) {
+		$result = $this->db->getDoc($username);
+		return $result;
 	}
 }
 ?>

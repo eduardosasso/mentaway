@@ -5,7 +5,7 @@ ini_set('display_startup_errors', TRUE);
 
 $q = $_REQUEST['q'];
 
-$args = explode("/", $q);  
+$args = explode("/", $q);
 
 $user = $q;
 /*
@@ -16,7 +16,7 @@ $is_user = true;
 $safe_pages = array("user", "search", "thread");  
 
 if (in_array($args[0], $safe_pages)) {
-	include($args[0].".php");  
+	include($args[0].".php");
 } elseif ($is_user) {
 	include("index.php");
 } else {

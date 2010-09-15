@@ -1,7 +1,7 @@
+var base_url='';
 var map;
 var markers = [];
 var infoWindow;
-
 
 init_map = function(lat, long, element) {
 	var myLatlng = new google.maps.LatLng(lat, long);
@@ -46,14 +46,29 @@ create_marker = function(placemark){
 }
 
 add_placemarks_on_the_map = function(callback){
+	/*
+		TODO validar user defined.
+	*/
 	args = {
 		a: "markers", 
 		uid: user
 	}
 	
-	$.getJSON('model/Controller.php?', args, function(data) {		
+	$.getJSON(base_url + '/model/Controller.php', args, function(data) {		
 		callback(data);
 	})
+}
+
+save_user = function(fields){
+	args = {
+		a: "save_user", 
+		fields: fields
+	}
+	
+	
+	
+	$.getJSON(base_url + '/model/Controller.php', args);
+	
 }
 
 get_post = function(callback){
@@ -62,7 +77,7 @@ get_post = function(callback){
 		uid: user
 	}
 	
-	$.getJSON('model/Controller.php', args, function(data) {		
+	$.getJSON(base_url + '/model/Controller.php', args, function(data) {		
 		callback(data);
 	})
 }
@@ -104,34 +119,38 @@ $(document).ready(function() {
 		map_elem = $('#map').get(0);
 		post = $('#post');
 		
-		add_placemarks_on_the_map(function(placemarks){
-			console.log(placemarks);
-			
-			most_recent_location = {
-				lat: placemarks[0]['value']['lat'], 
-				long: placemarks[0]['value']['long']
-			}
-			
-			get_post(function(post){
-				title = post[0]['title'];
-				body = post[0]['body'];
-				
-				$('#post #title').html(title);
-				$('#post #body').html(body);
-			});
-			
-			//inicia o map sempre na ultima localizacao do usuario
-			init_map(most_recent_location.lat, most_recent_location.long, map_elem);
-			
-			$.each(placemarks, function(i,placemark) {
-				create_marker(placemark['value']);
-			});
-			
-			//faz com que o ultimo lugar visitado ja fiquei aparecendo
-			highlight_last_position();
-			
-			//adciona navegacao nas marcacoes via links anterior e proximo
-			add_markers_external_navigation();
-			
-		});		
+		// add_placemarks_on_the_map(function(placemarks){
+		// 	most_recent_location = {
+		// 		lat: placemarks[0]['value']['lat'], 
+		// 		long: placemarks[0]['value']['long']
+		// 	}
+		// 	
+		// 	get_post(function(post){
+		// 		title = post[0]['title'];
+		// 		body = post[0]['body'];
+		// 		
+		// 		$('#post #title').html(title);
+		// 		$('#post #body').html(body);
+		// 	});
+		// 	
+		// 	//inicia o map sempre na ultima localizacao do usuario
+		// 	init_map(most_recent_location.lat, most_recent_location.long, map_elem);
+		// 	
+		// 	$.each(placemarks, function(i,placemark) {
+		// 		create_marker(placemark['value']);
+		// 	});
+		// 	
+		// 	//faz com que o ultimo lugar visitado ja fiquei aparecendo
+		// 	highlight_last_position();
+		// 	
+		// 	//adciona navegacao nas marcacoes via links anterior e proximo
+		// 	add_markers_external_navigation();
+		// 	
+		// });
+		
+		$('#new_user_account').click(function(){
+			user = $('#user_field').val();
+			save_user(user);
+		});
+
 });

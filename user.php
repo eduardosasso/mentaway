@@ -1,3 +1,10 @@
+<?php
+/*
+	TODO Essa pagina de html tem q ser generica... talvez com template.
+*/
+define('BASE_URL', dirname($_SERVER["SCRIPT_NAME"]));
+
+?>
 <!doctype html>
 <html lang="en" class="no-js">
 <head>
@@ -29,14 +36,14 @@
 
 
   <!-- CSS : implied media="all" -->
-  <link rel="stylesheet" href="css/style.css?v=1">
+  <link rel="stylesheet" href="<?php echo BASE_URL ?>/css/style.css?v=1">
 
   <!-- For the less-enabled mobile browsers like Opera Mini -->
-  <link rel="stylesheet" media="handheld" href="css/handheld.css?v=1">
+  <link rel="stylesheet" media="handheld" href="<?php echo BASE_URL ?>/css/handheld.css?v=1">
 
  
   <!-- All JavaScript at the bottom, except for Modernizr which enables HTML5 elements & feature detects -->
-  <script src="js/modernizr-1.5.min.js"></script>
+  <script src="<?php echo BASE_URL ?>/js/modernizr-1.5.min.js"></script>
 
 	<?php
 	/*
@@ -44,34 +51,12 @@
 	*/
 		$user = $_REQUEST['q'];
 		
-
-		$mongo = new Mongo(); // connects to localhost:27017
-		$db = $mongo->mentaway;
+		$user = explode('/',$user);
+		$user = $user[1];
 		
-		$collection = $db->user;
 		
-		$person = array(
-		 'name' => 'Cesar Rodas',
-		 'email' => 'crodas@php.net');
 		
-		$safe_insert = true;
-		$collection->insert($person, $safe_insert);
-		$person_identifier = $person['_id'];
-
-		echo $person_identifier;
-		// echo '<pre>';
-		// print_r($person_identifier);
-		// echo '</pre>';
-
-
-		/*
-			TODO procurar user...
-		*/
 	?>
-
-	<script type="text/javascript" charset="utf-8">
-		user = "<?php echo $user ?>"
-	</script>
 
 </head>
 
@@ -85,11 +70,12 @@
 <!--[if (gt IE 9)|!(IE)]><!--> <body> <!--<![endif]-->
 
 	<div id="user">
-		<h1>User Page</h1> 
+		<h1>User Page</h1>
 		
-		<!--
-			TODO quando entrar valida o argumento pra ver se eh nome do usuario, editando
-		-->
+		<input type="text" placeholder="User Name" value="<?php echo $user ?>" id="username_field">
+		<input type="text" placeholder="Full Name" value="" id="fullname_field">
+		
+		<input type="button" value="Create New User Account" id="new_user_account"> 
 		
 	</div>
 		
@@ -98,10 +84,14 @@
 
   <!-- Grab Google CDN's jQuery. fall back to local if necessary -->
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-  <script>!window.jQuery && document.write('<script src="js/jquery-1.4.2.min.js"><\/script>')</script>
+  <script>!window.jQuery && document.write('<script src="<?php echo BASE_URL ?>/js/jquery-1.4.2.min.js"><\/script>')</script>
 
-	<script src="js/plugins.js?v=1"></script>
-  <script src="js/script.js?v=1"></script>
+	<script src="<?php echo BASE_URL ?>/js/plugins.js?v=1"></script>
+  <script src="<?php echo BASE_URL ?>/js/script.js?v=1"></script>
+	<script type="text/javascript" charset="utf-8">
+			base_url = "<?php echo BASE_URL; ?>"
+	</script>
+
 
   <!--[if lt IE 7 ]>
     <script src="js/dd_belatedpng.js?v=1"></script>
