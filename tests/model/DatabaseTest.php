@@ -15,7 +15,7 @@ class DatabaseTest extends PHPUnit_Framework_TestCase {
 
 		}
 		
-		public function test_save_user() {
+		public function xtest_save_user() {
 			$db = DatabaseFactory::get_provider();
 			
 			$user = new User();
@@ -26,6 +26,15 @@ class DatabaseTest extends PHPUnit_Framework_TestCase {
 			$response = $db->save_user($user);
 
 			print_r($response);
+		}
+		
+		function test_get_user(){
+			$username = 'abduzeedo';
+			
+			$db = DatabaseFactory::get_provider();
+			$response = $db->get_user($username);
+			
+			print_r($response);			
 		}
 		
 		public function xxtestCleanDatabase() {

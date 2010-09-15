@@ -5,34 +5,32 @@
 		tem que recuperar marcacao baseado em data
 */
 
-header("Content-type: application/json");
-
 // error_reporting(E_ALL);
 // ini_set('display_errors', TRUE);
 // ini_set('display_startup_errors', TRUE);
 
-require_once("User.php");
+require_once("User.class.php");
 require_once("Placemark.class.php");
 require_once("DatabaseFactory.php");
 
 class Controller {
 	
-	function print_placemarks($user){
+	function get_placemarks($user){
 		$db = DatabaseFactory::get_provider();
 		$placemarks = $db->get_placemarks($user);
-		
-		//$placemarks = $this->backend->get_placemarks($user);
-		//print json_encode($placemarks);
 
-		print json_encode($placemarks->rows);
-
-		//print_r($placemarks->rows);
-
+		return $placemarks->rows;
 	}
 	
-	function print_posts($user){
+	function get_posts($user){
 		$posts = $this->backend->get_posts($user);
-		print json_encode($posts);
+		return $posts;
+	}
+		
+	function get_user($username){
+		$db = DatabaseFactory::get_provider();
+		$user = $db->get_user($username);
+		return $user;
 	}
 	
 	/*
@@ -50,33 +48,13 @@ class Controller {
 			$user->username = $fields;
 			$user->fullname = $fields;
 			
-			$user = $db->save_user($user);
+			$result = $db->save_user($user);
 			
 			/*
 				TODO tem q tratar melhor para dar uma saida amigavel de erro ou successo para o usuario
 			*/
-			print json_encode($user);
+			return $result;
 		}
-	
-	
-}
-
-$controller = new Controller();
-
-$action = $_REQUEST['a'];
-$user = $_REQUEST['uid'];
-
-switch ($action) {
-	case "markers":
-		$controller->print_placemarks($user);
-		break;
-	case "posts":
-		$controller->print_posts($user);
-		break;
-	case "save_user":
-		$fields = $_REQUEST['fields'];
-		$controller->save_user($fields);
-		break;	
 }
 
 ?>

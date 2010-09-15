@@ -54,7 +54,7 @@ add_placemarks_on_the_map = function(callback){
 		uid: user
 	}
 	
-	$.getJSON(base_url + '/model/Controller.php', args, function(data) {		
+	$.getJSON(base_url + 'ajax.php', args, function(data) {		
 		callback(data);
 	})
 }
@@ -64,10 +64,8 @@ save_user = function(fields){
 		a: "save_user", 
 		fields: fields
 	}
-	
-	
-	
-	$.getJSON(base_url + '/model/Controller.php', args);
+
+	$.getJSON(base_url + 'ajax.php', args);
 	
 }
 
@@ -77,7 +75,7 @@ get_post = function(callback){
 		uid: user
 	}
 	
-	$.getJSON(base_url + '/model/Controller.php', args, function(data) {		
+	$.getJSON(base_url + 'ajax.php', args, function(data) {		
 		callback(data);
 	})
 }
