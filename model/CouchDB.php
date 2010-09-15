@@ -28,6 +28,17 @@ class CouchDB implements DatabaseInterface {
 		return $placemarks;
 	}
 	
+	//Remove documentos poara teste
+	public function clean_database() {
+		$all_or_nothing = true;
+		
+		$placemarks = $this->db->getView('placemark','placemarks');
+		
+		foreach ($placemarks->rows as $row ) {
+			$this->db->deleteDoc($row->value);
+		}
+	}
+	
 	public function save_user($user) {
 		return "c";
 	}

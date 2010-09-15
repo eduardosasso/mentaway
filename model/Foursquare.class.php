@@ -23,10 +23,22 @@ class Foursquare extends AbstractService {
 		$placemarks = array();
 		
 		foreach ($history->checkins as $key => $checkin) {
+			
+			$shout = '';
+			if (isset($checkin->shout)) {
+				$shout = $checkin->shout;
+			}
+			
+			$icon = '';
+			if (isset($checkin->venue->primarycategory->iconurl)) {
+				$icon = $checkin->venue->primarycategory->iconurl;
+			}
+			
 			$placemark = new Placemark();
+			$placemark->_id = $checkin->created . '|' . $checkin->venue->name;
 			$placemark->name = $checkin->venue->name;
-			//$placemark->image = $checkin->venue->primarycategory->iconurl;
-			//$placemark->description = $checkin->shout;
+			$placemark->image = $icon;
+			$placemark->description = $shout;
 			$placemark->date = $checkin->created;
 			$placemark->lat = $checkin->venue->geolat;
 			$placemark->long = $checkin->venue->geolong;

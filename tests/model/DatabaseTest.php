@@ -5,7 +5,7 @@ require_once("$root/model/DatabaseFactory.php");
 
 //phpunit tests/model/DatabaseTest.php
 class DatabaseTest extends PHPUnit_Framework_TestCase {
-		public function testAll() {	
+		public function xxtestAll() {	
 			$db = DatabaseFactory::get_provider();
 			
 			$placemarks = $db->get_placemarks('eduardosasso');
@@ -13,5 +13,17 @@ class DatabaseTest extends PHPUnit_Framework_TestCase {
 			print_r($placemarks);
 
 		}
+		
+		public function testCleanDatabase() {
+			$db = DatabaseFactory::get_provider();
+			$db->clean_database();
+		}
+		
+		// function(doc) {
+		// 		  emit(doc.user, doc);
+		// 		}
+		
+		
 }
 ?>
+

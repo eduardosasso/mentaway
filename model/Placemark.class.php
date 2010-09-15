@@ -1,6 +1,6 @@
 <?php 
 class Placemark {  
-	public $id;
+	public $_id;
 	public $name;  
 	public $description;
 	public $image;

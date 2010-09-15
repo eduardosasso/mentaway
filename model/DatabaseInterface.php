@@ -6,5 +6,7 @@ interface DatabaseInterface
 	
 	public function save_user($user);
 	public function get_user($user);	
+	
+	public function clean_database();
 }
 ?>
