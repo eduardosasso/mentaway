@@ -105,9 +105,11 @@ $(document).ready(function() {
 		post = $('#post');
 		
 		add_placemarks_on_the_map(function(placemarks){
+			console.log(placemarks);
+			
 			most_recent_location = {
-				lat: placemarks[0]['lat'], 
-				long: placemarks[0]['long']
+				lat: placemarks[0]['value']['lat'], 
+				long: placemarks[0]['value']['long']
 			}
 			
 			get_post(function(post){
@@ -122,7 +124,7 @@ $(document).ready(function() {
 			init_map(most_recent_location.lat, most_recent_location.long, map_elem);
 			
 			$.each(placemarks, function(i,placemark) {
-				create_marker(placemark);
+				create_marker(placemark['value']);
 			});
 			
 			//faz com que o ultimo lugar visitado ja fiquei aparecendo

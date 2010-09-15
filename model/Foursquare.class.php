@@ -31,6 +31,7 @@ class Foursquare extends AbstractService {
 			$placemark->lat = $checkin->venue->geolat;
 			$placemark->long = $checkin->venue->geolong;
 			$placemark->service = "Foursquare";
+			$placemark->user = "eduardosasso";
 			
 			$placemarks[] = $placemark;
 

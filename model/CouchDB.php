@@ -23,10 +23,9 @@ class CouchDB implements DatabaseInterface {
 	}
 	
 	public function get_placemarks($user, $trip = '') {
-		//$all_docs = $this->db->getAllDocs();
-		$all_docs = $this->db->getDoc("87276b6df9c3520308602ca1260212c6");
+		$placemarks = $this->db->startkey($user)->endkey($user)->getView('placemark','placemarks');
 		
-		return $all_docs;
+		return $placemarks;
 	}
 	
 	public function save_user($user) {

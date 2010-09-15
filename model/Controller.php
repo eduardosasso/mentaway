@@ -29,7 +29,9 @@ class Controller {
 		//$placemarks = $this->backend->get_placemarks($user);
 		//print json_encode($placemarks);
 
-		print_r($placemarks);
+		print json_encode($placemarks->rows);
+
+		//print_r($placemarks->rows);
 
 	}
 	
