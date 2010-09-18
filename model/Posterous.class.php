@@ -4,9 +4,9 @@ require_once("Post.class.php");
 require_once("lib/posterous-api.php");
 
 class Posterous extends AbstractService {
-	public function get_updates($username){
+	public function get_updates($hostname){
 		$posterous = new PosterousAPI();
-		$xml = $posterous->readposts(array('hostname' =>'eduardosasso', 'tag' => 'mentaway'));
+		$xml = $posterous->readposts(array('hostname' => $hostname, 'tag' => 'mentaway'));
 		
 		$posts = array();
 		

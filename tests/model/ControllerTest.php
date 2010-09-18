@@ -9,7 +9,16 @@ class ControllerTest extends PHPUnit_Framework_TestCase {
 			$controller->print_placemarks('eduardosasso');
 		}
 		
-		public function test_get_user_service(){
+		public function test_get_posts(){
+			$username = 'eduardosasso';
+			
+			$controller = new Controller();
+			$posts = $controller->get_posts($username);
+			
+			print_r($posts);
+		}
+		
+		public function xtest_get_user_service(){
 			$username = 'eduardosasso';
 			$servicename = 'foursquare';
 			

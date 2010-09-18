@@ -23,9 +23,13 @@ class Controller {
 		return $placemarks->rows;
 	}
 	
-	public function get_posts($user) {
+	public function get_posts($username) {
+		$service = $this->get_user_service($username, 'posterous');
+		$hostname = $service->token;
+		
 		$posterous = new Posterous();
-		$posts = $posterous->get_updates();
+		$posts = $posterous->get_updates($hostname);
+		
 		return $posts;
 	}
 		

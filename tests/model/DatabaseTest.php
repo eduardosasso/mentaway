@@ -15,7 +15,7 @@ class DatabaseTest extends PHPUnit_Framework_TestCase {
 			
 		}
 		
-		public function test_get_placemarks() {	
+		public function xxtest_get_placemarks() {	
 			$db = DatabaseFactory::get_provider();
 			
 			$placemarks = $db->get_placemarks('eduardosasso');

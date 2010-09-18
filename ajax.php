@@ -21,11 +21,7 @@ switch ($action) {
 		break;
 	case "posts":
 		$posts = $controller->get_posts($user);
-		//print json_encode($posts);
-		echo '<pre>';
-		print_r($posts);
-		echo '</pre>';
-		
+		print json_encode($posts);
 		break;
 	case "get_user":
 			$user = $controller->get_user($user);
