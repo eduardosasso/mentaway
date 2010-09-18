@@ -1,5 +1,6 @@
 <?php 
 require_once("DatabaseInterface.php");
+require_once("Service.class.php");
 
 require_once "lib/couchdb/couch.php";
 require_once "lib/couchdb/couchClient.php";
@@ -35,6 +36,11 @@ class CouchDB implements DatabaseInterface {
 	public function clean_database() {
 		$all_or_nothing = true;
 		
+		// codigo da view
+		// 		function(doc) {
+		// 		  emit(doc.user, doc);
+		// 		}
+		
 		$placemarks = $this->db->getView('placemark','placemarks');
 		
 		foreach ($placemarks->rows as $row ) {
@@ -46,6 +52,17 @@ class CouchDB implements DatabaseInterface {
 		return $this->save($user);
 	}
 	
+	public function add_user_service($username, Service $service) {
+		$user = $this->get_user($username);
+		
+		$user->services[] = $service;
+		
+		$response = $this->save_user($user);
+		
+		return $response;
+		
+	}
+		
 	public function get_user($username) {
 		$result = $this->db->getDoc($username);
 		return $result;
