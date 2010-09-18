@@ -37,7 +37,7 @@ class DatabaseTest extends PHPUnit_Framework_TestCase {
 			print_r($response);
 		}
 		
-		public function test_add_user_service(){
+		public function xtest_add_user_service(){
 			$username = 'abduzeedo';
 			
 			$db = DatabaseFactory::get_provider();
@@ -54,6 +54,17 @@ class DatabaseTest extends PHPUnit_Framework_TestCase {
 
 			print_r($response);
 			
+		}
+		
+		public function test_remove_user_service(){
+			$username = 'abduzeedo';
+			$service_id = 'twitter';
+			
+			$db = DatabaseFactory::get_provider();
+			
+			$response = $db->remove_user_service($username, $service_id);
+			
+			print_r($response);
 		}
 		
 		public function xxtestCleanDatabase() {

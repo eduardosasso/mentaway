@@ -80,6 +80,20 @@ get_post = function(callback){
 	})
 }
 
+add_user_service = function(service,username){
+	args = {
+		a: "add_user_service", 
+		uid: username,
+		service: service
+	}
+	
+	console.log(args);
+	
+	// $.getJSON(base_url + 'ajax.php', args, function(data) {		
+	// 		callback(data);
+	// 	})
+}
+
 
 add_markers_external_navigation = function(){
 	var idx = 0;
@@ -145,6 +159,15 @@ $(document).ready(function() {
 		// 	add_markers_external_navigation();
 		// 	
 		// });
+		
+		$('.add_user_service').click(function(){
+			//usa pela class para ser generico e pegar todos os servicos...			
+			
+			service = $(this).attr('id');
+			username = $('#username').val();
+			
+			add_user_service(service, username);
+		});
 		
 		$('#new_user_account').click(function(){
 			user = $('#user_field').val();

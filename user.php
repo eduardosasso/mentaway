@@ -47,6 +47,7 @@ define('BASE_URL', dirname($_SERVER["SCRIPT_NAME"]));
 	<?php
 	/*
 		TODO primeira versao tosca de controle de usuarios, melhorar.
+		Usar templates para separar logica do visual
 	*/
 		$user = $_REQUEST['q'];
 		
@@ -57,9 +58,12 @@ define('BASE_URL', dirname($_SERVER["SCRIPT_NAME"]));
 		$controller = new Controller();
 		
 		$user = $controller->get_user($user);
-		echo '<pre>';
-		print_r($user);
-		echo '</pre>';
+		
+		$username = $user->username;
+		
+		if (!$user) {
+			echo "User not found. Wait to be invited...";
+		}
 		
 	?>
 
@@ -75,12 +79,18 @@ define('BASE_URL', dirname($_SERVER["SCRIPT_NAME"]));
 <!--[if (gt IE 9)|!(IE)]><!--> <body> <!--<![endif]-->
 
 	<div id="user">
-		<h1>User Page</h1>
+		<input type="hidden" value="<?php echo $username ?>" id="username">
 		
-		<input type="text" placeholder="User Name" value="<?php echo $user ?>" id="username_field">
+		<?php if ($user): ?>
+			<input type="button" value="Add your Foursquare account" id="foursquare" class="add_user_service">
+		<?php endif ?>
+
+		<!-- <h1>User Page</h1>
+		
+		<input type="text" placeholder="User Name" value="<?php //echo $user ?>" id="username_field">
 		<input type="text" placeholder="Full Name" value="" id="fullname_field">
 		
-		<input type="button" value="Create New User Account" id="new_user_account"> 
+		<input type="button" value="Create New User Account" id="new_user_account">  -->
 		
 	</div>
 		

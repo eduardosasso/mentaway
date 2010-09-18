@@ -74,10 +74,38 @@ class CouchDB implements DatabaseInterface {
 		
 		return $response;		
 	}
+	
+	public function remove_user_service($username, $service_id) {
+		$user = $this->get_user($username);
+		
+		$user_services = $user->services;
+		
+		foreach ($user_services as $key => $value) {
+			if ($value->_id == $service_id) {
+				unset($user_services[$key]);
+				$temp_array = array_values($user_services);
+				$user->services = $temp_array;
+			}
+		}
+		
+		$response = $this->save_user($user);
+		
+		return $response;		
+		
+	}
 		
 	public function get_user($username) {
-		$result = $this->db->getDoc($username);
-		return $result;
+		try {
+			$result = $this->db->getDoc($username);
+		} catch (couchException $e) {
+			/*
+				TODO tratar melhor o erro ver exatamente o que eh.
+				como solucao temp retorno null indicando q usuario nao foi encontrado
+			*/
+			$result = null;
+		}				
+		return $result;		
 	}
+	
 }
 ?>
