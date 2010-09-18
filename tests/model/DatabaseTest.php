@@ -43,10 +43,10 @@ class DatabaseTest extends PHPUnit_Framework_TestCase {
 			$db = DatabaseFactory::get_provider();
 			
 			$service = new Service();
-			$service->_id = 'foursquare';
-			$service->name = 'Foursquare';
-			$service->token = 'token';
-			$service->secret = 'secret';
+			$service->_id = 'twitter';
+			$service->name = 'Twitter';
+			$service->token = 'twitter';
+			$service->secret = 'twitter';
 			
 			$user->services[] = $service;
 			

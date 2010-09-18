@@ -6,6 +6,8 @@ require_once "lib/couchdb/couch.php";
 require_once "lib/couchdb/couchClient.php";
 require_once "lib/couchdb/couchDocument.php";
 
+require_once "lib/HelperFunctions.php";
+
 class CouchDB implements DatabaseInterface { 
 	
 	private $db;
@@ -55,12 +57,22 @@ class CouchDB implements DatabaseInterface {
 	public function add_user_service($username, Service $service) {
 		$user = $this->get_user($username);
 		
+		$user_services = $user->services;
+		
+		//ve se o servico ja existe, se sim remove para atualizar...
+		foreach ($user_services as $key => $value) {
+			if ($value->_id == $service->_id) {
+				unset($user_services[$key]);
+				$temp_array = array_values($user_services);
+				$user->services = $temp_array;
+			}
+		}
+		
 		$user->services[] = $service;
 		
 		$response = $this->save_user($user);
 		
-		return $response;
-		
+		return $response;		
 	}
 		
 	public function get_user($username) {
