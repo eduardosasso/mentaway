@@ -1,11 +1,20 @@
 <?php 
 $root = realpath($_SERVER["DOCUMENT_ROOT"]);
+
 require_once("$root/model/DatabaseFactory.php");
 require_once("$root/model/User.class.php");
 require_once("$root/model/Service.class.php");
 
 //phpunit tests/model/DatabaseTest.php
 class DatabaseTest extends PHPUnit_Framework_TestCase {
+	
+		public function xxtest_date_conversion() {
+			$time = strtotime('Mon, 5 Jul 10 22:53:21 -3');
+			print $time . ' ';
+			print date('d/m/y H:i:s',$time); 
+			
+		}
+		
 		public function test_get_placemarks() {	
 			$db = DatabaseFactory::get_provider();
 			

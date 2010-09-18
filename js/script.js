@@ -93,15 +93,16 @@ add_user_service = function(service,username){
 }
 
 add_markers_external_navigation = function(){
-	var idx = 0;
+	var idx = (markers.length -1);
 	$('#navigation #next').hide();
 	
 	$('#navigation #previous').click(function(){
 		$('#navigation #next').show();
 
-		if (++idx < markers.length) {
+		if (--idx > 0) {
 			google.maps.event.trigger(markers[idx], 'click'); 
 		} else {
+			google.maps.event.trigger(markers[idx], 'click'); 
 			$(this).hide();
 		}
 		
@@ -110,9 +111,10 @@ add_markers_external_navigation = function(){
 	$('#navigation #next').click(function(){
 		$('#navigation #previous').show();
 		
-		if (--idx >= 0) {
+		if (++idx < (markers.length -1)) {
 			google.maps.event.trigger(markers[idx], 'click'); 
 		} else {
+			google.maps.event.trigger(markers[idx], 'click'); 
 			$(this).hide();
 		}
 		
@@ -121,41 +123,44 @@ add_markers_external_navigation = function(){
 }
 
 highlight_last_position = function(){
-	google.maps.event.trigger(markers[0], 'click'); 
+	idx = (markers.length - 1);
+	google.maps.event.trigger(markers[idx], 'click'); 
 }
 
 $(document).ready(function() {
 		map_elem = $('#map').get(0);
 		post = $('#post');
 		
-		// add_placemarks_on_the_map(function(placemarks){
-		// 	most_recent_location = {
-		// 		lat: placemarks[0]['value']['lat'], 
-		// 		long: placemarks[0]['value']['long']
-		// 	}
-		// 	
-		// 	get_post(function(post){
-		// 		title = post[0]['title'];
-		// 		body = post[0]['body'];
-		// 		
-		// 		$('#post #title').html(title);
-		// 		$('#post #body').html(body);
-		// 	});
-		// 	
-		// 	//inicia o map sempre na ultima localizacao do usuario
-		// 	init_map(most_recent_location.lat, most_recent_location.long, map_elem);
-		// 	
-		// 	$.each(placemarks, function(i,placemark) {
-		// 		create_marker(placemark['value']);
-		// 	});
-		// 	
-		// 	//faz com que o ultimo lugar visitado ja fiquei aparecendo
-		// 	highlight_last_position();
-		// 	
-		// 	//adciona navegacao nas marcacoes via links anterior e proximo
-		// 	add_markers_external_navigation();
-		// 	
-		// });
+		if ($('#map').length > 0) {
+			add_placemarks_on_the_map(function(placemarks){
+				most_recent_location = {
+					lat: placemarks[0]['value']['lat'], 
+					long: placemarks[0]['value']['long']
+				}
+
+				get_post(function(post){
+					title = post[0]['title'];
+					body = post[0]['body'];
+
+					$('#post #title').html(title);
+					$('#post #body').html(body);
+				});
+
+				//inicia o map sempre na ultima localizacao do usuario
+				init_map(most_recent_location.lat, most_recent_location.long, map_elem);
+
+				$.each(placemarks, function(i,placemark) {
+					create_marker(placemark['value']);
+				});
+
+				//faz com que o ultimo lugar visitado ja fiquei aparecendo
+				highlight_last_position();
+
+				//adciona navegacao nas marcacoes via links anterior e proximo
+				add_markers_external_navigation();
+
+			});
+		}
 		
 		$('.add_user_service').click(function(){
 			//usa pela class para ser generico e pegar todos os servicos...			

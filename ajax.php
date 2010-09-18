@@ -31,10 +31,6 @@ switch ($action) {
 		$fields = $_REQUEST['fields'];
 		$result = $controller->save_user($fields);
 		print json_encode($result);
-		break;
-	case "add_user_service":
-		$service = $_REQUEST['service'];
 		break;	
-		
 }
 ?>

@@ -38,12 +38,15 @@ class Foursquare extends AbstractService {
 				$icon = $checkin->venue->primarycategory->iconurl;
 			}
 			
+			$timestamp = strtotime($checkin->created);
+			
 			$placemark = new Placemark();
-			$placemark->_id = $checkin->created . '|' . $checkin->venue->name;
+			$placemark->_id = $timestamp . '|' . $checkin->venue->name;
 			$placemark->name = $checkin->venue->name;
 			$placemark->image = $icon;
 			$placemark->description = $shout;
 			$placemark->date = $checkin->created;
+			$placemark->timestamp = $timestamp;
 			$placemark->lat = $checkin->venue->geolat;
 			$placemark->long = $checkin->venue->geolong;
 			$placemark->service = $servicename;
