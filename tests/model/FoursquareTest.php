@@ -5,14 +5,13 @@ require_once("$root/model/Foursquare.class.php");
 //phpunit tests/model/FoursquareTest.php
 class FoursquareTest extends PHPUnit_Framework_TestCase {
 		public function testGet_updates() {
-			$user = 'eduardosasso';
+			$username = 'eduardosasso';
 
 			$foursquare = new Foursquare();
-			$placemarks = $foursquare->get_updates($user);
+			$placemarks = $foursquare->get_updates($username);
 			
-			// echo '<pre>';
-			// print_r($placemarks);
-			// echo '</pre>';
+			print_r($placemarks);
+
 		}
 }
 ?>

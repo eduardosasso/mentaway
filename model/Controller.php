@@ -33,6 +33,27 @@ class Controller {
 		return $user;
 	}
 	
+	//retorna detalhes de acesso ao servico
+	function get_user_service($username, $servicename){
+		$db = DatabaseFactory::get_provider();
+		$user = $db->get_user($username);
+		
+		foreach ($user->services as $key => $service) {
+			if ($service->_id == $servicename) {
+				return $service;
+			}
+		}		
+		return null;
+	}
+	
+	function add_user_service($username, Service $service) {
+		$db = DatabaseFactory::get_provider();
+
+		$response = $db->add_user_service($username, $service);
+		
+		return $response;		
+	}
+	
 	/*
 		TODO tem q criar, ou alterar na mesma funcao
 	*/

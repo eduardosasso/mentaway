@@ -82,18 +82,15 @@ get_post = function(callback){
 
 add_user_service = function(service,username){
 	args = {
-		a: "add_user_service", 
-		uid: username,
-		service: service
+		username: username
 	}
 	
-	console.log(args);
+	url = base_url + '/services/' + service + '.php';
 	
-	// $.getJSON(base_url + 'ajax.php', args, function(data) {		
-	// 		callback(data);
-	// 	})
+	$.get(url,args, function(url){
+		window.location.replace(url);
+	});
 }
-
 
 add_markers_external_navigation = function(){
 	var idx = 0;

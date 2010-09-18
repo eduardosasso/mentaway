@@ -6,7 +6,7 @@ require_once("$root/model/Service.class.php");
 
 //phpunit tests/model/DatabaseTest.php
 class DatabaseTest extends PHPUnit_Framework_TestCase {
-		public function xxtestAll() {	
+		public function test_get_placemarks() {	
 			$db = DatabaseFactory::get_provider();
 			
 			$placemarks = $db->get_placemarks('eduardosasso');
@@ -19,9 +19,9 @@ class DatabaseTest extends PHPUnit_Framework_TestCase {
 			$db = DatabaseFactory::get_provider();
 			
 			$user = new User();
-			$user->_id = 'abduzeedo';
-			$user->username = 'abduzeedo';
-			$user->fullname = 'abduzeedo';
+			$user->_id = 'eduardosasso';
+			$user->username = 'eduardosasso';
+			$user->fullname = 'Eduardo Sasso';
 						
 			$response = $db->save_user($user);
 
@@ -56,7 +56,7 @@ class DatabaseTest extends PHPUnit_Framework_TestCase {
 			
 		}
 		
-		public function test_remove_user_service(){
+		public function xtest_remove_user_service(){
 			$username = 'abduzeedo';
 			$service_id = 'twitter';
 			

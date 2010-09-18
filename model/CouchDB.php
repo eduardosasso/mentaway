@@ -29,6 +29,12 @@ class CouchDB implements DatabaseInterface {
 	}
 	
 	public function get_placemarks($user, $trip = '') {
+		// codigo da view
+		// function(doc) {
+		// 		  if (doc.lat)
+		// 		    emit(doc.user, doc);
+		// 		}
+		
 		$placemarks = $this->db->startkey($user)->endkey($user)->getView('placemark','placemarks');
 		
 		return $placemarks;
@@ -37,11 +43,6 @@ class CouchDB implements DatabaseInterface {
 	//Remove documentos poara teste
 	public function clean_database() {
 		$all_or_nothing = true;
-		
-		// codigo da view
-		// 		function(doc) {
-		// 		  emit(doc.user, doc);
-		// 		}
 		
 		$placemarks = $this->db->getView('placemark','placemarks');
 		
