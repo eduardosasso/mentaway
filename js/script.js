@@ -92,6 +92,19 @@ add_user_service = function(service,username){
 	});
 }
 
+add_posterous = function(username,site, callback) {
+	args = {
+		username: username,
+		site: site
+	}
+
+	url = base_url + '/services/posterous.php';
+	
+	$.get(url,args, function(data){
+		callback(data);
+	});	
+}
+
 add_markers_external_navigation = function(){
 	var idx = (markers.length -1);
 	$('#navigation #next').hide();
@@ -170,6 +183,17 @@ $(document).ready(function() {
 			
 			add_user_service(service, username);
 		});
+
+		$('#add_posterous').click(function(){
+			username = $('#username').val();
+			site = $('#posterous_url').val();
+			
+			add_posterous(username,site, function(data){
+				$('#posterous_block').html(data);
+				console.log(data);
+			});
+		});
+		
 		
 		$('#new_user_account').click(function(){
 			user = $('#user_field').val();

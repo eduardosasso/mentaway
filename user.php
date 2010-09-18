@@ -82,7 +82,12 @@ define('BASE_URL', dirname($_SERVER["SCRIPT_NAME"]));
 		<input type="hidden" value="<?php echo $username ?>" id="username">
 		
 		<?php if ($user): ?>
-			<input type="button" value="Add your Foursquare account" id="foursquare" class="add_user_service">
+			<input type="button" value="Add Foursquare" id="foursquare" class="add_user_service">
+			
+			<div id="posterous_block">
+				<input type="text" placeholder="Posterous URL"	value="" id="posterous_url">
+				<input type="button" value="Add Posterous" id="add_posterous">
+			</div>
 		<?php endif ?>
 
 		<!-- <h1>User Page</h1>

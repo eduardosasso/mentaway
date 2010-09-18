@@ -11,6 +11,7 @@
 
 require_once("User.class.php");
 require_once("Placemark.class.php");
+require_once("Posterous.class.php");
 require_once("DatabaseFactory.php");
 
 class Controller {
@@ -22,8 +23,9 @@ class Controller {
 		return $placemarks->rows;
 	}
 	
-	function get_posts($user){
-		$posts = $this->backend->get_posts($user);
+	public function get_posts($user) {
+		$posterous = new Posterous();
+		$posts = $posterous->get_updates();
 		return $posts;
 	}
 		

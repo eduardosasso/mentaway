@@ -1,7 +1,7 @@
 <?php
 //Responsavel por transferir as chamadas via ajax para o Controller...
 
-header("Content-type: application/json");
+//header("Content-type: application/json");
 
 require_once("model/Controller.php");
 
@@ -21,7 +21,11 @@ switch ($action) {
 		break;
 	case "posts":
 		$posts = $controller->get_posts($user);
-		print json_encode($posts);
+		//print json_encode($posts);
+		echo '<pre>';
+		print_r($posts);
+		echo '</pre>';
+		
 		break;
 	case "get_user":
 			$user = $controller->get_user($user);
