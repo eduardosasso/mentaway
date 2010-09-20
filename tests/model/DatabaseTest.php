@@ -72,7 +72,7 @@ class DatabaseTest extends PHPUnit_Framework_TestCase {
 			print_r($response);		
 		}
 		
-		public function test_add_user_trip(){
+		public function xxtest_add_user_trip(){
 			$username = 'eduardosasso';
 			
 			$db = DatabaseFactory::get_provider();
@@ -104,7 +104,7 @@ class DatabaseTest extends PHPUnit_Framework_TestCase {
 			print_r($response);
 		}
 		
-		public function xxtestCleanDatabase() {
+		public function testCleanDatabase() {
 			$db = DatabaseFactory::get_provider();
 			$db->clean_database();
 		}

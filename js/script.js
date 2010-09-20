@@ -161,6 +161,19 @@ add_posterous = function(username,site, callback) {
 	});	
 }
 
+add_trip = function(username, desc, callback) {
+	args = {
+		username: username,
+		desc: desc
+	}
+	
+	url = base_url + '/services/trip.php';
+	
+	$.get(url,args, function(data){
+		callback(data);
+	});
+}
+
 add_twitter = function(username, twitter, callback) {
 	args = {
 		username: username,
@@ -171,7 +184,7 @@ add_twitter = function(username, twitter, callback) {
 	
 	$.get(url,args, function(data){
 		callback(data);
-	});	
+	});
 }
 
 
@@ -277,7 +290,14 @@ $(document).ready(function() {
 			});
 		});
 		
-		
+		$('#add_trip').click(function(){
+			username = $('#username').val();
+			trip_desc = $('#trip_desc').val();
+			
+			add_trip(username,trip_desc, function(data){
+				$('#trip_block').html(data);
+			});
+		});
 		
 		$('#new_user_account').click(function(){
 			user = $('#user_field').val();

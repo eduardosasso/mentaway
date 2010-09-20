@@ -54,7 +54,7 @@ class Foursquare extends AbstractService {
 			
 			$placemarks[] = $placemark;
 
-			parent::save($placemark);
+			parent::save($placemark, $username);
 		}
 		
 		return $placemarks;

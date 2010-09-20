@@ -12,6 +12,7 @@ $controller = new Controller();
 $users = $controller->get_all_users();
 
 foreach ($users as $key => $user) {
+	
 	foreach ($user->value->services as $key => $service) {
 			$username = $user->id;
 			$classname = $service->name;

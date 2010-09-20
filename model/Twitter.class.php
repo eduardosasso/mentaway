@@ -62,7 +62,7 @@ class Twitter extends AbstractService {
 				
 				$placemarks[] = $placemark;
 				
-				parent::save($placemark);
+				parent::save($placemark, $username);
 			}
 		}
 

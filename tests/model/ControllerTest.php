@@ -18,7 +18,7 @@ class ControllerTest extends PHPUnit_Framework_TestCase {
 			print_r($posts);
 		}
 		
-		public function test_get_posts_by_interval(){
+		public function xtest_get_posts_by_interval(){
 			$username = 'eduardosasso';
 			
 			$controller = new Controller();
@@ -30,7 +30,21 @@ class ControllerTest extends PHPUnit_Framework_TestCase {
 			print_r($posts);
 		}
 		
-		
+		function test_add_user_trip() {
+			$controller = new Controller();
+			$username = 'eduardosasso';
+						
+			$date = date('D M d H:i:s O Y');
+			
+			$trip = new Trip();
+			$trip->_id = 'trip';
+			$trip->name = 'Trip para os States 2010';
+			$trip->date =  $date;
+			$trip->timestamp = strtotime($trip->date);
+			$trip->current = true;
+			
+			$response = $controller->add_user_trip($username, $trip);			
+		}		
 		
 		public function xtest_get_user_service(){
 			$username = 'eduardosasso';

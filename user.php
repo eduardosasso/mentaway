@@ -85,7 +85,7 @@ define('BASE_URL', dirname($_SERVER["SCRIPT_NAME"]));
 			<input type="button" value="Add Foursquare" id="foursquare" class="add_user_service">
 			
 			<div id="trip_block">
-				<textarea name="textarea" rows="3" cols="10" wrap="wrap" id="trip_description"></textarea>
+				<textarea name="textarea" rows="3" cols="60" wrap="wrap" id="trip_desc"></textarea>
 				<input type="button" value="Add Trip" id="add_trip">
 			</div>
 			

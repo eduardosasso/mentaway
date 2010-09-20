@@ -5,17 +5,17 @@ require_once("$root/model/DatabaseFactory.php");
 
 //phpunit tests/model/FoursquareTest.php
 class FoursquareTest extends PHPUnit_Framework_TestCase {
-		public function testGet_updates() {
+		public function test_get_updates() {
 			$db = DatabaseFactory::get_provider();
 			
-			$db->clean_database();
+			//$db->clean_database();
 			
 			$username = 'eduardosasso';
 
 			$foursquare = new Foursquare();
 			$placemarks = $foursquare->get_updates($username);
 			
-			print_r($placemarks);
+			//print_r($placemarks);
 
 		}
 }

@@ -15,7 +15,7 @@ class TwitterTest extends PHPUnit_Framework_TestCase {
 			$twitter = new Twitter();
 			$placemarks = $twitter->get_updates($username);
 			
-			print_r($placemarks);
+			//print_r($placemarks);
 		}
 		
 		public function xxxtest_validate() {
