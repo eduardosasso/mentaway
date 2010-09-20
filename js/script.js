@@ -1,5 +1,6 @@
 var base_url='';
 var map;
+var placemarks = [];
 var markers = [];
 var infoWindow;
 
@@ -24,8 +25,21 @@ init_map_current_location = function(element){
 	});	
 }
 
+format_date= function(date) {
+	var dt = new Date(date*1000);
+	return dt.toLocaleString();
+}
+
 create_marker = function(placemark){
-	var html = placemark.name;
+	console.log(placemark);
+	date = format_date(placemark.timestamp);
+	
+	var html = 
+		'<div class="infowindow">' + placemark.name + 
+			'<p class="date">' + date + '</p> \
+			<p class="desc">' + placemark.description + '</p> \
+		</div>';
+	
 	
 	var latlng = new google.maps.LatLng(
 		parseFloat(placemark.lat),
@@ -54,7 +68,8 @@ add_placemarks_on_the_map = function(callback){
 		uid: user
 	}
 	
-	$.getJSON(base_url + 'ajax.php', args, function(data) {		
+	$.getJSON(base_url + 'ajax.php', args, function(data) {
+		placemarks = data;		
 		callback(data);
 	})
 }
@@ -118,7 +133,7 @@ add_markers_external_navigation = function(){
 			google.maps.event.trigger(markers[idx], 'click'); 
 			$(this).hide();
 		}
-		
+			console.log(idx);
 	});
 	
 	$('#navigation #next').click(function(){
@@ -130,8 +145,10 @@ add_markers_external_navigation = function(){
 			google.maps.event.trigger(markers[idx], 'click'); 
 			$(this).hide();
 		}
-		
+			console.log(idx);
 	});
+	
+
 	
 }
 
@@ -190,7 +207,6 @@ $(document).ready(function() {
 			
 			add_posterous(username,site, function(data){
 				$('#posterous_block').html(data);
-				console.log(data);
 			});
 		});
 		
