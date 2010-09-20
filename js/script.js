@@ -3,6 +3,8 @@ var map;
 var placemarks = [];
 var markers = [];
 var infoWindow;
+//index do placemark atual...
+var idx;
 
 init_map = function(lat, long, element) {
 	var myLatlng = new google.maps.LatLng(lat, long);
@@ -53,6 +55,22 @@ create_marker = function(placemark){
 
 	google.maps.event.addListener(marker, 'click', function() {
 		infoWindow.setContent(html);
+	
+		map.panTo(marker.position);
+		map.panBy(400, 0);
+		
+		idx = (marker.__gm_id -1);
+		
+		hide_show_navigation(idx);
+		
+		if (marker.__gm_id == placemarks.length) {
+			show_post();
+		} else {
+			current_placemark_timestamp = placemarks[idx].value.timestamp;
+		  next_placemark_timestamp = placemarks[(idx + 1)].value.timestamp;
+			show_post(current_placemark_timestamp, next_placemark_timestamp);			
+		}		
+		
 		infoWindow.open(map, marker);
 	});
 	
@@ -133,8 +151,22 @@ add_posterous = function(username,site, callback) {
 	});	
 }
 
+hide_show_navigation = function(idx){
+	if (idx > 0 && idx <= (placemarks.length-1)) {
+		$('#navigation #next, #navigation #previous,').show();
+	} 
+
+	if (idx == (placemarks.length-1)) {
+		$('#navigation #next').hide();
+	}
+	
+	if (idx == 0) {
+		$('#navigation #previous').hide();
+	}
+}
+
 add_markers_external_navigation = function(){
-	var idx = (markers.length -1);
+	//var idx = (markers.length -1);
 	$('#navigation #next').hide();
 	
 	$('#navigation #previous').click(function(){
@@ -146,20 +178,6 @@ add_markers_external_navigation = function(){
 			google.maps.event.trigger(markers[idx], 'click'); 
 			$(this).hide();
 		}
-		
-		var latlng = new google.maps.LatLng(
-			parseFloat(placemarks[idx].value.lat),
-			parseFloat(placemarks[idx].value.long)
-		);
-
-		map.panTo(latlng);
-		map.panBy(400, 0); 
-		
-		current_placemark_timestamp = placemarks[idx].value.timestamp;
-	  next_placemark_timestamp = placemarks[(idx+1)].value.timestamp;
-
-		show_post(current_placemark_timestamp, next_placemark_timestamp);
-		
 	});
 	
 	$('#navigation #next').click(function(){
@@ -170,24 +188,7 @@ add_markers_external_navigation = function(){
 		} else {
 			google.maps.event.trigger(markers[idx], 'click'); 
 			$(this).hide();
-		}
-		
-		var latlng = new google.maps.LatLng(
-			parseFloat(placemarks[idx].value.lat),
-			parseFloat(placemarks[idx].value.long)
-		);
-		
-		/*
-			TODO deixar mais generico a navegacao no mapa
-		*/
-		map.panTo(latlng);
-		map.panBy(400, 0);		
-		
-		//mostra os posts baseados no intervalo de datas...
-		current_placemark_timestamp = placemarks[idx].value.timestamp;
-	  next_placemark_timestamp = placemarks[(idx+1)].value.timestamp;
-	
-		show_post(current_placemark_timestamp, next_placemark_timestamp);
+		}	
 	});
 }
 
