@@ -84,15 +84,29 @@ save_user = function(fields){
 	
 }
 
-get_post = function(callback){
+get_post = function(begin_date, end_date, callback){
 	args = {
 		a: "posts", 
-		uid: user
+		uid: user,
+		begin: begin_date,
+		end: end_date
 	}
 	
 	$.getJSON(base_url + 'ajax.php', args, function(data) {		
 		callback(data);
 	})
+}
+
+
+show_post = function(begin_date, end_date) {
+	console.log(begin_date + ' ' + end_date);
+	get_post(begin_date, end_date, function(posts){
+		title = posts[0]['title'];
+		body = posts[0]['body'];
+
+		$('#post #title').html(title);
+		$('#post #body').html(body);
+	});	
 }
 
 add_user_service = function(service,username){
@@ -133,7 +147,12 @@ add_markers_external_navigation = function(){
 			google.maps.event.trigger(markers[idx], 'click'); 
 			$(this).hide();
 		}
-		console.log(idx);
+		
+		current_placemark_timestamp = placemarks[idx].value.timestamp;
+	  next_placemark_timestamp = placemarks[(idx+1)].value.timestamp;
+
+		show_post(current_placemark_timestamp, next_placemark_timestamp);
+		
 	});
 	
 	$('#navigation #next').click(function(){
@@ -146,6 +165,13 @@ add_markers_external_navigation = function(){
 			$(this).hide();
 		}
 		console.log(idx);
+		
+		current_placemark_timestamp = placemarks[idx].value.timestamp;
+	  next_placemark_timestamp = placemarks[(idx+1)].value.timestamp;
+	
+		show_post(current_placemark_timestamp, next_placemark_timestamp);
+		
+		
 	});
 }
 
@@ -165,13 +191,14 @@ $(document).ready(function() {
 					long: placemarks[0]['value']['long']
 				}
 
-				get_post(function(post){
-					title = post[0]['title'];
-					body = post[0]['body'];
-
-					$('#post #title').html(title);
-					$('#post #body').html(body);
-				});
+				show_post();
+				// get_post(function(post){
+				// 	title = post[0]['title'];
+				// 	body = post[0]['body'];
+				// 
+				// 	$('#post #title').html(title);
+				// 	$('#post #body').html(body);
+				// });
 
 				//inicia o map sempre na ultima localizacao do usuario
 				init_map(most_recent_location.lat, most_recent_location.long, map_elem);

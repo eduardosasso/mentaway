@@ -55,6 +55,10 @@ class Controller {
 			$posts[] = $posts_[0];
 		}
 		
+		if (count($posts) == 0) {
+			$posts[] = $posts_[0];
+		}
+		
 		return $posts;
 	}
 	
