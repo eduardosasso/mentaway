@@ -99,7 +99,6 @@ get_post = function(begin_date, end_date, callback){
 
 
 show_post = function(begin_date, end_date) {
-	console.log(begin_date + ' ' + end_date);
 	get_post(begin_date, end_date, function(posts){
 		title = posts[0]['title'];
 		body = posts[0]['body'];
@@ -148,6 +147,14 @@ add_markers_external_navigation = function(){
 			$(this).hide();
 		}
 		
+		var latlng = new google.maps.LatLng(
+			parseFloat(placemarks[idx].value.lat),
+			parseFloat(placemarks[idx].value.long)
+		);
+
+		map.panTo(latlng);
+		map.panBy(400, 0); 
+		
 		current_placemark_timestamp = placemarks[idx].value.timestamp;
 	  next_placemark_timestamp = placemarks[(idx+1)].value.timestamp;
 
@@ -164,14 +171,23 @@ add_markers_external_navigation = function(){
 			google.maps.event.trigger(markers[idx], 'click'); 
 			$(this).hide();
 		}
-		console.log(idx);
 		
+		var latlng = new google.maps.LatLng(
+			parseFloat(placemarks[idx].value.lat),
+			parseFloat(placemarks[idx].value.long)
+		);
+		
+		/*
+			TODO deixar mais generico a navegacao no mapa
+		*/
+		map.panTo(latlng);
+		map.panBy(400, 0);		
+		
+		//mostra os posts baseados no intervalo de datas...
 		current_placemark_timestamp = placemarks[idx].value.timestamp;
 	  next_placemark_timestamp = placemarks[(idx+1)].value.timestamp;
 	
 		show_post(current_placemark_timestamp, next_placemark_timestamp);
-		
-		
 	});
 }
 
