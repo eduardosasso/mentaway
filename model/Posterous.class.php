@@ -15,6 +15,7 @@ class Posterous extends AbstractService {
 			$post->title = (string) $post_->title;
 			$post->body = (string) $post_->body;
 			$post->date = (string) $post_->date;
+			$post->timestamp = strtotime($post->date);
 			$post->link = (string) $post_->link;
 
 			$posts[] = $post;			

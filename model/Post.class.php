@@ -4,6 +4,7 @@ class Post {
 	public $title;  
 	public $body;
 	public $date;
+	public $timestamp;
 	public $service;
 	public $user;
 	public $trip;

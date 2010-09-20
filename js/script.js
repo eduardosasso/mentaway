@@ -31,7 +31,7 @@ format_date= function(date) {
 }
 
 create_marker = function(placemark){
-	console.log(placemark);
+
 	date = format_date(placemark.timestamp);
 	
 	var html = 
@@ -133,7 +133,7 @@ add_markers_external_navigation = function(){
 			google.maps.event.trigger(markers[idx], 'click'); 
 			$(this).hide();
 		}
-			console.log(idx);
+		console.log(idx);
 	});
 	
 	$('#navigation #next').click(function(){
@@ -145,11 +145,8 @@ add_markers_external_navigation = function(){
 			google.maps.event.trigger(markers[idx], 'click'); 
 			$(this).hide();
 		}
-			console.log(idx);
+		console.log(idx);
 	});
-	
-
-	
 }
 
 highlight_last_position = function(){

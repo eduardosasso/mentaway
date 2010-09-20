@@ -9,7 +9,7 @@ class ControllerTest extends PHPUnit_Framework_TestCase {
 			$controller->print_placemarks('eduardosasso');
 		}
 		
-		public function test_get_posts(){
+		public function xtest_get_posts(){
 			$username = 'eduardosasso';
 			
 			$controller = new Controller();
@@ -17,6 +17,20 @@ class ControllerTest extends PHPUnit_Framework_TestCase {
 			
 			print_r($posts);
 		}
+		
+		public function test_get_posts_by_interval(){
+			$username = 'eduardosasso';
+			
+			$controller = new Controller();
+			$begin_date = 1281445385;
+			$end_date = 1284727310;
+			
+			$posts = $controller->get_posts_by_interval($username);
+			
+			print_r($posts);
+		}
+		
+		
 		
 		public function xtest_get_user_service(){
 			$username = 'eduardosasso';
