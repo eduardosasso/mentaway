@@ -14,8 +14,8 @@ class Twitter extends AbstractService {
 		$controller = new Controller();
 
 		$service = $controller->get_user_service($username, $servicename);
-		//$twitter_user = $service->token;
-		$twitter_user = 'eduardosasso';
+		$twitter_user = $service->token;
+		//$twitter_user = 'eduardosasso';
 
 		$twitter_url = "http://api.twitter.com/1/statuses/user_timeline.json?screen_name=$twitter_user";
 		
@@ -30,17 +30,22 @@ class Twitter extends AbstractService {
 		foreach ($tweets as $key => $tweet) {
 			$text = $tweet->text;
 			
-			//tem q ter geo habilitado + hash #m para identificar tweet do mentway
+			//tem q ter geo habilitado + hash #m para identificar tweet do mentaway
 			if (isset($tweet->geo) && (preg_match($pattern,$text) > 0 || preg_match($pattern_short,$text) > 0)) {
 				$timestamp = strtotime($tweet->created_at);
 
 				$lat = $tweet->geo->coordinates[0];
 				$long = $tweet->geo->coordinates[1];
 				
+				//http://twitpic.com/show/thumb/29u9f1
+				
+				// var img = new Image();
+				// 			  $(img).attr('src','http://twitpic.com/show/thumb/29u9f1');
+				
 				$placemark = new Placemark();
 				$placemark->_id = $timestamp . '|twitter';
 				$placemark->name = $text;
-				//$placemark->image = $icon;
+				$placemark->image = 'http://twitpic.com/show/thumb/29u9f1';
 				//$placemark->description = $shout;
 				$placemark->date = $tweet->created_at;
 				$placemark->timestamp = $timestamp;
@@ -51,14 +56,28 @@ class Twitter extends AbstractService {
 				
 				$placemarks[] = $placemark;
 				
-				// parent::save($placemark);
+				parent::save($placemark);
 			}
 		}
 				
 		print_r($placemarks);
 
 		return $placemarks;
-
 	}
+	
+	public function validate($twitter_user){
+		$twitter_url = "http://api.twitter.com/1/users/show.json?screen_name=$twitter_user";
+		
+		try {
+			$info = file_get_contents($twitter_url);
+			$result = true;
+		} catch (Exception $e) {
+			$result = false;
+		}
+		
+		return $result;
+		
+	}
+	
 }
 ?>

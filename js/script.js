@@ -36,12 +36,22 @@ create_marker = function(placemark){
 
 	date = format_date(placemark.timestamp);
 	
+	var img = '';
+	if (placemark.image) {
+		img = '<img src="' + placemark.image + '"/>'
+	};
+	
+	var desc = '';
+	if (placemark.description) {
+		desc = '<p class="desc">' + placemark.description + '</p>'; 
+	};
+		
 	var html = 
 		'<div class="infowindow">' + placemark.name + 
-			'<p class="date">' + date + '</p> \
-			<p class="desc">' + placemark.description + '</p> \
-		</div>';
-	
+			img + 
+			'<p class="date">' + date + '</p>' + 
+			desc + 
+		'</div>';	
 	
 	var latlng = new google.maps.LatLng(
 		parseFloat(placemark.lat),
@@ -151,6 +161,20 @@ add_posterous = function(username,site, callback) {
 	});	
 }
 
+add_twitter = function(username, twitter, callback) {
+	args = {
+		username: username,
+		twitter_user: twitter
+	}
+
+	url = base_url + '/services/twitter.php';
+	
+	$.get(url,args, function(data){
+		callback(data);
+	});	
+}
+
+
 hide_show_navigation = function(idx){
 	if (idx > 0 && idx <= (placemarks.length-1)) {
 		$('#navigation #next, #navigation #previous,').show();
@@ -209,13 +233,6 @@ $(document).ready(function() {
 				}
 
 				show_post();
-				// get_post(function(post){
-				// 	title = post[0]['title'];
-				// 	body = post[0]['body'];
-				// 
-				// 	$('#post #title').html(title);
-				// 	$('#post #body').html(body);
-				// });
 
 				//inicia o map sempre na ultima localizacao do usuario
 				init_map(most_recent_location.lat, most_recent_location.long, map_elem);
@@ -250,6 +267,16 @@ $(document).ready(function() {
 				$('#posterous_block').html(data);
 			});
 		});
+		
+		$('#add_twitter').click(function(){
+			username = $('#username').val();
+			twitter = $('#twitter_user').val();
+			
+			add_twitter(username,twitter, function(data){
+				$('#twitter_block').html(data);
+			});
+		});
+		
 		
 		
 		$('#new_user_account').click(function(){
