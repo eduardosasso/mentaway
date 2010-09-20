@@ -1,6 +1,7 @@
 <?php 
 require_once("DatabaseInterface.php");
 require_once("Service.class.php");
+require_once("Trip.class.php");
 
 require_once "lib/couchdb/couch.php";
 require_once "lib/couchdb/couchClient.php";
@@ -70,6 +71,29 @@ class CouchDB implements DatabaseInterface {
 		}
 		
 		$user->services[] = $service;
+		
+		$response = $this->save_user($user);
+		
+		return $response;		
+	}
+	
+	public function add_user_trip($username, Trip $trip) {
+		$user = $this->get_user($username);
+		
+		if (isset($user->trips)) {
+			$user_trips = $user->trips;
+
+			//ve se o servico ja existe, se sim remove para atualizar...
+			foreach ($user_trips as $key => $value) {
+				if ($value->_id == $trip->_id) {
+					unset($user_trips[$key]);
+					$temp_array = array_values($user_trips);
+					$user->trips = $temp_array;
+				}
+			}
+		}
+	
+		$user->trips[] = $trip;
 		
 		$response = $this->save_user($user);
 		

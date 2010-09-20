@@ -84,6 +84,11 @@ define('BASE_URL', dirname($_SERVER["SCRIPT_NAME"]));
 		<?php if ($user): ?>
 			<input type="button" value="Add Foursquare" id="foursquare" class="add_user_service">
 			
+			<div id="trip_block">
+				<textarea name="textarea" rows="3" cols="10" wrap="wrap" id="trip_description"></textarea>
+				<input type="button" value="Add Trip" id="add_trip">
+			</div>
+			
 			<div id="twitter_block">
 				<input type="text" placeholder="Twitter Username"	value="" id="twitter_user">
 				<input type="button" value="Add Twitter" id="add_twitter">

@@ -1,5 +1,5 @@
 <?php 
-class Trip {  
+class Trip {
 	public $_id;
 	public $name;
 	public $date;

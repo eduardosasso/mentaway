@@ -15,6 +15,8 @@ $user = $_REQUEST['uid'];
 */
 
 switch ($action) {
+	case "trip":
+		break;
 	case "markers":
 		$placemarks = $controller->get_placemarks($user);
 		print json_encode($placemarks);		

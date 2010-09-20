@@ -69,9 +69,29 @@ class DatabaseTest extends PHPUnit_Framework_TestCase {
 			
 			$response = $db->add_user_service($username, $service);
 
+			print_r($response);		
+		}
+		
+		public function test_add_user_trip(){
+			$username = 'eduardosasso';
+			
+			$db = DatabaseFactory::get_provider();
+
+			$date = date('D M d H:i:s O Y');
+			
+			$trip = new Trip();
+			$trip->_id = 'trip';
+			$trip->name = 'Trip para os States 2010';
+			$trip->date =  $date;
+			$trip->timestamp = strtotime($trip->date);
+			$trip->current = true;
+			
+			$response = $db->add_user_trip($username, $trip);
+			
 			print_r($response);
 			
 		}
+		
 		
 		public function xtest_remove_user_service(){
 			$username = 'abduzeedo';
@@ -84,7 +104,7 @@ class DatabaseTest extends PHPUnit_Framework_TestCase {
 			print_r($response);
 		}
 		
-		public function testCleanDatabase() {
+		public function xxtestCleanDatabase() {
 			$db = DatabaseFactory::get_provider();
 			$db->clean_database();
 		}
