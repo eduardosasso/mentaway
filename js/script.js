@@ -48,9 +48,9 @@ create_marker = function(placemark){
 		
 	var html = 
 		'<div class="infowindow">' + placemark.name + 
-			img + 
 			'<p class="date">' + date + '</p>' + 
 			desc + 
+			img + 
 		'</div>';	
 	
 	var latlng = new google.maps.LatLng(
@@ -67,7 +67,7 @@ create_marker = function(placemark){
 		infoWindow.setContent(html);
 	
 		map.panTo(marker.position);
-		map.panBy(400, 0);
+		map.panBy(400, -10);
 		
 		idx = (marker.__gm_id -1);
 		

@@ -18,12 +18,27 @@ class TwitterTest extends PHPUnit_Framework_TestCase {
 			print_r($placemarks);
 		}
 		
-		public function xtest_validate() {
+		public function xxxtest_validate() {
 			$username = 'eduardosassox';
 
 			$twitter = new Twitter();
-			$placemarks = $twitter->validate($username);
-			
+			$placemarks = $twitter->validate($username);			
 		}	
+		
+		public function xxxtest_twitpic_replace() {
+			$pattern = "#http://twitpic.com/(\w+)#";
+			
+			$text = "Mentaway Sneak Peak Source Code :-) #m http://twitpic.com/2qdh1d";
+			
+			$res = preg_replace($pattern ,'', $text);
+			$res = preg_replace('/#m/' ,'', $res);
+			$res = preg_replace('/#mentaway/' ,'', $res);
+			echo trim($res);
+			
+			//$res = preg_match('#http://twitpic.com/(\w+)#',$text, $matches);
+			
+			//print_r($matches);
+		}
+
 }
 ?>

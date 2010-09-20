@@ -37,15 +37,21 @@ class Twitter extends AbstractService {
 				$lat = $tweet->geo->coordinates[0];
 				$long = $tweet->geo->coordinates[1];
 				
-				//http://twitpic.com/show/thumb/29u9f1
+				$twitpic = '#http://twitpic.com/(\w+)#';
+				$image = '';
+				if (preg_match($twitpic, $text, $matches) > 0) {
+					$image = 'http://twitpic.com/show/thumb/' . $matches[1];
+				}
 				
-				// var img = new Image();
-				// 			  $(img).attr('src','http://twitpic.com/show/thumb/29u9f1');
+				//retira hash e image do twitter...
+				$text = preg_replace($twitpic ,'', $text);
+				$text = preg_replace('/#m/' ,'', $text);
+				$text = preg_replace('/#mentaway/' ,'', $text);
 				
 				$placemark = new Placemark();
 				$placemark->_id = $timestamp . '|twitter';
-				$placemark->name = $text;
-				$placemark->image = 'http://twitpic.com/show/thumb/29u9f1';
+				$placemark->name = trim($text);
+				$placemark->image = $image;
 				//$placemark->description = $shout;
 				$placemark->date = $tweet->created_at;
 				$placemark->timestamp = $timestamp;
@@ -59,8 +65,6 @@ class Twitter extends AbstractService {
 				parent::save($placemark);
 			}
 		}
-				
-		print_r($placemarks);
 
 		return $placemarks;
 	}
