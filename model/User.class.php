@@ -1,5 +1,6 @@
 <?php 
 require_once("Service.class.php");
+require_once("Trip.class.php");
 
 class User {  
 	public $_id;
@@ -11,9 +12,15 @@ class User {
 	public $date;
 	
 	public $services = array(); 
+	public $trips = array();
 	
 	function set_service(Service $service) {
 		$this->services[] = $service;
 	}
+	
+	function set_trip(Trip $trip) {
+		$this->trips[] = $trip;
+	}
+	
 }
 ?>
