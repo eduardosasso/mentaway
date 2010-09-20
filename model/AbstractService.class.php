@@ -8,8 +8,14 @@ abstract class AbstractService {
 	
 	//Aqui faz a persistencia dos servicos, Foursquare, Twitter ...
 	public function save($document) {
-		$db = DatabaseFactory::get_provider();
-		$db->save($document);
+		try {
+			$db = DatabaseFactory::get_provider();
+			$db->save($document);			
+		} catch (Exception $e) {
+			/*
+				TODO tratar melhor... por enquanto nao faz nada, so evita o erro
+			*/
+		}
 	}
 	
 }
