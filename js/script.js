@@ -245,7 +245,7 @@ $(document).ready(function() {
 					long: placemarks[0]['value']['long']
 				}
 
-				show_post();
+				show_post(null,null);
 
 				//inicia o map sempre na ultima localizacao do usuario
 				init_map(most_recent_location.lat, most_recent_location.long, map_elem);

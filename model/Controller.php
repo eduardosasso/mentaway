@@ -60,8 +60,11 @@ class Controller {
 			$posts[] = $posts_[0];
 		}
 		
-		if (count($posts) == 0) {
+		//tem usar o post mais proximo baseado na data q o usuario esta, se nao acha usa o ultimo mesmo.
+		if (count($posts) == 0 && count($nearest_post) >0) {
 			$posts[] = $nearest_post;
+		} else {
+			$posts[] = $posts_[0];
 		}
 		
 		return $posts;
