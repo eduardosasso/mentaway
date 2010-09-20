@@ -8,6 +8,7 @@ interface DatabaseInterface
 	public function add_user_service($username, Service $service);
 	public function remove_user_service($username, $service_id);
 	public function get_user($user);	
+	public function get_all_users();	
 	
 	public function clean_database();
 }

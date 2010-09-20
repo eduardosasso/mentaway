@@ -94,6 +94,16 @@ class CouchDB implements DatabaseInterface {
 		return $response;		
 		
 	}
+	
+	public function get_all_users() {
+		// function(doc) {
+		//   if (doc.services)
+		//   emit(doc.username, doc);
+		// }
+		
+		$users = $this->db->getView('users','users');
+		return $users->rows;
+	}
 		
 	public function get_user($username) {
 		try {

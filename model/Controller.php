@@ -67,6 +67,12 @@ class Controller {
 		return $posts;
 	}
 	
+
+	function get_all_users(){
+		$db = DatabaseFactory::get_provider();
+		$users = $db->get_all_users();
+		return $users;
+	}
 		
 	function get_user($username){
 		$db = DatabaseFactory::get_provider();

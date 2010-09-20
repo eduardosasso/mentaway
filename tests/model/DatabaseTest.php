@@ -15,6 +15,14 @@ class DatabaseTest extends PHPUnit_Framework_TestCase {
 			
 		}
 		
+		public function xxxtest_get_all_users() {	
+			$db = DatabaseFactory::get_provider();
+			
+			$users = $db->get_all_users();
+			
+			print_r($users);
+		}
+		
 		public function xxtest_get_placemarks() {	
 			$db = DatabaseFactory::get_provider();
 			
@@ -76,15 +84,10 @@ class DatabaseTest extends PHPUnit_Framework_TestCase {
 			print_r($response);
 		}
 		
-		public function xxtestCleanDatabase() {
+		public function testCleanDatabase() {
 			$db = DatabaseFactory::get_provider();
 			$db->clean_database();
 		}
-		
-		// function(doc) {
-		// 		  emit(doc.user, doc);
-		// 		}
-		
 		
 }
 ?>
