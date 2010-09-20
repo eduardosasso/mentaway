@@ -18,37 +18,44 @@ class Twitter extends AbstractService {
 		$twitter_user = 'eduardosasso';
 
 		$twitter_url = "http://api.twitter.com/1/statuses/user_timeline.json?screen_name=$twitter_user";
-
+		
 		$tweets = file_get_contents($twitter_url);
 
 		$tweets = json_decode($tweets);
 		
 		$placemarks = array();
+		$pattern = '/#mentaway/';
+		$pattern_short = '/#m/';
 
 		foreach ($tweets as $key => $tweet) {
-
+			$text = $tweet->text;
+			
 			//tem q ter geo habilitado + hash #m para identificar tweet do mentway
-			if (isset($tweet->geo)) {
+			if (isset($tweet->geo) && (preg_match($pattern,$text) > 0 || preg_match($pattern_short,$text) > 0)) {
 				$timestamp = strtotime($tweet->created_at);
-				print_r($tweet);
-			}
 
-			// $placemark = new Placemark();
-			// $placemark->_id = $timestamp . '|' . $checkin->venue->name;
-			// $placemark->name = $checkin->venue->name;
-			// $placemark->image = $icon;
-			// $placemark->description = $shout;
-			// $placemark->date = $checkin->created;
-			// $placemark->timestamp = $timestamp;
-			// $placemark->lat = $checkin->venue->geolat;
-			// $placemark->long = $checkin->venue->geolong;
-			// $placemark->service = $servicename;
-			// $placemark->user = $username;
-			// 
-			// $placemarks[] = $placemark;
-			// 
-			// parent::save($placemark);
+				$lat = $tweet->geo->coordinates[0];
+				$long = $tweet->geo->coordinates[1];
+				
+				$placemark = new Placemark();
+				$placemark->_id = $timestamp . '|twitter';
+				$placemark->name = $text;
+				//$placemark->image = $icon;
+				//$placemark->description = $shout;
+				$placemark->date = $tweet->created_at;
+				$placemark->timestamp = $timestamp;
+				$placemark->lat = $lat;
+				$placemark->long = $long;
+				$placemark->service = $servicename;
+				$placemark->user = $username;
+				
+				$placemarks[] = $placemark;
+				
+				// parent::save($placemark);
+			}
 		}
+				
+		print_r($placemarks);
 
 		return $placemarks;
 
