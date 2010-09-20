@@ -45,8 +45,13 @@ class Controller {
 		$posts_ = $posterous->get_updates($hostname);
 		
 		$posts = array();
-		if ($begin_date && $end_date) {
+		$nearest_post = '';
+		if ($begin_date && $end_date) {			
 			foreach ($posts_ as $key => $post) {
+				//procura o post mais proximo da data inicial
+				if ($post->timestamp >= $begin_date) {
+					$nearest_post = $post;
+				}
 				if ($post->timestamp >= $begin_date && $post->timestamp < $end_date) {
 					$posts[] = $post;
 				}
@@ -56,7 +61,7 @@ class Controller {
 		}
 		
 		if (count($posts) == 0) {
-			$posts[] = $posts_[0];
+			$posts[] = $nearest_post;
 		}
 		
 		return $posts;
