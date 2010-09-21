@@ -32,13 +32,13 @@ class DatabaseTest extends PHPUnit_Framework_TestCase {
 
 		}
 		
-		public function xtest_save_user() {
+		public function test_save_user() {
 			$db = DatabaseFactory::get_provider();
 			
 			$user = new User();
-			$user->_id = 'eduardosasso';
-			$user->username = 'eduardosasso';
-			$user->fullname = 'Eduardo Sasso';
+			$user->_id = 'abduzeedo';
+			$user->username = 'Abduzeedo';
+			$user->fullname = 'Abduzeedo';
 						
 			$response = $db->save_user($user);
 
@@ -104,7 +104,7 @@ class DatabaseTest extends PHPUnit_Framework_TestCase {
 			print_r($response);
 		}
 		
-		public function testCleanDatabase() {
+		public function xxxtestCleanDatabase() {
 			$db = DatabaseFactory::get_provider();
 			$db->clean_database();
 		}

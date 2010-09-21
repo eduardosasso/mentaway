@@ -10,8 +10,8 @@ require_once("../model/lib/foursquare/EpiFoursquare.php");
 
 $consumer_key = "3ZJVNOQBLHDFE3YKW3BJ1XQZG0XRJWLN4EVNR3WYRKEO0FED";								 
 $consumer_secret = "YLMEQHX1LO5K0XDGWCEQKNI0WXRPWNTKM05VXELYZ30J42C2";
-										
-$oauth_token = $_REQUEST['oauth_token'];
+
+$oauth_token = isset($_REQUEST['oauth_token']) ? $_REQUEST['oauth_token'] : '';
 $username = $_REQUEST['username'];
 
 //se o token vier populado significa que eh o callback do oauth

@@ -2,7 +2,12 @@
 /*
 	TODO Essa pagina de html tem q ser generica... talvez com template.
 */
-define('BASE_URL', dirname($_SERVER["SCRIPT_NAME"]));
+$script_name = dirname($_SERVER["SCRIPT_NAME"]);
+define('BASE_URL','');
+if ($script_name != '/') {
+	define('BASE_URL', dirname($_SERVER["SCRIPT_NAME"]));
+}
+
 ?>
 <!doctype html>
 <html lang="en" class="no-js">
@@ -54,6 +59,7 @@ define('BASE_URL', dirname($_SERVER["SCRIPT_NAME"]));
 		$user = explode('/',$user);
 		$user = $user[1];
 		
+	
 		require_once("model/Controller.php");
 		$controller = new Controller();
 		

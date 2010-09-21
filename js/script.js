@@ -141,11 +141,11 @@ add_user_service = function(service,username){
 		username: username
 	}
 	
-	url = base_url + '/services/' + service + '.php';
+	 url = base_url + '/services/' + service + '.php';
 	
-	$.get(url,args, function(url){
-		window.location.replace(url);
-	});
+		$.get(url,args, function(url){
+			window.location.replace(url);
+		});
 }
 
 add_posterous = function(username,site, callback) {
