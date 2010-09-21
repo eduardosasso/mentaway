@@ -32,7 +32,7 @@ class DatabaseTest extends PHPUnit_Framework_TestCase {
 
 		}
 		
-		public function test_save_user() {
+		public function xxxtest_save_user() {
 			$db = DatabaseFactory::get_provider();
 			
 			$user = new User();
@@ -104,7 +104,7 @@ class DatabaseTest extends PHPUnit_Framework_TestCase {
 			print_r($response);
 		}
 		
-		public function xxxtestCleanDatabase() {
+		public function testCleanDatabase() {
 			$db = DatabaseFactory::get_provider();
 			$db->clean_database();
 		}
