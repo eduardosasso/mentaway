@@ -104,6 +104,17 @@ class Controller {
 		return $response;				
 	}
 	
+	function get_current_trip($username) {
+		$db = DatabaseFactory::get_provider();
+
+		$user = $db->get_user($username);
+		/*
+			TODO fazer com q a trip corrent seja sempre indice zero ou encontrar a trip corrent via loop.
+		*/
+		$trip = $user->trips[0];
+		return $trip;
+	}
+	
 	function add_user_service($username, Service $service) {
 		$db = DatabaseFactory::get_provider();
 

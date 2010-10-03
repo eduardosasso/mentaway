@@ -3,10 +3,13 @@
 	TODO Essa pagina de html tem q ser generica... talvez com template.
 */
 $script_name = dirname($_SERVER["SCRIPT_NAME"]);
-define('BASE_URL','');
+$base_url = '';
+
 if ($script_name != '/') {
-	define('BASE_URL', dirname($_SERVER["SCRIPT_NAME"]));
+	$base_url = dirname($_SERVER["SCRIPT_NAME"]);
 }
+
+define('BASE_URL',$base_url);
 
 ?>
 <!doctype html>
@@ -88,7 +91,13 @@ if ($script_name != '/') {
 		<input type="hidden" value="<?php echo $username ?>" id="username">
 		
 		<?php if ($user): ?>
-			<input type="button" value="Add Foursquare" id="foursquare" class="add_user_service">
+			<div id="foursquare_block">
+				<input type="button" value="Add Foursquare" id="foursquare" class="add_user_service">
+			</div>			
+			
+			<div id="flickr_block">
+				<input type="button" value="Add Flickr" id="flickr" class="add_user_service">
+			</div>
 			
 			<div id="trip_block">
 				<textarea name="textarea" rows="3" cols="60" wrap="wrap" id="trip_desc"></textarea>
