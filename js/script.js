@@ -3,18 +3,56 @@ var map;
 var placemarks = [];
 var markers = [];
 var infoWindow;
+var bounds='';
 //index do placemark atual...
 var idx;
+
+
+dynamic_zoom_map = function(marker_idx) {	
+	//cria o zoom dinamico conforme o local dos pontos
+	current = markers[marker_idx];
+	
+	//redefine o bounds se o meu ponto atual nao estiver na area.
+	if (bounds != '' && bounds.contains(current.position) == false) {				
+		if (marker_idx == (markers.length -1)) {
+			next = markers[(marker_idx)];
+		} else {
+			next = markers[(marker_idx + 1)];
+		}
+		previous = markers[(marker_idx -1)];
+		
+		//cria uma nova area com os pontos anteriores, atual e proximo
+		var bounds_ = new google.maps.LatLngBounds();		
+		bounds_.extend(previous.position);
+		bounds_.extend(current.position);
+		bounds_.extend(next.position);
+		
+		//map.panToBounds(bounds);
+		
+		//redifine a area padrao...
+		bounds = bounds_;
+
+		map.fitBounds(bounds_);
+	};	
+	
+	map.panTo(current.position);
+	
+	//posiciona o mapa mais a esqueda
+	map.panBy(400, -10);	
+	
+}
 
 init_map = function(lat, long, element) {
 	var myLatlng = new google.maps.LatLng(lat, long);
 	var myOptions = {
-		zoom: 15,
+		zoom: 5,
 		center: myLatlng,
-		mapTypeId: google.maps.MapTypeId.ROADMAP
+		mapTypeId: google.maps.MapTypeId.ROADMAP,
+		streetViewControl: true
 	}
 	
 	map = new google.maps.Map(element, myOptions);
+	
 	infoWindow = new google.maps.InfoWindow();
 }
 
@@ -66,9 +104,6 @@ create_marker = function(placemark){
 	google.maps.event.addListener(marker, 'click', function() {
 		infoWindow.setContent(html);
 	
-		map.panTo(marker.position);
-		map.panBy(400, -10);
-		
 		idx = (marker.__gm_id -1);
 		
 		hide_show_navigation(idx);
@@ -79,7 +114,9 @@ create_marker = function(placemark){
 			current_placemark_timestamp = placemarks[idx].value.timestamp;
 		  next_placemark_timestamp = placemarks[(idx + 1)].value.timestamp;
 			show_post(current_placemark_timestamp, next_placemark_timestamp);			
-		}		
+		}
+		
+		dynamic_zoom_map(idx);		
 		
 		infoWindow.open(map, marker);
 	});
@@ -232,6 +269,17 @@ add_markers_external_navigation = function(){
 highlight_last_position = function(){
 	idx = (markers.length - 1);
 	google.maps.event.trigger(markers[idx], 'click'); 
+	
+	//define uma area padrao ao iniciar o mapa...
+	bounds = new google.maps.LatLngBounds();
+	
+	prev = markers[(idx -1)];
+	next = markers[(idx)];	
+	
+	bounds.extend(prev.position);
+	bounds.extend(next.position);
+		
+	map.fitBounds(bounds);	
 }
 
 $(document).ready(function() {
@@ -245,7 +293,7 @@ $(document).ready(function() {
 					long: placemarks[0]['value']['long']
 				}
 
-				//show_post(null,null);
+				//Gshow_post(null,null);
 
 				//inicia o map sempre na ultima localizacao do usuario
 				init_map(most_recent_location.lat, most_recent_location.long, map_elem);
