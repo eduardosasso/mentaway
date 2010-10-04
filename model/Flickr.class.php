@@ -28,9 +28,34 @@ class Flickr extends AbstractService {
 		$args = array("extras"=>"geo,date_taken", "min_taken_date"=>$date_trip);
 		$photos = $f->photos_getWithGeoData($args);
 		
-		echo '<pre>';
-		print_r($photos);
-		echo '</pre>';		
+		foreach ($photos['photo'] as $key => $photo) {
+			//http://farm{farm-id}.static.flickr.com/{server-id}/{id}_{secret}_[mstb].jpg
+			$image_url = 'http://farm' . $photo['farm'] . '.static.flickr.com/' . $photo['server'] . '/' . $photo['id'] . '_' . $photo['secret'] . '_t.jpg';
+			
+			$description = '';
+			$info = $f->photos_getInfo($photo['id']);
+			if (isset($info['description'])) {
+				$description = $info['description'];
+			}
+			
+			$timestamp = strtotime($photo['datetaken']);
+			
+			$placemark = new Placemark();
+			$placemark->_id = $timestamp . '|flickr';
+			$placemark->name = $photo['title'];
+			$placemark->image = $image_url;
+			$placemark->description = $description;
+			$placemark->date = $photo['datetaken'];
+			$placemark->timestamp = $timestamp;
+			$placemark->lat = $photo['latitude'];
+			$placemark->long = $photo['longitude'];
+			$placemark->service = 'flickr';
+			$placemark->user = $username;
+			
+			$placemarks[] = $placemark;
+
+			parent::save($placemark, $username);
+		}
 	}	
 }
 ?>
