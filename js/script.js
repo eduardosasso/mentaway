@@ -88,7 +88,7 @@ create_marker = function(placemark){
 	if (placemark.service == 'flickr') {
 		//se vem do flickr pega a imagem em thumb e mostra ela maior no lightbox
 		img_ = placemark.image;		
-		img_ = img_.replace('_t.','_m.');
+		img_ = img_.replace('_t.','_b.');
 		
 		img = '<a href="' + img_ + '" class="lightbox">' + img +  '</a>';
 	};
