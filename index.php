@@ -30,6 +30,7 @@
 
   <!-- CSS : implied media="all" -->
   <link rel="stylesheet" href="css/style.css?v=1">
+  <link rel="stylesheet" href="js/fancybox/jquery.fancybox-1.3.1.css">
 
   <!-- For the less-enabled mobile browsers like Opera Mini -->
   <link rel="stylesheet" media="handheld" href="css/handheld.css?v=1">

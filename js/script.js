@@ -71,12 +71,26 @@ format_date= function(date) {
 }
 
 create_marker = function(placemark){
-
 	date = format_date(placemark.timestamp);
 	
 	var img = '';
 	if (placemark.image) {
 		img = '<img src="' + placemark.image + '"/>'
+	};
+	
+	// if (placemark.service == 'twitter' && placemark.image != '') {
+	// 	img_ = placemark.image;		
+	// 	img_ = img_.replace('thumb','medium');
+	// 	
+	// 	img = '<a href="' + img_ + '" class="lightbox">' + img +  '</a>';
+	// };
+	
+	if (placemark.service == 'flickr') {
+		//se vem do flickr pega a imagem em thumb e mostra ela maior no lightbox
+		img_ = placemark.image;		
+		img_ = img_.replace('_t.','_m.');
+		
+		img = '<a href="' + img_ + '" class="lightbox">' + img +  '</a>';
 	};
 	
 	var desc = '';
@@ -119,6 +133,12 @@ create_marker = function(placemark){
 		dynamic_zoom_map(idx);		
 		
 		infoWindow.open(map, marker);
+		
+		/*
+			TODO meio burro, faz sempre o fancybox, melhorar.
+		*/
+		$("a.lightbox").fancybox();
+		
 	});
 	
 	markers.push(marker);
@@ -270,7 +290,7 @@ highlight_last_position = function(){
 	idx = (markers.length - 1);
 	google.maps.event.trigger(markers[idx], 'click'); 
 	
-	//define uma area padrao ao iniciar o mapa...
+	//define uma area padrao ao iniciar o mapa..
 	bounds = new google.maps.LatLngBounds();
 	
 	prev = markers[(idx -1)];
@@ -307,7 +327,6 @@ $(document).ready(function() {
 
 				//adciona navegacao nas marcacoes via links anterior e proximo
 				add_markers_external_navigation();
-
 			});
 		}
 		

@@ -1,19 +1,8 @@
-
 // remap jQuery to $
 (function($){
-
- 
-
-
-
-
-
- 
-
-
+	$.getScript("js/fancybox/jquery.fancybox-1.3.1.pack.js"); 
 
 })(window.jQuery);
-
 
 
 // usage: log('inside coolFunc',this,arguments);

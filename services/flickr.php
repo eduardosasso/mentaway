@@ -7,7 +7,7 @@
 
 	$api_key                 = "abf2e4a70a2362dcc429faf6060954a1";
 	$api_secret              = "d4e88e847732c369";
-	$default_redirect        = "/mentaway/eduardosasso";
+	//$default_redirect        = "/mentaway/eduardosasso";
 	$permissions             = "read";
 	$path_to_phpFlickr_class = "../model/lib/flickr/";
 
