@@ -138,11 +138,18 @@ create_marker = function(placemark){
 	});
 
 	google.maps.event.addListener(marker, 'click', function(e) {
-		fb_like = '<iframe src="http://www.facebook.com/plugins/like.php?href=' + escape(location.href) + '&layout=button_count&show_faces=true&width=450&action=like&colorscheme=light&height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:21px;" allowTransparency="true"></iframe>';
+		idx = (marker.__gm_id -1);
+		
+		//console.log(placemarks[idx].value.user);
+		$('title').text(placemarks[idx].value.user + ': ' + placemarks[idx].value.name);
+		
+		url = location.href;
+		
+		url = url.replace('#' + idx, '/' + idx);
+		
+		fb_like = '<iframe src="http://www.facebook.com/plugins/like.php?href=' + url + '&layout=button_count&show_faces=true&width=450&action=like&colorscheme=light&height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:21px;" allowTransparency="true"></iframe>';
 		
 		infoWindow.setContent(html + fb_like);
-	
-		idx = (marker.__gm_id -1);
 		
 		//teste para detectar se clicou direto no pin
 		if (typeof e != "undefined") {
