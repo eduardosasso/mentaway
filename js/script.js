@@ -7,6 +7,18 @@ var bounds='';
 //index do placemark atual...
 var idx;
 
+window.fbAsyncInit = function() {
+	FB.init({appId: '136687686378472', status: true, cookie: true, xfbml: true});
+};
+
+add_facebook = function(){
+	var e = document.createElement('script');
+	e.type = 'text/javascript';
+	e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
+	e.async = true;
+	document.getElementById('fb-root').appendChild(e);
+}
+
 dynamic_zoom_map = function(marker_idx) {	
 	//cria o zoom dinamico conforme o local dos pontos
 	current = markers[marker_idx];
@@ -126,7 +138,9 @@ create_marker = function(placemark){
 	});
 
 	google.maps.event.addListener(marker, 'click', function(e) {
-		infoWindow.setContent(html);
+		fb_like = '<iframe src="http://www.facebook.com/plugins/like.php?href=' + escape(location.href) + '&layout=button_count&show_faces=true&width=450&action=like&colorscheme=light&height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:21px;" allowTransparency="true"></iframe>';
+		
+		infoWindow.setContent(html + fb_like);
 	
 		idx = (marker.__gm_id -1);
 		
@@ -321,6 +335,8 @@ trigger_placemark = function(idx){
 }
 
 $(document).ready(function() {
+		add_facebook();
+		
 		map_elem = $('#map').get(0);
 		post = $('#post');
 		

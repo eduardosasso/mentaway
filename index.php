@@ -64,7 +64,9 @@
 <!--[if IE 8 ]>    <body class="ie8"> <![endif]-->
 <!--[if IE 9 ]>    <body class="ie9"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!--> <body> <!--<![endif]-->
-
+	
+	<div id="fb-root"></div>
+	
 	<div id="map"></div>
   <div id="content">
 		<div id="navigation">
