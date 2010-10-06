@@ -1,7 +1,7 @@
 // remap jQuery to $
 (function($){
 	$.getScript("js/fancybox/jquery.fancybox-1.3.1.pack.js"); 
-
+	$.getScript("js/jquery.history.js");
 })(window.jQuery);
 
 

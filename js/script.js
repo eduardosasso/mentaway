@@ -7,11 +7,10 @@ var bounds='';
 //index do placemark atual...
 var idx;
 
-
 dynamic_zoom_map = function(marker_idx) {	
 	//cria o zoom dinamico conforme o local dos pontos
 	current = markers[marker_idx];
-	
+
 	//redefine o bounds se o meu ponto atual nao estiver na area.
 	if (bounds != '' && bounds.contains(current.position) == false) {				
 		if (marker_idx == (markers.length -1)) {
@@ -33,7 +32,18 @@ dynamic_zoom_map = function(marker_idx) {
 		bounds = bounds_;
 
 		map.fitBounds(bounds_);
-	};	
+	} else if (bounds == '') {
+		//define uma area padrao ao iniciar o mapa..
+		bounds = new google.maps.LatLngBounds();
+
+		prev = markers[(marker_idx -1)];
+		next = markers[(marker_idx)];	
+
+		bounds.extend(prev.position);
+		bounds.extend(next.position);
+
+		map.fitBounds(bounds);		
+	};
 	
 	map.panTo(current.position);
 	
@@ -115,30 +125,35 @@ create_marker = function(placemark){
 		position: latlng
 	});
 
-	google.maps.event.addListener(marker, 'click', function() {
+	google.maps.event.addListener(marker, 'click', function(e) {
 		infoWindow.setContent(html);
 	
 		idx = (marker.__gm_id -1);
 		
-		hide_show_navigation(idx);
-		
-		if (marker.__gm_id == placemarks.length) {
-			show_post();
+		//teste para detectar se clicou direto no pin
+		if (typeof e != "undefined") {
+			//se caiu aqui eh pq clicou no pin entao seta o hash e o history vai se encarregar de executar o else...
+			location.hash = idx;
 		} else {
-			current_placemark_timestamp = placemarks[idx].value.timestamp;
-		  next_placemark_timestamp = placemarks[(idx + 1)].value.timestamp;
-			show_post(current_placemark_timestamp, next_placemark_timestamp);			
+			hide_show_navigation(idx);
+		
+			if (marker.__gm_id == placemarks.length) {
+				show_post();
+			} else {
+				current_placemark_timestamp = placemarks[idx].value.timestamp;
+			  next_placemark_timestamp = placemarks[(idx + 1)].value.timestamp;
+				show_post(current_placemark_timestamp, next_placemark_timestamp);			
+			}
+		
+			dynamic_zoom_map(idx);		
+		
+			infoWindow.open(map, marker);
+		
+			/*
+				TODO meio burro, faz sempre o fancybox, melhorar.
+			*/
+			$("a.lightbox").fancybox();
 		}
-		
-		dynamic_zoom_map(idx);		
-		
-		infoWindow.open(map, marker);
-		
-		/*
-			TODO meio burro, faz sempre o fancybox, melhorar.
-		*/
-		$("a.lightbox").fancybox();
-		
 	});
 	
 	markers.push(marker);
@@ -260,46 +275,49 @@ hide_show_navigation = function(idx){
 }
 
 add_markers_external_navigation = function(){
-	//var idx = (markers.length -1);
-	$('#navigation #next').hide();
-	
 	$('#navigation #previous').click(function(){
 		$('#navigation #next').show();
 
 		if (--idx > 0) {
-			google.maps.event.trigger(markers[idx], 'click'); 
+			show_placemark(idx);
+			//google.maps.event.trigger(markers[idx], 'click'); 
 		} else {
-			google.maps.event.trigger(markers[idx], 'click'); 
+			show_placemark(idx);
 			$(this).hide();
 		}
+				
+		return false;
 	});
 	
 	$('#navigation #next').click(function(){
 		$('#navigation #previous').show();
 		
 		if (++idx < (markers.length -1)) {
-			google.maps.event.trigger(markers[idx], 'click'); 
+			//google.maps.event.trigger(markers[idx], 'click'); 
+			show_placemark(idx);
 		} else {
-			google.maps.event.trigger(markers[idx], 'click'); 
+			//google.maps.event.trigger(markers[idx], 'click'); 
+			show_placemark(idx);
 			$(this).hide();
 		}	
+		
+		return false;
 	});
 }
 
 highlight_last_position = function(){
 	idx = (markers.length - 1);
-	google.maps.event.trigger(markers[idx], 'click'); 
 	
-	//define uma area padrao ao iniciar o mapa..
-	bounds = new google.maps.LatLngBounds();
-	
-	prev = markers[(idx -1)];
-	next = markers[(idx)];	
-	
-	bounds.extend(prev.position);
-	bounds.extend(next.position);
-		
-	map.fitBounds(bounds);	
+	$('#navigation #next').hide();
+	show_placemark(idx);
+}
+
+show_placemark = function(idx){	
+	jQuery.history.load(idx);	
+}
+
+trigger_placemark = function(idx){
+	google.maps.event.trigger(markers[idx], 'click');	
 }
 
 $(document).ready(function() {
@@ -313,18 +331,24 @@ $(document).ready(function() {
 					long: placemarks[0]['value']['long']
 				}
 
-				//Gshow_post(null,null);
-
-				//inicia o map sempre na ultima localizacao do usuario
 				init_map(most_recent_location.lat, most_recent_location.long, map_elem);
 
 				$.each(placemarks, function(i,placemark) {
 					create_marker(placemark['value']);
 				});
-
-				//faz com que o ultimo lugar visitado ja fiquei aparecendo
-				highlight_last_position();
-
+				
+				$.history.init(function(hash){
+					if(hash == "") {
+						//faz com que o ultimo lugar visitado ja fiquei aparecendo
+						highlight_last_position();						
+					} else {
+						// restore the state from hash
+						idx_ = hash;
+						trigger_placemark(idx_);
+					}
+				},
+				{ unescape: ",/" });
+				
 				//adciona navegacao nas marcacoes via links anterior e proximo
 				add_markers_external_navigation();
 			});

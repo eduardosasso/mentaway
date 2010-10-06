@@ -68,8 +68,8 @@
 	<div id="map"></div>
   <div id="content">
 		<div id="navigation">
-			<a href="#" id="previous">Anterior</a>
-			<a href="#" id="next">Próximo</a>
+			<a href="" id="previous">Anterior</a>
+			<a href="" id="next">Próximo</a>
 		</div>
 		<div id="post">
 			<h1 id="title"></h1>
