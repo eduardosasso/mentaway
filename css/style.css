@@ -372,6 +372,10 @@ a:hover{
 	column-gap: 20px;
 }
 
+.disabled-feature{
+	text-decoration:line-through;
+}
+
 /* end of mentaway custom style */
 
 /* 

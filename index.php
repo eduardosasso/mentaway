@@ -96,12 +96,12 @@
 			
 				<ul id="main-nav">
 					<li id="diary">Diary</li>
-					<!-- <li>History</li>
-					<li>Stats</li> -->
+					<li class="disabled-feature">History</li>
+					<li class="disabled-feature">Stats</li>
 				</ul>
 				
 				<div id="via">
-					<span>sent via <a href="#" class="source">Foursquare</a></span>
+					<span>sent via <a href="#" class="source"></a></span>
 					<div class="icon"></div>
 				</div>
 				

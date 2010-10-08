@@ -6,6 +6,7 @@ var infoWindow;
 var bounds='';
 //index do placemark atual...
 var idx;
+var old_service = '';
 
 window.fbAsyncInit = function() {
 	FB.init({appId: '136687686378472', status: true, cookie: true, xfbml: true});
@@ -149,6 +150,22 @@ create_marker = function(placemark){
 		$('#panel1 h2').text(placemarks[idx].value.name);
 		$('#panel1 .dates').text(date);
 		$('#panel1 .desc p').text(placemarks[idx].value.description);
+		
+		service = placemarks[idx].value.service;
+		$('#panel1').attr('class', service);
+			
+		$('#via span a').text(service);
+
+		if (old_service!='') $('#via span a, #via div.icon').removeClass(old_service);
+		
+		$('#via span a, #via div.icon').addClass(service);
+		old_service = service;
+		
+		//console.log(placemarks[idx]);
+		
+		// <div id="via">
+		// 			<span>sent via <a href="#" class="source"></a></span>
+		
 		
 		url = location.href;
 		
@@ -360,7 +377,7 @@ resize_map = function() {
 create_transitions = function(){
 	speed = 800;
    
-   $("#main-nav li").click(function(){
+   $("#main-nav li#diary").click(function(){
    		if($(window).width()<1024){
 				$("#map").width(30);
    			$("#panel1").css("right", "400px");
