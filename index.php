@@ -67,16 +67,70 @@
 	
 	<div id="fb-root"></div>
 	
-	<div id="map"></div>
-  <div id="content">
-		<div id="navigation">
-			<a href="" id="previous">Anterior</a>
-			<a href="" id="next">Próximo</a>
-		</div>
-		<div id="post">
-			<h1 id="title"></h1>
-			<div id="body"></div>
-		</div>
+	<div id="header">
+		<a href="#" id="logo"><img src="images/mentaway-logo.png" alt="Mentaway - Keep tracking of your adventures" /></a>
+		<div id="user">
+			<img src="http://a1.twimg.com/profile_images/1129099001/avatar-hair_bigger.jpg" />
+			<h3>Fabio Sasso</h3>
+			<p class="location">San Francisco, CA</p>
+			<p class="url"><a href="#">http://abduzeedo.com</a></p>
+		</div>	
+	</div>
+	
+	<div id="content">
+		<div id="map"></div>
+		
+		<div id="panel1">
+			<div class="column">
+				<p class="dates"><strong>Mon Oct 04 2010</strong> - 09:36:20 GMT - 0700 (PDT)</p>
+				<h2>San Francisco International Airport (SFO)</h2>
+				<div class="desc">
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam semper, nunc ac commodo sodales,</p>
+				</div>
+				<h3>Comments</h3>
+			</div>
+			
+			<div id="navigation" class="navigation">
+				<ul id="nav">
+					<li id="previous" class="previous"></li>
+					<li id="next" class="next"></li>
+				</ul>
+			
+				<ul id="main-nav">
+					<li>Journal</li>
+					<li>History</li>
+					<li>Stats</li>
+				</ul>
+				
+				<div id="via">
+					<span>sent via <a href="#" class="source">Foursquare</a></span>
+					<div class="icon"></div>
+				</div>
+				
+				<div class="share">
+					<span>share this on</span>
+					<ul>
+						<li><a href="http://twitter.com/share" class="twitter-share-button" data-count="none" data-via="abduzeedo">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script></li>
+					
+						<li><iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fexample.com%2Fpage%2Fto%2Flike&amp;layout=button_count&amp;show_faces=true&amp;width=90&amp;action=like&amp;font=arial&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:90px; height:21px;" allowTransparency="true"></iframe>
+						</li>					
+					
+				</div>
+			
+			
+			
+		</div>	
+	</div>
+	
+  <!-- <div id="content">
+  		<div id="navigation">
+  			<a href="" id="previous">Anterior</a>
+  			<a href="" id="next">Próximo</a>
+  		</div>
+  		<div id="post">
+  			<h1 id="title"></h1>
+  			<div id="body"></div>
+  		</div> -->
 		
   </div>
 	<!-- Javascript at the bottom for fast page loading -->

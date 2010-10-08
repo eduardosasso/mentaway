@@ -60,7 +60,8 @@ dynamic_zoom_map = function(marker_idx) {
 	map.panTo(current.position);
 	
 	//posiciona o mapa mais a esqueda
-	map.panBy(400, -10);	
+	//map.panBy(400, -10);	
+	//map.setCenter(current.position)
 	
 }
 
@@ -140,8 +141,14 @@ create_marker = function(placemark){
 	google.maps.event.addListener(marker, 'click', function(e) {
 		idx = (marker.__gm_id -1);
 		
+		date = format_date(placemarks[idx].value.timestamp);
+		
 		//console.log(placemarks[idx].value.user);
 		$('title').text(placemarks[idx].value.user + ': ' + placemarks[idx].value.name);
+		
+		$('#panel1 h2').text(placemarks[idx].value.name);
+		$('#panel1 .dates').text(date);
+		$('#panel1 .desc p').text(placemarks[idx].value.description);
 		
 		url = location.href;
 		
@@ -168,7 +175,7 @@ create_marker = function(placemark){
 		
 			dynamic_zoom_map(idx);		
 		
-			infoWindow.open(map, marker);
+			//infoWindow.open(map, marker);
 		
 			/*
 				TODO meio burro, faz sempre o fancybox, melhorar.
@@ -341,7 +348,18 @@ trigger_placemark = function(idx){
 	google.maps.event.trigger(markers[idx], 'click');	
 }
 
-$(document).ready(function() {
+resize_map = function() {
+	/*
+		TODO altura deve calcular em porcento
+	*/
+	$("#content").height($(window).height() - 130)
+	$("#map").height($(window).height() - 180);
+	$("#map").width($(window).width() - 570);
+}
+
+$(document).ready(function() {	
+		resize_map();
+	
 		add_facebook();
 		
 		map_elem = $('#map').get(0);
