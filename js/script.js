@@ -231,8 +231,8 @@ show_post = function(begin_date, end_date) {
 		title = posts[0]['title'];
 		body = posts[0]['body'];
 
-		$('#post #title').html(title);
-		$('#post #body').html(body);
+		$('#panel2 h2').html(title);
+		$('#panel2 .desc').html(body);
 	});	
 }
 
@@ -357,8 +357,37 @@ resize_map = function() {
 	$("#map").width($(window).width() - 570);
 }
 
+create_transitions = function(){
+	speed = 800;
+   
+   $("#main-nav li").click(function(){
+   		if($(window).width()<1024){
+				$("#map").width(30);
+   			$("#panel1").css("right", "400px");
+   			$("#panel2").width(340);
+   			$("#panel2").css("right", "0");
+   		}
+   		if($(window).width()>1024){
+   			w = 1100 - $(window).width() +"px";
+   			$("#map").animate({left: "-540px"}, speed );;
+   			$("#panel1").animate({right: "540px"}, speed );
+   			$("#panel2").animate({right: "0"}, speed);
+   		}
+   		
+   })
+   
+   $("#map").hover(function(){
+   		w = $(window).width() - 570 +"px";
+   		$("#map").animate({left: 0}, speed );;
+   		$("#panel1").animate({right: "0"}, speed );
+   		$("#panel2").animate({right: "-540px"}, speed );
+   })
+}
+
 $(document).ready(function() {	
 		resize_map();
+		
+		create_transitions();
 	
 		add_facebook();
 		

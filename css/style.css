@@ -279,13 +279,9 @@ a:hover{
 	height: 550px;
 	overflow: hidden;
 	float: left;
-	padding: 0 40px 0 0;
+/*	padding: 0 40px 0 0;*/
 	position: absolute;
 	left: 0;
-}
-#map iframe{
-	width: 100% !important;
-	height: 550px;
 }
 
 #panel1{

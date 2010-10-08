@@ -82,12 +82,10 @@
 		
 		<div id="panel1">
 			<div class="column">
-				<p class="dates"><strong>Mon Oct 04 2010</strong> - 09:36:20 GMT - 0700 (PDT)</p>
-				<h2>San Francisco International Airport (SFO)</h2>
-				<div class="desc">
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam semper, nunc ac commodo sodales,</p>
-				</div>
-				<h3>Comments</h3>
+				<p class="dates"></p>
+				<h2></h2>
+				<div class="desc"><p></p></div>
+				<!-- <h3>Comments</h3> -->
 			</div>
 			
 			<div id="navigation" class="navigation">
@@ -97,9 +95,9 @@
 				</ul>
 			
 				<ul id="main-nav">
-					<li>Journal</li>
-					<li>History</li>
-					<li>Stats</li>
+					<li id="diary">Diary</li>
+					<!-- <li>History</li>
+					<li>Stats</li> -->
 				</ul>
 				
 				<div id="via">
@@ -113,13 +111,19 @@
 						<li><a href="http://twitter.com/share" class="twitter-share-button" data-count="none" data-via="abduzeedo">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script></li>
 					
 						<li><iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fexample.com%2Fpage%2Fto%2Flike&amp;layout=button_count&amp;show_faces=true&amp;width=90&amp;action=like&amp;font=arial&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:90px; height:21px;" allowTransparency="true"></iframe>
-						</li>					
-					
+						</li>										
 				</div>
+		</div>
+		</div>
+		
+		<div id="panel2">
+			<div class="column">
+				<h2></h2>
+				<p class="dates"></p>
+				<div class="desc"></div>
+			</div>
+		</div>
 			
-			
-			
-		</div>	
 	</div>
 	
   <!-- <div id="content">
