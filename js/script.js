@@ -8,6 +8,9 @@ var bounds='';
 var idx;
 var old_service = '';
 
+var main_panel_title, main_panel_desc, main_panel_date;
+var aux_panel_title, aux_panel_desc, aux_panel_date;
+
 window.fbAsyncInit = function() {
 	FB.init({appId: '136687686378472', status: true, cookie: true, xfbml: true});
 };
@@ -98,36 +101,18 @@ create_marker = function(placemark){
 	date = format_date(placemark.timestamp);
 	
 	var img = '';
-	if (placemark.image) {
-		img = '<img src="' + placemark.image + '"/>'
-	};
 	
-	// if (placemark.service == 'twitter' && placemark.image != '') {
-	// 	img_ = placemark.image;		
-	// 	img_ = img_.replace('thumb','medium');
-	// 	
-	// 	img = '<a href="' + img_ + '" class="lightbox">' + img +  '</a>';
-	// };
+	if (placemark.image) {
+		img = '<img src="' + placemark.image + '" class="'+ placemark.service +'" />'
+	};
 	
 	if (placemark.service == 'flickr') {
 		//se vem do flickr pega a imagem em thumb e mostra ela maior no lightbox
 		img_ = placemark.image;		
 		img_ = img_.replace('_t.','_b.');
 		
-		img = '<a href="' + img_ + '" class="lightbox">' + img +  '</a>';
+		img = '<a href="' + img_ + '" class="flickr">' + img +  '</a>';
 	};
-	
-	var desc = '';
-	if (placemark.description) {
-		desc = '<p class="desc">' + placemark.description + '</p>'; 
-	};
-		
-	var html = 
-		'<div class="infowindow">' + placemark.name + 
-			'<p class="date">' + date + '</p>' + 
-			desc + 
-			img + 
-		'</div>';	
 	
 	var latlng = new google.maps.LatLng(
 		parseFloat(placemark.lat),
@@ -147,9 +132,13 @@ create_marker = function(placemark){
 		//console.log(placemarks[idx].value.user);
 		$('title').text(placemarks[idx].value.user + ': ' + placemarks[idx].value.name);
 		
+		description = placemarks[idx].value.description;
+		if (description == null) description = '';
+		description += img;
+		
 		$('#panel1 h2').text(placemarks[idx].value.name);
 		$('#panel1 .dates').text(date);
-		$('#panel1 .desc p').text(placemarks[idx].value.description);
+		$('#panel1 .desc p').html(description);
 		
 		service = placemarks[idx].value.service;
 		$('#panel1').attr('class', service);
@@ -161,19 +150,11 @@ create_marker = function(placemark){
 		$('#via span a, #via div.icon').addClass(service);
 		old_service = service;
 		
-		//console.log(placemarks[idx]);
-		
-		// <div id="via">
-		// 			<span>sent via <a href="#" class="source"></a></span>
-		
-		
 		url = location.href;
 		
 		url = url.replace('#' + idx, '/' + idx);
 		
 		fb_like = '<iframe src="http://www.facebook.com/plugins/like.php?href=' + url + '&layout=button_count&show_faces=true&width=450&action=like&colorscheme=light&height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:21px;" allowTransparency="true"></iframe>';
-		
-		infoWindow.setContent(html + fb_like);
 		
 		//teste para detectar se clicou direto no pin
 		if (typeof e != "undefined") {
@@ -374,23 +355,27 @@ resize_map = function() {
 	$("#map").width($(window).width() - 570);
 }
 
-create_transitions = function(){
+show_right_panel = function(){
 	speed = 800;
+	
+	if($(window).width()<1024){
+		$("#map").width(30);
+		$("#panel1").css("right", "400px");
+		$("#panel2").width(340);
+		$("#panel2").css("right", "0");
+	}
+	if($(window).width()>1024){
+		w = 1100 - $(window).width() +"px";
+		$("#map").animate({left: "-540px"}, speed );;
+		$("#panel1").animate({right: "540px"}, speed );
+		$("#panel2").animate({right: "0"}, speed);
+	}
+}
+
+create_transitions = function(){
    
    $("#main-nav li#diary").click(function(){
-   		if($(window).width()<1024){
-				$("#map").width(30);
-   			$("#panel1").css("right", "400px");
-   			$("#panel2").width(340);
-   			$("#panel2").css("right", "0");
-   		}
-   		if($(window).width()>1024){
-   			w = 1100 - $(window).width() +"px";
-   			$("#map").animate({left: "-540px"}, speed );;
-   			$("#panel1").animate({right: "540px"}, speed );
-   			$("#panel2").animate({right: "0"}, speed);
-   		}
-   		
+   		show_right_panel();
    })
    
    $("#map").hover(function(){
@@ -401,7 +386,20 @@ create_transitions = function(){
    })
 }
 
+init_vars = function(){
+	aux_panel_title = $('#panel2 h2');
+	aux_panel_desc = $('#panel2 .desc');
+	aux_panel_date = $('#panel2 .dates');
+	
+	main_panel_title = $('#panel1 h2');
+	main_panel_desc = $('#panel1 .desc');
+	main_panel_date = $('#panel1 .dates');
+	
+}
+
 $(document).ready(function() {	
+		init_vars();
+		
 		resize_map();
 		
 		create_transitions();
@@ -440,6 +438,22 @@ $(document).ready(function() {
 				add_markers_external_navigation();
 			});
 		}
+		
+		$('a.flickr').live('click',function(){
+			class_ = $(this).attr('class');
+			src_ = $(this).attr('href');
+
+			var img = $("<img border='0' />").
+				attr('src',src_).
+				attr('class', class_);
+			
+			$(aux_panel_title, aux_panel_date).text('');	
+			$(aux_panel_desc).html(img);
+	
+			show_right_panel();
+			return false;			
+			
+		});
 		
 		$('.add_user_service').click(function(){
 			//usa pela class para ser generico e pegar todos os servicos...			

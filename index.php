@@ -126,17 +126,6 @@
 			
 	</div>
 	
-  <!-- <div id="content">
-  		<div id="navigation">
-  			<a href="" id="previous">Anterior</a>
-  			<a href="" id="next">Próximo</a>
-  		</div>
-  		<div id="post">
-  			<h1 id="title"></h1>
-  			<div id="body"></div>
-  		</div> -->
-		
-  </div>
 	<!-- Javascript at the bottom for fast page loading -->
 
   <!-- Grab Google CDN's jQuery. fall back to local if necessary -->
