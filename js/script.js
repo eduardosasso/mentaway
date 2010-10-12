@@ -134,11 +134,11 @@ create_marker = function(placemark){
 		
 		description = placemarks[idx].value.description;
 		if (description == null) description = '';
-		description += img;
+		description = img + description;
 		
-		$('#panel1 h2').text(placemarks[idx].value.name);
-		$('#panel1 .dates').text(date);
-		$('#panel1 .desc p').html(description);
+		$(main_panel_title).text(placemarks[idx].value.name);
+		$(main_panel_date).text(date);
+		$(main_panel_desc).html(description);
 		
 		service = placemarks[idx].value.service;
 		$('#panel1').attr('class', service);
@@ -392,7 +392,7 @@ init_vars = function(){
 	aux_panel_date = $('#panel2 .dates');
 	
 	main_panel_title = $('#panel1 h2');
-	main_panel_desc = $('#panel1 .desc');
+	main_panel_desc = $('#panel1 .desc p');
 	main_panel_date = $('#panel1 .dates');
 	
 }
