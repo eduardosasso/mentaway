@@ -1,5 +1,9 @@
 var Map = {
-
+	placemarks: {},
+	markers: [],
+	gmap: null,
+	bounds: '',
+	
 	options: {
 		container_el: $("#content"),
 		map_el: $("#map"),
@@ -34,7 +38,7 @@ var Map = {
 			streetViewControl: true
 		}
 		
-		return new google.maps.Map(this.options.map_el.get(0), map_options);
+		this.gmap = new google.maps.Map(this.options.map_el.get(0), map_options);
 	},
 	
 	resize_map: function() {
@@ -46,51 +50,118 @@ var Map = {
 		this.options.map_el.width($(window).width() - 570);
 	},
 	
-	add_marker: function(placemark, map){
-		var date = Util.format_date(placemark.timestamp);
-
-		var img = placemark.image;
-
-		if (img) {
-			img = $('<img border="0" />').
-				attr('src', placemark.image).
-				attr('class', placemark.service);
-		};
-
-		if (placemark.service == 'flickr') {
-			img_big = img.attr('src');
-
-			//doc: http://www.flickr.com/services/api/misc.urls.html			
-			img_big = img_big.replace('_t.','_b.');
-			
-			img = $('<a></a>').attr('href',img_big).attr('class', 'flickr').html(img);
-		};
-
+	add_marker: function(placemark){
 		var latlng = new google.maps.LatLng(
 			parseFloat(placemark.lat),
 			parseFloat(placemark.long)
 		);
 
 		var marker = new google.maps.Marker({
-			map: map,
+			map: Map.gmap,
 			position: latlng
 		});
+		
+		google.maps.event.addListener(marker, 'click', function(e) {
+			var idx = (marker.__gm_id -1);
+			
+			var placemark = Map.placemarks[idx].value;
+			
+			Panel.update(placemark);
+			
+			Map.zoom(idx);			
+		});	
+		
+		this.markers.push(marker);
+	},
+	
+	show_placemark: function(idx){	
+		jQuery.history.load(idx);	
+	},
+	
+	trigger_placemark: function(idx){
+		google.maps.event.trigger(this.markers[idx], 'click');	
+	},
+	
+	highlight_most_recent: function(){
+		var idx = (Map.placemarks.length - 1);
+		// 	$('#navigation #next').hide();
+		
+		this.show_placemark(idx);
+	},
+	
+	enable_history: function(){
+		$.history.init(function(hash){
+			if(hash == "") {
+				//faz com que o ultimo lugar visitado ja fiquei aparecendo
+				Map.highlight_most_recent();
+			} else {
+				// restaura o estado pelo hash
+				var idx = hash;
+				Map.trigger_placemark(idx);
+			}
+		},
+		{ unescape: ",/" });
+	},
+	
+	zoom: function(idx) {	
+		//cria o zoom dinamico conforme o local dos pontos
+		current = this.markers[idx];
 
+		//redefine o bounds se o meu ponto atual nao estiver na area.
+		if (this.bounds != '' && this.bounds.contains(current.position) == false) {				
+			if (idx == (this.markers.length -1)) {
+				next = this.markers[(idx)];
+			} else {
+				next = this.markers[(idx + 1)];
+			}
+			previous = this.markers[(idx -1)];
+
+			//cria uma nova area com os pontos anteriores, atual e proximo
+			var bounds_ = new google.maps.LatLngBounds();		
+			bounds_.extend(previous.position);
+			bounds_.extend(current.position);
+			bounds_.extend(next.position);
+
+			//map.panToBounds(bounds);
+
+			//redifine a area padrao...
+			bounds = bounds_;
+
+			map.fitBounds(bounds_);
+		} else if (this.bounds == '') {
+			//define uma area padrao ao iniciar o mapa..
+			this.bounds = new google.maps.LatLngBounds();
+
+			prev = this.markers[(idx -1)];
+			next = this.markers[(idx)];	
+
+			this.bounds.extend(prev.position);
+			this.bounds.extend(next.position);
+
+			this.gmap.fitBounds(this.bounds);		
+		};
+
+		this.gmap.panTo(current.position);
 	},
 	
 	show: function(){
 		this.resize_map();
 		
 		this.get_placemarks(function(placemarks){
+			Map.placemarks = placemarks;
+			
 			var most_recent_location = {
 				lat: placemarks[0]['value']['lat'], 
 				long: placemarks[0]['value']['long']
 			}
-			var map = Map.add(most_recent_location.lat, most_recent_location.long);
+			
+			Map.add(most_recent_location.lat, most_recent_location.long);
 			
 			$.each(placemarks, function(i,placemark) {
-				Map.add_marker(placemark['value'], map);
+				Map.add_marker(placemark['value']);
 			});
+			
+			Map.enable_history();
 						
 		});
 	}

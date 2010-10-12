@@ -136,6 +136,7 @@
   
 	<script src="js/plugins.js?v=1"></script>
 	<script src="js/util.js?v=1"></script>
+	<script src="js/panel.js?v=1"></script>
 	<script src="js/map.js?v=1"></script>
   <script src="js/script.js?v=1"></script>
 
