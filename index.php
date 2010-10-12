@@ -135,6 +135,8 @@
 	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&language=pt-BR"></script> 	
   
 	<script src="js/plugins.js?v=1"></script>
+	<script src="js/util.js?v=1"></script>
+	<script src="js/map.js?v=1"></script>
   <script src="js/script.js?v=1"></script>
 
   <!--[if lt IE 7 ]>

@@ -1,7 +1,11 @@
 // remap jQuery to $
 (function($){
-	$.getScript("js/fancybox/jquery.fancybox-1.3.1.pack.js"); 
 	$.getScript("js/jquery.history.js");
+	
+	/*
+		TODO estudar para carregar o map async
+	*/
+	//$.getScript("http://maps.google.com/maps/api/js?sensor=false&callback=initialize");
 })(window.jQuery);
 
 
