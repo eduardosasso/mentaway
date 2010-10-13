@@ -3,11 +3,14 @@ var Map = {
 	markers: [],
 	gmap: null,
 	bounds: '',
+	previous_marker: '',
 	
 	options: {
 		container_el: $("#content"),
 		map_el: $("#map"),
-		user: ''
+		user: '',
+		active_icon: 'http://code.google.com/apis/maps/documentation/javascript/examples/images/beachflag.png',
+		default_icon: 'http://maps.google.com/mapfiles/marker.png'
 	},
 	
 	init: function(options) {			
@@ -62,13 +65,29 @@ var Map = {
 		});
 		
 		google.maps.event.addListener(marker, 'click', function(e) {
+			if (Map.previous_marker != '') {
+				//volta o icone default ao ir para outro ponto
+				Map.previous_marker.setIcon(Map.options.default_icon);
+			}
+			
 			var idx = (marker.__gm_id -1);
+			
+			marker.setIcon(Map.options.active_icon);
+			Map.previous_marker = marker;
 			
 			var placemark = Map.placemarks[idx].value;
 			
 			Panel.update(placemark);
 			
-			Map.zoom(idx);			
+			//teste para detectar se clicou direto no pin
+			if (typeof e != "undefined") {
+				//se caiu aqui eh pq clicou no pin entao seta o hash e o history vai se encarregar de executar o else...
+				location.hash = idx;
+			} else {
+				//hide_show_navigation(idx);
+				Map.zoom(idx);
+			}
+
 		});	
 		
 		this.markers.push(marker);
@@ -122,12 +141,10 @@ var Map = {
 			bounds_.extend(current.position);
 			bounds_.extend(next.position);
 
-			//map.panToBounds(bounds);
-
 			//redifine a area padrao...
 			bounds = bounds_;
 
-			map.fitBounds(bounds_);
+			this.gmap.fitBounds(bounds_);
 		} else if (this.bounds == '') {
 			//define uma area padrao ao iniciar o mapa..
 			this.bounds = new google.maps.LatLngBounds();
@@ -144,6 +161,8 @@ var Map = {
 		this.gmap.panTo(current.position);
 	},
 	
+	
+	//funcao principal... 
 	show: function(){
 		this.resize_map();
 		
