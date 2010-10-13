@@ -19,6 +19,10 @@ var Map = {
 		this.show();
 	},
 	
+	get_map_el: function(){
+		return this.options.map_el;
+	},
+
 	get_current_idx: function(){
 		return Map.marker_idx;
 	},
@@ -172,6 +176,14 @@ var Map = {
 		this.gmap.panTo(current.position);
 	},
 	
+	bind_events: function(){
+		Map.options.map_el.hover(function(){
+			w = $(window).width() - 570 +"px";
+			Map.options.map_el.animate({left: 0}, speed );
+					
+			Panel.goto_original_position();		   		
+		});
+	},
 	
 	//funcao principal... 
 	show: function(){
@@ -194,6 +206,8 @@ var Map = {
 			Nav.enable();
 			
 			Map.enable_history();
+			
+			Map.bind_events();
 						
 		});
 	}

@@ -1,9 +1,16 @@
 var Panel = {
 	previous_service: '',
+	
+	aux: {		
+		panel: $("#panel2"),		
+		title: $('h2', '#panel2'),
+		date: $('.dates', '#panel2'),
+		description: $('.desc', '#panel2'),
+	},
 		
 	el: {
-		container: $("#content"),
-		panel: $("#panel1"),
+		container: $("#content"),		
+		panel: $("#panel1"),		
 		title: $('h2', '#panel1'),
 		date: $('.dates', '#panel1'),
 		description: $('.desc p', '#panel1'),
@@ -40,7 +47,49 @@ var Panel = {
 		
 		this.previous_service = service;
 	},
+	
+	bind_events: function(){
+		$('a.flickr').live('click',function(){
+			class_ = $(this).attr('class');
+			src_ = $(this).attr('href');
+
+			var img = $("<img border='0' />").
+				attr('src',src_).
+				attr('class', class_);
+
+			Panel.aux.title.text('');
+			Panel.aux.date.text('');
+			Panel.aux.description.html(img);
+
+			Panel.show_aux_panel();
+
+			return false;			
+
+		});		
+	},
+	
+	show_aux_panel: function(){
+		speed = 800;
+
+		if($(window).width()<1024){
+			this.el.panel.css("right", "400px");
+			this.aux.panel.width(340);
+			this.aux.panel.css("right", "0");
+		}
 		
+		if($(window).width()>1024){
+			w = 1100 - $(window).width() +"px";
+			Map.get_map_el().animate({left: "-540px"}, speed );
+			this.el.panel.animate({right: "540px"}, speed );
+			this.aux.panel.animate({right: "0"}, speed);
+		}
+	},
+	
+	goto_original_position: function(){
+		this.el.panel.animate({right: "0"}, speed );
+		this.aux.panel.animate({right: "-540px"}, speed );
+	},
+			
 	update: function(placemark){		
 		//define a tag title da pagina
 		$('title').text(placemark.user + ': ' + placemark.name);
@@ -78,5 +127,8 @@ var Panel = {
 		this.set_description(description);
 		this.set_service(placemark.service);
 		
+		Panel.bind_events();
+				
 	}
+
 }
