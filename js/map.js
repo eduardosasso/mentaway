@@ -1,6 +1,7 @@
 var Map = {
 	placemarks: {},
 	markers: [],
+	marker_idx: '',
 	gmap: null,
 	bounds: '',
 	previous_marker: '',
@@ -16,6 +17,14 @@ var Map = {
 	init: function(options) {			
 		this.options = $.extend(this.options,options);
 		this.show();
+	},
+	
+	get_current_idx: function(){
+		return Map.marker_idx;
+	},
+	
+	get_markers_count: function(){
+		return (Map.markers.length - 1);
 	},
 	
 	get_placemarks: function(callback){
@@ -70,24 +79,25 @@ var Map = {
 				Map.previous_marker.setIcon(Map.options.default_icon);
 			}
 			
-			var idx = (marker.__gm_id -1);
+			Map.marker_idx = (marker.__gm_id -1);
 			
 			marker.setIcon(Map.options.active_icon);
 			Map.previous_marker = marker;
 			
-			var placemark = Map.placemarks[idx].value;
+			var placemark = Map.placemarks[Map.marker_idx].value;
 			
 			Panel.update(placemark);
 			
 			//teste para detectar se clicou direto no pin
 			if (typeof e != "undefined") {
 				//se caiu aqui eh pq clicou no pin entao seta o hash e o history vai se encarregar de executar o else...
-				location.hash = idx;
+				location.hash = Map.marker_idx;
 			} else {
-				//hide_show_navigation(idx);
-				Map.zoom(idx);
+				Nav.hide_show();
+				
+				Map.zoom();
 			}
-
+			
 		});	
 		
 		this.markers.push(marker);
@@ -122,7 +132,8 @@ var Map = {
 		{ unescape: ",/" });
 	},
 	
-	zoom: function(idx) {	
+	zoom: function() {	
+		var idx = Map.marker_idx;
 		//cria o zoom dinamico conforme o local dos pontos
 		current = this.markers[idx];
 
@@ -179,6 +190,8 @@ var Map = {
 			$.each(placemarks, function(i,placemark) {
 				Map.add_marker(placemark['value']);
 			});
+			
+			Nav.enable();
 			
 			Map.enable_history();
 						

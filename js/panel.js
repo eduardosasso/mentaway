@@ -63,10 +63,15 @@ var Panel = {
 			//doc: http://www.flickr.com/services/api/misc.urls.html			
 			img_big = img_big.replace('_t.','_b.');
 			
-			img = $('<a></a>').attr('href', img_big).attr('class', 'flickr').html(img);
+			img = $('<a>').attr('href', img_big).attr('class', 'flickr').append(img);
 		};
 		
-		if (img) description = img.html() + description;
+		if (img) {
+			//coloca a img em um dummy so pra pegar o html completo...
+			img = $('<div>').append(img).html();
+			
+			description = img + description;
+		}	
 		
 		this.set_title(placemark.name);
 		this.set_date(placemark.timestamp);
