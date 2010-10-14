@@ -399,6 +399,9 @@
 
 $(document).ready(function() {	
 		Map.init({user: user});
+		
+		Diary.init(user);
+		
 		//myMap.show();
 		
 		// init_vars();

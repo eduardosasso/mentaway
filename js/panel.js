@@ -1,12 +1,54 @@
-var Panel = {
-	previous_service: '',
-	
-	aux: {		
+var Panel_aux = {
+	el: {		
 		panel: $("#panel2"),		
 		title: $('h2', '#panel2'),
 		date: $('.dates', '#panel2'),
 		description: $('.desc', '#panel2'),
 	},
+		
+	set_title: function(title){
+		this.el.title.text(title);
+	},
+
+	set_date: function(timestamp){
+		var date = Util.format_date(timestamp);
+		this.el.date.text(date);
+	},
+
+	set_description: function(desc){
+		this.el.description.html(desc);
+	},
+	
+	show: function(){
+		var speed = 800;
+
+		if($(window).width()<1024){
+			Panel.get_el().css("right", "400px");
+			this.el.panel.width(340);
+			this.el.panel.css("right", "0");
+		}
+		
+		if($(window).width()>1024){
+			w = 1100 - $(window).width() +"px";
+			Map.get_map_el().animate({left: "-540px"}, speed );
+			Panel.get_el().animate({right: "540px"}, speed );
+			this.el.panel.animate({right: "0"}, speed);
+		}
+	},
+	
+	hide: function(){
+		var speed = 800;
+		
+		w = $(window).width() - 570 +"px";
+		Map.get_map_el().animate({left: 0}, speed );		
+		Panel.get_el().animate({right: "0"}, speed );
+		this.el.panel.animate({right: "-540px"}, speed );
+	}
+	
+}
+
+var Panel = {
+	previous_service: '',
 		
 	el: {
 		container: $("#content"),		
@@ -16,6 +58,10 @@ var Panel = {
 		description: $('.desc p', '#panel1'),
 		service: $('#via span a'),
 		service_icon: $('#via div.icon')
+	},
+	
+	get_el: function(){
+		return this.el.panel;
 	},
 	
 	set_title: function(title){
@@ -48,6 +94,9 @@ var Panel = {
 		this.previous_service = service;
 	},
 	
+	/*
+		TODO revisar eventos..
+	*/
 	bind_events: function(){
 		$('a.flickr').live('click',function(){
 			class_ = $(this).attr('class');
@@ -57,37 +106,15 @@ var Panel = {
 				attr('src',src_).
 				attr('class', class_);
 
-			Panel.aux.title.text('');
-			Panel.aux.date.text('');
-			Panel.aux.description.html(img);
+			Panel_aux.set_title('');
+			Panel_aux.set_date('');
+			Panel_aux.set_description(img);
 
-			Panel.show_aux_panel();
+			Panel_aux.show();
 
 			return false;			
 
 		});		
-	},
-	
-	show_aux_panel: function(){
-		speed = 800;
-
-		if($(window).width()<1024){
-			this.el.panel.css("right", "400px");
-			this.aux.panel.width(340);
-			this.aux.panel.css("right", "0");
-		}
-		
-		if($(window).width()>1024){
-			w = 1100 - $(window).width() +"px";
-			Map.get_map_el().animate({left: "-540px"}, speed );
-			this.el.panel.animate({right: "540px"}, speed );
-			this.aux.panel.animate({right: "0"}, speed);
-		}
-	},
-	
-	goto_original_position: function(){
-		this.el.panel.animate({right: "0"}, speed );
-		this.aux.panel.animate({right: "-540px"}, speed );
 	},
 			
 	update: function(placemark){		

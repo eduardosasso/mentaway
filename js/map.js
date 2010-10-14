@@ -99,6 +99,13 @@ var Map = {
 			} else {
 				Nav.hide_show();
 				
+				if (Map.marker_idx > 0 && Diary.has_posts()) {
+					current_placemark_timestamp = placemark.timestamp;
+					next_placemark_timestamp = Map.placemarks[Map.marker_idx + 1].value.timestamp;
+					
+					Diary.get_posts(current_placemark_timestamp, next_placemark_timestamp);			
+				}
+				
 				Map.zoom();
 			}
 			
@@ -176,12 +183,12 @@ var Map = {
 		this.gmap.panTo(current.position);
 	},
 	
+	/*
+		TODO revisar para ver se esse eh o melhor lugar para essa funcionalidade
+	*/
 	bind_events: function(){
 		Map.options.map_el.hover(function(){
-			w = $(window).width() - 570 +"px";
-			Map.options.map_el.animate({left: 0}, speed );
-					
-			Panel.goto_original_position();		   		
+			Panel_aux.hide();		   		
 		});
 	},
 	
