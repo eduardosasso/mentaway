@@ -18,7 +18,7 @@ class ControllerTest extends PHPUnit_Framework_TestCase {
 			print_r($posts);
 		}
 		
-		public function xtest_get_posts_by_interval(){
+		public function test_get_posts_by_interval(){
 			$username = 'eduardosasso';
 			
 			$controller = new Controller();
@@ -30,7 +30,7 @@ class ControllerTest extends PHPUnit_Framework_TestCase {
 			print_r($posts);
 		}
 		
-		function test_add_user_trip() {
+		function xtest_add_user_trip() {
 			$controller = new Controller();
 			$username = 'eduardosasso';
 						
@@ -47,8 +47,8 @@ class ControllerTest extends PHPUnit_Framework_TestCase {
 		}		
 		
 		public function xtest_get_user_service(){
-			$username = 'eduardosasso';
-			$servicename = 'foursquare';
+			$username = 'abduzeedo';
+			$servicename = 'posterous';
 			
 			$controller = new Controller();
 			

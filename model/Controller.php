@@ -38,11 +38,8 @@ class Controller {
 			TODO refazer data inicial e final e desconsiderar a parte da hora, pegar so data...
 		*/
 		
-		$service = $this->get_user_service($username, 'posterous');
-		$hostname = $service->token;
-		
 		$posterous = new Posterous();
-		$posts_ = $posterous->get_updates($hostname);
+		$posts_ = $posterous->get_updates($username);
 		
 		$posts = array();
 		$nearest_post = '';
@@ -93,6 +90,7 @@ class Controller {
 				return $service;
 			}
 		}		
+		
 		return null;
 	}
 	

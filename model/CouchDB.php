@@ -14,7 +14,11 @@ class CouchDB implements DatabaseInterface {
 	private $db;
 	
 	function __construct() {
-		$url = "http://localhost:5984/";
+		//$url = "http://localhost:5984/";
+
+		//via ssh tunnel base quente.
+		$url = "http://localhost:5985/";
+		
 		$database = "mentaway";
 		
 		$this->db = new couchClient($url,$database);
