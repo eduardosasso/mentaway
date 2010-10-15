@@ -111,8 +111,6 @@
 				<div class="desc"><p></p></div>
 				<!-- <h3>Comments</h3> -->
 			</div>
-		
-			
 			
 		</div>
 		
@@ -124,18 +122,13 @@
 				<div class="desc"></div>
 			</div>
 		</div>
-		
-		<div id="panel3"></div>
-		
-		
 	
 		<div id="navigation">
-		
 			<ul>
-				<!-- <li><a href="#">First Spot</a></li> -->
+				<li><a href="#">First Spot</a></li>
 				<li><a href="#" id="previous">Previous</a></li>
 				<li><a href="#" id="next">Next</a></li>
-				<!-- <li><a href="#">Last Stop</a></li> -->
+				<li><a href="#">Last Stop</a></li>
 			</ul>
 			
 		</div>

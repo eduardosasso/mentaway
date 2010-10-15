@@ -60,7 +60,7 @@ var Map = {
 			navigationControl: true,
 			navigationControlOptions: {
 				style: google.maps.NavigationControlStyle.SMALL,
-				position: google.maps.ControlPosition.BOTTOM_LEFT
+				position: google.maps.ControlPosition.BOTTOM_LEFT 
 			},
 			scaleControl: false
 		}
