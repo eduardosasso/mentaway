@@ -86,6 +86,8 @@ define('BASE_URL',$base_url);
 <!--[if IE 8 ]>    <body class="ie8"> <![endif]-->
 <!--[if IE 9 ]>    <body class="ie9"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!--> <body> <!--<![endif]-->
+	
+	<div id="fb-root"></div>
 
 	<div id="user">
 		<input type="hidden" value="<?php echo $username ?>" id="username">
@@ -133,11 +135,14 @@ define('BASE_URL',$base_url);
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
   <script>!window.jQuery && document.write('<script src="<?php echo BASE_URL ?>/js/jquery-1.4.2.min.js"><\/script>')</script>
 
-	<script src="<?php echo BASE_URL ?>/js/plugins.js?v=1"></script>
-  <script src="<?php echo BASE_URL ?>/js/script.js?v=1"></script>
 	<script type="text/javascript" charset="utf-8">
 			base_url = "<?php echo BASE_URL; ?>"
 	</script>
+
+	<script src="<?php echo BASE_URL ?>/js/plugins.js?v=1"></script>
+  <script src="<?php echo BASE_URL ?>/js/user.js?v=1"></script>
+
+  <script src="<?php echo BASE_URL ?>/js/user-ui.js?v=1"></script>
 
 
   <!--[if lt IE 7 ]>
