@@ -196,7 +196,7 @@ var Map = {
 	
 	//funcao principal... 
 	show: function(){
-		this.resize_map();
+		//this.resize_map();
 		
 		this.get_placemarks(function(placemarks){
 			Map.placemarks = placemarks;

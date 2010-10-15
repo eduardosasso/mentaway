@@ -200,10 +200,22 @@ button {  width: auto; overflow: visible; }
   font-family: "Mentaway";
   src: url(mentaway.ttf);
 }
+@brown:#8b7b6b;
+@blue:#7ba9d3;
+@pink:#fe7b7b;
+@yellow:#f8bd50;
 
 body{
 	font: lighter 14px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
 	color: #8b7b6b;
+	padding: 0;
+	margin: 0;
+}
+#content{
+	overflow: hidden !important;
+	display: block;
+	position: relative;
+	
 }
 strong{
 	font-weight: bolder;
@@ -213,9 +225,9 @@ p{
 	padding: 0 0 20px 0;
 }
 h2{
-	padding: 5px 0 20px 0;
-	color: #7ba9d3;
-	font: 42px/46px "Mentaway", "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	padding: 0;
+	color: #8b7b6b;
+	font: 22px/24px "Mentaway", "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
 }
 h3{
 	font-size: 24px;
@@ -231,22 +243,38 @@ a{
 a:hover{
 	color: #f8bd50;
 }
+#via, .share{
+	font-size: 12px;
+}
+.wrap{
+}
+
 #header{
-	height: 90px;
-	padding: 20px 50px;	
+	position: absolute;
+	width: 100%;
+	background: rgba(250,250,250,.93);
+	top: 30px;
+	height: 100px;
+}
+p.dates{
+	padding: 0 0 5px 0;
+	color: #fe7b7b;
+	font-size: 12px;
 }
 #header p{
 	padding: 0 0 0 0;
 }
 #header #logo{
 	float: left;
+	background: #fff;
+	padding: 10px 20px 5px 30px;;
 }
 
 #header #user{
 	float: right;
 	width: 400px;
 	text-align: right;
-	padding: 5px 0 0 0;
+	padding: 12px 20px 0 0;
 }
 #header #user img{
 	float: right;
@@ -262,119 +290,47 @@ a:hover{
 #header a:hover{
 	color: #fe7b7b;
 }
-#content{
-	min-width: 980px;
-	position: relative;
-	display: block;
-	width: 100%;
-	height: 100%;
-	overflow: hidden !important;
+#header ul#main-nav{
+	float: left;
+	text-align: right;
+	margin: 12px 20px 0 50px;
+	padding-right: 20px;
+	line-height: 180%;
+	border-right: 1px solid #bfa993;
 }
-#content h3{
-	padding: 20px 0;
+#info h1{
+	float: left;
+	padding: 12px 0 10px 0;
+	font: 20px/26px "Mentaway", "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
 }
 #map{
-	width: 700px;
-	height: 550px;
-	overflow: hidden;
-	float: left;
-/*	padding: 0 40px 0 0;*/
-	position: absolute;
-	left: 0;
+	padding: 10px;
 }
-
 #panel1{
 	position: absolute;
-	right: 0;
-	width: 530px;
-}
-
-#panel1 .column{
-	width: 390px;
-	float: left;
-}
-.dates{
-	color: #fe7b7b;
-	padding: 0;
-}
-#panel1 .navigation{
-	float: right;
-	width: 120px;
-}
-#nav {
-	height: 30px;
-	padding: 0 0 20px 0;
-}
-#nav li{
-	display: block;
-	width: 30px;
-	height: 30px;
-	float: left;
-	background: url(../images/arrows.png);
-}
-
-#nav li.next{
-	margin: 0 0 0 5px;
-	background-position: 30px top;
-}
-#main-nav{
-	padding-bottom: 30px;
-}
-#main-nav li{
-	height: 30px;
-	line-height: 30px;
-	background: #8b7b6b;
-	margin-bottom: 1px;
-	padding: 0 10px;
-	color: #fff;
-	
-	-webkit-transition:background .5s ease-in;
-	-moz-transition: background .5s ease-in;
-	
-	cursor: pointer;
-	
-}
-#main-nav li:hover, #main-nav li.active{
-	background:#f8bd50;
+	top: 180px;
+	right: 200px;
+	background: #fff;
+	width: 400px;
+	padding: 20px;
 }
 #via{
-	padding-bottom: 30px;
+	float: left;
 }
-#via a{
-	display: block;
-	clear: both;
+.share{
+	float: right;
 }
-
 .share li{
-	display: block;
-	padding: 10px 0 0 0;
+	display: inline;
 }
-
 #panel2{
-	width: 470px;
-	padding: 0 30px 0 0;
- 	position: absolute;
- 	right: -500px;
+	padding: 30px;
+	position: absolute;
+	top: 150px;
+	left: 0;
+	width: 400px;
+	background: #fff;
 }
-#panel2 h2{
-	padding: 0;
-}
-#panel2 .dates{
-	padding: 5px 0 10px 0;
-}
-#panel2 .desc{
-	-moz-column-count: 2;
-	-moz-column-gap: 20px;
-	-webkit-column-count: 2;
-	-webkit-column-gap: 20px;
-	column-count: 2;
-	column-gap: 20px;
-}
-
-.disabled-feature{
-	text-decoration:line-through;
-}
-
 /* end of mentaway custom style */
 
 /* 

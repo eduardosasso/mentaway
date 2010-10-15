@@ -67,51 +67,58 @@
 	
 	<div id="fb-root"></div>
 	
-	<div id="header">
-		<a href="#" id="logo"><img src="images/mentaway-logo.png" alt="Mentaway - Keep tracking of your adventures" /></a>
-		<div id="user">
-			<img src="http://a1.twimg.com/profile_images/1129099001/avatar-hair_bigger.jpg" />
-			<h3>Fabio Sasso</h3>
-			<p class="location">San Francisco, CA</p>
-			<p class="url"><a href="#">http://abduzeedo.com</a></p>
-		</div>	
-	</div>
-	
 	<div id="content">
+		<div id="header">
+
+			<div class="wrap">
+				<a href="#" id="logo"><img src="images/mentaway-logo.png" alt="Mentaway - Keep tracking of your adventures" /></a>
+
+				<ul id="main-nav">
+					<li>Journal</li>
+					<li>History</li>
+					<li>Stats</li>
+				</ul>
+
+				<div id="info">
+					<h1>Trip</h1>
+				</div>
+
+				<div id="user">
+					<img src="http://a1.twimg.com/profile_images/1129099001/avatar-hair_bigger.jpg" />
+					<h3>Fabio Sasso</h3>
+					<p class="location">San Francisco, CA</p>
+					<p class="url"><a href="#">http://abduzeedo.com</a></p>
+				</div>	
+
+			</div>
+
+		</div>
+		
+		
 		<div id="map"></div>
 		
 		<div id="panel1">
+			
 			<div class="column">
 				<p class="dates"></p>
 				<h2></h2>
 				<div class="desc"><p></p></div>
 				<!-- <h3>Comments</h3> -->
 			</div>
-			
-			<div id="navigation" class="navigation">
-				<ul id="nav">
-					<li id="previous" class="previous"></li>
-					<li id="next" class="next"></li>
-				</ul>
-			
-				<ul id="main-nav">
-					<li id="diary">Diary</li>
-					<li class="disabled-feature">History</li>
-					<li class="disabled-feature">Stats</li>
-				</ul>
+		
+			<div id="via">
+				<span>sent via <a href="#" class="source"></a></span>
+				<div class="icon"></div>
+			</div>
 				
-				<div id="via">
-					<span>sent via <a href="#" class="source"></a></span>
-					<div class="icon"></div>
-				</div>
-				
-				<div class="share">
-					<span>share this on</span>
-					<ul>
-						<li id="tweet"></li>					
-						<li id="fb-like"></li>
-				</div>
-		</div>
+			<div class="share">
+				<span>share this on</span>
+				<ul>
+					<li id="tweet"></li>					
+					<li id="fb-like"></li>
+				</ul>
+			</div>
+			
 		</div>
 		
 		<div id="panel2">
