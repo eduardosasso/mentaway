@@ -64,10 +64,8 @@
 <!--[if IE 8 ]>    <body class="ie8"> <![endif]-->
 <!--[if IE 9 ]>    <body class="ie9"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!--> <body> <!--<![endif]-->
-	
+	<div id="map"></div>
 	<div id="fb-root"></div>
-
-	<div id="content">
 		<div id="header">
 
 			<div class="wrap">
@@ -99,22 +97,22 @@
 			<div class="column">
 				<p class="dates"></p>
 				<h2></h2>
+				<div id="via">
+					<span>sent via <a href="#" class="source"></a></span>
+					<div class="icon"></div>
+				</div>
+				<div class="share">
+					<ul>
+						<li id="tweet"></li>					
+						<li id="fb-like"></li>
+					</ul>
+				</div>
+				<div class="clear"></div>
 				<div class="desc"><p></p></div>
 				<!-- <h3>Comments</h3> -->
 			</div>
 		
-			<div id="via">
-				<span>sent via <a href="#" class="source"></a></span>
-				<div class="icon"></div>
-			</div>
-				
-			<div class="share">
-				<span>share this on</span>
-				<ul>
-					<li id="tweet"></li>					
-					<li id="fb-like"></li>
-				</ul>
-			</div>
+			
 			
 		</div>
 		
@@ -125,10 +123,19 @@
 				<div class="desc"></div>
 			</div>
 		</div>
-			
-	</div>
+		
+		
 	
-		<div id="map"></div>
+		<div id="navigation">
+		
+			<ul>
+				<li><a href="#">First Spot</a></li>
+				<li><a href="#">Previous</a></li>
+				<li><a href="#">Next</a></li>
+				<li><a href="#">Last Stop</a></li>
+			</ul>
+			
+		</div>
 	
 	<!-- Javascript at the bottom for fast page loading -->
 
@@ -144,7 +151,7 @@
 	<script src="js/diary.js?v=1"></script>
 	<script src="js/nav.js?v=1"></script>
 	<script src="js/map.js?v=1"></script>
-  <script src="js/script.js?v=1"></script>
+  	<script src="js/script.js?v=1"></script>
 
   <!--[if lt IE 7 ]>
     <script src="js/dd_belatedpng.js?v=1"></script>

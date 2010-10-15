@@ -1,3 +1,5 @@
+/* @override http://beta.mentaway.com/css/style.css?v=1 */
+
 /* 
   style.css contains a reset, font normalization and some base styles.
   
@@ -37,7 +39,7 @@ time, mark, audio, video {
 article, aside, figure, footer, header, 
 hgroup, nav, section { display:block; }
 
-nav ul { list-style:none; }
+nav ul, ul { list-style:none; }
 
 blockquote, q { quotes:none; }
 
@@ -198,7 +200,7 @@ button {  width: auto; overflow: visible; }
 /* mentaway custom style */
 html { height: 100% }
 body { height: 100%; margin: 0px; padding: 0px }
-#map { height: 100% }
+#map { height: 98% }
 
 @font-face {
   font-family: "Mentaway";
@@ -212,14 +214,10 @@ body { height: 100%; margin: 0px; padding: 0px }
 body{
 	font: lighter 14px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
 	color: #8b7b6b;
-	padding: 0;
 	margin: 0;
-}
-#content{
+	width: 100%;
+	height: 100%;
 	overflow: hidden !important;
-	display: block;
-	position: relative;
-	
 }
 strong{
 	font-weight: bolder;
@@ -252,7 +250,9 @@ a:hover{
 }
 .wrap{
 }
-
+.clear{
+	clear: both;
+}
 #header{
 	position: absolute;
 	width: 100%;
@@ -308,7 +308,7 @@ p.dates{
 	font: 20px/26px "Mentaway", "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
 }
 #map{
-	padding: 10px;
+	border: 10px solid #fff;
 }
 #panel1{
 	position: absolute;
@@ -323,17 +323,73 @@ p.dates{
 }
 .share{
 	float: right;
+	width: 220px;
 }
 .share li{
-	display: inline;
+ 	float: right;
+ 	clear: none;
+ 	display: block;
+ 	width: 58px;
+ 	overflow: hidden;
+}
+.share li#fb-like{
+	display: none;
+	
+}
+.desc{
+	clear: both;
+	display: block;
+	padding-top: 20px;
+	margin: 20px 0 0 0;
+	border-top: 1px solid  #ddd;
+	
+}
+img.foursquare{
+	position: absolute;
+	top: 20px;
+	right: 20px;
 }
 #panel2{
 	padding: 30px;
 	position: absolute;
 	top: 150px;
-	left: 0;
+	left: -460px;
 	width: 400px;
 	background: #fff;
+}
+#panel2 img{
+	width: 120px;
+	height: auto;
+}
+#navigation{
+	position: absolute;
+	bottom: 10px;
+	z-index: 100;
+	width: 100% !important;
+	text-align: center;
+}
+#navigation ul{
+	margin: 0 auto;
+	width: 380px;
+	background: #fe7b7b;
+	height: 30px;
+	line-height: 30px;
+}
+#navigation ul li{
+	text-align: center;
+	display: inline;
+	padding: 0 10px;
+	font-weight: bold;
+	border-right: 1px solid #fff;
+}
+#navigation ul li:last-child{
+	border-right: none;
+}
+#navigation ul li a{
+	color: #fff;
+}
+#panel3{
+	display: none;
 }
 /* end of mentaway custom style */
 
