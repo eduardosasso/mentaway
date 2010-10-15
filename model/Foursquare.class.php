@@ -21,7 +21,7 @@ class Foursquare extends AbstractService {
 		
 		$foursquare = new EpiFoursquare($consumer_key, $consumer_secret, $service->token, $service->secret);
 		
-		$history = $foursquare->get('/history.json');
+		$history = $foursquare->get('/history.json', array('l' => 250));
 		$history = json_decode($history->responseText);
 		
 		$placemarks = array();

@@ -32,7 +32,7 @@ class DatabaseTest extends PHPUnit_Framework_TestCase {
 
 		}
 		
-		public function test_save_user() {
+		public function xtest_save_user() {
 			$db = DatabaseFactory::get_provider();
 			
 			$user = new User();
