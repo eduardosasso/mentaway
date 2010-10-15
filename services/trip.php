@@ -6,29 +6,47 @@
 require_once("../model/Trip.class.php");
 require_once("../model/Controller.php");
 
-$username = $_REQUEST['username'];
-$trip_desc = $_REQUEST['desc'];
+$action = $_REQUEST['action'];
 
-$date = date('D M d H:i:s O Y');
+switch ($action) {
+	case "get":
+		get_trip();
+		break;
+	case "add":
+		add_trip();
+		break;	
+}
 
-$trip = new Trip();
-$trip->_id = 'trip';
-$trip->name = $trip_desc;
-$trip->date = $date;
-$trip->timestamp = strtotime($trip->date);
-$trip->current = true;
+function add_trip() {
+	$username = $_REQUEST['username'];
+	$trip_desc = $_REQUEST['desc'];
+	$date = date('D M d H:i:s O Y');
 
-$controller = new Controller();
+	$trip = new Trip();
+	$trip->_id = 'trip';
+	$trip->name = $trip_desc;
+	$trip->date = $date;
+	$trip->timestamp = strtotime($trip->date);
+	$trip->current = true;
+	
+	$controller = new Controller();
+	$response = $controller->add_user_trip($username, $trip);
 
-$response = $controller->add_user_trip($username, $trip);
+	/*
+	TODO Validar a saida para dar uma mensagem amigavel.
+	*/
+	echo 'Trip configured. Everything from now on will be tracked as your current trip.';	
+}
 
-/*
-TODO Validar a saida para dar uma mensagem amigavel.
-*/
-echo 'Trip configured. Everything from now on will be tracked as your current trip.';
+function get_trip() {
+	/*
+		TODO a funcao deve pegar a trip baseado na url + user por exemplo para identificar de qual a trip um placemark eh.
+	*/
+	$username = $_REQUEST['username'];
+	$controller = new Controller();
+	$trip =  $controller->get_current_trip($username);
+	echo $trip->name;
+}
 
-// } else {
-// 	echo 'Error setting trip.';	
-// }
 
 ?>

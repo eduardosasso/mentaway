@@ -78,7 +78,7 @@
 				</ul>
 
 				<div id="info">
-					<h1>Trip</h1>
+					<h1></h1>
 				</div>
 
 				<div id="user">
@@ -149,6 +149,7 @@
 	
 	<script src="js/plugins.js?v=1"></script>
 	<script src="js/util.js?v=1"></script>
+	<script src="js/user.js?v=1"></script>
 	<script src="js/panel.js?v=1"></script>
 	<script src="js/diary.js?v=1"></script>
 	<script src="js/nav.js?v=1"></script>

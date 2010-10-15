@@ -7,6 +7,7 @@ var User = {
 	
 	add_trip: function(desc, callback) {
 		args = {
+			action: 'add',
 			username: this.name,
 			desc: desc
 		}
@@ -16,6 +17,19 @@ var User = {
 		$.get(url,args, function(data){
 			callback(data);
 		});
+	},
+	
+	get_trip: function(user,callback) {
+		args = {			
+			action: 'get',
+			username: user,
+		}
+		
+		url = 'services/trip.php';
+
+		$.get(url,args, function(data){
+			callback(data);
+		});		
 	},
 	
 	add_general_service: function(service){
