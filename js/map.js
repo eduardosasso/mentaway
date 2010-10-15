@@ -52,7 +52,17 @@ var Map = {
 			zoom: 5,
 			center: lat_long,
 			mapTypeId: google.maps.MapTypeId.ROADMAP,
-			streetViewControl: true
+			streetViewControl: true,
+			mapTypeControlOptions: {
+				style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+				position: google.maps.ControlPosition.BOTTOM_RIGHT
+			},
+			navigationControl: true,
+			navigationControlOptions: {
+				style: google.maps.NavigationControlStyle.SMALL,
+				position: google.maps.ControlPosition.BOTTOM_LEFT
+			},
+			scaleControl: false
 		}
 		
 		this.gmap = new google.maps.Map(this.options.map_el.get(0), map_options);

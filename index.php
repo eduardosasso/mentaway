@@ -117,6 +117,7 @@
 		</div>
 		
 		<div id="panel2">
+			<div id="close">close</div>
 			<div class="column">
 				<h2></h2>
 				<p class="dates"></p>
