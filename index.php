@@ -101,15 +101,14 @@
 					<span>sent via <a href="#" class="source"></a></span>
 					<div class="icon"></div>
 				</div>
-				<div class="share">
-					<ul>
-						<!-- <li id="tweet"></li>					 -->
-						<li id="fb-like"></li>
-					</ul>
-				</div>
 				<div class="clear"></div>
 				<div class="desc"><p></p></div>
-				<!-- <h3>Comments</h3> -->
+				<div class="share">
+					<ul>
+						<!-- <li id="tweet"></li>	-->
+						<li id="fb-like"></li>
+					</ul>
+				</div>				
 			</div>
 			
 		</div>
@@ -125,10 +124,10 @@
 	
 		<div id="navigation">
 			<ul>
-				<li><a href="#">First Spot</a></li>
+				<li><a href="#" id="first">First Spot</a></li>
 				<li><a href="#" id="previous">Previous</a></li>
 				<li><a href="#" id="next">Next</a></li>
-				<li><a href="#">Last Stop</a></li>
+				<li><a href="#" id="last">Last Stop</a></li>
 			</ul>
 			
 		</div>

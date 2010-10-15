@@ -1,7 +1,9 @@
 var Nav = {
 	el: {
+		first: $('#navigation #first'),
 		next: $('#navigation #next'),
-		previous: $('#navigation #previous')
+		previous: $('#navigation #previous'),
+		last: $('#navigation #last')
 	},
 	
 	hide_show: function(){
@@ -23,6 +25,16 @@ var Nav = {
 	},
 	
 	enable: function(){
+		Nav.el.first.click(function(){
+			var count = Map.get_markers_count();
+			
+			if (count > 0) {
+				Map.show_placemark(0);
+			};
+
+			return false;
+		});
+		
 		Nav.el.previous.click(function(){
 			Nav.el.next.show();
 			
@@ -34,7 +46,7 @@ var Nav = {
 				Map.show_placemark(idx);
 				$(this).hide();
 			}
-			Panel_aux.hide();
+			//Panel_aux.hide();
 			return false;
 		});
 		
@@ -50,9 +62,21 @@ var Nav = {
 				Map.show_placemark(idx);				
 				$(this).hide();
 			}	
-			Panel_aux.hide();
+			//Panel_aux.hide();
 			return false;
 		});
+		
+		Nav.el.last.click(function(){
+			var count = Map.get_markers_count();
+			
+			if (count > 0) {
+				Map.show_placemark(count - 1);
+			};
+
+			return false;
+		});
+		
+		
 	}
 	
 }	

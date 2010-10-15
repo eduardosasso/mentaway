@@ -11,8 +11,8 @@ var Map = {
 		container_el: $("#content"),
 		map_el: $("#map"),
 		user: '',
-		active_icon: 'http://code.google.com/apis/maps/documentation/javascript/examples/images/beachflag.png',
-		default_icon: 'http://maps.google.com/mapfiles/marker.png'
+		active_icon: 'images/mark-active.png',
+		default_icon: 'images/marks.png'
 	},
 	
 	init: function(options) {			
@@ -93,6 +93,8 @@ var Map = {
 			map: Map.gmap,
 			position: latlng
 		});
+		
+		marker.setIcon(Map.options.default_icon);
 		
 		google.maps.event.addListener(marker, 'click', function(e) {
 			if (Map.previous_marker != '') {

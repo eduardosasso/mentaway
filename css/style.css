@@ -321,15 +321,14 @@ p.dates{
 #via{
 	float: left;
 }
-.share{
+/*.share{
 	float: right;
 	width: 220px;
 }
+*/
 .share li{
- 	float: right;
  	clear: none;
  	display: block;
- 	width: 58px;
  	overflow: hidden;
 }
 .desc{
