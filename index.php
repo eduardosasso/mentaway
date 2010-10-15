@@ -103,7 +103,7 @@
 				</div>
 				<div class="share">
 					<ul>
-						<li id="tweet"></li>					
+						<!-- <li id="tweet"></li>					 -->
 						<li id="fb-like"></li>
 					</ul>
 				</div>
@@ -124,15 +124,17 @@
 			</div>
 		</div>
 		
+		<div id="panel3"></div>
+		
 		
 	
 		<div id="navigation">
 		
 			<ul>
-				<li><a href="#">First Spot</a></li>
-				<li><a href="#">Previous</a></li>
-				<li><a href="#">Next</a></li>
-				<li><a href="#">Last Stop</a></li>
+				<!-- <li><a href="#">First Spot</a></li> -->
+				<li><a href="#" id="previous">Previous</a></li>
+				<li><a href="#" id="next">Next</a></li>
+				<!-- <li><a href="#">Last Stop</a></li> -->
 			</ul>
 			
 		</div>
@@ -151,7 +153,7 @@
 	<script src="js/diary.js?v=1"></script>
 	<script src="js/nav.js?v=1"></script>
 	<script src="js/map.js?v=1"></script>
-  	<script src="js/script.js?v=1"></script>
+  <script src="js/script.js?v=1"></script>
 
   <!--[if lt IE 7 ]>
     <script src="js/dd_belatedpng.js?v=1"></script>

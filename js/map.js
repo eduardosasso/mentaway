@@ -3,9 +3,10 @@ var Map = {
 	markers: [],
 	marker_idx: '',
 	gmap: null,
+	//infoWindow: null,
 	bounds: '',
 	previous_marker: '',
-	
+
 	options: {
 		container_el: $("#content"),
 		map_el: $("#map"),
@@ -55,6 +56,12 @@ var Map = {
 		}
 		
 		this.gmap = new google.maps.Map(this.options.map_el.get(0), map_options);
+		
+		// var infoWindowOptions = {
+		// 	maxWidth: 400
+		// };
+		// 
+		// this.infoWindow = new google.maps.InfoWindow(infoWindowOptions);
 	},
 	
 	resize_map: function() {
@@ -91,6 +98,8 @@ var Map = {
 			var placemark = Map.placemarks[Map.marker_idx].value;
 			
 			Panel.update(placemark);
+			//var html = Panel.html(placemark);
+			//Map.infoWindow.setContent(html);
 			
 			//teste para detectar se clicou direto no pin
 			if (typeof e != "undefined") {
@@ -107,6 +116,8 @@ var Map = {
 				}
 				
 				Map.zoom();
+				
+				//Map.infoWindow.open(Map.gmap, marker);
 				
 				Util.update_share_buttons();
 			}
