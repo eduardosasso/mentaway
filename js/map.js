@@ -107,6 +107,8 @@ var Map = {
 				}
 				
 				Map.zoom();
+				
+				Util.update_share_buttons();
 			}
 			
 		});	

@@ -108,10 +108,8 @@
 				<div class="share">
 					<span>share this on</span>
 					<ul>
-						<li><a href="http://twitter.com/share" class="twitter-share-button" data-count="none" data-via="abduzeedo">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script></li>
-					
-						<li><iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fexample.com%2Fpage%2Fto%2Flike&amp;layout=button_count&amp;show_faces=true&amp;width=90&amp;action=like&amp;font=arial&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:90px; height:21px;" allowTransparency="true"></iframe>
-						</li>										
+						<li id="tweet"></li>					
+						<li id="fb-like"></li>
 				</div>
 		</div>
 		</div>
@@ -132,8 +130,8 @@
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
   <script>!window.jQuery && document.write('<script src="js/jquery-1.4.2.min.js"><\/script>')</script>
 
-	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&language=pt-BR"></script> 	
-  
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&language=pt-BR"></script> 
+	
 	<script src="js/plugins.js?v=1"></script>
 	<script src="js/util.js?v=1"></script>
 	<script src="js/panel.js?v=1"></script>

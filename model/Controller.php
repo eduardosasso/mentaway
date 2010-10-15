@@ -80,6 +80,16 @@ class Controller {
 		return $user;
 	}
 	
+	function is_user($username) {
+		$user = $this->get_user($username);
+		
+		if (empty($user)) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
 	//retorna detalhes de acesso ao servico
 	function get_user_service($username, $servicename){
 		$db = DatabaseFactory::get_provider();

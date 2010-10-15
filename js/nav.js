@@ -34,7 +34,7 @@ var Nav = {
 				Map.show_placemark(idx);
 				$(this).hide();
 			}
-								
+			
 			return false;
 		});
 		

@@ -1,3 +1,15 @@
+window.fbAsyncInit = function() {
+	FB.init({appId: '136687686378472', status: true, cookie: true, xfbml: true});
+};
+
+add_facebook = function(){
+	var e = document.createElement('script');
+	e.type = 'text/javascript';
+	e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
+	e.async = true;
+	document.getElementById('fb-root').appendChild(e);
+}();
+
 // remap jQuery to $
 (function($){
 	$.getScript("js/jquery.history.js");
@@ -18,8 +30,6 @@ window.log = function(){
     console.log( Array.prototype.slice.call(arguments) );
   }
 };
-
-
 
 // catch all document.write() calls
 (function(doc){
