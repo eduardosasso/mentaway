@@ -66,7 +66,7 @@
 <!--[if (gt IE 9)|!(IE)]><!--> <body> <!--<![endif]-->
 	
 	<div id="fb-root"></div>
-	
+
 	<div id="content">
 		<div id="header">
 
@@ -93,9 +93,6 @@
 			</div>
 
 		</div>
-		
-		
-		<div id="map"></div>
 		
 		<div id="panel1">
 			
@@ -130,6 +127,8 @@
 		</div>
 			
 	</div>
+	
+		<div id="map"></div>
 	
 	<!-- Javascript at the bottom for fast page loading -->
 
