@@ -200,9 +200,9 @@ var Map = {
 		TODO revisar para ver se esse eh o melhor lugar para essa funcionalidade
 	*/
 	bind_events: function(){
-		Map.options.map_el.hover(function(){
-			Panel_aux.hide();		   		
-		});
+		// Map.options.map_el.hover(function(){
+		// 	Panel_aux.hide();		   		
+		// });
 	},
 	
 	//funcao principal... 

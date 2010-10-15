@@ -20,29 +20,38 @@ var Panel_aux = {
 	},
 	
 	show: function(){
-		// var speed = 800;
-		// 
-		// 	if($(window).width()<1024){
-		// 		Panel.get_el().css("right", "400px");
-		// 		this.el.panel.width(340);
-		// 		this.el.panel.css("right", "0");
-		// 	}
-		// 	
-		// 	if($(window).width()>1024){
-		// 		w = 1100 - $(window).width() +"px";
-		// 		Map.get_map_el().animate({left: "-540px"}, speed );
-		// 		Panel.get_el().animate({right: "540px"}, speed );
-		// 		this.el.panel.animate({right: "0"}, speed);
-		// 	}
+		var speed = 800;
+		
+			if($(window).width()<1024){
+				Panel.get_el().css("right", "400px");
+				this.el.panel.width(340);
+				this.el.panel.css("right", "0");
+			}
+			
+			if($(window).width()>1024){
+				//w = 1100 - $(window).width() +"px";
+				var map_width = Map.get_map_el().css('width');
+				
+				Map.get_map_el().css('width', '1800px');
+				
+				Map.get_map_el().animate({left: "-400px"}, speed );
+				Panel.get_el().animate({right: "500px"}, speed );
+				this.el.panel.animate({right: "0"}, speed);
+			}
+			this.el.panel.show();
 	},
 	
 	hide: function(){
-		// var speed = 800;
-		// 
-		// w = $(window).width() - 570 +"px";
-		// Map.get_map_el().animate({left: 0}, speed );		
-		// Panel.get_el().animate({right: "0"}, speed );
-		// this.el.panel.animate({right: "-540px"}, speed );
+		var speed = 800;
+		
+		var map_width = Map.get_map_el().css('width');
+		Map.get_map_el().css('width','1400px');
+		
+		Map.get_map_el().animate({left: 0}, speed );		
+		Panel.get_el().animate({right: "0"}, speed );
+		this.el.panel.animate({right: "-500px"}, speed );
+		
+		this.el.panel.hide();
 	}
 	
 }

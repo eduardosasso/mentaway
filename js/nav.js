@@ -34,7 +34,7 @@ var Nav = {
 				Map.show_placemark(idx);
 				$(this).hide();
 			}
-			
+			Panel_aux.hide();
 			return false;
 		});
 		
@@ -47,10 +47,10 @@ var Nav = {
 			if (++idx < count) {
 				Map.show_placemark(idx);
 			} else {
-				Map.show_placemark(idx);
+				Map.show_placemark(idx);				
 				$(this).hide();
 			}	
-			
+			Panel_aux.hide();
 			return false;
 		});
 	}

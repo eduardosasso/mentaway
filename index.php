@@ -72,9 +72,9 @@
 				<a href="#" id="logo"><img src="images/mentaway-logo.png" alt="Mentaway - Keep tracking of your adventures" /></a>
 
 				<ul id="main-nav">
-					<li>Journal</li>
-					<li>History</li>
-					<li>Stats</li>
+					<li id="diary">Diary</li>
+					<li class="disabled-feature">History</li>
+					<li class="disabled-feature">Stats</li>
 				</ul>
 
 				<div id="info">
