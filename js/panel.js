@@ -74,7 +74,8 @@ var Panel = {
 	},
 
 	set_description: function(desc){
-		this.el.description.html(desc);
+		var comments = Util.add_comments();
+		this.el.description.html(desc + comments);
 	},
 	
 	//define a origem, flickr, foursquare etc... e seta classes para customizacao

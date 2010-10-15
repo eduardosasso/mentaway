@@ -13,6 +13,11 @@ var Util = {
 		return url;
 	},
 	
+	add_comments: function(){
+		var url = Util.get_pretty_url();
+		return '<fb:comments width="380" xid="'+ Map.get_current_idx() +'" simple="1" url="'+ url + '"></fb:comments>';
+	},	
+	
 	update_share_buttons: function() {
 		Util.update_like_button();
 		Util.update_tweet_button();
@@ -24,9 +29,8 @@ var Util = {
 		this.fblike.html('<fb:like href="' + url + '"></fb:like>');
 		
 		if (typeof(FB) != "undefined") {
-			FB.XFBML.parse(this.fblike.get(0));		
+			FB.XFBML.parse();		
 		};
-
 	},
 	
 	update_tweet_button: function(){
