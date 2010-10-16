@@ -17,7 +17,7 @@ class CouchDB implements DatabaseInterface {
 		$url = "http://localhost:5984/";
 
 		//via ssh tunnel base quente.
-		$url = "http://localhost:5985/";
+		//$url = "http://localhost:5985/";
 		
 		$database = "mentaway";
 		
