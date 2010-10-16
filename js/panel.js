@@ -80,29 +80,6 @@ var Panel = {
 		this.previous_service = service;
 	},
 	
-	/*
-		TODO revisar eventos..
-	*/
-	bind_events: function(){
-		$('a.flickr').live('click',function(){
-			class_ = $(this).attr('class');
-			src_ = $(this).attr('href');
-
-			var img = $("<img border='0' />").
-				attr('src',src_).
-				attr('class', class_);
-
-			Panel_aux.set_title('');
-			Panel_aux.set_date('');
-			Panel_aux.set_description(img);
-
-			Panel_aux.show();
-
-			return false;			
-
-		});		
-	},
-	
 	html: function(placemark){
 		this.update(placemark);
 		return this.el.panel.html();
@@ -130,7 +107,7 @@ var Panel = {
 			//doc: http://www.flickr.com/services/api/misc.urls.html			
 			img_big = img_big.replace('_t.','_b.');
 			
-			img = $('<a>').attr('href', img_big).attr('class', 'flickr').append(img);
+			img = $('<a>').attr('href', img_big).attr('class', 'flickr').attr('class','lightbox').append(img);
 		};
 		
 		if (img) {
@@ -144,9 +121,6 @@ var Panel = {
 		this.set_date(placemark.timestamp);
 		this.set_description(description);
 		this.set_service(placemark.service);
-		
-		Panel.bind_events();
-				
 	}
 
 }
@@ -155,4 +129,5 @@ var Panel = {
 Panel_aux.el.close.click(function(){
 	Panel_aux.hide();
 });
+
 

@@ -51,7 +51,7 @@ var Map = {
 		var map_options = {
 			zoom: 5,
 			center: lat_long,
-			mapTypeId: google.maps.MapTypeId.ROADMAP,
+			mapTypeId: google.maps.MapTypeId.HYBRID,
 			streetViewControl: true,
 			mapTypeControlOptions: {
 				style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,

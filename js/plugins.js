@@ -13,6 +13,7 @@ add_facebook = function(){
 // remap jQuery to $
 (function($){
 	$.getScript("js/jquery.history.js");
+	$.getScript("js/fancybox/jquery.fancybox-1.3.1.pack.js"); 
 	
 	/*
 		TODO estudar para carregar o map async
