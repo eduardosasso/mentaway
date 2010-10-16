@@ -200,7 +200,7 @@ button {  width: auto; overflow: visible; }
 /* mentaway custom style */
 html { height: 100% }
 body { height: 100%; margin: 0px; padding: 0px }
-#map { height: 98% }
+#map { height: 100% }
 
 @font-face {
   font-family: "Mentaway";
@@ -227,6 +227,7 @@ p{
 	padding: 0 0 20px 0;
 }
 h2{
+	clear: both;
 	padding: 0;
 	color: #8b7b6b;
 	font: 22px/24px "Mentaway", "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
@@ -256,14 +257,16 @@ a:hover{
 #header{
 	position: absolute;
 	width: 100%;
-	background: rgba(250,250,250,.93);
+	background: #8b7b6b;
 	top: 30px;
 	height: 100px;
+	color: #fff;
 }
 p.dates{
 	padding: 0 0 5px 0;
 	color: #fe7b7b;
 	font-size: 12px;
+	float: left;
 }
 #header p{
 	padding: 0 0 0 0;
@@ -271,9 +274,12 @@ p.dates{
 #header #logo{
 	float: left;
 	background: #fff;
-	padding: 10px 20px 5px 30px;;
+	height: 100px;
+	padding: 0 30px;
 }
-
+#header img{
+	padding-top: 15px;
+}
 #header #user{
 	float: right;
 	width: 400px;
@@ -307,48 +313,50 @@ p.dates{
 	padding: 12px 0 10px 0;
 	font: 20px/26px "Mentaway", "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
 }
-#map{
-	border: 10px solid #fff;
-}
 #panel1{
 	position: absolute;
-	top: 180px;
-	right: 0px;
+	top: 160px;
+	right: 0;
 	background: #fff;
-	width: 400px;
+	width: 360px;
 	padding: 20px;
 }
 #via{
-	float: left;
-}
-/*.share{
 	float: right;
-	width: 220px;
 }
-*/
+.share{
+	float: leftt;
+}
 .share li{
- 	clear: none;
- 	display: block;
- 	overflow: hidden;
+ 
+}
+.share li#fb-like{
+	 display
+	
 }
 .desc{
 	clear: both;
 	display: block;
-	padding-top: 20px;
-	margin: 20px 0 0 0;
-	border-top: 1px solid  #ddd;
+	margin: 0 0 10px 0;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #ddd !important;
 	
 }
-img.foursquare{
-	position: absolute;
-	top: 20px;
-	right: 20px;
+.flickr .desc p{
+	
+}
+.flickr .desc img{
+	float: right !important;
+}
+.foursquare .desc img{
+	float: right;
+	margin-top: -20px;
 }
 #panel2{
-	display:none;
 	padding: 30px;
 	position: absolute;
 	top: 150px;
+	left: -460px;
 	width: 400px;
 	background: #fff;
 }
@@ -358,10 +366,13 @@ img.foursquare{
 }
 #navigation{
 	position: absolute;
-	bottom: 10px;
+	bottom: 40px;
 	z-index: 100;
-	width: 100% !important;
+	width: 380px !important;
 	text-align: center;
+	overflow: transparent;
+	margin-left: -190px;
+	left: 50%;
 }
 #navigation ul{
 	margin: 0 auto;

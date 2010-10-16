@@ -96,13 +96,15 @@
 			
 			<div class="column">
 				<p class="dates"></p>
-				<h2></h2>
 				<div id="via">
 					<span>sent via <a href="#" class="source"></a></span>
 					<div class="icon"></div>
 				</div>
-				<div class="clear"></div>
-				<div class="desc"><p></p></div>
+				<h2></h2>
+				<div class="desc">
+					<p></p>
+					<div class="clear"></div>
+				</div>			
 				<div class="share">
 					<ul>
 						<!-- <li id="tweet"></li>	-->
