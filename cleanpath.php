@@ -32,7 +32,7 @@ if (in_array($args[0], $safe_pages)) {
 		$url = "$app_url/$user#$id";
 		header("Location: $url");
 	} else {
-		include("index.php");
+		include("app.php");
 	}
 	
 } else {
