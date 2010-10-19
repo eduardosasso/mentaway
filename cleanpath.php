@@ -1,8 +1,4 @@
 <?php 
-error_reporting(E_ALL);
-ini_set('display_errors', TRUE);
-ini_set('display_startup_errors', TRUE);
-
 require_once("model/Controller.php");
 
 $controller = new Controller();
@@ -13,14 +9,28 @@ $args = explode("/", $q);
 
 $is_user = $controller->is_user($args[0]);
 
-$safe_pages = array("user", "search", "thread");  
+$safe_pages = array("user");  
 
 if (in_array($args[0], $safe_pages)) {
+	//se ta na pagina de user ve se recebeu um segundo arg
+	$pages = array("services", "profile", "trips");  
+	$page = $args[1];
+
+	if (!in_array($args[1], $pages)) {
+		header("Location: /user/profile");
+	}	
 	
 	include($args[0].".php");
 
 } elseif ($is_user) {
-	$user = $args[0];
+	$user = $controller->get_user($args[0]);
+	
+	$username = $user->username;
+	$location = $user->location;
+	$fullname = $user->fullname;
+	$site = $user->site;
+	$bio = $user->bio;
+	$picture = $user->picture;
 	
 	$id = end($args);
 	
@@ -36,7 +46,7 @@ if (in_array($args[0], $safe_pages)) {
 	}
 	
 } else {
-	
+	//se nao eh user vai para pagina 404
 	include("404.php");  
 }
 

@@ -51,7 +51,7 @@
 	?>
 
 	<script type="text/javascript" charset="utf-8">
-		user = "<?php echo $user ?>"
+		user = "<?php echo $username ?>"
 	</script>
 
 </head>
@@ -82,10 +82,10 @@
 				</div>
 
 				<div id="user">
-					<img src="http://a1.twimg.com/profile_images/1129099001/avatar-hair_bigger.jpg" />
-					<h3>Fabio Sasso</h3>
-					<p class="location">San Francisco, CA</p>
-					<p class="url"><a href="#">http://abduzeedo.com</a></p>
+					<img src="<?php echo $picture ?>" />
+					<h3><?php echo $fullname ?></h3>
+					<p class="location"><?php echo $location ?></p>
+					<p class="url"><a href="<?php echo $site ?>"><?php echo $site ?></a></p>
 				</div>	
 
 			</div>

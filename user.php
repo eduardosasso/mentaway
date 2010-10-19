@@ -63,15 +63,23 @@ define('BASE_URL',$base_url);
 		header('location: /');
 		return;
 	}
-	
+
 	require_once("model/Controller.php");
 	$controller = new Controller();
 
 	$user = $controller->get_user($id);
-		
-		echo '<pre>';
-		print_r($user);
-		echo '</pre>';
+	
+	$username = $user->username;
+	
+	$foursquare = $controller->get_user_service($username,'foursquare');
+	$twitter = $controller->get_user_service($username,'twitter');
+	$flickr = $controller->get_user_service($username,'flickr');
+	$posterous = $controller->get_user_service($username,'posterous');
+	
+	$has_foursquare = !empty($foursquare);
+	$has_twitter = !empty($twitter);
+	$has_flickr = !empty($flickr);
+	$has_posterous = !empty($posterous);
 		
 	?>
 
@@ -84,39 +92,101 @@ define('BASE_URL',$base_url);
 <!--[if IE 7 ]>    <body class="ie7"> <![endif]-->
 <!--[if IE 8 ]>    <body class="ie8"> <![endif]-->
 <!--[if IE 9 ]>    <body class="ie9"> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!--> <body> <!--<![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <body class="user-page"> <!--<![endif]-->
 	
 	<div id="fb-root"></div>
+	
+	<input type="hidden" value="<?php echo $username ?>" id="username">
+	
+	<div id="header"> 
+		<div class="wrap"> 
+			<a href="#" id="logo"><img src="/images/mentaway-logo.png" alt="Mentaway - Keep tracking of your adventures" width="195" height="64"/></a> 
+			<div id="info" > 
+				<h1>Account</h1> 
+			</div> 
 
-	<div id="user">
-		<input type="hidden" value="<?php echo $username ?>" id="username">
+			<div id="user"> 
+				<img src="<?php echo $user->picture ?>" /> 
+				<h3><?php echo $user->fullname; ?></h3> 
+				<p class="location"><?php echo $user->location; ?></p> 
+				<p class="url"><a href="#"><?php echo $user->site ?></a></p> 
+			</div>
+
+		</div> 
+
+	</div> 
+
+	<div id="panel_user">
+		<!--
+			TODO melhor eh cada tipo (services, profile e trips) ter sua propria pagina, tem q usar templates para padronizar header e outros detalhes comuns
+		-->
+		<?php if ($page == 'services'): ?>
+			<h3>Choose your services</h3>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam semper, nunc ac commodo sodales</p>
+			<div class="list-services">
+				<ul>
+					<li class="foursquare">
+						<?php if (!$has_foursquare): ?>
+							<a href="#" id="foursquare" class="add_user_service add">Add Foursquare</a>
+						<?php else: ?>
+							<a href="#" class="remove_user_service remove">Remove Foursquare</a>
+						<?php endif ?>					
+					</li>
+					<li class="flickr">
+						<?php if (!$has_flickr): ?>
+							<a href="#" id="flickr" class="add_user_service add">Add Flickr</a>
+						<?php else: ?>
+							<a href="#" class="remove_user_service remove">Remove Flickr</a>
+						<?php endif ?>					
+					</li>				
+					<li class="twitter">
+						<?php if (!$has_twitter): ?>
+							<a href="#" id="twitter" class="add_user_service add">Add Twitter</a>
+						<?php else: ?>
+							<a href="#" class="remove_user_service remove">Remove Twitter</a>
+						<?php endif ?>					
+					</li>
+					<li class="posterous">
+						<?php if (!$has_posterous): ?>
+							<a href="#" id="posterous" class="add">Add Posterous</a>
+						<?php else: ?>
+							<a href="#" class="remove">Remove Posterous</a>
+						<?php endif ?>					
+					</li>
+				</ul>
+			</div>
 		
-		<?php if ($user): ?>
-			<div id="foursquare_block">
-				<input type="button" value="Add Foursquare" id="foursquare" class="add_user_service">
-			</div>			
-			
-			<div id="flickr_block">
-				<input type="button" value="Add Flickr" id="flickr" class="add_user_service">
-			</div>
-			
-			<div id="trip_block">
-				<textarea name="textarea" rows="3" cols="60" wrap="wrap" id="trip_desc"></textarea>
-				<input type="button" value="Add Trip" id="add_trip">
-			</div>
-			
-			<div id="twitter_block">
-				<input type="text" placeholder="Twitter Username"	value="" id="twitter_user">
-				<input type="button" value="Add Twitter" id="add_twitter">
-			</div>
-			
-			<div id="posterous_block">
+			<!-- <div id="posterous_block">
 				<input type="text" placeholder="Posterous URL"	value="" id="posterous_url">
 				<input type="button" value="Add Posterous" id="add_posterous">
-			</div>
-			
-			
+			</div> -->
+		
+			<div class="bt_ok"><a href="#">I’m okay! Show me my Mentaway!</a></div>
+		<?php endif ?> 
+		
+		<?php if ($page == 'profile'): ?>
+			Aqui vai os campos do user...			
 		<?php endif ?>
+		
+		<?php if ($page == 'trips'): ?>
+			Aqui vai os campos de trips
+		<?php endif ?>		
+		
+	</div> 
+
+
+			
+<!-- 			<div id="trip_block">
+				<textarea name="textarea" rows="3" cols="60" wrap="wrap" id="trip_desc"></textarea>
+				<input type="button" value="Add Trip" id="add_trip">
+			</div> -->
+			
+			<!-- <div id="twitter_block">
+				<input type="text" placeholder="Twitter Username"	value="" id="twitter_user">
+				<input type="button" value="Add Twitter" id="add_twitter">
+			</div> -->
+			
+
 
 		<!-- <h1>User Page</h1>
 		
@@ -124,9 +194,7 @@ define('BASE_URL',$base_url);
 		<input type="text" placeholder="Full Name" value="" id="fullname_field">
 		
 		<input type="button" value="Create New User Account" id="new_user_account">  -->
-		
-	</div>
-		
+
 
 	<!-- Javascript at the bottom for fast page loading -->
 

@@ -435,7 +435,6 @@ div.user-log-bts .logo-service{
 	margin-right: 10px;
 	text-indent: -9000px;
 }
-
 div.user-log-bts .log-as-twitter{
 	width: 105px;
 	background: url(../images/logo_twitter_1.jpg) left top no-repeat;
@@ -443,18 +442,40 @@ div.user-log-bts .log-as-twitter{
 div.user-log-bts a {
 	margin-left: 10px;
 }
+#panel_user .list-services ul {
+	position: relative;
+	height: 35px;
+	padding-bottom: 20px;
+}
 #panel_user .list-services ul li {
 	display: block;
 	float: left;
 	width: 85px;
 	height: 35px;
-	border: 1px solid #DDD;
 	margin: 0 8px 8px 0;
 }
-#panel_user .list-services ul li:hover {
+#panel_user .list-services ul li a:hover {
 	border: 1px solid #999;
 	cursor: pointer;
 }
+#panel_user .list-services ul li a {
+	display: block;
+	width: 85px;
+	height: 35px;
+	float: left;
+	border: 1px solid #DDD;
+	text-indent: -9000px;
+}
+#panel_user .list-services ul li.foursquare a{
+	background: url(../images/logos_services.jpg) -87px 0 no-repeat;
+}
+#panel_user .list-services ul li.foursquare a.remove{
+	background: url(../images/logos_services.jpg) -87px -37px no-repeat;
+}
+#panel_user .list-services ul li.foursquare a.remove:hover{
+	background: url(../images/logos_services.jpg) -87px -73px no-repeat;
+}
+
 #panel_user .bt_ok  {
 	border-top: 1px solid #DDD;
 	padding-top: 30px;
