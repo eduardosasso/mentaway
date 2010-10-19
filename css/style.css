@@ -236,6 +236,11 @@ h3{
 	font-size: 24px;
 	font-weight: lighter;
 }
+#panel_user h3{
+	font-size: 24px;
+	color: #fe7b7b;
+	margin-bottom: 10px;
+}
 a{
 	color: #fe7b7b;
 	text-decoration: none;
@@ -276,6 +281,7 @@ p.dates{
 	background: #fff;
 	height: 100px;
 	padding: 0 30px;
+	width: 200px;
 }
 #header img{
 	padding-top: 15px;
@@ -293,6 +299,7 @@ p.dates{
 #header h3{
 	font-size: 18px;
 	font-weight: bold;
+	color: #FFF;
 }
 #header a{
 	color: #7ba9d3;
@@ -312,6 +319,13 @@ p.dates{
 	float: left;
 	padding: 12px 0 10px 0;
 	font: 20px/26px "Mentaway", "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+}
+
+.user-page #info h1{
+	float: left;
+	padding: 0 30px;
+	font: 36px/100px "Mentaway", "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	
 }
 #panel1{
 	position: absolute;
@@ -396,6 +410,70 @@ p.dates{
 }
 #panel3{
 	display: none;
+}
+
+#panel_user{
+	padding: 0px;
+	position: absolute;
+	top: 160px;
+	left: 290px;
+	width: 400px;
+	background: #FFF;
+}
+
+div.user-log-bts {
+	height: 25px;
+	line-height: 25px;
+	margin: 20px 0 20px;
+	padding-bottom: 20px;
+	border-bottom: 1px solid #DDD;
+}
+div.user-log-bts .logo-service{
+	display: block;
+	float: left;
+	height: 25px;
+	margin-right: 10px;
+	text-indent: -9000px;
+}
+
+div.user-log-bts .log-as-twitter{
+	width: 105px;
+	background: url(../images/logo_twitter_1.jpg) left top no-repeat;
+}
+div.user-log-bts a {
+	margin-left: 10px;
+}
+#panel_user .list-services ul li {
+	display: block;
+	float: left;
+	width: 85px;
+	height: 35px;
+	border: 1px solid #DDD;
+	margin: 0 8px 8px 0;
+}
+#panel_user .list-services ul li:hover {
+	border: 1px solid #999;
+	cursor: pointer;
+}
+#panel_user .bt_ok  {
+	border-top: 1px solid #DDD;
+	padding-top: 30px;
+}
+#panel_user .bt_ok a:link, #panel_user .bt_ok a:active, #panel_user .bt_ok a:visited {
+	background: #6699CC;
+	color: #FFF;
+	border-radius:5px;
+	-webkit-border-radius:5px;
+	-moz-border-radius:5px;
+	-khtml-border-radius:5px;
+	padding: 12px 20px;
+	font-size: 22px;
+	font-weight: bold;
+	-webkit-transition: background .4s ease-in !important;
+	-moz-transition: background .4s ease-in !important;
+}
+#panel_user .bt_ok a:hover {
+	background:#fe7b7b ;
 }
 /* end of mentaway custom style */
 

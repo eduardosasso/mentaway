@@ -134,17 +134,17 @@ class Controller {
 	/*
 		TODO tem q criar, ou alterar na mesma funcao
 	*/
-	function save_user($fields) {		
+	function save_user($user) {		
 			$db = DatabaseFactory::get_provider();
 			
-			/*
-				TODO tem q retornar para o usuario para ver se nao deu erro
-				fields vem serializado com todos os campos, explodir...
-			*/
-			$user = new User();
-			$user->_id = $fields;
-			$user->username = $fields;
-			$user->fullname = $fields;
+			// /*
+			// 	TODO tem q retornar para o usuario para ver se nao deu erro
+			// 	fields vem serializado com todos os campos, explodir...
+			// */
+			// $user = new User();
+			// $user->_id = $fields;
+			// $user->username = $fields;
+			// $user->fullname = $fields;
 			
 			$result = $db->save_user($user);
 			

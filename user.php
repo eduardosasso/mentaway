@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 /*
 	TODO Essa pagina de html tem q ser generica... talvez com template.
 */
@@ -53,26 +55,23 @@ define('BASE_URL',$base_url);
   <script src="<?php echo BASE_URL ?>/js/modernizr-1.5.min.js"></script>
 
 	<?php
-	/*
-		TODO primeira versao tosca de controle de usuarios, melhorar.
-		Usar templates para separar logica do visual
-	*/
-		$user = $_REQUEST['q'];
-		
-		$user = explode('/',$user);
-		$user = $user[1];
-		
 	
-		require_once("model/Controller.php");
-		$controller = new Controller();
+	$id = $_SESSION['id'];
+	
+	if (empty($id)) {
+		//usuario nao esta logado, redireciona para a home
+		header('location: /');
+		return;
+	}
+	
+	require_once("model/Controller.php");
+	$controller = new Controller();
+
+	$user = $controller->get_user($id);
 		
-		$user = $controller->get_user($user);
-		
-		$username = $user->username;
-		
-		if (!$user) {
-			echo "User not found. Wait to be invited...";
-		}
+		echo '<pre>';
+		print_r($user);
+		echo '</pre>';
 		
 	?>
 

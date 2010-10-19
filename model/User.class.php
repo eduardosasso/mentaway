@@ -6,6 +6,8 @@ class User {
 	public $_id;
 	public $username;
 	public $fullname;
+	public $picture;
+	public $site;
 	public $token;
 	public $secret;
 	public $bio;

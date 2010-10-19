@@ -1,63 +1,80 @@
 <?php
-// error_reporting(E_ALL);
-// ini_set('display_errors', TRUE);
-// ini_set('display_startup_errors', TRUE);
-
-// require_once("model/Service.class.php");
-// require_once("model/Controller.php");
-
+session_start();
 
 include 'model/lib/twitter/EpiCurl.php';
 include 'model/lib/twitter/EpiOAuth.php';
 include 'model/lib/twitter/EpiTwitter.php';
 
-$consumer_key = "4H54L27rDeG7Waz1HKdfsA";
-$consumer_secret = "syl1r1YxIoFQDSku0zbY0kY96eHOCoifAO60V7aHxc";
+$consumer_key = "rJHgm4ewnT6VqD7MFThA";
+$consumer_secret = "88QKvizTTHlIsmPlv93t4tRPIKTNf7lQx4ZnZwPduI";
 
-$oauth_token = isset($_REQUEST['oauth_token']) ? $_REQUEST['oauth_token'] : '';
-//$username = $_REQUEST['username'];
+$twitterObj = new EpiTwitter($consumer_key, $consumer_secret);
 
 //se o token vier populado significa que eh o callback do oauth
-if ($oauth_token) {
-	auth_callback();
-}
-
-// session_start();
-// 
-
-function auth_callback(){	
-
-		$twitterObj = new EpiTwitter($consumer_key, $consumer_secret);
-		
-		$twitterObj->setToken($oauth_token);
-		
-		$token = $twitterObj->getAccessToken();
-		
-		$twitterObj->setToken($token->oauth_token, $token->oauth_token_secret);
-		
-		// save to cookies
-		setcookie('oauth_token', $token->oauth_token);
-		setcookie('oauth_token_secret', $token->oauth_token_secret);
-
-		$twitterInfo= $twitterObj->get_accountVerify_credentials();
-		
-		echo '<pre>';
-		print_r($twitterInfo);
-		echo '</pre>';
+if ($_GET['oauth_token']) {
 	
-} 
+	require_once("model/Service.class.php");
+	require_once("model/Controller.php");
+	require_once("model/User.class.php");
+	
+	$twitter_id = $_SESSION['twitter_id'];
+	
+	//se nao foi autenticado pelo twitter ou nao tem conta criada entra aqui
+	if (empty($twitter_id)) {
+		$controller = new Controller();
+		
+		$twitterObj->setToken($_GET['oauth_token']);
 
+		$token = $twitterObj->getAccessToken();
 
-function get_auth_url(){		
-	$consumer_key = "4H54L27rDeG7Waz1HKdfsA";
-	$consumer_secret = "syl1r1YxIoFQDSku0zbY0kY96eHOCoifAO60V7aHxc";
+		$twitterObj->setToken($token->oauth_token, $token->oauth_token_secret);
 
-	$twitterObj = new EpiTwitter($consumer_key, $consumer_secret);
+		/*
+			TODO procurar o user e redirecionar
+		*/
+		$twitterInfo= $twitterObj->get_accountVerify_credentials();
+		$screen_name = $twitterInfo->screen_name;
+		
+		$user = $controller->get_user($screen_name);
+		
+		if (empty($user)) {
+			//novo usuario redireciona para a tela de servicos...
+		} else {
+			$id = $user->_id;
 
-	$authenticate_url = $twitterObj->getAuthenticateUrl();
+			/*
+				TODO sempre q logar atualiza algumas infos do twitter q o usuario possa ter alterado.
+			*/
+			$user->bio = $twitterInfo->description;
+			$user->site = $twitterInfo->url;
+			$user->picture = $twitterInfo->profile_image_url;
+			
+			$controller->save_user($user);
+			
+			//atualiza o cookie e a sessao e redireciona o usuario para a tela dele...
+			$_SESSION['id'] = $id;
+			header('location: /' . $id);			
+		}
+		
+		/*
+			TODO se nao achar user vai para a pagina de criar user.
+		*/
 
-	return $authenticate_url;
-
+		echo $twitterInfo->id;
+		echo "<br>";
+		echo $twitterInfo->screen_name;
+		echo "<br>";
+		echo $twitterInfo->profile_image_url;		
+	} else {
+		/*
+			TODO se ja ta autenticado vai para a pagina do user
+		*/
+	}
+			
+	
+} else {
+	//retorna uma variavel para colocar o link na tela...
+	$twitter_url = $twitterObj->getAuthenticateUrl();
 }
 
 ?>
