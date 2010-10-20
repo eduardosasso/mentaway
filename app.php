@@ -66,29 +66,27 @@
 <!--[if (gt IE 9)|!(IE)]><!--> <body> <!--<![endif]-->
 	<div id="map"></div>
 	<div id="fb-root"></div>
-		<div id="header">
+	<div id="header">
 
-			<div class="wrap">
-				<a href="#" id="logo"><img src="images/mentaway-logo.png" alt="Mentaway - Keep tracking of your adventures" /></a>
+		<div class="wrap">
+			<a href="#" id="logo"><img src="images/mentaway-logo.png" alt="Mentaway - Keep tracking of your adventures" /></a>
 
-				<ul id="main-nav">
-					<li id="diary">Diary</li>
-					<li class="disabled-feature">History</li>
-					<li class="disabled-feature">Stats</li>
-				</ul>
+			<ul id="main-nav">
+				<li id="diary">Diary</li>
+				<li class="disabled-feature">History</li>
+				<li class="disabled-feature">Stats</li>
+			</ul>
 
-				<div id="info">
-					<h1></h1>
-				</div>
-
-				<div id="user">
-					<img src="<?php echo $picture ?>" />
-					<h3><?php echo $fullname ?></h3>
-					<p class="location"><?php echo $location ?></p>
-					<p class="url"><a href="<?php echo $site ?>"><?php echo $site ?></a></p>
-				</div>	
-
+			<div id="info">
+				<h1></h1>
 			</div>
+
+			<div id="user">
+				<img src="<?php echo $picture ?>" />
+				<h3><?php echo $fullname ?></h3>
+				<p class="location"><?php echo $location ?></p>
+				<p class="url"><a href="<?php echo $site ?>"><?php echo $site ?></a></p>
+			</div>	
 
 		</div>
 		

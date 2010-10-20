@@ -3,34 +3,70 @@
 // ini_set('display_errors', TRUE);
 // ini_set('display_startup_errors', TRUE);
 
+session_start();
+
 require_once("../model/Service.class.php");
 require_once("../model/Controller.php");
 require_once("../model/Twitter.class.php");
+require_once("../util/Message.class.php");
 
 $username = $_REQUEST['username'];
-$twitter_user = $_REQUEST['twitter_user'];
 
-$twitter = new Twitter();
-$is_valid = $twitter->validate($twitter_user);
+$controller = new Controller();
+$user = $controller->get_user($username);
 
-if ($is_valid) {
+$token = $user->token;
+$secret = $user->secret;
+
+/*
+	TODO isso ta meio inicial, ele leva em consideracao q essa info de token na raiz do user eh do twitter e isso nao ta legal.
+			 tem continuar testando o token mais em outra hierarquia e tambem permitir a auth via oauth
+*/
+if ($token && $secret) {	
 	
 	$service = new Service();
 	$service->_id = 'twitter';
 	$service->name = 'Twitter';
-	$service->token = $twitter_user;
-
-	$controller = new Controller();
-	
-	$response = $controller->add_user_service($username, $service);
+	$service->token = $token;
+	$service->secret = $secret;
 	
 	/*
-		TODO Validar a saida para dar uma mensagem amigavel.
+		TODO fazer controle de excecao aqui pra se der erro ele mostrar uma mensagem para o user
 	*/
-	echo 'Twitter configured... Add "#m" to your tweets and dont forget to enable geolocation on twitter.';
-
-} else {
-		echo 'Invalid Twitter Account';	
+	$response = $controller->add_user_service($username, $service);	
+	//manda devolta para a pagina de user so pra atualizar a UI
+	Message::set("Twitter configured... Add '#m' to your tweets and dont forget to enable geolocation on twitter.");
+	
+	
+	/*
+		TODO esse conceito ta meio tosco, ele chega aqui por ajax e faz um echo com a url para retornar, tem q melhorar
+	*/
+	echo "/user/services";
+	
 }
+
+// 
+// // $twitter = new Twitter();
+// // $is_valid = $twitter->validate($twitter_user);
+// 
+// if ($is_valid) {
+// 	
+// 	$service = new Service();
+// 	$service->_id = 'twitter';
+// 	$service->name = 'Twitter';
+// 	$service->token = $twitter_user;
+// 
+// 
+// 	
+// 	$response = $controller->add_user_service($username, $service);
+// 	
+// 	/*
+// 		TODO Validar a saida para dar uma mensagem amigavel.
+// 	*/
+// 	echo 'Twitter configured... Add "#m" to your tweets and dont forget to enable geolocation on twitter.';
+// 
+// } else {
+// 		echo 'Invalid Twitter Account';	
+// }
 
 ?>

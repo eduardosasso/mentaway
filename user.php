@@ -1,6 +1,4 @@
 <?php
-session_start();
-
 /*
 	TODO Essa pagina de html tem q ser generica... talvez com template.
 */
@@ -115,7 +113,11 @@ define('BASE_URL',$base_url);
 		</div> 
 
 	</div> 
-
+	
+	<div class="messages">
+		<?php echo $messages ?>
+	</div>
+	
 	<div id="panel_user">
 		<!--
 			TODO melhor eh cada tipo (services, profile e trips) ter sua propria pagina, tem q usar templates para padronizar header e outros detalhes comuns
@@ -123,6 +125,7 @@ define('BASE_URL',$base_url);
 		<?php if ($page == 'services'): ?>
 			<h3>Choose your services</h3>
 			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam semper, nunc ac commodo sodales</p>
+
 			<div class="list-services">
 				<ul>
 					<li class="foursquare">
@@ -208,8 +211,6 @@ define('BASE_URL',$base_url);
 
 	<script src="<?php echo BASE_URL ?>/js/plugins.js?v=1"></script>
   <script src="<?php echo BASE_URL ?>/js/user.js?v=1"></script>
-
-  <script src="<?php echo BASE_URL ?>/js/user-ui.js?v=1"></script>
 
 
   <!--[if lt IE 7 ]>

@@ -466,7 +466,9 @@ div.user-log-bts a {
 	border: 1px solid #DDD;
 	text-indent: -9000px;
 }
-#panel_user .list-services ul li.foursquare a{
+
+/* Foursquare */
+#panel_user .list-services ul li.foursquare a.add{
 	background: url(../images/logos_services.jpg) -87px 0 no-repeat;
 }
 #panel_user .list-services ul li.foursquare a.remove{
@@ -476,8 +478,40 @@ div.user-log-bts a {
 	background: url(../images/logos_services.jpg) -87px -73px no-repeat;
 }
 
+/* Flickr */
+#panel_user .list-services ul li.flickr a.add{
+	background: url(../images/logos_services.jpg) 0 0 no-repeat;
+}
+#panel_user .list-services ul li.flickr a.remove{
+	background: url(../images/logos_services.jpg) 0 -37px no-repeat;
+}
+#panel_user .list-services ul li.flickr a.remove:hover{
+	background: url(../images/logos_services.jpg) 0 -73px no-repeat;
+}
+
+/* Twitter */
+#panel_user .list-services ul li.twitter a.add{
+	background: url(../images/logos_services.jpg) -173px 0 no-repeat;
+}
+#panel_user .list-services ul li.twitter a.remove{
+	background: url(../images/logos_services.jpg) -173px -37px no-repeat;
+}
+#panel_user .list-services ul li.twitter a.remove:hover{
+	background: url(../images/logos_services.jpg) -173px -73px no-repeat;
+}
+
+/* Posterous */
+#panel_user .list-services ul li.posterous a.add{
+	background: url(../images/logos_services.jpg) -259px 0 no-repeat;
+}
+#panel_user .list-services ul li.posterous a.remove{
+	background: url(../images/logos_services.jpg) -259px -37px no-repeat;
+}
+#panel_user .list-services ul li.posterous a.remove:hover{
+	background: url(../images/logos_services.jpg) -259px -73px no-repeat;
+}
+
 #panel_user .bt_ok  {
-	border-top: 1px solid #DDD;
 	padding-top: 30px;
 }
 #panel_user .bt_ok a:link, #panel_user .bt_ok a:active, #panel_user .bt_ok a:visited {

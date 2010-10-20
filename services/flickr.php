@@ -1,10 +1,6 @@
 <?php
 	session_start();
 	
-	error_reporting(E_ALL);
-	ini_set('display_errors', TRUE);
-	ini_set('display_startup_errors', TRUE);
-
 	$api_key                 = "abf2e4a70a2362dcc429faf6060954a1";
 	$api_secret              = "d4e88e847732c369";
 	//$default_redirect        = "/mentaway/eduardosasso";
@@ -48,7 +44,7 @@
 		
 		$response = $controller->add_user_service($username, $service);		
 		
-		header( 'Location: '  . '/user/' . $username);
+		header( 'Location: /user/services');
 	}
 
 	// if (empty($redirect)) {

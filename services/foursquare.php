@@ -40,7 +40,7 @@ if ($oauth_token) {
 	
 	$response = $controller->add_user_service($username, $service);
 
-	header( 'Location: '  . '/user/' . $username);	
+	header( 'Location: '  . '/user/services');	
 	
 	// echo $token->oauth_token;
 	// 	echo "<br>";

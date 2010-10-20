@@ -1,4 +1,6 @@
 <?php 
+session_start();
+
 require_once("model/Controller.php");
 
 $controller = new Controller();
@@ -19,6 +21,8 @@ if (in_array($args[0], $safe_pages)) {
 	if (!in_array($args[1], $pages)) {
 		header("Location: /user/profile");
 	}	
+	
+	include("util/Message.class.php");
 	
 	include($args[0].".php");
 

@@ -48,6 +48,8 @@ if ($_GET['oauth_token']) {
 		$user->bio = $twitterInfo->description;
 		$user->site = $twitterInfo->url;
 		$user->picture = $twitterInfo->profile_image_url;
+		$user->token = $token->oauth_token;				
+		$user->secret = $token->oauth_token_secret;
 
 		$controller->save_user($user);
 

@@ -38,8 +38,11 @@ var User = {
 		}
 
 		url = base_url + '/services/' + service + '.php';
-
+		
 		$.get(url,args, function(url){
+			/*
+				TODO aqui tem q testar o retorno para ver se eh url, se nao for eh msg de erro, ou essa validacao tem q vir de cima...
+			*/
 			window.location.replace(url);
 		});
 	},
@@ -59,8 +62,7 @@ var User = {
 
 	add_twitter: function(twitter, callback) {
 		args = {
-			username: this.name,
-			twitter_user: twitter
+			username: this.name
 		}
 
 		url = base_url + '/services/twitter.php';
@@ -71,3 +73,42 @@ var User = {
 	}
 
 }
+
+$(document).ready(function() {
+	var username = $('#username').val();
+	User.init(username);
+	
+	$('.add_user_service').click(function(){
+		//usa pela class para ser generico e pegar todos os servicos...			
+		service = $(this).attr('id');
+		
+		User.add_general_service(service);
+	});
+
+	$('#add_posterous').click(function(){
+		site = $('#posterous_url').val();
+
+		User.add_posterous(site, function(data){
+			$('#posterous_block').html(data);
+		});
+	});
+
+	// $('#twitter.add').click(function(){
+	// 		User.add_twitter(twitter, function(data){
+	// 			$('#twitter_block').html(data);
+	// 		});
+	// 	});
+	
+	$('#add_trip').click(function(){
+		trip_desc = $('#trip_desc').val();
+		
+		User.add_trip(trip_desc, function(data){
+			$('#trip_block').html(data);
+		});
+	});
+	
+	// $('#new_user_account').click(function(){
+	// 	User.save_user();
+	// });
+	
+});
