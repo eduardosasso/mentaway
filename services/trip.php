@@ -14,7 +14,10 @@ switch ($action) {
 		break;
 	case "add":
 		add_trip();
-		break;	
+		break;
+	case "status":
+		get_current_trip_status();
+		break;
 }
 
 function add_trip() {
@@ -45,7 +48,15 @@ function get_trip() {
 	$username = $_REQUEST['username'];
 	$controller = new Controller();
 	$trip =  $controller->get_current_trip($username);
-	echo $trip->name;
+	header("Content-type: application/json");
+	print json_encode($trip);
+}
+
+function get_current_trip_status(){
+	$username = $_REQUEST['username'];
+	$controller = new Controller();
+	$status =  $controller->get_current_trip_status($username);
+	echo $status;
 }
 
 

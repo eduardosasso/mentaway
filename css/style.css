@@ -274,6 +274,20 @@ a:hover{
 	opacity: 0.9;
 	margin-left: 260px;
 }
+.user-page #header .wrap {
+	height: 100px;
+	background: #7A6957;
+	opacity: 0.9;
+	margin-left: 260px;
+	color: #FFF;
+}
+.user-page #header .wrap h3 {
+	color: #FFF;
+}
+.user-page #header .wrap a {
+	color: #FFF;
+	font-weight: bold;
+}
 p.dates{
 	padding: 0 0 5px 0;
 	color: #fe7b7b;
@@ -282,6 +296,7 @@ p.dates{
 }
 #header p{
 	padding: 0 0 0 0;
+	font-size: 12px;
 }
 #header #logo{
 	float: left;
@@ -295,17 +310,18 @@ p.dates{
 	padding-top: 15px;
 }
 #header #user{
-	float: right;
+	position: absolute;
+	right: 20px;
+	top: 25px;
 	width: 400px;
 	text-align: right;
-	padding: 12px 20px 0 0;
 }
 #header #user img{
 	float: right;
 	padding: 0 0 0 20px;
 }
 #header h3{
-	font-size: 18px;
+	font-size: 16px;
 	font-weight: bold;
 	color: #7A6957;
 }
@@ -324,17 +340,21 @@ p.dates{
 	border-right: 1px solid #bfa993;
 }
 #info h1{
-	float: left;
-	padding: 12px 0 10px 0;
-	font: 20px/26px "Mentaway", "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	padding: 26px 0 2px 0;
+	font: 28px/26px "Mentaway", "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	color: #7A6957;
 }
-
 .user-page #info h1{
-	float: left;
 	padding: 0 30px;
 	font: 36px/100px "Mentaway", "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
-	
 }
+
+#info h4.trip-status {
+	font-weight: ;
+	font: 16px/24px "Mentaway", "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	color: #fe7b7b;
+}
+
 #panel1{
 	position: absolute;
 	top: 160px;
@@ -517,17 +537,73 @@ div.user-log-bts .log-as-twitter{
 div.user-log-bts a {
 	margin-left: 10px;
 }
+#panel_user .list-services ul {
+	position: relative;
+	height: 35px;
+	padding-bottom: 20px;
+}
 #panel_user .list-services ul li {
 	display: block;
 	float: left;
 	width: 85px;
 	height: 35px;
-	border: 1px solid #DDD;
 	margin: 0 8px 8px 0;
 }
-#panel_user .list-services ul li:hover {
+#panel_user .list-services ul li a:hover {
 	border: 1px solid #999;
 	cursor: pointer;
+}
+#panel_user .list-services ul li a {
+	display: block;
+	width: 85px;
+	height: 35px;
+	float: left;
+	border: 1px solid #DDD;
+	text-indent: -9000px;
+}
+
+/* Foursquare */
+#panel_user .list-services ul li.foursquare a.add{
+	background: url(../images/logos_services.jpg) -87px 0 no-repeat;
+}
+#panel_user .list-services ul li.foursquare a.remove{
+	background: url(../images/logos_services.jpg) -87px -37px no-repeat;
+}
+#panel_user .list-services ul li.foursquare a.remove:hover{
+	background: url(../images/logos_services.jpg) -87px -73px no-repeat;
+}
+
+/* Flickr */
+#panel_user .list-services ul li.flickr a.add{
+	background: url(../images/logos_services.jpg) 0 0 no-repeat;
+}
+#panel_user .list-services ul li.flickr a.remove{
+	background: url(../images/logos_services.jpg) 0 -37px no-repeat;
+}
+#panel_user .list-services ul li.flickr a.remove:hover{
+	background: url(../images/logos_services.jpg) 0 -73px no-repeat;
+}
+
+/* Twitter */
+#panel_user .list-services ul li.twitter a.add{
+	background: url(../images/logos_services.jpg) -173px 0 no-repeat;
+}
+#panel_user .list-services ul li.twitter a.remove{
+	background: url(../images/logos_services.jpg) -173px -37px no-repeat;
+}
+#panel_user .list-services ul li.twitter a.remove:hover{
+	background: url(../images/logos_services.jpg) -173px -73px no-repeat;
+}
+
+/* Posterous */
+#panel_user .list-services ul li.posterous a.add{
+	background: url(../images/logos_services.jpg) -259px 0 no-repeat;
+}
+#panel_user .list-services ul li.posterous a.remove{
+	background: url(../images/logos_services.jpg) -259px -37px no-repeat;
+}
+#panel_user .list-services ul li.posterous a.remove:hover{
+	background: url(../images/logos_services.jpg) -259px -73px no-repeat;
 }
 #panel_user .bt_ok  {
 	border-top: 1px solid #DDD;

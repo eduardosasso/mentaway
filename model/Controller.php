@@ -132,6 +132,11 @@ class Controller {
 		return $trip;
 	}
 	
+	function get_current_trip_status($username){
+		$trip = $this->get_current_trip($username);
+		return $trip->status;
+	}
+	
 	function add_user_service($username, Service $service) {
 		$db = DatabaseFactory::get_provider();
 

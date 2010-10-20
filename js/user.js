@@ -32,6 +32,19 @@ var User = {
 		});		
 	},
 	
+	get_current_status: function(){
+		args = {			
+			action: 'status',
+			username: user,
+		}
+		
+		url = 'services/trip.php';
+
+		$.get(url,args, function(data){
+			callback(data);
+		});				
+	},
+	
 	add_general_service: function(service){
 		args = {
 			username: this.name
@@ -77,6 +90,11 @@ var User = {
 $(document).ready(function() {
 	var username = $('#username').val();
 	User.init(username);
+	
+	User.get_trip(user,function(trip){
+		$('h1').text(trip.name);
+		$('h4.trip-status').html(trip.status);
+	});
 	
 	$('.add_user_service').click(function(){
 		//usa pela class para ser generico e pegar todos os servicos...			

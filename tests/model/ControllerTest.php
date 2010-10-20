@@ -18,7 +18,7 @@ class ControllerTest extends PHPUnit_Framework_TestCase {
 			print_r($posts);
 		}
 		
-		public function test_get_posts_by_interval(){
+		public function xtest_get_posts_by_interval(){
 			$username = 'eduardosasso';
 			
 			$controller = new Controller();
@@ -57,5 +57,17 @@ class ControllerTest extends PHPUnit_Framework_TestCase {
 			print_r($service);
 
 		}	
+		
+		public function test_get_current_trip_status(){
+			$username = 'eduardosasso';	
+			
+			$controller = new Controller();
+			
+			$trip = $controller->get_current_trip_status($username);
+			
+			echo '<pre>';
+			print_r($trip);
+			echo '</pre>';
+		}
 }
 ?>
