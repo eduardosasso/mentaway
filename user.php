@@ -97,8 +97,8 @@ define('BASE_URL',$base_url);
 	<input type="hidden" value="<?php echo $username ?>" id="username">
 	
 	<div id="header"> 
-		<div class="wrap"> 
-			<a href="#" id="logo"><img src="/images/mentaway-logo.png" alt="Mentaway - Keep tracking of your adventures" width="195" height="64"/></a> 
+		<a href="#" id="logo"><img src="/images/mentaway-logo.png" alt="Mentaway - Keep tracking of your adventures" width="195" height="64"/></a> 
+		<div class="wrap"> 			
 			<div id="info" > 
 				<h1>Account</h1> 
 			</div> 
