@@ -1,0 +1,146 @@
+@import url("reset.css");
+
+@font-face {
+  font-family: "Mentaway";
+  src: url(mentaway.ttf);
+}
+@brown:#8b7b6b;
+@blue:#7ba9d3;
+@pink:#fe7b7b;
+@yellow:#f8bd50;
+
+body{
+	font: lighter 14px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	color: #8b7b6b;
+	padding: 0;
+	margin: 0;
+}
+#content{
+	overflow: hidden !important;
+	display: block;
+	position: relative;
+	width: 99.5%;
+	height: 97.5%;
+	padding: 0;
+	margin: 0 auto;
+	
+}
+strong{
+	font-weight: bolder;
+}
+
+p{
+	padding: 0 0 20px 0;
+}
+h2{
+	padding: 0;
+	color: #8b7b6b;
+	font: 22px/24px "Mentaway", "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+}
+h3{
+	font-size: 24px;
+	font-weight: lighter;
+}
+a{
+	color: #fe7b7b;
+	text-decoration: none;
+	
+	-webkit-transition: color .5s ease-in !important;
+	-moz-transition: color .5s ease-in !important;
+}
+a:hover{
+	color: #f8bd50;
+}
+#via, .share{
+	font-size: 12px;
+}
+.wrap{
+}
+
+#header{
+	position: absolute;
+	width: 100%;
+	background: rgba(250,250,250,.93);
+	top: 30px;
+	height: 100px;
+}
+p.dates{
+	padding: 0 0 5px 0;
+	color: #fe7b7b;
+	font-size: 12px;
+}
+#header p{
+	padding: 0 0 0 0;
+}
+#header #logo{
+	float: left;
+	background: #fff;
+	padding: 0 30px;
+	height: 100px;
+}
+#header #logo img{
+	width: 195px;
+	padding-top: 15px;
+	
+}
+#header #user{
+	float: right;
+	width: 400px;
+	text-align: right;
+	padding: 12px 20px 0 0;
+}
+#header #user img{
+	float: right;
+	padding: 0 0 0 20px;
+}
+#header h3{
+	font-size: 18px;
+	font-weight: bold;
+}
+#header a{
+	color: #7ba9d3;
+}
+#header a:hover{
+	color: #fe7b7b;
+}
+#header ul#main-nav{
+	float: left;
+	text-align: right;
+	margin: 12px 20px 0 50px;
+	padding-right: 20px;
+	line-height: 180%;
+	border-right: 1px solid #bfa993;
+}
+#info h1{
+	float: left;
+	padding: 12px 0 10px 0;
+	font: 20px/26px "Mentaway", "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+}
+#map{
+	padding: 10px;
+}
+#panel1{
+	position: absolute;
+	top: 180px;
+	right: 200px;
+	background: #fff;
+	width: 400px;
+	padding: 20px;
+}
+#via{
+	float: left;
+}
+.share{
+	float: right;
+}
+.share li{
+	display: inline;
+}
+#panel2{
+	padding: 30px;
+	position: absolute;
+	top: 150px;
+	left: -460px;
+	width: 400px;
+	background: #fff;
+}
