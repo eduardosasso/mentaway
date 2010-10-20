@@ -10,6 +10,11 @@ class Posterous extends AbstractService {
 		
 		$servicename = 'posterous';
 		$service = $controller->get_user_service($username, $servicename);
+
+		if (empty($service->token)) {
+			return null;
+		}
+		
 		
 		$posterous = new PosterousAPI();
 		$xml = $posterous->readposts(array('hostname' => $service->token, 'tag' => 'mentaway'));
@@ -23,6 +28,7 @@ class Posterous extends AbstractService {
 			$post->date = (string) $post_->date;
 			$post->timestamp = strtotime($post->date);
 			$post->link = (string) $post_->link;
+			$post->service = 'posterous';
 
 			$posts[] = $post;			
 

@@ -5,6 +5,7 @@ var Panel_aux = {
 		close: $('#close', '#panel2'),
 		date: $('.dates', '#panel2'),
 		description: $('.desc', '#panel2'),
+		service: $('#via span a', '#panel2')
 	},
 		
 	set_title: function(title){
@@ -18,6 +19,10 @@ var Panel_aux = {
 
 	set_description: function(desc){
 		this.el.description.html(desc);
+	},
+	
+	set_service: function(service){
+		this.el.service.text(service);
 	},
 	
 	show: function(){
@@ -40,7 +45,7 @@ var Panel = {
 		title: $('h2', '#panel1'),
 		date: $('.dates', '#panel1'),
 		description: $('.desc p', '#panel1'),
-		service: $('#via span a'),
+		service: $('#via span a', '#panel1'),
 		service_icon: $('#via div.icon')
 	},
 	

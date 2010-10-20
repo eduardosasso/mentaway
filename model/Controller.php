@@ -24,6 +24,10 @@ class Controller {
 	}
 	
 	public function get_posts($username) {
+		/*
+			TODO aqui ta errado tem q ser tipo a funcao abaixo.
+		*/
+		
 		$service = $this->get_user_service($username, 'posterous');
 		$hostname = $service->token;
 		
@@ -41,8 +45,13 @@ class Controller {
 		$posterous = new Posterous();
 		$posts_ = $posterous->get_updates($username);
 		
+		if (empty($posts_)) {
+			return null;
+		}
+		
 		$posts = array();
 		$nearest_post = '';
+		
 		if ($begin_date && $end_date) {			
 			foreach ($posts_ as $key => $post) {
 				//procura o post mais proximo da data inicial
@@ -58,8 +67,8 @@ class Controller {
 		}
 		
 		//tem usar o post mais proximo baseado na data q o usuario esta, se nao acha usa o ultimo mesmo.
-		if (count($posts) == 0 && count($nearest_post) >0) {
-			$posts[] = $nearest_post;
+		if (count($posts) == 0 && !empty($nearest_post)) {
+			$posts[] = $nearest_post;			
 		} else {
 			$posts[] = $posts_[0];
 		}

@@ -20,15 +20,14 @@ switch ($action) {
 		print json_encode($placemarks);		
 		break;
 	case "posts":
-		$begin = '';
-		$end = '';
+		$begin = $_REQUEST['begin'];
+		$end = $_REQUEST['end'];			
 		
-		if (!empty($_REQUEST['begin']) && !empty($_REQUEST['end'])) {
-			$begin = $_REQUEST['begin'];
-			$end = $_REQUEST['end'];			
-		}		
-		
-		$posts = $controller->get_posts_by_interval($user, $begin, $end);
+		if ($begin != 'null' && $end != 'null') {
+			$posts = $controller->get_posts_by_interval($user, $begin, $end);
+		} else {
+			$posts = $controller->get_posts_by_interval($user);
+		}
 		
 		print json_encode($posts);
 		

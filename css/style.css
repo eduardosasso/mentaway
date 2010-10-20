@@ -262,10 +262,17 @@ a:hover{
 #header{
 	position: absolute;
 	width: 100%;
-	background: #8b7b6b;
+	
 	top: 30px;
+	
 	height: 100px;
-	color: #fff;
+	color: #7A6957;
+}
+#header .wrap {
+	height: 100px;
+	background: #fFF;
+	opacity: 0.9;
+	margin-left: 260px;
 }
 p.dates{
 	padding: 0 0 5px 0;
@@ -282,6 +289,7 @@ p.dates{
 	height: 100px;
 	padding: 0 30px;
 	width: 200px;
+	display: block;
 }
 #header img{
 	padding-top: 15px;
@@ -299,10 +307,10 @@ p.dates{
 #header h3{
 	font-size: 18px;
 	font-weight: bold;
-	color: #FFF;
+	color: #7A6957;
 }
 #header a{
-	color: #7ba9d3;
+	color: #6699CC;
 }
 #header a:hover{
 	color: #fe7b7b;
@@ -474,6 +482,10 @@ div.user-log-bts a {
 }
 #panel_user .bt_ok a:hover {
 	background:#fe7b7b ;
+}
+
+.disabled-feature {
+	text-decoration: line-through;
 }
 /* end of mentaway custom style */
 

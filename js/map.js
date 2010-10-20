@@ -120,11 +120,17 @@ var Map = {
 			} else {
 				Nav.hide_show();
 				
-				if (Map.marker_idx > 0 && Diary.has_posts()) {
-					current_placemark_timestamp = placemark.timestamp;
-					next_placemark_timestamp = Map.placemarks[Map.marker_idx + 1].value.timestamp;
+				if (Map.marker_idx > 0) {
 					
-					Diary.get_posts(current_placemark_timestamp, next_placemark_timestamp);			
+					var next_id = Map.marker_idx + 1;
+					if (next_id < Map.placemarks.length) {
+						current_placemark_timestamp = placemark.timestamp;
+						next_placemark_timestamp = Map.placemarks[next_id].value.timestamp;
+						Diary.get_posts(current_placemark_timestamp, next_placemark_timestamp);	
+					} else {
+						Diary.get_posts();
+					}
+					
 				}
 				
 				Map.zoom();

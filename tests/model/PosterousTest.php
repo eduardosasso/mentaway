@@ -6,7 +6,7 @@ require_once("$root/model/Posterous.class.php");
 class PosterousTest extends PHPUnit_Framework_TestCase {
 		public function test_get_updates() {	
 			$posterous = new Posterous();
-			$posts = $posterous->get_updates('abduzeedo');
+			$posts = $posterous->get_updates('eduardosasso');
 			
 			print_r($posts);
 		}

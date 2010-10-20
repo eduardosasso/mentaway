@@ -69,8 +69,9 @@
 	<div id="fb-root"></div>
 	
 	<div id="header">
+		<a href="#" id="logo"><img src="images/mentaway-logo.png" alt="Mentaway - Keep tracking of your adventures" /></a>
+		
 		<div class="wrap">
-			<a href="#" id="logo"><img src="images/mentaway-logo.png" alt="Mentaway - Keep tracking of your adventures" /></a>
 
 			<ul id="main-nav">
 				<li id="diary"><a href="">Diary</a></li>
@@ -117,6 +118,9 @@
 
 	<div id="panel2">
 		<div id="close">close</div>
+		<div id="via">
+			<span>sent via <a href="#" class="source"></a></span>
+		</div>
 		<div class="column">
 			<h2></h2>
 			<p class="dates"></p>

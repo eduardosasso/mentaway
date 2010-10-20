@@ -1,31 +1,39 @@
 var Diary = {
 	user: '',
-	has_data: false,
+	has_data: true,
 	link_el: $('#diary a'),
 		
 	init: function(user) {
 		this.user = user;
 		
 		this.link_el.click(function(){
-			Panel_aux.show();
+			if (Diary.has_data) {
+				Panel_aux.show();
+			};
+			
 			return false;
 		});
 		
-		//quando inicializa ve se tem posts para mostrar ou nao o link do diario na tela...
-		Diary.get_(null,null,function(posts){
-			if (posts) {
-				Diary.has_data = true;
-				Diary.link_el.show();
-				
-				var title = posts[0]['title'];
-				var body = posts[0]['body'];
-				
-				Panel_aux.set_title(title);
-				Panel_aux.set_description(body);
-			} else {
-				Diary.link_el.hide();
-			}
-		});		
+		// //quando inicializa ve se tem posts para mostrar ou nao o link do diario na tela...
+		// 		Diary.get_(null,null,function(posts){
+		// 			if (posts) {
+		// 				Diary.has_data = true;
+		// 				Diary.link_el.show();
+		// 				
+		// 				var title = posts[0]['title'];
+		// 				var body = posts[0]['body'];
+		// 				var date = posts[0]['timestamp'];
+		// 				var service = posts[0]['service'];
+		// 				
+		// 				Panel_aux.set_title(title);
+		// 				Panel_aux.set_date(date);
+		// 				Panel_aux.set_description(body);
+		// 				Panel_aux.set_service(service);
+		// 				
+		// 			} else {
+		// 				Diary.link_el.hide();
+		// 			}
+		// 		});		
 	},
 	
 	has_posts: function(){
@@ -46,12 +54,27 @@ var Diary = {
 	},
 	
 	get_posts: function(begin_date, end_date) {
+		if (Diary.has_data == false) {
+			return;
+		}
+		
 		Diary.get_(begin_date, end_date, function(posts){
-			var title = posts[0]['title'];
-			var body = posts[0]['body'];
+			if (posts) {
+				Diary.has_data = true;
 			
-			Panel_aux.set_title(title);
-			Panel_aux.set_description(body);			
+				var title = posts[0]['title'];
+				var body = posts[0]['body'];
+				var date = posts[0]['timestamp'];
+				var service = posts[0]['service'];
+
+				Panel_aux.set_title(title);
+				Panel_aux.set_date(date);
+				Panel_aux.set_description(body);
+				Panel_aux.set_service(service);			
+			} else {
+				Diary.link_el.addClass('disabled-feature');
+				Diary.has_data = false;
+			}
 		});	
 	}
 	
