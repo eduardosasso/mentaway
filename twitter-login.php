@@ -1,8 +1,8 @@
 <?php
 session_start();
 
-include 'model/lib/twitter/EpiCurl.php';
-include 'model/lib/twitter/EpiOAuth.php';
+include 'model/lib/twitter/EpiCurlTwitter.php';
+include 'model/lib/twitter/EpiOAuthTwitter.php';
 include 'model/lib/twitter/EpiTwitter.php';
 
 $consumer_key = "rJHgm4ewnT6VqD7MFThA";

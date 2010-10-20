@@ -9,7 +9,7 @@
  * 
  *  @author Jaisen Mathai <jaisen@jmathai.com>
  */
-class EpiTwitter extends EpiOAuth
+class EpiTwitter extends EpiOAuthTwitter
 {
   const EPITWITTER_SIGNATURE_METHOD = 'HMAC-SHA1';
   const EPITWITTER_AUTH_OAUTH = 'oauth';
@@ -141,7 +141,7 @@ class EpiTwitter extends EpiOAuth
     if(!empty($username) && !empty($password))
       curl_setopt($ch, CURLOPT_USERPWD, "{$username}:{$password}");
 
-    $resp = new EpiTwitterJson(EpiCurl::getInstance()->addCurl($ch), $this->debug);
+    $resp = new EpiTwitterJson(EpiCurlTwitter::getInstance()->addCurl($ch), $this->debug);
     if(!$this->isAsynchronous)
       $resp->response;
 

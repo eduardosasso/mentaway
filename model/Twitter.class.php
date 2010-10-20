@@ -3,8 +3,8 @@ require_once("AbstractService.class.php");
 require_once("Controller.php");
 require_once("Placemark.class.php");
 
-require_once("lib/twitter/EpiCurl.php");
-require_once("lib/twitter/EpiOAuth.php");
+require_once("lib/twitter/EpiCurlTwitter.php");
+require_once("lib/twitter/EpiOAuthTwitter.php");
 require_once("lib/twitter/EpiTwitter.php");
 
 
@@ -19,6 +19,10 @@ class Twitter extends AbstractService {
 		$controller = new Controller();
 
 		$service = $controller->get_user_service($username, $servicename);
+		
+		if (empty($service->token) || empty($service->secret)) {
+			return;
+		}
 		
 		$twitter = new EpiTwitter($consumer_key, $consumer_secret, $service->token, $service->secret);
 		  				

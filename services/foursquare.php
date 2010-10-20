@@ -7,6 +7,7 @@ require_once("../model/Controller.php");
 require_once("../model/lib/foursquare/EpiCurl.php");
 require_once("../model/lib/foursquare/EpiOAuth.php");
 require_once("../model/lib/foursquare/EpiFoursquare.php");
+require_once("../util/Message.class.php");
 
 $consumer_key = "3ZJVNOQBLHDFE3YKW3BJ1XQZG0XRJWLN4EVNR3WYRKEO0FED";								 
 $consumer_secret = "YLMEQHX1LO5K0XDGWCEQKNI0WXRPWNTKM05VXELYZ30J42C2";
@@ -39,6 +40,8 @@ if ($oauth_token) {
 	$service->secret = $token->oauth_token_secret;
 	
 	$response = $controller->add_user_service($username, $service);
+	
+	//Message::set("Now its time to checkin into ")
 
 	header( 'Location: '  . '/user/services');	
 	

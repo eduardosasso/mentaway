@@ -1,13 +1,14 @@
 var Diary = {
 	user: '',
 	has_data: false,
-	link_el: $('#diary'),
+	link_el: $('#diary a'),
 		
 	init: function(user) {
 		this.user = user;
 		
 		this.link_el.click(function(){
 			Panel_aux.show();
+			return false;
 		});
 		
 		//quando inicializa ve se tem posts para mostrar ou nao o link do diario na tela...

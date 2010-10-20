@@ -65,14 +65,15 @@
 <!--[if IE 9 ]>    <body class="ie9"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!--> <body> <!--<![endif]-->
 	<div id="map"></div>
+	
 	<div id="fb-root"></div>
+	
 	<div id="header">
-
 		<div class="wrap">
 			<a href="#" id="logo"><img src="images/mentaway-logo.png" alt="Mentaway - Keep tracking of your adventures" /></a>
 
 			<ul id="main-nav">
-				<li id="diary">Diary</li>
+				<li id="diary"><a href="">Diary</a></li>
 				<li class="disabled-feature">History</li>
 				<li class="disabled-feature">Stats</li>
 			</ul>
@@ -88,49 +89,50 @@
 				<p class="url"><a href="<?php echo $site ?>"><?php echo $site ?></a></p>
 			</div>	
 
-		</div>
-		
-		<div id="panel1">
-			
-			<div class="column">
-				<p class="dates"></p>
-				<div id="via">
-					<span>sent via <a href="#" class="source"></a></span>
-					<div class="icon"></div>
-				</div>
-				<h2></h2>
-				<div class="desc">
-					<p></p>
-					<div class="clear"></div>
-				</div>			
-				<div class="share">
-					<ul>
-						<!-- <li id="tweet"></li>	-->
-						<li id="fb-like"></li>
-					</ul>
-				</div>				
-			</div>
-			
-		</div>
-		
-		<div id="panel2">
-			<div id="close">close</div>
-			<div class="column">
-				<h2></h2>
-				<p class="dates"></p>
-				<div class="desc"></div>
-			</div>
-		</div>
+		</div>		
+	</div>
 	
-		<div id="navigation">
-			<ul>
-				<li><a href="#" id="first">First Spot</a></li>
-				<li><a href="#" id="previous">Previous</a></li>
-				<li><a href="#" id="next">Next</a></li>
-				<li><a href="#" id="last">Last Stop</a></li>
-			</ul>
-			
+	<div id="panel1">
+
+		<div class="column">
+			<p class="dates"></p>
+			<div id="via">
+				<span>sent via <a href="#" class="source"></a></span>
+				<div class="icon"></div>
+			</div>
+			<h2></h2>
+			<div class="desc">
+				<p></p>
+				<div class="clear"></div>
+			</div>			
+			<div class="share">
+				<ul>
+					<!-- <li id="tweet"></li>	-->
+					<li id="fb-like"></li>
+				</ul>
+			</div>				
 		</div>
+
+	</div>
+
+	<div id="panel2">
+		<div id="close">close</div>
+		<div class="column">
+			<h2></h2>
+			<p class="dates"></p>
+			<div class="desc"></div>
+		</div>
+	</div>
+
+	<div id="navigation">
+		<ul>
+			<li><a href="#" id="first">First Spot</a></li>
+			<li><a href="#" id="previous">Previous</a></li>
+			<li><a href="#" id="next">Next</a></li>
+			<li><a href="#" id="last">Last Stop</a></li>
+		</ul>
+
+	</div>
 	
 	<!-- Javascript at the bottom for fast page loading -->
 

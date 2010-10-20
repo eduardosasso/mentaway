@@ -15,7 +15,7 @@ var Util = {
 	
 	add_comments: function(){
 		var url = Util.get_pretty_url();
-		return '<fb:comments width="380" xid="'+ Map.get_current_idx() +'" simple="1" url="'+ url + '"></fb:comments>';
+		return '<fb:comments width="360" xid="'+ Map.get_current_idx() +'" simple="1" url="'+ url + '"></fb:comments>';
 	},	
 	
 	update_share_buttons: function() {
@@ -26,7 +26,7 @@ var Util = {
 	update_like_button: function(){
 		var url = Util.get_pretty_url();
 				
-		this.fblike.html('<fb:like href="' + url + '"></fb:like>');
+		this.fblike.html('<fb:like width="360" show_faces="false" href="' + url + '"></fb:like>');
 		
 		if (typeof(FB) != "undefined") {
 			FB.XFBML.parse();		
