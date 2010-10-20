@@ -13,19 +13,32 @@ var Nav = {
 		if (idx > 0 && idx <= count) {
 			this.el.next.show();
 			this.el.previous.show();
+			
+			this.el.first.show();
+			this.el.last.show();
+			
 		} 
 	
 		if (idx == count) {
 			this.el.next.hide();
+			this.el.last.hide();
 		}
 		
 		if (idx == 0) {
+			this.el.first.hide();
 			this.el.previous.hide();
+			
+			this.el.next.show();
+			this.el.last.show();
+			
 		}
+		
 	},
 	
 	enable: function(){
 		Nav.el.first.click(function(){
+			Nav.hide_show();
+			
 			var count = Map.get_markers_count();
 			
 			if (count > 0) {
@@ -36,7 +49,7 @@ var Nav = {
 		});
 		
 		Nav.el.previous.click(function(){
-			Nav.el.next.show();
+			Nav.hide_show();
 			
 			var idx = Map.get_current_idx();
 			
@@ -51,7 +64,7 @@ var Nav = {
 		});
 		
 		Nav.el.next.click(function(){
-			Nav.el.previous.show();
+			Nav.hide_show();
 			
 			var idx = Map.get_current_idx();
 			var count = Map.get_markers_count();
@@ -67,10 +80,12 @@ var Nav = {
 		});
 		
 		Nav.el.last.click(function(){
+			Nav.hide_show();
+			
 			var count = Map.get_markers_count();
 			
 			if (count > 0) {
-				Map.show_placemark(count - 1);
+				Map.show_placemark(count);
 			};
 
 			return false;

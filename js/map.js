@@ -174,20 +174,40 @@ var Map = {
 		{ unescape: ",/" });
 	},
 	
+	get_next_marker: function(){
+		var idx = Map.get_current_idx();
+		var next = '';
+		
+		if (idx == (this.markers.length -1)) {
+			next = this.markers[(idx)];
+		} else {
+			next = this.markers[(idx + 1)];
+		}		
+		return next;
+	},
+	
+	get_previous_marker: function(){
+		var idx = Map.get_current_idx();
+		var previous = '';
+		
+		if (idx > 0) {
+			previous = this.markers[(idx -1)];
+		} else {
+			previous = this.markers[(idx)];
+		}
+		return previous;
+	},
+	
 	zoom: function() {	
-		var idx = Map.marker_idx;
+		var idx = Map.get_current_idx();
 		//cria o zoom dinamico conforme o local dos pontos
-		current = this.markers[idx];
+		
+		var current = this.markers[idx];
+		var next = Map.get_next_marker();
+		var previous = Map.get_previous_marker();
 
 		//redefine o bounds se o meu ponto atual nao estiver na area.
-		if (this.bounds != '' && this.bounds.contains(current.position) == false) {				
-			if (idx == (this.markers.length -1)) {
-				next = this.markers[(idx)];
-			} else {
-				next = this.markers[(idx + 1)];
-			}
-			previous = this.markers[(idx -1)];
-
+		if (this.bounds != '' && this.bounds.contains(current.position) == false) {							
 			//cria uma nova area com os pontos anteriores, atual e proximo
 			var bounds_ = new google.maps.LatLngBounds();		
 			bounds_.extend(previous.position);
@@ -202,10 +222,7 @@ var Map = {
 			//define uma area padrao ao iniciar o mapa..
 			this.bounds = new google.maps.LatLngBounds();
 
-			prev = this.markers[(idx -1)];
-			next = this.markers[(idx)];	
-
-			this.bounds.extend(prev.position);
+			this.bounds.extend(previous.position);
 			this.bounds.extend(next.position);
 
 			this.gmap.fitBounds(this.bounds);		

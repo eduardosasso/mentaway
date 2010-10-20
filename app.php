@@ -118,22 +118,22 @@
 
 	<div id="panel2">
 		<div id="close">close</div>
-		<div id="via">
-			<span>sent via <a href="#" class="source"></a></span>
-		</div>
 		<div class="column">
 			<h2></h2>
 			<p class="dates"></p>
+			<div id="via">
+				<span>sent via <a href="#" class="source"></a></span>
+			</div>		
 			<div class="desc"></div>
 		</div>
 	</div>
 
 	<div id="navigation">
 		<ul>
-			<li><a href="#" id="first">First Spot</a></li>
-			<li><a href="#" id="previous">Previous</a></li>
-			<li><a href="#" id="next">Next</a></li>
-			<li><a href="#" id="last">Last Stop</a></li>
+			<li id="first"><a title="Go to the first visited location on this trip" href="#">First Spot</a></li>
+			<li id="previous"><a title="Go to the previous location"href="#">Previous</a></li>
+			<li id="next"><a title="Go to the next location" href="#">Next</a></li>
+			<li id="last"><a title="Go to the last visited location on this trip" href="#">Last Stop</a></li>
 		</ul>
 
 	</div>
@@ -144,7 +144,7 @@
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
   <script>!window.jQuery && document.write('<script src="js/jquery-1.4.2.min.js"><\/script>')</script>
 
-	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&language=pt-BR"></script> 
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script> 
 	
 	<script src="js/plugins.js?v=1"></script>
 	<script src="js/util.js?v=1"></script>
