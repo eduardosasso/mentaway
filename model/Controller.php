@@ -113,7 +113,7 @@ class Controller {
 		return null;
 	}
 	
-	function add_user_trip($username, Trip $trip) {
+	function add_user_trip($username, $trip) {
 		$db = DatabaseFactory::get_provider();
 
 		$response = $db->add_user_trip($username, $trip);

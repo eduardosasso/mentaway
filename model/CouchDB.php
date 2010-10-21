@@ -81,7 +81,7 @@ class CouchDB implements DatabaseInterface {
 		return $response;		
 	}
 	
-	public function add_user_trip($username, Trip $trip) {
+	public function add_user_trip($username, $trip) {
 		$user = $this->get_user($username);
 		
 		if (isset($user->trips)) {
