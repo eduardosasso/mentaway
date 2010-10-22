@@ -4,16 +4,13 @@ require_once("lib/HelperFunctions.php");
 require_once("AbstractService.class.php");
 require_once("Controller.php");
 require_once("Placemark.class.php");
+require_once("Status.class.php");
 
 /*
 	TODO Deve percorrer todos os placemarks do usuario para a trip ativa e identificar informacoes como cidades visitadas, fotos tiradas, dias na estrada etc...
 */
 class Stats extends AbstractService {
 	
-		var $city = array();
-		var $state = array();
-		var $country = array();
-		
 		const CITY =  1;
 		const STATE = 2;
 		const COUNTRY = 3;		
@@ -23,24 +20,31 @@ class Stats extends AbstractService {
 			
 			$trip = $controller->get_current_trip($username);
 			
-			$how_many_days = $this->how_many_days($trip->timestamp);
-			$how_many_days .= 'on the road';
-
+			$last_update = $trip->status->last_update;
+			
 			/*
 				TODO aqui tem q ser os placemarks da trip atual
-			*/
-			$placemarks = $controller->get_placemarks($username);
-			$this->get_location_stats($placemarks);
-			$locations =  $this->format_location_message();
+			*/			
+			if (!empty($last_update)) {
+				$placemarks = $controller->get_placemarks_starting_from($username, $last_update);
+			}	else {
+				$placemarks = $controller->get_placemarks($username);
+			}
 			
-			$trip->status = $how_many_days . $locations; 
+			if (empty($placemarks)) {
+				return null;
+			}	
+
+			$trip->status = $this->update_trip_status($trip, $placemarks);
+			
 			$controller->add_user_trip($username, $trip);
+			
 		}	
-		
-		public function format_location_message(){
-			$cities = count($this->get_cities_visited());
-			$states = count($this->get_states_visited());
-			$countries = count($this->get_countries_visited());
+				
+		public function format_location_message($status){
+			$cities = count($status->cities);
+			$states = count($status->states);
+			$countries = count($status->countries);
 			
 			if ($cities > 1) {
 				$message = ", $cities cities";
@@ -57,29 +61,9 @@ class Stats extends AbstractService {
 			if ($message) {
 				$message .= ' visited so far';
 			}
-			
+
 			return $message;
 			
-		}
-		
-		public function get_cities_visited(){
-			$cities = array_unique($this->city);
-			// echo '<pre>';
-			// print_r($cities);
-			// echo '</pre>';
-			return $cities;
-		}
-		
-		public function get_states_visited(){
-			$states = array_unique($this->state);
-			// echo '<pre>';
-			// print_r($states);
-			// echo '</pre>';
-			return $states;
-		}
-		
-		public function get_countries_visited(){
-			return array_unique($this->country);
 		}
 		
 		public function how_many_days($timestamp){
@@ -87,8 +71,20 @@ class Stats extends AbstractService {
 			//return $date;
 			return nicetime($date);
 		}
-		
-		public function get_location_stats($placemarks){
+				
+		public function update_trip_status($trip, $placemarks){			
+			$status = $trip->status;
+			
+			if (empty($status)) {
+				$status->cities = array();
+				$status->states = array();
+				$status->countries = array();
+			} else {
+				$status->cities = (array)$status->cities;
+				$status->states = (array)$status->states;
+				$status->countries = (array)$status->countries;
+			}
+			
 			foreach ($placemarks as $key => $placemark) {
 				$lat = $placemark->value->lat;
 				$long = $placemark->value->long;
@@ -105,19 +101,34 @@ class Stats extends AbstractService {
 
 						switch ($address_type) {
 							case CITY:
-							$this->city[] = $name;
+							$status->cities[] = $name;
 							break;
 							case STATE:
-							$this->state[] = $name;
+							$status->states[] = $name;
 							break;
 							case COUNTRY:	
-							$this->country[] = $name;
+							$status->countries[] = $name;
 							break;
 						}
 					}	
-				}		
-				
+				}
 			}
+			
+			$last_placemark = end($placemarks);
+			$status->last_update = $last_placemark->value->timestamp;
+			
+			$status->cities = array_unique($status->cities);
+			$status->states = array_unique($status->states);
+			$status->countries = array_unique($status->countries);
+			
+			$locations = $this->format_location_message($status);
+			
+			$how_many_days = $this->how_many_days($trip->timestamp);
+			$how_many_days .= 'on the road';
+
+			$status->message = $how_many_days . $locations; 
+			
+			return $status;			
 			
 		}
 		

@@ -4,9 +4,25 @@ require_once("$root/model/Controller.php");
 
 //phpunit tests/model/ControllerTest.php
 class ControllerTest extends PHPUnit_Framework_TestCase {
-		public function xtestAll() {
+		public function xxtest_get_placemarks() {
 			$controller = new Controller();
-			$controller->print_placemarks('eduardosasso');
+			
+			$placemarks = $controller->get_placemarks('eduardosasso');
+			
+			echo '<pre>';
+			print_r($placemarks);
+			echo '</pre>';
+		}
+		
+		public function xtest_get_placemarks_starting_from() {
+			$controller = new Controller();
+			
+			$placemarks = $controller->get_placemarks_starting_from('eduardosasso', 1287615450);
+			
+			echo '<pre>';
+			print_r($placemarks);
+			echo '</pre>';
+			
 		}
 		
 		public function xtest_get_posts(){
@@ -65,9 +81,8 @@ class ControllerTest extends PHPUnit_Framework_TestCase {
 			
 			$trip = $controller->get_current_trip_status($username);
 			
-			echo '<pre>';
-			print_r($trip);
-			echo '</pre>';
+			echo $trip->message;
+
 		}
 }
 ?>

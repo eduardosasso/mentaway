@@ -23,6 +23,13 @@ class Controller {
 		return $placemarks->rows;
 	}
 	
+	function get_placemarks_starting_from($user, $timestamp){
+		$placemarks = $this->get_placemarks($user);
+		
+		//filtra o placemark e retorna somente os placemarks a partir do timestamp informado
+		return array_filter($placemarks, function($id) use ($timestamp) {return ($id->value->timestamp > $timestamp);});
+	}
+	
 	public function get_posts($username) {
 		/*
 			TODO aqui ta errado tem q ser tipo a funcao abaixo.

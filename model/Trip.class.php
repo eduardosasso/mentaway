@@ -5,5 +5,6 @@ class Trip {
 	public $date;
 	public $timestamp;
 	public $current; //indica se eh a trip corrent true/false	
+	public $status; 
 }
 ?>

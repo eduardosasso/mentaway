@@ -93,7 +93,7 @@ $(document).ready(function() {
 	
 	User.get_trip(user,function(trip){
 		$('h1').text(trip.name);
-		$('h4.trip-status').html(trip.status);
+		$('h4.trip-status').html(trip.status.message);
 	});
 	
 	$('.add_user_service').click(function(){
