@@ -172,45 +172,34 @@ define('BASE_URL',$base_url);
 		<?php endif ?>
 		
 		<?php if ($page == 'trips'): ?>
-			Aqui vai os campos de trips
+			
+			<div id="trip_block">
+				<form>
+					<h4>Are you going to travel or are already traveling somewhere?</h4>
+					<textarea rows="8" cols="40"><?php echo $trip->name; ?></textarea>
+					<label for="begin">Begin *</label><input type="text" name="begin" id="begin_trip_date" class="required date" value="<?php echo $trip->begin_date ?>">
+					<label for="end">End</label><input type="text" name="end" id="end_trip_date" class="date" value="<?php echo $trip->end_date ?>">
+					<input type="checkbox" name="" value="true" checked="<?php echo $trip->current ?>" />Current trip
+					<input type="submit">
+				</form>
+			</div>			
 		<?php endif ?>		
 		
 	</div> 
-
-
-			
-<!-- 			<div id="trip_block">
-				<textarea name="textarea" rows="3" cols="60" wrap="wrap" id="trip_desc"></textarea>
-				<input type="button" value="Add Trip" id="add_trip">
-			</div> -->
-			
-			<!-- <div id="twitter_block">
-				<input type="text" placeholder="Twitter Username"	value="" id="twitter_user">
-				<input type="button" value="Add Twitter" id="add_twitter">
-			</div> -->
-			
-
-
-		<!-- <h1>User Page</h1>
-		
-		<input type="text" placeholder="User Name" value="<?php //echo $user ?>" id="username_field">
-		<input type="text" placeholder="Full Name" value="" id="fullname_field">
-		
-		<input type="button" value="Create New User Account" id="new_user_account">  -->
-
 
 	<!-- Javascript at the bottom for fast page loading -->
 
   <!-- Grab Google CDN's jQuery. fall back to local if necessary -->
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-  <script>!window.jQuery && document.write('<script src="<?php echo BASE_URL ?>/js/jquery-1.4.2.min.js"><\/script>')</script>
-
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js"></script>
+	
 	<script type="text/javascript" charset="utf-8">
 			base_url = "<?php echo BASE_URL; ?>"
 	</script>
 
 	<script src="<?php echo BASE_URL ?>/js/plugins.js?v=1"></script>
   <script src="<?php echo BASE_URL ?>/js/user.js?v=1"></script>
+  <script src="<?php echo BASE_URL ?>/js/user-ui.js?v=1"></script>
 
 
   <!--[if lt IE 7 ]>

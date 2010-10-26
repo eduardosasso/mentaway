@@ -2,6 +2,7 @@
 session_start();
 
 require_once("model/Controller.php");
+require_once("model/View.php");
 
 $controller = new Controller();
 
@@ -15,12 +16,22 @@ $safe_pages = array("user");
 
 if (in_array($args[0], $safe_pages)) {
 	//se ta na pagina de user ve se recebeu um segundo arg
-	$pages = array("services", "profile", "trips");  
+	$pages = array("services", "profile", "trips", "signout");  
 	$page = $args[1];
+	
+	$username = $_SESSION['id'];
+	
+	$trip = $controller->get_current_trip($username);
+	$trip->begin_date = date('m/d/Y', $trip->timestamp);
 
-	if (!in_array($args[1], $pages)) {
+	if (!in_array($page, $pages)) {
 		header("Location: /user/profile");
-	}	
+	}
+	
+	if ($page == "signout") {
+		unset($_SESSION['id']);
+		header("Location: /");
+	}
 	
 	include("util/Message.class.php");
 	
@@ -28,6 +39,8 @@ if (in_array($args[0], $safe_pages)) {
 
 } elseif ($is_user) {
 	$user = $controller->get_user($args[0]);
+	
+	$username_and_or_user_menu = View::show_username_and_menu($user);
 	
 	$username = $user->username;
 	$location = $user->location;

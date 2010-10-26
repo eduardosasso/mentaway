@@ -54,7 +54,7 @@
 	/*
 		TODO primeira versao tosca de controle de usuarios, melhorar.
 	*/
-		$user = $_REQUEST['q'];
+		$username = $_REQUEST['q'];
 
 		/*
 			TODO procurar user...
@@ -75,6 +75,8 @@
 <!--[if IE 8 ]>    <body class="ie8"> <![endif]-->
 <!--[if IE 9 ]>    <body class="ie9"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!--> <body> <!--<![endif]-->
+	<input type="hidden" value="<?php echo $username ?>" id="username">
+	
 	<div id="map"></div>
 	
 	<div id="fb-root"></div>
@@ -97,7 +99,7 @@
 
 			<div id="user">
 				<img src="<?php echo $picture ?>" />
-				<h3><?php echo $fullname ?></h3>
+				<?php echo $username_and_or_user_menu ?>
 				<p class="location"><?php echo $location ?></p>
 				<p class="url"><a href="<?php echo $site ?>"><?php echo $site ?></a></p>
 			</div>	

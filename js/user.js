@@ -19,13 +19,13 @@ var User = {
 		});
 	},
 	
-	get_trip: function(user,callback) {
+	get_trip: function(username,callback) {
 		args = {			
 			action: 'get',
-			username: user,
+			username: username,
 		}
 		
-		url = 'services/trip.php';
+		url = base_url + '/services/trip.php';
 
 		$.get(url,args, function(data){
 			callback(data);
@@ -38,7 +38,7 @@ var User = {
 			username: user,
 		}
 		
-		url = 'services/trip.php';
+		url = base_url + '/services/trip.php';
 
 		$.get(url,args, function(data){
 			callback(data);
@@ -91,7 +91,7 @@ $(document).ready(function() {
 	var username = $('#username').val();
 	User.init(username);
 	
-	User.get_trip(user,function(trip){
+	User.get_trip(username,function(trip){
 		$('h1').text(trip.name);
 		$('h4.trip-status').html(trip.status.message);
 	});
