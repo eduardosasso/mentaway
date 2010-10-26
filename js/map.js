@@ -110,6 +110,8 @@ var Map = {
 			var placemark = Map.placemarks[Map.marker_idx].value;
 			
 			Panel.update(placemark);
+			
+			Util.update_metatags(placemark);
 			//var html = Panel.html(placemark);
 			//Map.infoWindow.setContent(html);
 			

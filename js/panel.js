@@ -92,7 +92,7 @@ var Panel = {
 			
 	update: function(placemark){		
 		//define a tag title da pagina
-		$('title').text(placemark.user + ': ' + placemark.name);
+		//$('title').text(placemark.user + ': ' + placemark.name);
 		
 		var description = placemark.description;
 		

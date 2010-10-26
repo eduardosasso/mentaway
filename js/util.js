@@ -20,7 +20,14 @@ var Util = {
 	
 	update_share_buttons: function() {
 		Util.update_like_button();
-		Util.update_tweet_button();
+		//Util.update_tweet_button();
+	},
+	
+	update_metatags: function(placemark) {
+		$('meta[property=og:title]').attr('content',placemark.name);
+		$('meta[property=og:description]').attr('content',placemark.description);
+		$('meta[property=og:url]').attr('content',window.location);
+		$('meta[property=og:image]').attr('content',placemark.image);
 	},
 	
 	update_like_button: function(){

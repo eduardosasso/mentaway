@@ -43,7 +43,9 @@ if (in_array($args[0], $safe_pages)) {
 	*/
 	if (count($args) > 1 && is_int(intval($id))) {
 		$app_url = get_app_url();
-		$url = "$app_url/$user#$id";
+		$username = $user->username;
+		
+		$url = "$app_url/$username#$id";
 		header("Location: $url");
 	} else {
 		include("app.php");
