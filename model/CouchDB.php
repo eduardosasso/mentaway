@@ -87,15 +87,17 @@ class CouchDB implements DatabaseInterface {
 		if (isset($user->trips)) {
 			$user_trips = $user->trips;
 
-			/*
-				TODO aqui tem q ser a atualizacao nativa do couchdb
-			*/
 			//ve se o servico ja existe, se sim remove para atualizar...
 			foreach ($user_trips as $key => $value) {
 				if ($value->_id == $trip->_id) {
+					$trip = array_remove_empty($trip);
+					
+					$trip = (object) array_merge((array)$value, (array)$trip);
+					
 					unset($user_trips[$key]);
 					$temp_array = array_values($user_trips);
 					$user->trips = $temp_array;
+
 				}
 			}
 		}

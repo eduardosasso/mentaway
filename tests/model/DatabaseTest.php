@@ -23,7 +23,7 @@ class DatabaseTest extends PHPUnit_Framework_TestCase {
 			print_r($users);
 		}
 		
-		public function test_get_placemarks() {	
+		public function xtest_get_placemarks() {	
 			$db = DatabaseFactory::get_provider();
 			
 			$placemarks = $db->get_placemarks('eduardosasso');
@@ -72,7 +72,7 @@ class DatabaseTest extends PHPUnit_Framework_TestCase {
 			print_r($response);		
 		}
 		
-		public function xxtest_add_user_trip(){
+		public function test_add_user_trip(){
 			$username = 'eduardosasso';
 			
 			$db = DatabaseFactory::get_provider();
@@ -82,8 +82,7 @@ class DatabaseTest extends PHPUnit_Framework_TestCase {
 			$trip = new Trip();
 			$trip->_id = 'trip';
 			$trip->name = 'Trip para os States 2010';
-			$trip->date =  $date;
-			$trip->timestamp = strtotime($trip->date);
+			$trip->begin =  $date;
 			$trip->current = true;
 			
 			$response = $db->add_user_trip($username, $trip);

@@ -18,11 +18,12 @@ abstract class AbstractService {
 			/*
 				TODO Salva somente se a data do placemark eh maior ou igual a data da trip atual
 				Esse metodo nao esta performatico pois recupera o user a cada Save, melhorar...
+				E aqui tem q pegar a trip padrao e nao a trip 0
 			*/
 			$user = $db->get_user($username);
 			$trip = $user->trips[0];
 			
-			if ($document->timestamp >= $trip->timestamp) {
+			if ($document->timestamp >= strtotime($trip->begin)) {
 				$db->save($document);			
 			}
 
