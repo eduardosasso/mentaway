@@ -51,7 +51,7 @@
   <script src="js/modernizr-1.5.min.js"></script>
 
 	<script type="text/javascript" charset="utf-8">
-		user = "<?php echo $username ?>"
+		user = "<?php echo $user->username ?>"
 	</script>
 
 </head>
@@ -64,7 +64,7 @@
 <!--[if IE 8 ]>    <body class="ie8"> <![endif]-->
 <!--[if IE 9 ]>    <body class="ie9"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!--> <body> <!--<![endif]-->
-	<input type="hidden" value="<?php echo $username ?>" id="username">
+	<input type="hidden" value="<?php echo $user->username ?>" id="username">
 	
 	<div id="map"></div>
 	
@@ -87,10 +87,10 @@
 			</div>
 
 			<div id="user">
-				<img src="<?php echo $picture ?>" />
+				<img src="<?php echo $user->picture ?>" />
 				<?php echo $username_and_or_user_menu ?>
-				<p class="location"><?php echo $location ?></p>
-				<p class="url"><a href="<?php echo $site ?>"><?php echo $site ?></a></p>
+				<p class="location"><?php echo $user->location ?></p>
+				<p class="url"><a href="<?php echo $site ?>"><?php echo $user->site ?></a></p>
 			</div>	
 
 		</div>		
@@ -145,7 +145,6 @@
 
   <!-- Grab Google CDN's jQuery. fall back to local if necessary -->
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-  <script>!window.jQuery && document.write('<script src="js/jquery-1.4.2.min.js"><\/script>')</script>
 
 	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script> 
 	

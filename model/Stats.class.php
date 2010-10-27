@@ -123,7 +123,7 @@ class Stats extends AbstractService {
 			
 			$locations = $this->format_location_message($status);
 			
-			$how_many_days = $this->how_many_days($trip->timestamp);
+			$how_many_days = $this->how_many_days(strtotime($trip->begin));
 			$how_many_days .= 'on the road';
 
 			$status->message = $how_many_days . $locations; 

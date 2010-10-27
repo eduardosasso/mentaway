@@ -52,35 +52,6 @@ define('BASE_URL',$base_url);
   <!-- All JavaScript at the bottom, except for Modernizr which enables HTML5 elements & feature detects -->
   <script src="<?php echo BASE_URL ?>/js/modernizr-1.5.min.js"></script>
 
-	<?php
-	
-	$id = $_SESSION['id'];
-	
-	if (empty($id)) {
-		//usuario nao esta logado, redireciona para a home
-		header('location: /');
-		return;
-	}
-
-	require_once("model/Controller.php");
-	$controller = new Controller();
-
-	$user = $controller->get_user($id);
-	
-	$username = $user->username;
-	
-	$foursquare = $controller->get_user_service($username,'foursquare');
-	$twitter = $controller->get_user_service($username,'twitter');
-	$flickr = $controller->get_user_service($username,'flickr');
-	$posterous = $controller->get_user_service($username,'posterous');
-	
-	$has_foursquare = !empty($foursquare);
-	$has_twitter = !empty($twitter);
-	$has_flickr = !empty($flickr);
-	$has_posterous = !empty($posterous);
-		
-	?>
-
 </head>
 
 
@@ -94,7 +65,7 @@ define('BASE_URL',$base_url);
 	
 	<div id="fb-root"></div>
 	
-	<input type="hidden" value="<?php echo $username ?>" id="username">
+	<input type="hidden" value="<?php echo $user->username ?>" id="username">
 	
 	<div id="header"> 
 		<a href="#" id="logo"><img src="/images/mentaway-logo.png" alt="Mentaway - Keep tracking of your adventures" width="195" height="64"/></a> 
@@ -103,13 +74,13 @@ define('BASE_URL',$base_url);
 				<h1>Account</h1> 
 			</div> 
 
-			<div id="user"> 
-				<img src="<?php echo $user->picture ?>" /> 
-				<h3><?php echo $user->fullname; ?></h3> 
-				<p class="location"><?php echo $user->location; ?></p> 
-				<p class="url"><a href="#"><?php echo $user->site ?></a></p> 
-			</div>
-
+			<div id="user">
+				<img src="<?php echo $user->picture ?>" />
+				<?php echo $username_and_or_user_menu ?>
+				<p class="location"><?php echo $user->location ?></p>
+				<p class="url"><a href="<?php echo $user->site ?>"><?php echo $user->site ?></a></p>
+			</div>	
+			
 		</div> 
 
 	</div> 
@@ -123,6 +94,18 @@ define('BASE_URL',$base_url);
 			TODO melhor eh cada tipo (services, profile e trips) ter sua propria pagina, tem q usar templates para padronizar header e outros detalhes comuns
 		-->
 		<?php if ($page == 'services'): ?>
+			<?php
+				$username = $user->username;
+				$foursquare = $controller->get_user_service($username,'foursquare');
+				$twitter = $controller->get_user_service($username,'twitter');
+				$flickr = $controller->get_user_service($username,'flickr');
+				$posterous = $controller->get_user_service($username,'posterous');
+
+				$has_foursquare = !empty($foursquare);
+				$has_twitter = !empty($twitter);
+				$has_flickr = !empty($flickr);
+				$has_posterous = !empty($posterous);
+			?>
 			<h3>Choose your services</h3>
 			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam semper, nunc ac commodo sodales</p>
 
@@ -168,18 +151,58 @@ define('BASE_URL',$base_url);
 		<?php endif ?> 
 		
 		<?php if ($page == 'profile'): ?>
-			Aqui vai os campos do user...			
+			<div id="profile_block">
+				<form>
+					<label for="username">Username</label>
+					<input type="text" name="username" value="<?php echo $user->username ?>">
+					
+					<label for="fullname">Full Name</label>
+					<input type="text" name="fullname" value="<?php echo $user->fullname ?>">
+
+					<label for="bio">Short Bio</label>									
+					<input type="text" name="bio" value="<?php echo $user->bio ?>">
+					
+					<label for="email">Email</label>
+					<input type="email" name="email" value="<?php echo $user->email ?>">
+					
+					<label for="site">Site</label>
+					<input type="url" name="site" value="<?php echo $user->site ?>">
+					
+					<label for="location">Home Base</label>
+					<input type="text" name="location" value="<?php echo $user->location ?>">
+					
+					<span class="">Avatar</span>
+					<img src="<?php echo $user->picture ?>" alt="User picture" border="0" />
+					
+					<label for="maptype">Default Map Type</label>
+					<select name="maptype" id="maptype">
+					  <option value="ROADMAP">Map</option>
+					  <option value="SATELLITE">Satellite</option>
+					  <option value="HYBRID">Hybrid</option>
+					  <option value="TERRAIN">Terrain</option>
+					</select>
+					
+					<input type="checkbox" name="notification" value="true" checked="<?php echo $user->notification ?>" />Receive notifications (not spam)
+					
+					<input type="submit" id="submit_profile">
+				</form>				
+			</div>
 		<?php endif ?>
 		
 		<?php if ($page == 'trips'): ?>
-			
 			<div id="trip_block">
 				<form>
 					<h4>Are you going to travel or are already traveling somewhere?</h4>
 					<textarea name="name" rows="8" cols="40"><?php echo $trip->name; ?></textarea>
-					<label for="begin">Begin *</label><input type="text" name="begin" id="begin_trip_date" class="required date" value="<?php echo $trip->begin ?>">
-					<label for="end">End</label><input type="text" name="end" id="end_trip_date" class="date" value="<?php echo $trip->end ?>">
-					<input type="checkbox" name="" value="true" name="current" checked="<?php echo $trip->current ?>" />Current trip
+					
+					<label for="begin">Begin *</label>
+					<input type="text" name="begin" id="begin_trip_date" class="required date" value="<?php echo $trip->begin ?>">
+					
+					<label for="end">End</label>
+					<input type="text" name="end" id="end_trip_date" class="date" value="<?php echo $trip->end ?>">
+					
+					<input type="checkbox" value="true" name="current" checked="<?php echo $trip->current ?>" />Current trip
+					
 					<input type="submit" id="submit_trip">
 				</form>
 			</div>			
@@ -195,6 +218,8 @@ define('BASE_URL',$base_url);
 	
 	<script type="text/javascript" charset="utf-8">
 			base_url = "<?php echo BASE_URL; ?>"
+			
+			$('#map_type').val('<?php echo $user->maptype ?>');
 	</script>
 
 	<script src="<?php echo BASE_URL ?>/js/plugins.js?v=1"></script>

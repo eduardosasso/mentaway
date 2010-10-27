@@ -5,6 +5,19 @@ var User = {
 		this.name = username;
 	},
 	
+	insert_update: function(args, callback) {
+		/*
+			TODO validar form
+		*/
+		
+		url = base_url + '/services/profile.php';
+
+		$.post(url, args, function(data){
+			callback(data);
+		});
+		
+	},
+	
 	add_trip: function(args, callback) {
 		/*
 			TODO antes de fazer o ajax tem q validar o form.
@@ -95,7 +108,6 @@ var User = {
 $(document).ready(function() {
 	var username = $('#username').val();
 	User.init(username);
-
 	
 	User.get_trip(username,function(trip){
 		$('h1').text(trip.name);
@@ -122,6 +134,16 @@ $(document).ready(function() {
 	// 			$('#twitter_block').html(data);
 	// 		});
 	// 	});
+	
+	$('#submit_profile').click(function(){
+		args = $('#profile_block form').serialize();
+		
+		User.insert_update(args, function(data){
+			$('#profile_block').html(data);
+		});
+		
+		return false;
+	});
 	
 	$('#submit_trip').click(function(){
 		args = $('#trip_block form').serialize();
