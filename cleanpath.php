@@ -22,7 +22,6 @@ if (in_array($args[0], $safe_pages)) {
 	$username = $_SESSION['id'];
 	
 	$trip = $controller->get_current_trip($username);
-	$trip->begin_date = date('m/d/Y', $trip->timestamp);
 
 	if (!in_array($page, $pages)) {
 		header("Location: /user/profile");

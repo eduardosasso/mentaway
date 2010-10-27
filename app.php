@@ -50,17 +50,6 @@
   <!-- All JavaScript at the bottom, except for Modernizr which enables HTML5 elements & feature detects -->
   <script src="js/modernizr-1.5.min.js"></script>
 
-	<?php
-	/*
-		TODO primeira versao tosca de controle de usuarios, melhorar.
-	*/
-		$username = $_REQUEST['q'];
-
-		/*
-			TODO procurar user...
-		*/
-	?>
-
 	<script type="text/javascript" charset="utf-8">
 		user = "<?php echo $username ?>"
 	</script>

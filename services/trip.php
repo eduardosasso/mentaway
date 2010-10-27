@@ -22,7 +22,7 @@ switch ($action) {
 
 function add_trip() {
 	$username = $_REQUEST['username'];
-	$trip_desc = $_REQUEST['desc'];
+	$name = $_REQUEST['name'];
 	$begin = $_REQUEST['begin'];
 	$end = $_REQUEST['end'];
 	/*
@@ -34,8 +34,11 @@ function add_trip() {
 	//$date = date('D M d H:i:s O Y');
 
 	$trip = new Trip();
+	/*
+		TODO esse id tem q ser dinamico quando tiver suporte para multiplas trips
+	*/
 	$trip->_id = 'trip';
-	$trip->name = $trip_desc;
+	$trip->name = $name;
 	$trip->begin = $begin;
 	$trip->end = $end;
 	

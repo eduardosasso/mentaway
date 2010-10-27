@@ -5,16 +5,21 @@ var User = {
 		this.name = username;
 	},
 	
-	add_trip: function(desc, callback) {
-		args = {
-			action: 'add',
-			username: this.name,
-			desc: desc
-		}
+	add_trip: function(args, callback) {
+		/*
+			TODO antes de fazer o ajax tem q validar o form.
+		*/
+		params = args + "&action=add&username=" + this.name;
+		
+		// args = {
+		// 	action: 'add',
+		// 	username: this.name,
+		// 	desc: desc
+		// }
 
 		url = base_url + '/services/trip.php';
 
-		$.get(url,args, function(data){
+		$.post(url, params, function(data){
 			callback(data);
 		});
 	},
@@ -90,6 +95,7 @@ var User = {
 $(document).ready(function() {
 	var username = $('#username').val();
 	User.init(username);
+
 	
 	User.get_trip(username,function(trip){
 		$('h1').text(trip.name);
@@ -117,12 +123,14 @@ $(document).ready(function() {
 	// 		});
 	// 	});
 	
-	$('#add_trip').click(function(){
-		trip_desc = $('#trip_desc').val();
+	$('#submit_trip').click(function(){
+		args = $('#trip_block form').serialize();
 		
-		User.add_trip(trip_desc, function(data){
+		User.add_trip(args, function(data){
 			$('#trip_block').html(data);
 		});
+		
+		return false;
 	});
 	
 	// $('#new_user_account').click(function(){

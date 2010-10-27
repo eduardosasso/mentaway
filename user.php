@@ -176,11 +176,11 @@ define('BASE_URL',$base_url);
 			<div id="trip_block">
 				<form>
 					<h4>Are you going to travel or are already traveling somewhere?</h4>
-					<textarea rows="8" cols="40"><?php echo $trip->name; ?></textarea>
-					<label for="begin">Begin *</label><input type="text" name="begin" id="begin_trip_date" class="required date" value="<?php echo $trip->begin_date ?>">
-					<label for="end">End</label><input type="text" name="end" id="end_trip_date" class="date" value="<?php echo $trip->end_date ?>">
-					<input type="checkbox" name="" value="true" checked="<?php echo $trip->current ?>" />Current trip
-					<input type="submit">
+					<textarea name="name" rows="8" cols="40"><?php echo $trip->name; ?></textarea>
+					<label for="begin">Begin *</label><input type="text" name="begin" id="begin_trip_date" class="required date" value="<?php echo $trip->begin ?>">
+					<label for="end">End</label><input type="text" name="end" id="end_trip_date" class="date" value="<?php echo $trip->end ?>">
+					<input type="checkbox" name="" value="true" name="current" checked="<?php echo $trip->current ?>" />Current trip
+					<input type="submit" id="submit_trip">
 				</form>
 			</div>			
 		<?php endif ?>		

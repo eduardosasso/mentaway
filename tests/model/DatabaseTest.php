@@ -23,7 +23,7 @@ class DatabaseTest extends PHPUnit_Framework_TestCase {
 			print_r($users);
 		}
 		
-		public function xxtest_get_placemarks() {	
+		public function test_get_placemarks() {	
 			$db = DatabaseFactory::get_provider();
 			
 			$placemarks = $db->get_placemarks('eduardosasso');
@@ -104,7 +104,7 @@ class DatabaseTest extends PHPUnit_Framework_TestCase {
 			print_r($response);
 		}
 		
-		public function testCleanDatabase() {
+		public function xxxtestCleanDatabase() {
 			$db = DatabaseFactory::get_provider();
 			$db->clean_database();
 		}
