@@ -41,5 +41,13 @@ switch ($action) {
 		$result = $controller->save_user($fields);
 		print json_encode($result);
 		break;	
+	case "invite":
+		$code = $_REQUEST['code'];
+		if ($code == '9z3e') {
+			echo "true";
+		} else {
+			echo "false";
+		}
+		break;
 }
 ?>
