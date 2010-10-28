@@ -80,6 +80,7 @@ var User = {
 	
 	remove_service: function(service){
 		args = {
+			action: 'remove',
 			service: service,
 			username: this.name
 		}
@@ -90,6 +91,20 @@ var User = {
 			//if (data == "ok") {
 				window.location.reload(true);
 			//}	
+		});
+		
+	},
+	
+	dummy_save_service: function(callback){
+		args = {
+			action: 'save',
+			username: this.name
+		}
+		
+		url = '/services/service.php';
+
+		$.post(url, args, function(data){
+			callback(data);
 		});
 		
 	},
@@ -169,7 +184,6 @@ $(document).ready(function() {
 		args = $('#profile_block form').serialize();
 		
 		User.insert_update(args, function(data){
-			console.log(Util.is_url(data));
 			if (Util.is_url(data)) {
 				Util.redirect(data);
 			} else {
@@ -184,11 +198,33 @@ $(document).ready(function() {
 		return false;
 	});
 	
+	$('#submit_service').click(function(){
+		//o service na realidade ja ta salvo entao so chama o ajax para retornar uma mensagem ou redirecionar para outra etapa nao concluida
+		User.dummy_save_service(function(data){
+			if (Util.is_url(data)) {
+				Util.redirect(data);
+			} else {
+				/*
+					TODO Definir aqui um esquema para setar mensagens Message::set
+				*/
+				$('#profile_block').html(data);
+			}			
+		});
+	});
+	
 	$('#submit_trip').click(function(){
 		args = $('#trip_block form').serialize();
 		
 		User.add_trip(args, function(data){
-			$('#trip_block').html(data);
+			if (Util.is_url(data)) {
+				Util.redirect(data);
+			} else {
+				/*
+					TODO Definir aqui um esquema para setar mensagens Message::set
+				*/
+				$('#trip_block').html(data);
+			}
+			
 		});
 		
 		return false;

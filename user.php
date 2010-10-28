@@ -147,7 +147,7 @@ define('BASE_URL',$base_url);
 				<input type="button" value="Add Posterous" id="add_posterous">
 			</div>
 		
-			<div class="bt_ok"><a href="#">I’m okay! Show me my Mentaway!</a></div>
+			<input type="submit" id="submit_service">
 		<?php endif ?> 
 		
 		<?php if ($page == 'profile'): ?>

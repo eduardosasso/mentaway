@@ -46,11 +46,35 @@ function add_trip() {
 	$trip->current = $current;
 	
 	$controller = new Controller();
-	$response = $controller->add_user_trip($username, $trip);
+
+	if (!empty($trip->name)) {
+		//validacao basica pra ver se o user pelo menos colocou um nome na trip
+		/*
+			TODO tem q validar no css tb
+		*/
+		$response = $controller->add_user_trip($username, $trip);
+	}
 
 	/*
 	TODO Validar a saida para dar uma mensagem amigavel.
 	*/
+	$user = $controller->get_user($username);
+	
+	if (count($user->trips) == 0) {
+		echo "/user/trips";			
+		return;
+	};
+	
+	if (empty($user->email)) {
+		echo "/user/profile";
+		return;			
+	}
+	
+	if (count($user->services) == 0) {
+		echo "/user/services";
+		return;
+	};
+	
 	echo 'Trip configured. Everything from now on will be tracked as your current trip.';	
 }
 
