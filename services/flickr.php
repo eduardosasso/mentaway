@@ -11,6 +11,7 @@
 
 	require_once("../model/Service.class.php");
 	require_once("../model/Controller.php");
+	require_once("../util/Message.class.php");
 
 	require_once($path_to_phpFlickr_class . "phpFlickr.php");
 	
@@ -42,7 +43,9 @@
 		$service->name = 'Flickr';
 		$service->token = $_SESSION['phpFlickr_auth_token'];
 		
-		$response = $controller->add_user_service($username, $service);		
+		$response = $controller->add_user_service($username, $service);	
+		
+		Message::set("Flickr configured... Don't forget to set Geo location on your photos. If you have an iPhone you should definitely check out <a href='http://instagr.am/'>Instagram</a> to do this.");	
 		
 		header( 'Location: /user/services');
 	}

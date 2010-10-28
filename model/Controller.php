@@ -120,6 +120,14 @@ class Controller {
 		return null;
 	}
 	
+	function remove_user_service($username, $service_id) {
+		$db = DatabaseFactory::get_provider();
+		
+		$response = $db->remove_user_service($username, $service_id);
+		
+		return $response;		
+	}
+	
 	function add_user_trip($username, $trip) {
 		$db = DatabaseFactory::get_provider();
 

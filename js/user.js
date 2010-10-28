@@ -77,6 +77,22 @@ var User = {
 			window.location.replace(url);
 		});
 	},
+	
+	remove_service: function(service){
+		args = {
+			service: service,
+			username: this.name
+		}
+		
+		url = '/services/service.php';
+
+		$.post(url, args, function(data){
+			//if (data == "ok") {
+				window.location.reload(true);
+			//}	
+		});
+		
+	},
 
 	add_posterous: function(site, callback) {
 		args = {
@@ -87,7 +103,8 @@ var User = {
 		url = base_url + '/services/posterous.php';
 
 		$.get(url,args, function(data){
-			callback(data);
+			//callback(data);
+			window.location.reload(true);
 		});	
 	},
 
@@ -114,19 +131,30 @@ $(document).ready(function() {
 		$('h4.trip-status').html(trip.status.message);
 	});
 	
-	$('.add_user_service').click(function(){
+	$('a.add_user_service').click(function(){
 		//usa pela class para ser generico e pegar todos os servicos...			
 		service = $(this).attr('id');
 		
 		User.add_general_service(service);
 	});
-
+	
+	$('a.remove_user_service').click(function(){
+		service = $(this).attr('id');
+		
+		User.remove_service(service);
+		
+		return false;
+	});
+	
+	$('a#posterous.add').click(function(){
+		$('#posterous_block').removeClass('hidden').show();
+		$('#posterous_url').focus();
+	})
+	
 	$('#add_posterous').click(function(){
 		site = $('#posterous_url').val();
 
-		User.add_posterous(site, function(data){
-			$('#posterous_block').html(data);
-		});
+		User.add_posterous(site);
 	});
 
 	// $('#twitter.add').click(function(){

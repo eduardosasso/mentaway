@@ -123,8 +123,8 @@ class CouchDB implements DatabaseInterface {
 		}
 		
 		$response = $this->save_user($user);
-		
-		return $response;		
+
+		return $response;
 		
 	}
 	

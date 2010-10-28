@@ -115,37 +115,37 @@ define('BASE_URL',$base_url);
 						<?php if (!$has_foursquare): ?>
 							<a href="#" id="foursquare" class="add_user_service add">Add Foursquare</a>
 						<?php else: ?>
-							<a href="#" class="remove_user_service remove">Remove Foursquare</a>
+							<a href="#" class="remove_user_service remove" id="foursquare">Remove Foursquare</a>
 						<?php endif ?>					
 					</li>
 					<li class="flickr">
 						<?php if (!$has_flickr): ?>
 							<a href="#" id="flickr" class="add_user_service add">Add Flickr</a>
 						<?php else: ?>
-							<a href="#" class="remove_user_service remove">Remove Flickr</a>
+							<a href="#" class="remove_user_service remove" id="flickr">Remove Flickr</a>
 						<?php endif ?>					
 					</li>				
 					<li class="twitter">
 						<?php if (!$has_twitter): ?>
 							<a href="#" id="twitter" class="add_user_service add">Add Twitter</a>
 						<?php else: ?>
-							<a href="#" class="remove_user_service remove">Remove Twitter</a>
+							<a href="#" class="remove_user_service remove" id="twitter">Remove Twitter</a>
 						<?php endif ?>					
 					</li>
 					<li class="posterous">
 						<?php if (!$has_posterous): ?>
 							<a href="#" id="posterous" class="add">Add Posterous</a>
 						<?php else: ?>
-							<a href="#" class="remove">Remove Posterous</a>
+							<a href="#" class="remove_user_service remove" id="posterous">Remove Posterous</a>
 						<?php endif ?>					
 					</li>
 				</ul>
 			</div>
 		
-			<!-- <div id="posterous_block">
+			<div id="posterous_block" class="hidden">
 				<input type="text" placeholder="Posterous URL"	value="" id="posterous_url">
 				<input type="button" value="Add Posterous" id="add_posterous">
-			</div> -->
+			</div>
 		
 			<div class="bt_ok"><a href="#">I’m okay! Show me my Mentaway!</a></div>
 		<?php endif ?> 

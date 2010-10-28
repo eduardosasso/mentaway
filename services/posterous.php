@@ -3,9 +3,12 @@
 // ini_set('display_errors', TRUE);
 // ini_set('display_startup_errors', TRUE);
 
+session_start();
+
 require_once("../model/Service.class.php");
 require_once("../model/Controller.php");
 require_once("../model/Posterous.class.php");
+require_once("../util/Message.class.php");
 
 $username = $_REQUEST['username'];
 $url = $_REQUEST['site'];
@@ -34,10 +37,10 @@ if ($is_valid) {
 	/*
 		TODO Validar a saida para dar uma mensagem amigavel.
 	*/
-	echo 'Posterous configured... Add tag "mentaway" to your posts';
+	Message::set('Posterous configured... Add tag "mentaway" to your posts');
 
 } else {
-		echo 'Invalid Posterous Site';	
+	Message::set('Invalid Posterous Site');
 }
 
 
