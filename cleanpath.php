@@ -34,7 +34,8 @@ if ($args[0] == 'user') {
 	$username = $_SESSION['id'];
 	
 	$user = $controller->get_user($username);
-	$trip = $controller->get_current_trip($user->username);
+	
+	$trip = $controller->get_current_trip($username);
 	$username_and_or_user_menu = View::show_username_and_menu($user);
 	
 	include("util/Message.class.php");

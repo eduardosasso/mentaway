@@ -223,6 +223,7 @@ define('BASE_URL',$base_url);
 	</script>
 
 	<script src="<?php echo BASE_URL ?>/js/plugins.js?v=1"></script>
+	<script src="<?php echo BASE_URL ?>/js/util.js?v=1"></script>
   <script src="<?php echo BASE_URL ?>/js/user.js?v=1"></script>
   <script src="<?php echo BASE_URL ?>/js/user-ui.js?v=1"></script>
 

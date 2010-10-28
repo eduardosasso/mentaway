@@ -143,7 +143,12 @@ class Controller {
 		/*
 			TODO fazer com q a trip corrent seja sempre indice zero ou encontrar a trip corrent via loop.
 		*/
-		$trip = $user->trips[0];
+		$trip = null;
+		
+		if (count($user->trips) > 0) {
+			$trip = $user->trips[0];
+		}
+		
 		return $trip;
 	}
 	

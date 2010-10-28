@@ -17,10 +17,6 @@ if (empty($notification)) {
 	$notification = 'false';
 }
 
-/*
-	TODO tem q ver como vai receber o token e o secret
-*/
-
 $new_user = new User();
 $new_user->username = $username;
 $new_user->fullname = $fullname;
@@ -42,12 +38,18 @@ if ($user) {
 	$user = (object) array_merge((array)$user, (array)$new_user);
 	
 } else {
-	//user novo
+	//user novo, nao vai cair aqui pq eu salvo o user de forma temp.
 }
-
 
 $controller->save_user($user);
 
-echo "Done. Now go have some fun!";
+if (count($user->services) == 0) {
+	echo "/user/services";
+} elseif (count($user->trips) == 0) {
+	echo "/user/trips";
+} else {
+	echo "Done. Now go have some fun!";
+}
+
 
 ?>

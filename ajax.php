@@ -1,4 +1,5 @@
 <?php
+session_start();
 //Responsavel por transferir as chamadas via ajax para o Controller...
 
 //header("Content-type: application/json");
@@ -44,9 +45,11 @@ switch ($action) {
 	case "invite":
 		$code = $_REQUEST['code'];
 		if ($code == '9z3e') {
-			echo "true";
+			$_SESSION['invite'] = true;
+			echo "true";			
 		} else {
-			echo "false";
+			unset($_SESSION['invite']);
+			echo "false";			
 		}
 		break;
 }

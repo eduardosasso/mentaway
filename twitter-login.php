@@ -4,6 +4,8 @@ session_start();
 include 'model/lib/twitter/EpiCurlTwitter.php';
 include 'model/lib/twitter/EpiOAuthTwitter.php';
 include 'model/lib/twitter/EpiTwitter.php';
+include 'model/User.class.php';
+include 'util/Message.class.php';
 
 $consumer_key = "rJHgm4ewnT6VqD7MFThA";
 $consumer_secret = "88QKvizTTHlIsmPlv93t4tRPIKTNf7lQx4ZnZwPduI";
@@ -25,36 +27,65 @@ if ($_GET['oauth_token']) {
 
 	$twitterObj->setToken($token->oauth_token, $token->oauth_token_secret);
 
-	/*
-	TODO procurar o user e redirecionar
-	*/
 	$twitterInfo= $twitterObj->get_accountVerify_credentials();
 
 	$id = strtolower($twitterInfo->screen_name);
 
 	$user = $controller->get_user($id);
 
-
 	if (empty($user)) {
-		//novo usuario redireciona para a tela de servicos...
-		echo "novo";
+		if (!empty($_SESSION['invite'])) {
+			//se chegou aqui e tem o invite cria o user temp e segue adiante para preencher outras infos
+			$user = new User();
+			$user->_id = $id;
+			$user->username = $id;
+			$user->fullname = $twitterInfo->location;
+			$user->location = $twitterInfo->location;
+			$user->bio = $twitterInfo->description;
+			$user->site = $twitterInfo->url;
+			$user->picture = $twitterInfo->profile_image_url;
+			$user->date = date('m/d/y');
+			$user->token = $token->oauth_token;				
+			$user->secret = $token->oauth_token_secret;
+
+			$controller->save_user($user);
+			
+			$_SESSION['id'] = $id;
+			
+			header('location: /user/profile');	
+		} else {
+			//tentou criar um user sem invite, da uma mensagem e redireciona para a home....
+			Message::set("Sorry but only invited users for now.");
+			header('location: /');
+		}
+		
 	} else {
 		$id = $user->_id;
-
-		/*
-		TODO sempre q logar atualiza algumas infos do twitter q o usuario possa ter alterado.
-		*/
-		$user->location = $twitterInfo->location;
-		$user->bio = $twitterInfo->description;
-		$user->site = $twitterInfo->url;
+		$_SESSION['id'] = $id;
+		
 		$user->picture = $twitterInfo->profile_image_url;
 		$user->token = $token->oauth_token;				
 		$user->secret = $token->oauth_token_secret;
 
 		$controller->save_user($user);
+		
+		if (empty($user->email)) {
+			header('location: /user/profile');
+			return;			
+		}
+		
+		if (count($user->services) == 0) {
+			//usuario ja foi criado mas nao tem nenhum servico
+			header('location: /user/services');
+			return;
+		};
+		
+		if (count($user->trips) == 0) {
+			//usuario ja foi criado mas nao tem trip
+			header('location: /user/trips');
+			return;
+		};
 
-		//atualiza o cookie e a sessao e redireciona o usuario para a tela dele...
-		$_SESSION['id'] = $id;
 		header('location: /' . $id);
 	}
 

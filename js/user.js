@@ -13,7 +13,7 @@ var User = {
 		url = base_url + '/services/profile.php';
 
 		$.post(url, args, function(data){
-			callback(data);
+				callback(data);
 		});
 		
 	},
@@ -127,8 +127,10 @@ $(document).ready(function() {
 	User.init(username);
 	
 	User.get_trip(username,function(trip){
-		$('h1').text(trip.name);
-		$('h4.trip-status').html(trip.status.message);
+		if (trip) {
+			$('h1').text(trip.name);
+			$('h4.trip-status').html(trip.status.message);
+		};		
 	});
 	
 	$('a.add_user_service').click(function(){
@@ -167,7 +169,16 @@ $(document).ready(function() {
 		args = $('#profile_block form').serialize();
 		
 		User.insert_update(args, function(data){
-			$('#profile_block').html(data);
+			console.log(Util.is_url(data));
+			if (Util.is_url(data)) {
+				Util.redirect(data);
+			} else {
+				/*
+					TODO Definir aqui um esquema para setar mensagens Message::set
+				*/
+				$('#profile_block').html(data);
+			}
+			
 		});
 		
 		return false;

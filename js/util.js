@@ -1,3 +1,7 @@
+String.prototype.startsWith = function(str){
+    return (this.indexOf(str) === 0);
+}
+
 var Util = {
 	fblike: $('#fb-like'),
 	tweet: $('#tweet'),
@@ -5,6 +9,15 @@ var Util = {
 	format_date: function(date) {
 		var dt = new Date(date*1000);
 		return dt.toLocaleString();
+	},
+	
+	redirect: function(url){
+		window.location.replace(url);
+	},
+	
+	is_url: function(arg){
+		arg = jQuery.trim(arg);
+		return arg.startsWith('/');
 	},
 	
 	get_pretty_url: function(){
