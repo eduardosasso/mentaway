@@ -37,10 +37,10 @@ if ($is_valid) {
 	/*
 		TODO Validar a saida para dar uma mensagem amigavel.
 	*/
-	Message::set('Posterous configured... Add tag "mentaway" to your posts');
+	Message::show('Posterous configured... Add tag "mentaway" to your posts', Message::INFO);
 
 } else {
-	Message::set('Invalid Posterous Site');
+	Message::show('Invalid Posterous Site', Message::ERROR);
 }
 
 

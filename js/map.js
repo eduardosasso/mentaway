@@ -15,6 +15,10 @@ var Map = {
 		default_icon: 'images/marks.png'
 	},
 	
+	set_zoom: function(zoom) {
+		this.gmap.setZoom(zoom);
+	},
+	
 	init: function(options) {			
 		this.options = $.extend(this.options,options);
 		this.show();
@@ -233,20 +237,27 @@ var Map = {
 		this.gmap.panTo(current.position);
 	},
 	
-	/*
-		TODO revisar para ver se esse eh o melhor lugar para essa funcionalidade
-	*/
-	bind_events: function(){
-		// Map.options.map_el.hover(function(){
-		// 	Panel_aux.hide();		   		
-		// });
-	},
-	
 	//funcao principal... 
 	show: function(){
 		//this.resize_map();
 		
 		this.get_placemarks(function(placemarks){
+			if (placemarks.length == 0) {
+				//se caiu aqui eh pq o user eh nao usou o mentaway ainda entao seta o mapa em algum lugar padrao...
+				
+				//Util.message('This user doesnt have anything on h');
+				
+				Panel.hide();
+				Panel_aux.hide();
+				Nav.hide();
+				
+				Map.add('-20.468189', '-59.589844');
+
+				Map.set_zoom(2);
+				
+				return;
+			};
+			
 			Map.placemarks = placemarks;
 			
 			var most_recent_location = {
@@ -264,7 +275,7 @@ var Map = {
 			
 			Map.enable_history();
 			
-			Map.bind_events();
+			//Map.bind_events();
 						
 		});
 	}

@@ -35,7 +35,7 @@ if ($token && $secret) {
 	*/
 	$response = $controller->add_user_service($username, $service);	
 	//manda devolta para a pagina de user so pra atualizar a UI
-	Message::set("Twitter configured... Add '#m' to your tweets and dont forget to enable geolocation on twitter.");
+	Message::show("Twitter configured... Add '#m' to your tweets and dont forget to enable geolocation on twitter.",Message::INFO);
 	
 	
 	/*

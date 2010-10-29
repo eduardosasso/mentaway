@@ -1,9 +1,14 @@
 var Nav = {
 	el: {
+		container: $('#navigation'),
 		first: $('#navigation #first'),
 		next: $('#navigation #next'),
 		previous: $('#navigation #previous'),
 		last: $('#navigation #last')
+	},
+	
+	hide: function(){
+			this.el.container.hide();
 	},
 	
 	hide_show: function(){

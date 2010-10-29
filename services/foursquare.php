@@ -41,7 +41,7 @@ if ($oauth_token) {
 	
 	$response = $controller->add_user_service($username, $service);
 	
-	//Message::set("Now its time to checkin into ")
+	Message::Show("Foursquare check!");
 
 	header( 'Location: '  . '/user/services');	
 	

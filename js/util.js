@@ -15,6 +15,10 @@ var Util = {
 		window.location.replace(url);
 	},
 	
+	message: function(message, type) {
+		$('#messages').removeClass().addClass(type).html(message).show();
+	},
+	
 	is_url: function(arg){
 		arg = jQuery.trim(arg);
 		return arg.startsWith('/');

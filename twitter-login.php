@@ -55,7 +55,7 @@ if ($_GET['oauth_token']) {
 			header('location: /user/profile');	
 		} else {
 			//tentou criar um user sem invite, da uma mensagem e redireciona para a home....
-			Message::set("Sorry but only invited users for now.");
+			Message::show("Sorry but only invited users for now.");
 			header('location: /');
 		}
 		

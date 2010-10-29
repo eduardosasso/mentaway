@@ -66,6 +66,12 @@
 <!--[if (gt IE 9)|!(IE)]><!--> <body> <!--<![endif]-->
 	<input type="hidden" value="<?php echo $user->username ?>" id="username">
 	
+	<?php if ($messages): ?>
+		<div id="messages">
+			<?php echo $messages ?>
+		</div>			
+	<?php endif ?>
+	
 	<div id="map"></div>
 	
 	<div id="fb-root"></div>
@@ -144,9 +150,9 @@
 	<!-- Javascript at the bottom for fast page loading -->
 
   <!-- Grab Google CDN's jQuery. fall back to local if necessary -->
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 
-	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script> 
+	<script src="http://maps.google.com/maps/api/js?sensor=false"></script> 
 	
 	<script src="js/plugins.js?v=1"></script>
 	<script src="js/util.js?v=1"></script>

@@ -94,7 +94,7 @@ pre, code, kbd, samp { font-family: monospace, sans-serif; }
 
 
 /* #444 looks better than black: twitter.com/H_FJ/statuses/11800719859 */ 
-body, select, input, textarea { color:#444; }
+body, select, input, textarea { color:#333; }
 
 /* Headers (h1,h2,etc) have no default font-size or margin,
    you'll want to define those yourself. */ 
@@ -234,39 +234,91 @@ h2{
 }
 h3{
 	font-size: 24px;
-	font-weight: lighter;
+	font-weight: normal;
 }
 #panel_user h3{
 	font-size: 24px;
 	color: #fe7b7b;
-	margin-bottom: 10px;
+	margin-bottom: 30px;
 }
 a{
-	color: #fe7b7b;
+	color: #6699CC;
 	text-decoration: none;
-	
 	-webkit-transition: color .5s ease-in !important;
 	-moz-transition: color .5s ease-in !important;
 }
 a:hover{
-	color: #f8bd50;
+	color: #fe7b7b;
 }
 #via, .share{
 	font-size: 12px;
 }
-.wrap{
-}
 .clear{
 	clear: both;
 }
+
+div.help-sidebar {
+	width: 240px;
+	float: right;
+	background: #fbfdd6;
+	padding: 25px;
+	color: #666;
+	border: 1px solid #fad789;
+}
+
+/* Sidebrar */
+div.help-sidebar h6 {
+	margin-bottom: 10px;
+}
+div.help-sidebar p {
+	font: 12px/18px Arial, Helvetica, Geneva, sans-serif;
+}
+
+/* Messages */
+#messages {
+	text-align: center;
+	color: #FFF;
+	background: #fe7b7b;
+	padding: 10px 20px;
+	margin-bottom: 30px;
+	border-radius:6px;
+	-webkit-border-radius:6px;
+	-moz-border-radius:6px;
+	-khtml-border-radius:6px;
+	font-weight: bold;
+}
+
 #header{
 	position: absolute;
+	top: 0px;
 	width: 100%;
-	
-	top: 30px;
-	
 	height: 100px;
 	color: #7A6957;
+	margin-bottom: 30px;
+	z-index: 90;
+}
+.login-register #header,
+.user-page #header{
+	position: relative;
+}
+body.user-page {
+	overflow: visible !important;
+}
+.user-page #header{
+	position: relative;
+	background: #f0f0f0;
+	height: 85px;
+	border-bottom: 1px solid #DDD;
+}
+.login-register #header {
+	border: none;
+	height: 100px;
+	padding-top: 20px;
+	margin-bottom: 30px;
+}
+.login-register {
+	background: #f0f0f0;
+	color: #666;
 }
 #header .wrap {
 	height: 100px;
@@ -274,19 +326,111 @@ a:hover{
 	opacity: 0.9;
 	margin-left: 260px;
 }
+.login-register .wrap {
+	width: 690px;
+	margin: 0 auto;
+	position: relative;
+	background: #FFF;
+	border: 1px solid #ddd;
+	padding: 30px;
+	-webkit-border-radius:10px;
+	-moz-border-radius:10px;
+	-khtml-border-radius:10px;
+	border-radius:10px;
+}
+.login-register .wrap {
+	width: 690px;
+	margin: 0 auto;
+	position: relative;
+	background: #FFF;
+	border: 1px solid #ddd;
+	padding: 30px;
+	-webkit-border-radius:10px;
+	-moz-border-radius:10px;
+	-khtml-border-radius:10px;
+	border-radius:10px;
+}
+.login-register .wrap h2 {
+	color: #fe7b7b;
+	margin-bottom: 15px;
+	font: 24px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+}
+.login-register .wrap div#login {
+	width: 285px;
+	padding-right: 40px;
+	float: left;
+}
+.login-register .wrap div#register {
+	width: 285px;
+	float: left;
+	padding-left: 40px;
+	border-left: 1px solid #DDD;
+}
+#login div.twitter-login-button{
+	margin-top: 15px;	
+}
+#code_block {
+	margin: 15px 0;
+	text-align: center;
+	clear: both;
+}
+.login-register .wrap div#register input {
+	border-color:#CCCCCC #999999 #999999 #CCCCCC;
+	border-style:solid;
+	border-width:1px;
+	padding: 4px 0 0 0px;
+	color: #666;
+	font-size: 18px;
+	margin: 0;
+	height:30px;
+	width: 150px;
+	text-align: center;
+}
+.login-register .wrap div#register input:hover {
+	border: 1px solid #7A6957;
+}
+.login-register .wrap div#register input:focus {
+	border: 1px solid #7A6957;
+	outline: none;
+	color: #222;
+}
+
+.login-register .wrap div.twitter-login-button {
+	text-align: center;
+}
+
 .user-page #header .wrap {
-	height: 100px;
-	background: #7A6957;
-	opacity: 0.9;
-	margin-left: 260px;
-	color: #FFF;
+	height: 80px;
+	background:none;
+	margin: 0 auto;
+	width: 860px;
+	position: relative;
+	z-index: 10;
 }
-.user-page #header .wrap h3 {
-	color: #FFF;
+#header .wrap h3 {
+	height: 20px;
+	line-height: 20px;
+	margin-bottom: 2px;
 }
-.user-page #header .wrap a {
+#header .wrap h3 a {
+	background: url(../images/seta_menu_user_2.png) right -6px no-repeat;
+	padding: 6px 20px 6px 12px;
+	height: 20px;
+	line-height: 20px;
+	color: #7A6957;
+	-webkit-transition: color .4s ease-out !important;
+}
+.user-page #header .wrap h3 a {
+	background: url(../images/seta_menu_user.png) right -6px no-repeat;
+	padding: 6px 20px 6px 12px;
+	height: 20px;
+	line-height: 20px;
+	color: #333;
+	-webkit-transition: color .4s ease-out !important;
+}
+#header .wrap h3 a.active{
+	background: url(../images/seta_menu_user.png) right 15px no-repeat #333;
 	color: #FFF;
-	font-weight: bold;
 }
 p.dates{
 	padding: 0 0 5px 0;
@@ -297,6 +441,7 @@ p.dates{
 #header p{
 	padding: 0 0 0 0;
 	font-size: 12px;
+	font-weight: normal;
 }
 #header #logo{
 	float: left;
@@ -305,6 +450,18 @@ p.dates{
 	padding: 0 30px;
 	width: 200px;
 	display: block;
+}
+body.user-page #header #logo {
+	margin-left: 0px;
+	background: none;
+	padding: 11px 0 0;
+	height: 60px;
+}
+body.user-page #header img {
+	padding: 0;
+}
+.login-register #header  {
+	text-align: center;
 }
 #header img{
 	padding-top: 15px;
@@ -315,6 +472,12 @@ p.dates{
 	top: 25px;
 	width: 400px;
 	text-align: right;
+	z-index: 4;
+}
+body.user-page #header #user {
+	right: 0;
+	color: #333;
+	top: 18px;
 }
 #header #user img{
 	float: right;
@@ -328,6 +491,31 @@ p.dates{
 #header a{
 	color: #6699CC;
 }
+/* Menu User */
+#header #user_menu {
+	background: #333;
+	position: absolute;
+	right: 68px;
+	top: 21px;
+	font-size: 13px;
+	text-align: left;
+	display: none;
+	z-index: 900000px;
+	width: 100px;
+}
+#header #user_menu a {
+	font-weight: normal;
+	display: block;
+	height: 30px;
+	line-height: 30px;
+	color:#CCC;
+	padding: 0px 18px;
+}
+#header #user_menu a:hover {
+	color: #FFF;
+	background: #4d4e4e;
+}
+
 #header a:hover{
 	color: #fe7b7b;
 }
@@ -346,7 +534,7 @@ p.dates{
 }
 .user-page #info h1{
 	padding: 0 30px;
-	font: 36px/100px "Mentaway", "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	font: 26px/100px "Mentaway", "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
 }
 
 #info h4.trip-status {
@@ -357,11 +545,12 @@ p.dates{
 
 #panel1{
 	position: absolute;
-	top: 160px;
+	top: 140px;
 	right: 0;
 	background: #fff;
 	width: 360px;
 	padding: 20px;
+	z-index: 2;
 }
 #via{
 	float: right;
@@ -501,19 +690,269 @@ p.dates{
 #navigation ul li#last a:hover{
 	background: url(../images/pager.png) -71px top no-repeat;
 }
-
 #panel3{
 	display: none;
 }
-
+.user-page .content {
+	position: relative;
+	width: 860px;
+	margin: 0 auto;
+	z-index: 2;
+}
 #panel_user{
 	padding: 0px;
+	width: 440px;
+	float: left;
+}
+/* Steps */
+#registration_steps {
+	padding: 0px;
+	width: 440px;
+	height: 36px;
+	line-height: 36px;
+	border-bottom: 1px solid #DDD;
+	margin-bottom: 30px;
+	color: #C8C0B9;
+	font-weight: normal;
+	font-size: 18px;
+}
+#registration_steps ul li {
+	float: left;
+	margin-right: 30px;
+}
+#registration_steps ul li.active {
+	color: #666;
+	background: url(../images/seta_steps.png) center bottom no-repeat;
+}
+
+#registration_steps ul li.finished {
+	color: #669900;
+	background: url(../images/check_steps.png) left center no-repeat;
+	padding-left: 15px;
+}
+
+/* Forms */
+#panel_user form {
+	padding-bottom: 40px;
+}
+#panel_user form div {
+	margin-bottom: 15px;
+}
+#panel_user .tip{
+	font-size: 11px;
+	font-weight: normal;
+	line-height: 18px;
+	color: #999;
+}
+#panel_user .current,
+#panel_user form #avatar span,
+#panel_user form label,
+#panel_user form h4 {
+	display: block;
+	font-weight: bold;
+	margin-bottom: 4px;
+	font-size: 12px;
+	clear: both;
+	color: #666;
+}
+#panel_user form #options {
+	font-weight: bold;
+	font-size: 12px;
+	color: #666;
+}
+#panel_user form input.checkbox {
+	height: auto;
+	width: 20px;
+	float: left;
+	margin-top: 2px;
+	margin-right: 2px;
+}
+#panel_user form input {
+	height: 28px;
+}
+#panel_user input#posterous_url{
+	height: 22px;
+	width: 200px !important;
+}
+#panel_user form input.error {
+	background:none repeat scroll 0 0 #FFF4F1 !important;
+	border:1px solid #D69999 !important;
+	color:#000000;
+}
+#panel_user form label.error {
+	color: #d35e62;
+	font-weight: normal;
+	font-size: 11px;
+	margin: 4px 0;
+}
+#panel_user form textarea {
+	height: 60px;
+}
+#panel_user input#posterous_url,
+#panel_user form input,
+#panel_user form textarea {
+	border-color:#CCCCCC #999999 #999999 #CCCCCC;
+	border-style:solid;
+	border-width:1px;
+	padding: 4px 0 0 8px;
+	color: #666;
+	font-size: 12px;
+	margin: 0;
+	width:430px;
+}
+#panel_user input#posterous_url:hover,
+#panel_user form textarea:hover,
+#panel_user form input:hover {
+	border: 1px solid #7A6957;
+}
+#panel_user input#posterous_url:focus,
+#panel_user form textarea:focus,
+#panel_user form input:focus {
+	border: 1px solid #7A6957;
+	outline: none;
+	color: #222;
+}
+#panel_user form #username {
+	width: 220px;
+	float: left;
+}
+#panel_user form #username input {
+	width: 200px;
+	font-size: 20px;
+	height: 44px;
+	border: 1px solid #ddd;
+	color: #999;
+	background: #f2f4f4;	
+}
+#panel_user form #avatar {
+	float: left;
+	margin:19px 6px 0; 
+}
+#panel_user form #avatar img{
+	border: 1px solid #DDD;
+}
+
+#add_posterous,
+#panel_user input.submit {
+	background:url(../images/bg_submit.png) repeat-x left top #C7C7C7;
+	border-color:#CCCCCC #999999 #999999 #CCCCCC;
+	border-style:solid;
+	border-width:1px;
+	color:#333;
+	cursor:pointer;
+	font-size:14px;
+	padding:6px 0px;
+	text-shadow:0 1px 0 #FFFFFF;
+	width: 80px;
+	margin-top: 20px;
+}
+#add_posterous {
+	margin-top: 0;
+	width: 120px;
+	font-size: 12px;
+}
+#add_posterous:hover
+#panel_user input.submit:hover {
+	border: 1px solid #999;
+}
+#add_posterous:active
+#panel_user input.submit:active {
+	background: #f0f0f0;
+}
+#panel_user #end,
+#panel_user #begin {
+	width: 170px;
+	float: left;
+}
+#panel_user #begin input,
+#panel_user #end input{
+	width: 140px;
+}
+
+#trip_block form div.current {
+	display: block;
+	clear: both;	
+}
+
+/*Calendar*/
+#ui-datepicker-div {
+	background: #FFF;
+	padding: 15px;
+	-webkit-box-shadow:2px 2px 10px #999;
+	-moz-box-shadow:2px 2px 10px #999;
+	margin-top: -10px;
+	margin-left: 10px;
+	color: #666;
+	font-size: 12px;
+	display: none;
+}
+div.ui-widget-header {
+	height: 24px;
+	position: relative;
+	border-bottom: 1px solid #e8e8e8;
+	margin-bottom: 8px;
+}
+div.ui-datepicker-title {
+	text-align: center;
+	color: #333;
+}
+div.ui-widget-header span.ui-icon-circle-triangle-w {
+	display: block;
+	width: 16px;
+	height: 16px;
+	background: url(../images/icons_arrow.png) 5px 3px no-repeat;
+	text-indent: -9000px;
 	position: absolute;
-	top: 160px;
-	left: 290px;
-	width: 400px;
+	left: 0;
+	top: 0;
+	cursor: pointer;
+}
+div.ui-widget-header span.ui-icon-circle-triangle-w:hover {
+	background: url(../images/icons_arrow.png) 5px -10px no-repeat #f0f0f0;
+}
+div.ui-widget-header span.ui-icon-circle-triangle-e {
+	display: block;
+	width: 16px;
+	height: 16px;
+	background: url(../images/icons_arrow.png) -14px 3px no-repeat;
+	text-indent: -9000px;
+	position: absolute;
+	right: 0;
+	top: 0;
+	cursor: pointer;
+}
+div.ui-widget-header span.ui-icon-circle-triangle-e:hover {
+	background: url(../images/icons_arrow.png) -14px -10px no-repeat #f0f0f0;
+}
+#ui-datepicker-div tr td.ui-datepicker-today {
+	background: #fbf198;	
+	
+}
+#ui-datepicker-div tr td.ui-datepicker-today a {
+	font-weight: bold;
+	color: #666;
+}
+#ui-datepicker-div th {
+	font-weight: bold;
+}
+#ui-datepicker-div tr td {
+	background: #f0f0f0;
+	padding: 3px 5px;
+	border-right: 1px solid #FFF;
+	border-top: 1px solid #FFF;
+	text-align: center;
+}
+#ui-datepicker-div tr td:hover {
+	background: #e1e1e1;
+	cursor: pointer;
+}
+#ui-datepicker-div tr td.ui-state-disabled {
 	background: #FFF;
 }
+#ui-datepicker-div tr td a {
+	color: #333;
+}
+/* End calendar*/
 
 div.user-log-bts {
 	height: 25px;
@@ -529,7 +968,6 @@ div.user-log-bts .logo-service{
 	margin-right: 10px;
 	text-indent: -9000px;
 }
-
 div.user-log-bts .log-as-twitter{
 	width: 105px;
 	background: url(../images/logo_twitter_1.jpg) left top no-repeat;

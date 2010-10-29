@@ -16,7 +16,9 @@ $(document).ready(function() {
 				if (jQuery.trim(data) == "true") {
 					window.location.replace(twitter);
 				} else {
-					alert('It seems that your invitation code is invalid. :(');
+					Util.message('Invalid invitation code.','error');
+					
+					$('#code').select();
 				} 
 			});
 			

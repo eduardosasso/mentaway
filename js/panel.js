@@ -49,6 +49,10 @@ var Panel = {
 		service_icon: $('#via div.icon')
 	},
 	
+	hide: function(){
+		this.el.panel.hide();
+	},
+	
 	get_el: function(){
 		return this.el.panel;
 	},

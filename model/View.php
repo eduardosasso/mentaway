@@ -7,8 +7,8 @@ class View {
 		$username_and_or_menu =  "<h3>" . $user->fullname . "</h3>"; 
 		
 		if (!empty($id)) {
-			$username_and_or_menu .= 	
-"				<div id='user_menu'>
+			$username_and_or_menu =  "<h3><a href='#' id='user_menu_header'>" . $user->fullname . "</a></h3>
+				<div id='user_menu'>
 				<ul>
 					<li><a href='/user/profile'>Profile</a></li>
 					<li><a href='/user/services'>Services</a></li>
@@ -40,7 +40,7 @@ class View {
 				case 'trips':
 					//como esse eh o ultimo ponto verifico pra ver se ja ta concluido para setar o finished nesse tb
 					$class = 'active';					
-					if (count($user->trips > 0)) {
+					if (count($user->trips) > 0) {
 						$class = 'finished';
 					}
 					

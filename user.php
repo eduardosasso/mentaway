@@ -24,9 +24,9 @@ define('BASE_URL',$base_url);
        Remove this if you use the .htaccess -->
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-  <title>Mentaway: Explore the world</title>
-  <meta name="description" content="">
-  <meta name="author" content="Eduardo Sasso">
+  <title>Mentaway</title> 
+  <meta name="description" content="Mentaway is a service that helps people to keep track of their trips around the world and share their adventures and discoveries with friends and family"> 
+  <meta name="author" content="Eduardo Sasso">   
 
   <!--  Mobile Viewport Fix
         j.mp/mobileviewport & davidbcalhoun.com/2010/viewport-metatag 
@@ -68,11 +68,8 @@ define('BASE_URL',$base_url);
 	<input type="hidden" value="<?php echo $user->username ?>" id="username">
 	
 	<div id="header"> 
-		<a href="/<?php echo $user->username ?>" id="logo"><img src="/images/mentaway-logo.png" alt="Mentaway - Keep tracking of your adventures" width="195" height="64"/></a> 
 		<div class="wrap"> 			
-			<div id="info" > 
-				<h1>Account</h1> 
-			</div> 
+			<a href="/<?php echo $user->username ?>" id="logo"><img src="/images/mentaway-logo.png" alt="Mentaway" width="195" height="64"/></a> 
 
 			<div id="user">
 				<img src="<?php echo $user->picture ?>" />
@@ -85,33 +82,44 @@ define('BASE_URL',$base_url);
 
 	</div> 
 	
-	<?php echo $registration_steps ?>
-	
-	<div class="messages">
-		<?php echo $messages ?>
-	</div>	
-	
-	<div id="panel_user">
-		<!--
-			TODO melhor eh cada tipo (services, profile e trips) ter sua propria pagina, tem q usar templates para padronizar header e outros detalhes comuns
-		-->
-		<?php if ($page == 'services'): ?>
-			<?php
-				$username = $user->username;
-				$foursquare = $controller->get_user_service($username,'foursquare');
-				$twitter = $controller->get_user_service($username,'twitter');
-				$flickr = $controller->get_user_service($username,'flickr');
-				$posterous = $controller->get_user_service($username,'posterous');
+	<div class="content">
+		
+		<?php
+			$class = "";
+			if (!$messages) {
+				$class="hidden";
+			}
+		?>
+		<div id="messages" class='<?php echo "$class $message_type" ?>'>			
+			<?php echo $messages ?>
+		</div>			
+				
+		<div id="panel_user">
+			
+			<?php echo $registration_steps ?>
 
-				$has_foursquare = !empty($foursquare);
-				$has_twitter = !empty($twitter);
-				$has_flickr = !empty($flickr);
-				$has_posterous = !empty($posterous);
-			?>
-			<h3>Choose your services</h3>
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam semper, nunc ac commodo sodales</p>
+			
+			<!--
+			TODO melhor eh cada tipo (services, profile e trips) ter sua propria pagina, tem q usar templates para padronizar header e outros detalhes comuns
+			-->
+			<?php if ($page == 'services'): ?>
+				<?php
+					$username = $user->username;
+					$foursquare = $controller->get_user_service($username,'foursquare');
+					$twitter = $controller->get_user_service($username,'twitter');
+					$flickr = $controller->get_user_service($username,'flickr');
+					$posterous = $controller->get_user_service($username,'posterous');
+
+					$has_foursquare = !empty($foursquare);
+					$has_twitter = !empty($twitter);
+					$has_flickr = !empty($flickr);
+					$has_posterous = !empty($posterous);
+					
+					$help = "Click on the service image to Add or Remove them. <p>More services like Gowalla, Facebook, Tumblr and others will be included in the future.</p>";
+				?>
 
 			<div id="services_block" class="list-services">
+				<h3>Choose your services</h3>
 				<ul>
 					<li class="foursquare">
 						<?php if (!$has_foursquare): ?>
@@ -142,81 +150,138 @@ define('BASE_URL',$base_url);
 						<?php endif ?>					
 					</li>
 				</ul>
-				
+
 				<div id="posterous_block" class="hidden">
 					<input type="text" placeholder="Posterous URL"	value="" id="posterous_url">
-					<input type="button" value="Add Posterous" id="add_posterous">
+					<span class="tip">Ex: http://<strong>yoursite</strong>.posterous.com</span>
+					<input type="button" value="Add" id="add_posterous">
 				</div>
 
-				<input type="submit" id="submit_service">
+				<input type="submit" id="submit_service" value="Save" class="submit">
 			</div>
 		<?php endif ?> 
-		
-		<?php if ($page == 'profile'): ?>
-			<div id="profile_block">
-				<form>
-					<label for="username">Username</label>
-					<input type="text" name="username" value="<?php echo $user->username ?>">
-					
-					<label for="fullname">Full Name</label>
-					<input type="text" name="fullname" value="<?php echo $user->fullname ?>">
 
-					<label for="bio">Short Bio</label>									
-					<input type="text" name="bio" value="<?php echo $user->bio ?>">
+		<?php if ($page == 'profile'): ?>
+			<?php
+				$help = "There is nothing new here. Just set your info and you are all set. <p>If you are a new user this will be a quick 3 steps process.</p>"
+			?>
+			
+			<div id="profile_block">
+				<h3>Configure your profile</h3>
+				
+				<form>
+					<div id="username">
+						<label for="username">Username</label>
+						<input type="text" name="username" value="<?php echo $user->username ?>" class="required" readonly>
+						<span class="tip">http://beta.mentaway.com/<strong><?php echo $user->username ?></strong></span>
+					</div>
+
+					<div id="avatar">
+						<!-- <span class="">&nbsp;</span> -->
+						<img src="<?php echo $user->picture ?>" alt="User picture" border="0" />
+					</div>					
+
+					<div id="fullname">
+						<label for="fullname">Full Name *</label>
+						<input type="text" name="fullname" value="<?php echo $user->fullname ?>" class="required">
+					</div>	
 					
-					<label for="email">Email</label>
-					<input type="email" name="email" value="<?php echo $user->email ?>">
-					
-					<label for="site">Site</label>
-					<input type="url" name="site" value="<?php echo $user->site ?>">
-					
-					<label for="location">Home Base</label>
-					<input type="text" name="location" value="<?php echo $user->location ?>">
-					
-					<span class="">Avatar</span>
-					<img src="<?php echo $user->picture ?>" alt="User picture" border="0" />
-					
-					<label for="maptype">Default Map Type</label>
-					<select name="maptype" id="maptype">
-					  <option value="ROADMAP">Map</option>
-					  <option value="SATELLITE">Satellite</option>
-					  <option value="HYBRID">Hybrid</option>
-					  <option value="TERRAIN">Terrain</option>
-					</select>
-					
-					<input type="checkbox" name="notification" value="true" checked="<?php echo $user->notification ?>" />Receive notifications (not spam)
-					
-					<input type="submit" id="submit_profile">
+					<div id="email">
+						<label for="email">Email *</label>
+						<input type="email" name="email" value="<?php echo $user->email ?>" class="required email">
+					</div>
+
+					<div id="bio">
+						<label for="bio">Short Bio</label>
+						<textarea name="bio"></textarea>
+					</div>
+
+					<div id="site">
+						<label for="site">Site</label>
+						<input type="url" name="site" value="<?php echo $user->site ?>">
+					</div>
+
+					<div id="location">
+						<label for="location">Where do you live?</label>
+						<input type="text" name="location" value="<?php echo $user->location ?>">
+					</div>
+
+					<div id="maptype_block">
+						<label for="maptype">Map Type</label>
+						<select name="maptype" id="maptype">
+							<option value="ROADMAP">Map</option>
+							<option value="SATELLITE">Satellite</option>
+							<option value="HYBRID">Hybrid</option>
+							<option value="TERRAIN">Terrain</option>
+						</select>
+					</div>
+
+					<div id="options">
+						<div id="notification">
+							<input type="checkbox" class="checkbox" name="notification" value="true" checked="<?php echo $user->notification ?>" />Receive notifications (not spam)
+						</div>
+
+						<div id="follow">
+							<input type="checkbox" class="checkbox" value="true" checked="true" />Follow Mentaway on Twitter
+						</div>
+
+					</div>
+
+					<input type="submit" id="submit_profile" value="Save" class="submit">
 				</form>				
 			</div>
 		<?php endif ?>
-		
+
 		<?php if ($page == 'trips'): ?>
+			<?php
+				$help = "Mentaway is in beta, so we are trying to figure it out the best way to use trips.<p>For now you can just set anything anything just to play with Mentaway to see how cool it is.</p>"
+			?>
 			<div id="trip_block">
+				<h3>Set your trip</h3>
 				<form>
-					<h4>Are you going to travel or are already traveling somewhere?</h4>
-					<textarea name="name" rows="8" cols="40"><?php echo $trip->name; ?></textarea>
-					
-					<label for="begin">Begin *</label>
-					<input type="text" name="begin" id="begin_trip_date" class="required date" value="<?php echo $trip->begin ?>">
-					
-					<label for="end">End</label>
-					<input type="text" name="end" id="end_trip_date" class="date" value="<?php echo $trip->end ?>">
-					
-					<input type="checkbox" value="true" name="current" checked="<?php echo $trip->current ?>" />Current trip
-					
-					<input type="submit" id="submit_trip">
+					<div id="name">
+						<label for="name">Give your trip a name *</label>
+						<textarea name="name" class="required"><?php echo $trip->name; ?></textarea>
+						<span class="tip">Ex: Trip to Europe or Road trip, you got the idea</span>
+					</div>
+
+					<div id="begin">
+						<label for="begin">Begin date</label>
+						<input type="text" name="begin" id="begin_trip_date" class="date" value="<?php echo $trip->begin ?>">
+						<span class="tip">Can be a past date</span>						
+					</div>
+
+					<div id="end">
+						<label for="end">End date</label>
+						<input type="text" name="end" id="end_trip_date" class="date" value="<?php echo $trip->end ?>">
+					</div>
+
+					<div class="current">
+						<input type="checkbox" class="checkbox" value="true" name="current" checked="<?php echo $trip->current ?>" />Make it active
+					</div>
+
+					<input type="submit" id="submit_trip" value="Save" class="submit">
+
 				</form>
 			</div>			
 		<?php endif ?>		
-		
+
 	</div> 
 
+	<?php if ($help): ?>
+		<div class="help-sidebar">
+			<h6>Help</h6>
+			<p><?php echo $help ?></p>
+		</div>
+	<?php endif ?>
+	
+</div>
 	<!-- Javascript at the bottom for fast page loading -->
 
   <!-- Grab Google CDN's jQuery. fall back to local if necessary -->
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js"></script>
+	<script src="http://ajax.microsoft.com/ajax/jquery.validate/1.7/jquery.validate.pack.js"></script>
 	
 	<script type="text/javascript" charset="utf-8">
 			base_url = "<?php echo BASE_URL; ?>"
@@ -224,7 +289,6 @@ define('BASE_URL',$base_url);
 			$('#map_type').val('<?php echo $user->maptype ?>');
 	</script>
 
-	<script src="<?php echo BASE_URL ?>/js/plugins.js?v=1"></script>
 	<script src="<?php echo BASE_URL ?>/js/util.js?v=1"></script>
   <script src="<?php echo BASE_URL ?>/js/user.js?v=1"></script>
   <script src="<?php echo BASE_URL ?>/js/user-ui.js?v=1"></script>
