@@ -68,7 +68,7 @@ define('BASE_URL',$base_url);
 	<input type="hidden" value="<?php echo $user->username ?>" id="username">
 	
 	<div id="header"> 
-		<a href="#" id="logo"><img src="/images/mentaway-logo.png" alt="Mentaway - Keep tracking of your adventures" width="195" height="64"/></a> 
+		<a href="/<?php echo $user->username ?>" id="logo"><img src="/images/mentaway-logo.png" alt="Mentaway - Keep tracking of your adventures" width="195" height="64"/></a> 
 		<div class="wrap"> 			
 			<div id="info" > 
 				<h1>Account</h1> 
@@ -85,9 +85,11 @@ define('BASE_URL',$base_url);
 
 	</div> 
 	
+	<?php echo $registration_steps ?>
+	
 	<div class="messages">
 		<?php echo $messages ?>
-	</div>
+	</div>	
 	
 	<div id="panel_user">
 		<!--
@@ -109,7 +111,7 @@ define('BASE_URL',$base_url);
 			<h3>Choose your services</h3>
 			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam semper, nunc ac commodo sodales</p>
 
-			<div class="list-services">
+			<div id="services_block" class="list-services">
 				<ul>
 					<li class="foursquare">
 						<?php if (!$has_foursquare): ?>
@@ -140,14 +142,14 @@ define('BASE_URL',$base_url);
 						<?php endif ?>					
 					</li>
 				</ul>
+				
+				<div id="posterous_block" class="hidden">
+					<input type="text" placeholder="Posterous URL"	value="" id="posterous_url">
+					<input type="button" value="Add Posterous" id="add_posterous">
+				</div>
+
+				<input type="submit" id="submit_service">
 			</div>
-		
-			<div id="posterous_block" class="hidden">
-				<input type="text" placeholder="Posterous URL"	value="" id="posterous_url">
-				<input type="button" value="Add Posterous" id="add_posterous">
-			</div>
-		
-			<input type="submit" id="submit_service">
 		<?php endif ?> 
 		
 		<?php if ($page == 'profile'): ?>

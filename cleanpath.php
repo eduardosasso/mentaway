@@ -27,7 +27,21 @@ if ($args[0] == 'user') {
 	}
 	
 	if ($page == "signout") {
-		unset($_SESSION['id']);
+		$_SESSION = array();
+
+		// If it's desired to kill the session, also delete the session cookie.
+		// Note: This will destroy the session, and not just the session data!
+		if (ini_get("session.use_cookies")) {
+			$params = session_get_cookie_params();
+			setcookie(session_name(), '', time() - 42000,
+				$params["path"], $params["domain"],
+				$params["secure"], $params["httponly"]
+				);
+		}
+
+		// Finally, destroy the session.
+		session_destroy();
+
 		header("Location: /");
 	}
 	
@@ -37,6 +51,8 @@ if ($args[0] == 'user') {
 	
 	$trip = $controller->get_current_trip($username);
 	$username_and_or_user_menu = View::show_username_and_menu($user);
+
+	$registration_steps = View::show_steps_registration($user, $page);
 	
 	include("util/Message.class.php");
 	

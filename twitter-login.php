@@ -39,7 +39,7 @@ if ($_GET['oauth_token']) {
 			$user = new User();
 			$user->_id = $id;
 			$user->username = $id;
-			$user->fullname = $twitterInfo->location;
+			$user->fullname = $twitterInfo->name;
 			$user->location = $twitterInfo->location;
 			$user->bio = $twitterInfo->description;
 			$user->site = $twitterInfo->url;
