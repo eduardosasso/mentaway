@@ -35,6 +35,7 @@ switch ($action) {
 		break;
 	case "get_user":
 			$user = $controller->get_user($user);
+			header("Content-type: application/json");
 			print json_encode($user);
 			break;	
 	case "save_user":
@@ -44,7 +45,7 @@ switch ($action) {
 		break;	
 	case "invite":
 		$code = $_REQUEST['code'];
-		if ($code == '9z3e') {
+		if (strtolower($code) == '9z3e') {
 			$_SESSION['invite'] = true;
 			echo "true";			
 		} else {

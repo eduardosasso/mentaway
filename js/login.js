@@ -1,9 +1,8 @@
 $(document).ready(function() {
-	$('a#twitter-login').click(function(){
+	$('a#twitter-register').click(function(){
 		var code = $('#code').val();
 		var twitter = $(this).attr('href');
-		
-		if (code) {
+
 			//se colocou codigo eh pq eh usuario novo
 			args = {
 				a: 'invite',
@@ -24,8 +23,6 @@ $(document).ready(function() {
 			
 			return false;
 			
-		} 
-		
 	});
 	
 });

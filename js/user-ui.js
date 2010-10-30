@@ -39,7 +39,7 @@ $(document).ready(function() {
 				if (Util.is_url(data)) {
 					Util.redirect(data);
 				} else {
-					Util.message(data);
+					Util.message(data, 'info');
 					//$('#profile_block').html(data);
 				}
 
@@ -53,7 +53,7 @@ $(document).ready(function() {
 			if (Util.is_url(data)) {
 				Util.redirect(data);
 			} else {
-				Util.message(data);
+				Util.message(data, 'info');
 				//$('#services_block').html(data);
 			}			
 		});
@@ -70,7 +70,7 @@ $(document).ready(function() {
 				} else {
 					//se chegou aqui eh pq a principio nao deu erro entao setar a Trip no Li se for user novo para finished
 					$('#registration_steps ul li:last').removeClass('active').addClass('finished');
-					Util.message(data);
+					Util.message(data, 'info');
 
 					//$('#trip_block').html(data);
 				}

@@ -24,29 +24,43 @@ class View {
 		$steps_finished = count($user->services) + count($user->trips);
 		
 		//se o user tem o session invite eh pq ta comecando agora, se ta nos steps_finished eh pq fechou o browser e voltou novamente
-		if ($steps_finished <= 1 || $_SESSION['invite']) {
+		//if ($steps_finished <= 1 || $_SESSION['invite']) {
+			
+			$profile = "<a href='/user/profile'>Profile</a>";
+			$services = "<a href='/user/services'>Services</a>";
+			$trips = "<a href='/user/trips'>Trips</a>";
+			
+			if (count($user->services) > 0) {
+				$class_services = 'finished';
+			}
+			
+			if ($user->email && $user->fullname) {
+				$class_profile = 'finished';
+			}
+			
+			if (count($user->trips) > 0) {
+				$class_trips = 'finished';
+			}
+			
 			
 			switch ($page) {
 				case 'profile':
-					$html = '<li class="active">Profile</li>
-									 <li>Services</li>
-									 <li>Trips</li>';
+					$html = "<li class='active'>Profile</li>
+									 <li class='$class_services'>$services</li>
+									 <li class='$class_trips'>$trips</li>";
 					break;
 				case 'services':
-					$html = '<li class="finished">Profile</li>
-									 <li class="active">Services</li>
-									 <li>Trips</li>';
+					$html = "<li class='$class_profile'>$profile</li>
+									 <li class='active'>Services</li>
+									 <li class='$class_trips'>$trips</li>";
 					break;
 				case 'trips':
 					//como esse eh o ultimo ponto verifico pra ver se ja ta concluido para setar o finished nesse tb
-					$class = 'active';					
-					if (count($user->trips) > 0) {
-						$class = 'finished';
-					}
+					$class_trips = 'active';
 					
-					$html = '<li class="finished">Profile</li>
-									 <li class="finished">Services</li>
-									 <li class="' . $class . '">Trips</li>';
+					$html = "<li class='$class_profile'>$profile</li>
+									 <li class='$class_services'>$services</li>
+									 <li class='$class_trips'>Trips</li>";
 					break;
 			}
 			
@@ -55,7 +69,6 @@ class View {
 								</div>";
 			
 			return $result;
-		}
 	}
 	
 }

@@ -35,6 +35,7 @@ if ($_GET['oauth_token']) {
 
 	if (empty($user)) {
 		if (!empty($_SESSION['invite'])) {
+			
 			//se chegou aqui e tem o invite cria o user temp e segue adiante para preencher outras infos
 			$user = new User();
 			$user->_id = $id;
@@ -44,7 +45,7 @@ if ($_GET['oauth_token']) {
 			$user->bio = $twitterInfo->description;
 			$user->site = $twitterInfo->url;
 			$user->picture = $twitterInfo->profile_image_url;
-			$user->date = date('m/d/y');
+			$user->date = date('m/d/Y');
 			$user->token = $token->oauth_token;				
 			$user->secret = $token->oauth_token_secret;
 
@@ -55,7 +56,7 @@ if ($_GET['oauth_token']) {
 			header('location: /user/profile');	
 		} else {
 			//tentou criar um user sem invite, da uma mensagem e redireciona para a home....
-			Message::show("Sorry but only invited users for now.");
+			Message::show("Sorry but only invited users for now.", Message::ERROR);
 			header('location: /');
 		}
 		

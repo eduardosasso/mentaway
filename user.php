@@ -115,7 +115,9 @@ define('BASE_URL',$base_url);
 					$has_flickr = !empty($flickr);
 					$has_posterous = !empty($posterous);
 					
-					$help = "Click on the service image to Add or Remove them. <p>More services like Gowalla, Facebook, Tumblr and others will be included in the future.</p>";
+					$help = "Click on the service image to Add or Remove them. 
+										<p>If you have a Posterous account you can set it up and use Mentaway as your travel blogging. How cool is that!</p>
+										<p>More services like Gowalla, Facebook, Tumblr and others will be included in the future.</p>";
 				?>
 
 			<div id="services_block" class="list-services">
@@ -153,8 +155,8 @@ define('BASE_URL',$base_url);
 
 				<div id="posterous_block" class="hidden">
 					<input type="text" placeholder="Posterous URL"	value="" id="posterous_url">
-					<span class="tip">Ex: http://<strong>yoursite</strong>.posterous.com</span>
 					<input type="button" value="Add" id="add_posterous">
+					<span class="tip">Ex: http://<strong>yoursite</strong>.posterous.com</span>
 				</div>
 
 				<input type="submit" id="submit_service" value="Save" class="submit">
@@ -163,7 +165,7 @@ define('BASE_URL',$base_url);
 
 		<?php if ($page == 'profile'): ?>
 			<?php
-				$help = "There is nothing new here. Just set your info and you are all set. <p>If you are a new user this will be a quick 3 steps process.</p>"
+				$help = "There is nothing new here. Just update your info if needed and you are all set. <p>If you are a new user this will be a quick three steps process.</p>"
 			?>
 			
 			<div id="profile_block">
@@ -193,7 +195,7 @@ define('BASE_URL',$base_url);
 
 					<div id="bio">
 						<label for="bio">Short Bio</label>
-						<textarea name="bio"></textarea>
+						<textarea name="bio"><?php echo $user->bio ?></textarea>
 					</div>
 
 					<div id="site">
@@ -221,7 +223,7 @@ define('BASE_URL',$base_url);
 							<input type="checkbox" class="checkbox" name="notification" value="true" checked="<?php echo $user->notification ?>" />Receive notifications (not spam)
 						</div>
 
-						<div id="follow">
+						<div id="follow" class="hidden">
 							<input type="checkbox" class="checkbox" value="true" checked="true" />Follow Mentaway on Twitter
 						</div>
 
@@ -234,7 +236,9 @@ define('BASE_URL',$base_url);
 
 		<?php if ($page == 'trips'): ?>
 			<?php
-				$help = "Mentaway is in beta, so we are trying to figure it out the best way to use trips.<p>For now you can just set anything anything just to play with Mentaway to see how cool it is.</p>"
+				$help = "Mentaway is in beta, so we are trying to figure it out the best way to explore this feature.
+									<p><strong>Tip:</strong> You can set a past date on the begin date of your trip, this way we can collect checkins and pictures taken on a previous trip for example.</p>
+									<p>If you just want to play with just type anything on the Trip's name so we can get you up un running...</p>"
 			?>
 			<div id="trip_block">
 				<h3>Set your trip</h3>
@@ -256,7 +260,7 @@ define('BASE_URL',$base_url);
 						<input type="text" name="end" id="end_trip_date" class="date" value="<?php echo $trip->end ?>">
 					</div>
 
-					<div class="current">
+					<div class="current hidden">
 						<input type="checkbox" class="checkbox" value="true" name="current" checked="<?php echo $trip->current ?>" />Make it active
 					</div>
 

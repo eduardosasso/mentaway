@@ -63,7 +63,7 @@
 				$class="hidden";
 			}
 		?>
-		<div id="messages" class="<?php echo $class ?>">
+		<div id="messages" class='<?php echo "$class $message_type" ?>'>			
 			<?php echo $messages ?>
 		</div>			
 
@@ -91,7 +91,7 @@
 			</div>
 
 			<div class="twitter-login-button">
-				<a href='<?php echo $twitter_url ?>' id="twitter-login"><img src='images/sign-in-with-twitter-d.png'  border='0'/></a>	
+				<a href='<?php echo $twitter_url ?>' id="twitter-register"><img src='images/sign-in-with-twitter-d.png'  border='0'/></a>	
 			</div>		
 		</div>
 		

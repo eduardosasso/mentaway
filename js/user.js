@@ -1,8 +1,11 @@
 var User = {
 	name: '',
+	maptype: 'HYBRID',
 	
 	init: function(username){
 		this.name = username;
+		
+		this.get_user(username);
 	},
 	
 	insert_update: function(args, callback) {
@@ -48,6 +51,19 @@ var User = {
 		$.get(url,args, function(data){
 			callback(data);
 		});		
+	},
+	
+	get_user: function(username) {
+		args = {			
+			a: 'get_user',
+			uid: username,
+		}
+		
+		url = base_url + '/ajax.php';
+
+		$.get(url,args, function(data){
+			User.maptype = data.maptype;
+		});
 	},
 	
 	get_current_status: function(){

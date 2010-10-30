@@ -52,10 +52,11 @@ var Map = {
 	
 	add: function(lat, long) {
 		var lat_long = new google.maps.LatLng(lat, long);
+		
 		var map_options = {
 			zoom: 5,
 			center: lat_long,
-			mapTypeId: google.maps.MapTypeId.HYBRID,
+			mapTypeId: eval('google.maps.MapTypeId.' + User.maptype),
 			streetViewControl: true,
 			mapTypeControlOptions: {
 				style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,

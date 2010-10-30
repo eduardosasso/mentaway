@@ -24,6 +24,11 @@ function add_trip() {
 	$username = $_REQUEST['username'];
 	$name = $_REQUEST['name'];
 	$begin = $_REQUEST['begin'];
+	
+	if (empty($begin)) {
+		$begin = date('m/d/Y');
+	}
+	
 	$end = $_REQUEST['end'];
 	/*
 		TODO aqui eh pra ter suporte para multiplas trips. Quando setar uma trip para current todas as outras tem q ficar off

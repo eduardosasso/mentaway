@@ -275,16 +275,20 @@ div.help-sidebar p {
 }
 
 /* Messages */
-#messages {
+#messages.error {
 	text-align: center;
 	color: #FFF;
 	background: #fe7b7b;
 	padding: 10px 20px;
 	margin-bottom: 30px;
-	border-radius:6px;
-	-webkit-border-radius:6px;
-	-moz-border-radius:6px;
-	-khtml-border-radius:6px;
+	font-weight: bold;
+}
+#messages.info {
+	text-align: center;
+	color: #FFF;
+	background: #6699CC;
+	padding: 10px 20px;
+	margin-bottom: 30px;
 	font-weight: bold;
 }
 
@@ -380,11 +384,12 @@ body.user-page {
 	border-width:1px;
 	padding: 4px 0 0 0px;
 	color: #666;
-	font-size: 18px;
+	font-size: 13px;
 	margin: 0;
 	height:30px;
 	width: 150px;
 	text-align: center;
+	text-transform: uppercase;
 }
 .login-register .wrap div#register input:hover {
 	border: 1px solid #7A6957;
@@ -743,6 +748,9 @@ body.user-page #header #user {
 	font-weight: normal;
 	line-height: 18px;
 	color: #999;
+	clear: both;
+	display: block;
+	padding-top: 2px;
 }
 #panel_user .current,
 #panel_user form #avatar span,
@@ -848,7 +856,7 @@ body.user-page #header #user {
 }
 #add_posterous {
 	margin-top: 0;
-	width: 120px;
+	width: 60px;
 	font-size: 12px;
 }
 #add_posterous:hover

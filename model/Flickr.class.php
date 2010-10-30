@@ -18,7 +18,7 @@ class Flickr extends AbstractService {
 		$trip = $controller->get_current_trip($username);
 		
 		//mysql datetime format YYYY-MM-DD HH:MM:SS
-		$date_trip = date("Y-m-d G:i:s", $trip->timestamp);
+		$date_trip = date("Y-m-d G:i:s", strtotime($trip->begin));
 		
 		$service = $controller->get_user_service($username, $servicename);
 		
