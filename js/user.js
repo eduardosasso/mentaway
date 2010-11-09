@@ -80,19 +80,26 @@ var User = {
 	},
 	
 	add_general_service: function(service){
+		
+		// window.location = 'http://mentaway.com';
+		// return false;
+		
 		args = {
 			username: this.name
 		}
 
 		url = base_url + '/services/' + service + '.php';
 		
+		
 		$.get(url,args, function(url){
 			/*
 				TODO aqui tem q testar o retorno para ver se eh url, se nao for eh msg de erro, ou essa validacao tem q vir de cima...
 			*/
-			window.location.replace(url);
+			//alert(url);
+			Util.redirect(url);
 		});
 	},
+	
 	
 	remove_service: function(service){
 		args = {

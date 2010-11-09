@@ -14,14 +14,14 @@
   <meta name="description" content="">
   <meta name="author" content="Eduardo Sasso">
 
-  <meta property="fb:app_id" content="136687686378472"/> 
+  <!-- <meta property="fb:app_id" content="136687686378472"/> 
 	<meta property="fb:admins" content="631466850"/>
 	<meta property="og:title" content="title title"/>
 	<meta property="og:type" content="type"/>
 	<meta property="og:url" content="url"/>
 	<meta property="og:image" content="http://farm5.static.flickr.com/4085/5091161303_e5ab5d044d_t.jpg"/>
 	<meta property="og:site_name" content="Mentaway"/>
-	<meta property="og:description" content="Lorem ipsum pro nullam mnesarchum ut, vim ea wisi modus concludaturque, cum id meliore splendide. His ei utroque convenire definitionem, te has eius invenire cotidieque. Nec et velit debitis antiopam, ex elaboraret referrentur per, periculis molestiae scriptorem in sit. Ei erant quidam ornatus mea, clita nostro rationibus eum ea. Ut quot commune assueverit nec, in fabulas senserit maluisset per. Eos ad vero reque dicta, timeam quaeque conclusionemque mel cu, cum in rationibus expetendis consequuntur."/>
+	<meta property="og:description" content="Lorem ipsum pro nullam mnesarchum ut, vim ea wisi modus concludaturque, cum id meliore splendide. His ei utroque convenire definitionem, te has eius invenire cotidieque. Nec et velit debitis antiopam, ex elaboraret referrentur per, periculis molestiae scriptorem in sit. Ei erant quidam ornatus mea, clita nostro rationibus eum ea. Ut quot commune assueverit nec, in fabulas senserit maluisset per. Eos ad vero reque dicta, timeam quaeque conclusionemque mel cu, cum in rationibus expetendis consequuntur."/> -->
 
 	  </head>
 

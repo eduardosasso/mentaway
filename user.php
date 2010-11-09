@@ -57,10 +57,10 @@ define('BASE_URL',$base_url);
 
 <!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
 
-<!--[if lt IE 7 ]> <body class="ie6"> <![endif]-->
-<!--[if IE 7 ]>    <body class="ie7"> <![endif]-->
-<!--[if IE 8 ]>    <body class="ie8"> <![endif]-->
-<!--[if IE 9 ]>    <body class="ie9"> <![endif]-->
+<!--[if lt IE 7 ]> <body class="user-page ie6"> <![endif]-->
+<!--[if IE 7 ]>    <body class="user-page ie7"> <![endif]-->
+<!--[if IE 8 ]>    <body class="user-page ie8"> <![endif]-->
+<!--[if IE 9 ]>    <body class="user-page ie9"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!--> <body class="user-page"> <!--<![endif]-->
 	
 	<div id="fb-root"></div>
@@ -296,6 +296,25 @@ define('BASE_URL',$base_url);
 	<script src="<?php echo BASE_URL ?>/js/util.js?v=1"></script>
   <script src="<?php echo BASE_URL ?>/js/user.js?v=1"></script>
   <script src="<?php echo BASE_URL ?>/js/user-ui.js?v=1"></script>
+
+	<script type="text/javascript" charset="utf-8">
+	  var is_ssl = ("https:" == document.location.protocol);
+	  var asset_host = is_ssl ? "https://s3.amazonaws.com/getsatisfaction.com/" : "http://s3.amazonaws.com/getsatisfaction.com/";
+	  document.write(unescape("%3Cscript src='" + asset_host + "javascripts/feedback-v2.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+
+	<script type="text/javascript" charset="utf-8">
+	  var feedback_widget_options = {};
+
+	  feedback_widget_options.display = "overlay";  
+	  feedback_widget_options.company = "mentaway";
+	  feedback_widget_options.placement = "left";
+	  feedback_widget_options.color = "#222";
+	  feedback_widget_options.style = "idea";
+
+	  var feedback_widget = new GSFN.feedback_widget(feedback_widget_options);
+	</script>
+
 
 
   <!--[if lt IE 7 ]>

@@ -726,14 +726,14 @@ body.user-page #header #user {
 	margin-right: 30px;
 }
 #registration_steps ul li.active {
-	color: #666;
+	color: #333;
 	background: url(../images/seta_steps.png) center bottom no-repeat;
 }
 
 #registration_steps ul li.finished {
 	color: #669900;
-	background: url(../images/check_steps.png) left center no-repeat;
-	padding-left: 15px;
+	/*background: url(../images/check_steps.png) left center no-repeat;
+	padding-left: 15px;*/
 }
 
 /* Forms */

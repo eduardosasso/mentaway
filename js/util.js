@@ -12,7 +12,7 @@ var Util = {
 	},
 	
 	redirect: function(url){
-		window.location.replace(url);
+		window.location.replace(jQuery.trim(url));
 	},
 	
 	message: function(message, type) {
@@ -41,16 +41,18 @@ var Util = {
 	},
 	
 	update_metatags: function(placemark) {
-		$('meta[property=og:title]').attr('content',placemark.name);
-		$('meta[property=og:description]').attr('content',placemark.description);
-		$('meta[property=og:url]').attr('content',window.location);
-		$('meta[property=og:image]').attr('content',placemark.image);
+		// $('meta[property=og:title]').attr('content',placemark.name);
+		// $('meta[property=og:description]').attr('content',placemark.description);
+		// $('meta[property=og:url]').attr('content',Util.get_pretty_url());
+		// $('meta[property=og:image]').attr('content',placemark.image);
 	},
 	
 	update_like_button: function(){
 		var url = Util.get_pretty_url();
+		
+		var like = '<fb:like width="360" show_faces="false" url="' + url + '"></fb:like>';
 				
-		this.fblike.html('<fb:like width="360" show_faces="false" href="' + url + '"></fb:like>');
+		this.fblike.html(like);
 		
 		if (typeof(FB) != "undefined") {
 			FB.XFBML.parse();		

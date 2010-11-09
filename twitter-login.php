@@ -34,7 +34,7 @@ if ($_GET['oauth_token']) {
 	$user = $controller->get_user($id);
 
 	if (empty($user)) {
-		if (!empty($_SESSION['invite'])) {
+		//if (!empty($_SESSION['invite'])) {
 			
 			//se chegou aqui e tem o invite cria o user temp e segue adiante para preencher outras infos
 			$user = new User();
@@ -54,11 +54,11 @@ if ($_GET['oauth_token']) {
 			$_SESSION['id'] = $id;
 			
 			header('location: /user/profile');	
-		} else {
-			//tentou criar um user sem invite, da uma mensagem e redireciona para a home....
-			Message::show("Sorry but only invited users for now.", Message::ERROR);
-			header('location: /');
-		}
+		// } else {
+		// 			//tentou criar um user sem invite, da uma mensagem e redireciona para a home....
+		// 			Message::show("Sorry but only invited users for now.", Message::ERROR);
+		// 			header('location: /');
+		// 		}
 		
 	} else {
 		$id = $user->_id;

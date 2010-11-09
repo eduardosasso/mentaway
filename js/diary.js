@@ -15,25 +15,25 @@ var Diary = {
 		});
 		
 		// //quando inicializa ve se tem posts para mostrar ou nao o link do diario na tela...
-		// 		Diary.get_(null,null,function(posts){
-		// 			if (posts) {
-		// 				Diary.has_data = true;
-		// 				Diary.link_el.show();
-		// 				
-		// 				var title = posts[0]['title'];
-		// 				var body = posts[0]['body'];
-		// 				var date = posts[0]['timestamp'];
-		// 				var service = posts[0]['service'];
-		// 				
-		// 				Panel_aux.set_title(title);
-		// 				Panel_aux.set_date(date);
-		// 				Panel_aux.set_description(body);
-		// 				Panel_aux.set_service(service);
-		// 				
-		// 			} else {
-		// 				Diary.link_el.hide();
-		// 			}
-		// 		});		
+				Diary.get_(null,null,function(posts){
+					if (posts) {
+						Diary.has_data = true;
+						Diary.link_el.show();
+						
+						// var title = posts[0]['title'];
+						// var body = posts[0]['body'];
+						// var date = posts[0]['timestamp'];
+						// var service = posts[0]['service'];
+						// 
+						// Panel_aux.set_title(title);
+						// Panel_aux.set_date(date);
+						// Panel_aux.set_description(body);
+						// Panel_aux.set_service(service);
+						
+					} else {
+						Diary.link_el.hide();
+					}
+				});		
 	},
 	
 	has_posts: function(){

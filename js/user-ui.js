@@ -8,6 +8,8 @@ $(document).ready(function() {
 		$(this).attr('class','remove_user_service remove');
 		
 		User.add_general_service(service);
+		
+		return false;
 	});
 	
 	$('a.remove_user_service').click(function(){
@@ -23,12 +25,16 @@ $(document).ready(function() {
 	$('a#posterous.add').click(function(){
 		$('#posterous_block').removeClass('hidden').show();
 		$('#posterous_url').focus();
+		
+		return false;
 	})
 	
 	$('#add_posterous').click(function(){
 		site = $('#posterous_url').val();
 
 		User.add_posterous(site);
+		
+		return false;
 	});
 	
 	$("#profile_block form").validate({
@@ -57,6 +63,7 @@ $(document).ready(function() {
 				//$('#services_block').html(data);
 			}			
 		});
+		return false;
 	});
 	
 	
