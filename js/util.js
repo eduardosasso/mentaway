@@ -42,21 +42,23 @@ var Util = {
 	
 	update_metatags: function(placemark) {
 		// $('meta[property=og:title]').attr('content',placemark.name);
-		// $('meta[property=og:description]').attr('content',placemark.description);
-		// $('meta[property=og:url]').attr('content',Util.get_pretty_url());
-		// $('meta[property=og:image]').attr('content',placemark.image);
+		// 		$('meta[property=og:description]').attr('content',placemark.description);
+		// 		$('meta[property=og:url]').attr('content',Util.get_pretty_url());
+		// 		$('meta[property=og:image]').attr('content',placemark.image);
 	},
 	
 	update_like_button: function(){
 		var url = Util.get_pretty_url();
 		
-		var like = '<fb:like width="360" show_faces="false" url="' + url + '"></fb:like>';
+		//var like = '<fb:like width="360" show_faces="false" url="' + url + '"></fb:like>';		
+		
+		var like = '<iframe src="http://www.facebook.com/plugins/like.php?href=' +  url + '&layout=button_count" scrolling="no" frameborder="0" style="height: 21px; width: 360px" allowTransparency="true"></iframe>';
 				
 		this.fblike.html(like);
 		
-		if (typeof(FB) != "undefined") {
-			FB.XFBML.parse();		
-		};
+		// if (typeof(FB) != "undefined") {
+		// 			FB.XFBML.parse();		
+		// 		};
 	},
 	
 	update_tweet_button: function(){

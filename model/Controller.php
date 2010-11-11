@@ -23,6 +23,11 @@ class Controller {
 		return $placemarks->rows;
 	}
 	
+	function get_placemark($user, $checkin_id) {
+		$placemarks = $this->get_placemarks($user);
+		return $placemarks[$checkin_id];		
+	}
+	
 	function get_placemarks_starting_from($user, $timestamp){
 		$placemarks = $this->get_placemarks($user);
 		

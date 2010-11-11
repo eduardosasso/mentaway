@@ -66,17 +66,28 @@ if ($args[0] == 'user') {
 		$username_and_or_user_menu = View::show_username_and_menu($user);
 		
 		$id = end($args);
-
+		
 		/*
 			TODO Controle tosco para identificar url bookmarkable, se vem com /numero troca para #numero para testar facebook
 		*/
 		if (count($args) > 1 && is_int(intval($id))) {
+			
 			$app_url = get_app_url();
 			$username = $user->username;
+						
+			if (is_facebook_bot()) {
+				$placemark = $controller->get_placemark($username, $id);
+								
+				//se a requisicao eh feita pela facebook entao so escreve as tags na tela e nada mais.
+				echo View::show_facebook_metatags($placemark, $user->fullname);
+				
+			} else {
+				$url = "$app_url/$username#$id";
 
-			$url = "$app_url/$username#$id";
-			header("Location: $url");
-		} else {
+				header("Location: $url");
+			}			
+			
+		} else {			
 			include("app.php");
 		}
 
@@ -85,6 +96,16 @@ if ($args[0] == 'user') {
 		include("404.php");  
 	}
 	
+}
+
+function is_facebook_bot() {
+
+	//$sites = 'Google|Yahoo|msnbot|facebookexternalhit'; // Add the rest of the search-engines 
+
+	$sites = 'facebookexternalhit';
+
+	return (preg_match("/$sites/", $_SERVER['HTTP_USER_AGENT']) > 0) ? true : false;  
+
 }
 
 function get_app_url() {

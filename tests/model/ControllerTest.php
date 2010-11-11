@@ -14,6 +14,16 @@ class ControllerTest extends PHPUnit_Framework_TestCase {
 			echo '</pre>';
 		}
 		
+		public function test_get_placemark() {
+			$controller = new Controller();
+			
+			$placemark = $controller->get_placemark('eduardosasso', 310);
+			
+			echo '<pre>';
+			print_r($placemark);
+			echo '</pre>';
+		}
+		
 		public function xtest_get_placemarks_starting_from() {
 			$controller = new Controller();
 			
@@ -74,7 +84,7 @@ class ControllerTest extends PHPUnit_Framework_TestCase {
 
 		}	
 		
-		public function test_get_current_trip_status(){
+		public function xtest_get_current_trip_status(){
 			$username = 'eduardosasso';	
 			
 			$controller = new Controller();
