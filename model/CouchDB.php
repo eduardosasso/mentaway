@@ -90,7 +90,7 @@ class CouchDB implements DatabaseInterface {
 			//ve se a trip eh nova ou atualizacao, se eh atualizacao remove a existente e 
 			//inclui novamente a quem vem por argumento com infos atualizadas
 			foreach ($user_trips as $key => $trip_saved_on_db) {
-				if ($new_or_updated_trip->_id == $trip_saved_on_db->_id) {
+				if (isset($trip_saved_on_db->_id) && $new_or_updated_trip->_id == $trip_saved_on_db->_id) {
 					
 					unset($user_trips[$key]);
 					$temp_array = array_values($user_trips);
@@ -99,8 +99,11 @@ class CouchDB implements DatabaseInterface {
 				}
 			}
 		}
-	
-		$user->trips[] = $new_or_updated_trip;
+
+		//$user->trips[] = $new_or_updated_trip;
+
+		//coloca a trip nova/atualizada sempre no inicio da lista para usar a convencao q a trip 0 eh a corrente.. lame
+		array_unshift($user->trips, $new_or_updated_trip);
 		
 		$response = $this->save_user($user);
 		

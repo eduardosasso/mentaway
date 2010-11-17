@@ -20,18 +20,23 @@ class Stats extends AbstractService {
 			
 			$trip = $controller->get_current_trip($username);
 			
-			if (empty($trip)) {
-				error_log("Usuario $username sem trip");
-				return;
+			/*
+				TODO se a trip do cara ta quebrada seta alguns defaults para ele na hora de atualizar os stats
+				como vamos revisar a necessidade de trips isso quebra o galho
+			*/
+			if (!isset($trip->name)) {
+				$trip->name = 'My Trip';
 			}
 			
-			$last_update = $trip->status->last_update;
+			if (!isset($trip->_id)) {
+				$trip->_id = 'trip';
+			}
 			
 			/*
 				TODO aqui tem q ser os placemarks da trip atual
 			*/			
-			if (!empty($last_update)) {
-				$placemarks = $controller->get_placemarks_starting_from($username, $last_update);
+			if (isset($trip->status->last_update)) {
+				$placemarks = $controller->get_placemarks_starting_from($username, $trip->status->last_update);
 			}	else {
 				$placemarks = $controller->get_placemarks($username);
 			}
@@ -128,8 +133,12 @@ class Stats extends AbstractService {
 			
 			$locations = $this->format_location_message($status);
 			
-			$how_many_days = $this->how_many_days(strtotime($trip->begin));
-			$how_many_days .= 'on the road';
+			if (isset($trip->begin)) {
+				$how_many_days = $this->how_many_days(strtotime($trip->begin));
+				$how_many_days .= 'on the road';
+			} else {
+				$how_many_days = '';
+			}
 
 			$status->message = $how_many_days . $locations; 
 			
