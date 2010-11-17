@@ -13,21 +13,19 @@ set_time_limit(0);
 
 $controller = new Controller();
 
-$users = $controller->get_all_users();
+$username = 'tommaso';
+$user = $controller->get_user($username);
 
-foreach ($users as $key => $user) {
+foreach ($user->services as $key => $service) {
+	$classname = $service->name;
 
-	foreach ($user->value->services as $key => $service) {
-		$username = $user->id;
-		$classname = $service->name;
-
-		$object = new $classname;
-		$object->get_updates($username);
-	}
-
-	//atualiza stats
-	$stats = new Stats();
-	$stats->get_updates($username);	
+	$object = new $classname;
+	$object->get_updates($username);
 }
+
+//atualiza stats
+$stats = new Stats();
+$stats->get_updates($username);	
+
 
 ?>
