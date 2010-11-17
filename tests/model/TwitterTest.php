@@ -10,7 +10,7 @@ class TwitterTest extends PHPUnit_Framework_TestCase {
 			// 
 			// $db->clean_database();
 			
-			$username = 'eduardosasso';
+			$username = 'arasmus';
 
 			$twitter = new Twitter();
 			$placemarks = $twitter->get_updates($username);

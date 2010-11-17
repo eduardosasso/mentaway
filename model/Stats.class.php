@@ -20,6 +20,11 @@ class Stats extends AbstractService {
 			
 			$trip = $controller->get_current_trip($username);
 			
+			if (empty($trip)) {
+				error_log("Usuario $username sem trip");
+				return;
+			}
+			
 			$last_update = $trip->status->last_update;
 			
 			/*
@@ -32,7 +37,7 @@ class Stats extends AbstractService {
 			}
 			
 			if (empty($placemarks)) {
-				return null;
+				return;
 			}	
 
 			$trip->status = $this->update_trip_status($trip, $placemarks);
@@ -100,13 +105,13 @@ class Stats extends AbstractService {
 						$name = $value['long_name'];
 
 						switch ($address_type) {
-							case CITY:
+							case self::CITY:
 							$status->cities[] = $name;
 							break;
-							case STATE:
+							case self::STATE:
 							$status->states[] = $name;
 							break;
-							case COUNTRY:	
+							case self::COUNTRY:	
 							$status->countries[] = $name;
 							break;
 						}
@@ -134,9 +139,9 @@ class Stats extends AbstractService {
 		
 		private function address_type($types) {
 			if (count($types) >=2) {
-				if ($types[0] == 'locality' && $types[1] == 'political') return CITY;
-				if ($types[0] == 'administrative_area_level_1' && $types[1] == 'political') return STATE;
-				if ($types[0] == 'country' && $types[1] == 'political') return COUNTRY;
+				if ($types[0] == 'locality' && $types[1] == 'political') return self::CITY;
+				if ($types[0] == 'administrative_area_level_1' && $types[1] == 'political') return self::STATE;
+				if ($types[0] == 'country' && $types[1] == 'political') return self::COUNTRY;
 			}
 			return null;			
 		}
@@ -148,7 +153,7 @@ class Stats extends AbstractService {
 
 			curl_setopt($ch, CURLOPT_URL, $url);
 			curl_setopt($ch, CURLOPT_HEADER,0);
-			curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER["HTTP_USER_AGENT"]);
+//			curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER["HTTP_USER_AGENT"]);
 			curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 

@@ -14,10 +14,10 @@ class CouchDB implements DatabaseInterface {
 	private $db;
 	
 	function __construct() {
-		$url = "http://localhost:5984/";
+		//$url = "http://localhost:5984/";
 
 		//via ssh tunnel base quente.
-		//$url = "http://localhost:5985/";
+		$url = "http://localhost:5985/";
 		
 		$database = "mentaway";
 		
@@ -81,28 +81,26 @@ class CouchDB implements DatabaseInterface {
 		return $response;		
 	}
 	
-	public function add_user_trip($username, $trip) {
+	public function add_user_trip($username, $new_or_updated_trip) {
 		$user = $this->get_user($username);
 		
 		if (isset($user->trips)) {
 			$user_trips = $user->trips;
 
-			//ve se o servico ja existe, se sim remove para atualizar...
-			foreach ($user_trips as $key => $value) {
-				if ($value->_id == $trip->_id) {
-					$trip = array_remove_empty($trip);
-					
-					$trip = (object) array_merge((array)$value, (array)$trip);
+			//ve se a trip eh nova ou atualizacao, se eh atualizacao remove a existente e 
+			//inclui novamente a quem vem por argumento com infos atualizadas
+			foreach ($user_trips as $key => $trip_saved_on_db) {
+				if ($new_or_updated_trip->_id == $trip_saved_on_db->_id) {
 					
 					unset($user_trips[$key]);
 					$temp_array = array_values($user_trips);
 					$user->trips = $temp_array;
-
+					
 				}
 			}
 		}
 	
-		$user->trips[] = $trip;
+		$user->trips[] = $new_or_updated_trip;
 		
 		$response = $this->save_user($user);
 		
