@@ -57,7 +57,7 @@ class Stats extends AbstractService {
 			$countries = count($status->countries);
 			
 			if ($cities > 1) {
-				$message = ", $cities cities";
+				$message = "$cities cities";
 			}
 			
 			if ($states > 1) {
@@ -135,7 +135,7 @@ class Stats extends AbstractService {
 			
 			if (isset($trip->begin)) {
 				$how_many_days = $this->how_many_days(strtotime($trip->begin));
-				$how_many_days .= 'on the road';
+				$how_many_days .= 'on the road, ';
 			} else {
 				$how_many_days = '';
 			}
