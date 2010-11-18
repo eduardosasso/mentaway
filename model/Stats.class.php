@@ -20,19 +20,29 @@ class Stats extends AbstractService {
 			
 			$trip = $controller->get_current_trip($username);
 			
-			$last_update = $trip->status->last_update;
+			/*
+				TODO se a trip do cara ta quebrada seta alguns defaults para ele na hora de atualizar os stats
+				como vamos revisar a necessidade de trips isso quebra o galho
+			*/
+			if (!isset($trip->name)) {
+				$trip->name = 'My Trip';
+			}
+			
+			if (!isset($trip->_id)) {
+				$trip->_id = 'trip';
+			}
 			
 			/*
 				TODO aqui tem q ser os placemarks da trip atual
 			*/			
-			if (!empty($last_update)) {
-				$placemarks = $controller->get_placemarks_starting_from($username, $last_update);
+			if (isset($trip->status->last_update)) {
+				$placemarks = $controller->get_placemarks_starting_from($username, $trip->status->last_update);
 			}	else {
 				$placemarks = $controller->get_placemarks($username);
 			}
 			
 			if (empty($placemarks)) {
-				return null;
+				return;
 			}	
 
 			$trip->status = $this->update_trip_status($trip, $placemarks);
@@ -47,7 +57,7 @@ class Stats extends AbstractService {
 			$countries = count($status->countries);
 			
 			if ($cities > 1) {
-				$message = ", $cities cities";
+				$message = "$cities cities";
 			}
 			
 			if ($states > 1) {
@@ -100,13 +110,13 @@ class Stats extends AbstractService {
 						$name = $value['long_name'];
 
 						switch ($address_type) {
-							case CITY:
+							case self::CITY:
 							$status->cities[] = $name;
 							break;
-							case STATE:
+							case self::STATE:
 							$status->states[] = $name;
 							break;
-							case COUNTRY:	
+							case self::COUNTRY:	
 							$status->countries[] = $name;
 							break;
 						}
@@ -123,8 +133,12 @@ class Stats extends AbstractService {
 			
 			$locations = $this->format_location_message($status);
 			
-			$how_many_days = $this->how_many_days(strtotime($trip->begin));
-			$how_many_days .= 'on the road';
+			if (isset($trip->begin)) {
+				$how_many_days = $this->how_many_days(strtotime($trip->begin));
+				$how_many_days .= 'on the road, ';
+			} else {
+				$how_many_days = '';
+			}
 
 			$status->message = $how_many_days . $locations; 
 			
@@ -134,9 +148,9 @@ class Stats extends AbstractService {
 		
 		private function address_type($types) {
 			if (count($types) >=2) {
-				if ($types[0] == 'locality' && $types[1] == 'political') return CITY;
-				if ($types[0] == 'administrative_area_level_1' && $types[1] == 'political') return STATE;
-				if ($types[0] == 'country' && $types[1] == 'political') return COUNTRY;
+				if ($types[0] == 'locality' && $types[1] == 'political') return self::CITY;
+				if ($types[0] == 'administrative_area_level_1' && $types[1] == 'political') return self::STATE;
+				if ($types[0] == 'country' && $types[1] == 'political') return self::COUNTRY;
 			}
 			return null;			
 		}
@@ -148,7 +162,7 @@ class Stats extends AbstractService {
 
 			curl_setopt($ch, CURLOPT_URL, $url);
 			curl_setopt($ch, CURLOPT_HEADER,0);
-			curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER["HTTP_USER_AGENT"]);
+//			curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER["HTTP_USER_AGENT"]);
 			curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 

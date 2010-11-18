@@ -22,9 +22,14 @@ abstract class AbstractService {
 			*/
 			$user = $db->get_user($username);
 			$trip = $user->trips[0];
-			
-			if ($document->timestamp >= strtotime($trip->begin)) {
-				$db->save($document);			
+
+			//se a trip do cara tem data de inicio respeita ela na hora de salvar os checkins, se nao tem nada pega tudo.
+			if (isset($trip->begin)) {
+				if ($document->timestamp >= strtotime($trip->begin)) {
+					$db->save($document);
+				}
+			} else {
+				$db->save($document);
 			}
 
 		} catch (Exception $e) {

@@ -27,7 +27,7 @@
 				}
 			}
 			else {
-				if (trim($val) != ""){
+				if (!is_object($val) && trim($val) != ""){
 					$narr[$key] = $val;
 				}
 			}

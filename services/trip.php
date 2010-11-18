@@ -37,8 +37,10 @@ function add_trip() {
 	$current = true;
 	
 	//$date = date('D M d H:i:s O Y');
-
-	$trip = new Trip();
+	
+	$controller = new Controller();
+	$trip = $controller->get_current_trip($username);
+	
 	/*
 		TODO esse id tem q ser dinamico quando tiver suporte para multiplas trips
 	*/

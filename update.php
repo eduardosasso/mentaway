@@ -1,5 +1,5 @@
 <?php
-error_reporting(E_ALL);
+//error_reporting(E_ALL);
 ini_set('display_errors', TRUE);
 ini_set('display_startup_errors', TRUE);
 
@@ -22,7 +22,14 @@ foreach ($users as $key => $user) {
 		$classname = $service->name;
 
 		$object = new $classname;
-		$object->get_updates($username);
+
+		//Faz um Try/catch para o erro nao ser fatal, tenta atualizar todos sempre...
+		try {
+			$object->get_updates($username);
+		} catch (Exception $e) {
+			error_log("Problema fazendo update do usuario: $username");
+		}
+		
 	}
 
 	//atualiza stats
