@@ -1,23 +1,12 @@
 <?php 
-require_once("DatabaseInterface.php");
-require_once("Service.class.php");
-require_once("Trip.class.php");
-
-require_once "lib/couchdb/couch.php";
-require_once "lib/couchdb/couchClient.php";
-require_once "lib/couchdb/couchDocument.php";
-
-require_once "lib/HelperFunctions.php";
+include realpath($_SERVER["DOCUMENT_ROOT"]) . '/classes.php';
 
 class CouchDB implements DatabaseInterface { 
 	
 	private $db;
 	
 	function __construct() {
-		//$url = "http://localhost:5984/";
-
-		//via ssh tunnel base quente.
-		$url = "http://localhost:5985/";
+		$url = Settings::get_couchdb_url();
 		
 		$database = "mentaway";
 		

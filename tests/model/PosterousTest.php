@@ -1,6 +1,5 @@
 <?php 
-$root = realpath($_SERVER["DOCUMENT_ROOT"]);
-require_once("$root/model/Posterous.class.php");
+include realpath($_SERVER["DOCUMENT_ROOT"]) . '/classes.php';
 
 //phpunit tests/model/PosterousTest.php
 class PosterousTest extends PHPUnit_Framework_TestCase {

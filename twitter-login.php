@@ -1,11 +1,7 @@
 <?php
 session_start();
 
-include 'model/lib/twitter/EpiCurlTwitter.php';
-include 'model/lib/twitter/EpiOAuthTwitter.php';
-include 'model/lib/twitter/EpiTwitter.php';
-include 'model/User.class.php';
-include 'util/Message.class.php';
+include realpath($_SERVER["DOCUMENT_ROOT"]) . '/classes.php';
 
 $consumer_key = "rJHgm4ewnT6VqD7MFThA";
 $consumer_secret = "88QKvizTTHlIsmPlv93t4tRPIKTNf7lQx4ZnZwPduI";

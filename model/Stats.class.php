@@ -1,10 +1,6 @@
 <?php 
 
-require_once("lib/HelperFunctions.php");
-require_once("AbstractService.class.php");
-require_once("Controller.php");
-require_once("Placemark.class.php");
-require_once("Status.class.php");
+include realpath($_SERVER["DOCUMENT_ROOT"]) . '/classes.php';
 
 /*
 	TODO Deve percorrer todos os placemarks do usuario para a trip ativa e identificar informacoes como cidades visitadas, fotos tiradas, dias na estrada etc...

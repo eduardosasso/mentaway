@@ -4,7 +4,7 @@ session_start();
 
 //header("Content-type: application/json");
 
-require_once("model/Controller.php");
+include $_SERVER["DOCUMENT_ROOT"] . '/classes.php';
 
 $controller = new Controller();
 

@@ -3,11 +3,7 @@
 ini_set('display_errors', TRUE);
 ini_set('display_startup_errors', TRUE);
 
-require_once("model/Controller.php");
-require_once("model/Foursquare.class.php");
-require_once("model/Twitter.class.php");
-require_once("model/Flickr.class.php");
-require_once("model/Stats.class.php");
+include realpath($_SERVER["DOCUMENT_ROOT"]) . '/classes.php';
 
 set_time_limit(0);
 

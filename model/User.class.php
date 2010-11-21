@@ -1,6 +1,5 @@
 <?php 
-require_once("Service.class.php");
-require_once("Trip.class.php");
+include realpath($_SERVER["DOCUMENT_ROOT"]) . '/classes.php';
 
 class User {  
 	public $_id;

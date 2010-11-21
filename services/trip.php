@@ -1,10 +1,8 @@
 <?php
-// error_reporting(E_ALL);
-// ini_set('display_errors', TRUE);
-// ini_set('display_startup_errors', TRUE);
+// require_once("../model/Trip.class.php");
+// require_once("../model/Controller.php");
 
-require_once("../model/Trip.class.php");
-require_once("../model/Controller.php");
+include realpath($_SERVER["DOCUMENT_ROOT"]) . '/classes.php';
 
 $action = $_REQUEST['action'];
 

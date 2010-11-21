@@ -1,8 +1,5 @@
 <?php
-require_once("AbstractService.class.php");
-require_once("Controller.php");
-require_once("Post.class.php");
-require_once("lib/posterous-api.php");
+include realpath($_SERVER["DOCUMENT_ROOT"]) . '/classes.php';
 
 class Posterous extends AbstractService {
 	public function get_updates($username){

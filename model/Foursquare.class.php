@@ -1,11 +1,5 @@
 <?php 
-require_once("AbstractService.class.php");
-require_once("Controller.php");
-require_once("Placemark.class.php");
-
-require_once("lib/foursquare/EpiCurl.php");
-require_once("lib/foursquare/EpiOAuth.php");
-require_once("lib/foursquare/EpiFoursquare.php");
+include realpath($_SERVER["DOCUMENT_ROOT"]) . '/classes.php';
 
 class Foursquare extends AbstractService { 
 	

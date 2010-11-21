@@ -1,13 +1,15 @@
 <?php
 session_start();
 
-require_once("../model/Service.class.php");
-require_once("../model/Controller.php");
+// require_once("../model/Service.class.php");
+// require_once("../model/Controller.php");
+// 
+// require_once("../model/lib/foursquare/EpiCurl.php");
+// require_once("../model/lib/foursquare/EpiOAuth.php");
+// require_once("../model/lib/foursquare/EpiFoursquare.php");
+// require_once("../util/Message.class.php");
 
-require_once("../model/lib/foursquare/EpiCurl.php");
-require_once("../model/lib/foursquare/EpiOAuth.php");
-require_once("../model/lib/foursquare/EpiFoursquare.php");
-require_once("../util/Message.class.php");
+include realpath($_SERVER["DOCUMENT_ROOT"]) . '/classes.php';
 
 $consumer_key = "3ZJVNOQBLHDFE3YKW3BJ1XQZG0XRJWLN4EVNR3WYRKEO0FED";								 
 $consumer_secret = "YLMEQHX1LO5K0XDGWCEQKNI0WXRPWNTKM05VXELYZ30J42C2";

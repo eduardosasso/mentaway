@@ -1,8 +1,10 @@
 <?php
 
-require_once("../model/User.class.php");
-require_once("../model/Controller.php");
-require_once("../model/lib/HelperFunctions.php");
+// require_once("../model/User.class.php");
+// require_once("../model/Controller.php");
+// require_once("../model/lib/HelperFunctions.php");
+
+include realpath($_SERVER["DOCUMENT_ROOT"]) . '/classes.php';
 
 $username = $_REQUEST['username'];
 $fullname = $_REQUEST['fullname'];

@@ -9,11 +9,13 @@
 
 	ob_start();
 
-	require_once("../model/Service.class.php");
-	require_once("../model/Controller.php");
-	require_once("../util/Message.class.php");
-
-	require_once($path_to_phpFlickr_class . "phpFlickr.php");
+	// require_once("../model/Service.class.php");
+	// 	require_once("../model/Controller.php");
+	// 	require_once("../util/Message.class.php");
+	// 
+	// 	require_once($path_to_phpFlickr_class . "phpFlickr.php");
+	
+	include realpath($_SERVER["DOCUMENT_ROOT"]) . '/classes.php';
 	
 	//@unset($_SESSION['phpFlickr_auth_token']);
 	unset($_SESSION['phpFlickr_auth_token']);

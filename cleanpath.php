@@ -1,8 +1,7 @@
 <?php 
 session_start();
 
-require_once("model/Controller.php");
-require_once("model/View.php");
+include realpath($_SERVER["DOCUMENT_ROOT"]) . '/classes.php';
 
 $controller = new Controller();
 

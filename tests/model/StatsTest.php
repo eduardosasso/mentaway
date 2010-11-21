@@ -1,7 +1,5 @@
 <?php 
-$root = realpath($_SERVER["DOCUMENT_ROOT"]);
-require_once("$root/model/Stats.class.php");
-require_once("$root/model/Trip.class.php");
+include realpath($_SERVER["DOCUMENT_ROOT"]) . '/classes.php';
 
 //phpunit tests/model/StatsTest.php
 class StatsTest extends PHPUnit_Framework_TestCase {

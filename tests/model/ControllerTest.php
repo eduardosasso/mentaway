@@ -1,6 +1,5 @@
 <?php 
-$root = realpath($_SERVER["DOCUMENT_ROOT"]);
-require_once("$root/model/Controller.php");
+include realpath($_SERVER["DOCUMENT_ROOT"]) . '/classes.php';
 
 //phpunit tests/model/ControllerTest.php
 class ControllerTest extends PHPUnit_Framework_TestCase {

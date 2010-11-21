@@ -1,6 +1,6 @@
 <?php
 
-require_once("../model/Controller.php");
+include realpath($_SERVER["DOCUMENT_ROOT"]) . '/classes.php';
 
 $action = $_REQUEST['action'];
 $username = $_REQUEST['username'];
