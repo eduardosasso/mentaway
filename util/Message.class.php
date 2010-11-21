@@ -27,4 +27,3 @@ $messages = Message::get();
 $message_type = Message::get_type();
 	
 ?>
-

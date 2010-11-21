@@ -1,11 +1,15 @@
 <?php
 	session_start();
 	
-	$api_key                 = "abf2e4a70a2362dcc429faf6060954a1";
-	$api_secret              = "d4e88e847732c369";
-	//$default_redirect        = "/mentaway/eduardosasso";
-	$permissions             = "read";
-	$path_to_phpFlickr_class = "../model/lib/flickr/";
+	include realpath($_SERVER["DOCUMENT_ROOT"]) . '/classes.php';
+	
+	$key_secret = Settings::get_flickr_oauth_key();		
+	
+	$api_key = $key_secret[0];
+	$api_secret = $key_secret[1];
+	
+	$permissions = "read";
+	//$path_to_phpFlickr_class = "../model/lib/flickr/";
 
 	ob_start();
 
@@ -14,8 +18,6 @@
 	// 	require_once("../util/Message.class.php");
 	// 
 	// 	require_once($path_to_phpFlickr_class . "phpFlickr.php");
-	
-	include realpath($_SERVER["DOCUMENT_ROOT"]) . '/classes.php';
 	
 	//@unset($_SESSION['phpFlickr_auth_token']);
 	unset($_SESSION['phpFlickr_auth_token']);

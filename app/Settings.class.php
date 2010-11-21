@@ -43,6 +43,38 @@ class Settings {
 		return $key_secret;		
 	}
 	
+	public static function get_foursquare_oauth_key() {
+		$consumer_key = "3ZJVNOQBLHDFE3YKW3BJ1XQZG0XRJWLN4EVNR3WYRKEO0FED";
+		$consumer_secret = "YLMEQHX1LO5K0XDGWCEQKNI0WXRPWNTKM05VXELYZ30J42C2";
+		
+		if (Settings::get_env() == Settings::LOCAL) {
+			$consumer_key = "A50Y3YTNHIXKMLBRV24JRSJXQCGNCSVVWAXV3S1D1DPGAKDJ";
+			$consumer_secret = "MU5SR2PHQ02FJDKJXMUZW0R3OWOAOBPZGHEX1YTDJPUH0HJQ";
+		}
+		
+		$key_secret = array();
+		$key_secret[] = $consumer_key;
+		$key_secret[] = $consumer_secret;
+		
+		return $key_secret;
+	}
+	
+	public static function get_flickr_oauth_key(){
+		$consumer_key = "abf2e4a70a2362dcc429faf6060954a1";
+		$consumer_secret = "d4e88e847732c369";
+		
+		if (Settings::get_env() == Settings::LOCAL) {
+			$consumer_key = "1003882fc64173a086b55b4a255f8c2f";
+			$consumer_secret = "6adf2461ab5e6b59";
+		}
+		
+		$key_secret = array();
+		$key_secret[] = $consumer_key;
+		$key_secret[] = $consumer_secret;
+		
+		return $key_secret;	
+	}
+	
 	public static function get_couchdb_url() {
 		$url = 'http://localhost:5984/';
 		

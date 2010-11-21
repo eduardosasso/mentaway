@@ -4,8 +4,10 @@ include realpath($_SERVER["DOCUMENT_ROOT"]) . '/classes.php';
 class Foursquare extends AbstractService { 
 	
 	public function get_updates($username){
-		$consumer_key = "3ZJVNOQBLHDFE3YKW3BJ1XQZG0XRJWLN4EVNR3WYRKEO0FED";								 
-		$consumer_secret = "YLMEQHX1LO5K0XDGWCEQKNI0WXRPWNTKM05VXELYZ30J42C2";
+		$key_secret = Settings::get_foursquare_oauth_key();
+		
+		$consumer_key = $key_secret[0];
+		$consumer_secret = $key_secret[1];
 		
 		$servicename = 'foursquare';
 		
