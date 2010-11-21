@@ -27,13 +27,29 @@ class Settings {
 		
 	}
 	
+	public static function get_twitter_oauth_key(){
+		$consumer_key = "rJHgm4ewnT6VqD7MFThA";
+		$consumer_secret = "88QKvizTTHlIsmPlv93t4tRPIKTNf7lQx4ZnZwPduI";
+		
+		if (Settings::get_env() == Settings::LOCAL) {
+			$consumer_key = "ehdVztRxrLeQDvaiOXfOrg";
+			$consumer_secret = "m5TwGbCbQ9iz1wWrsEyp4Fa9Q5PgTwH2PXQmZLltU4";
+		}
+		
+		$key_secret = array();
+		$key_secret[] = $consumer_key;
+		$key_secret[] = $consumer_secret;
+		
+		return $key_secret;		
+	}
+	
 	public static function get_couchdb_url() {
 		$url = 'http://localhost:5984/';
 		
-		if (Settings::get_env() == Settings::LOCAL) {
-			//via ssh tunnel base quente.
-			$url = "http://localhost:5985/";
-		}
+		// if (Settings::get_env() == Settings::LOCAL) {
+		// 	//via ssh tunnel base quente.
+		// 	$url = "http://localhost:5985/";
+		// }
 		
 		return $url;
 	}	

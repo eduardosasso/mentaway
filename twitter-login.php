@@ -3,17 +3,19 @@ session_start();
 
 include realpath($_SERVER["DOCUMENT_ROOT"]) . '/classes.php';
 
-$consumer_key = "rJHgm4ewnT6VqD7MFThA";
-$consumer_secret = "88QKvizTTHlIsmPlv93t4tRPIKTNf7lQx4ZnZwPduI";
+$key_secret = Settings::get_twitter_oauth_key();
+
+$consumer_key = $key_secret[0];
+$consumer_secret = $key_secret[1];
 
 $twitterObj = new EpiTwitter($consumer_key, $consumer_secret);
 
 //se o token vier populado significa que eh o callback do oauth
 if ($_GET['oauth_token']) {
 
-	require_once("model/Service.class.php");
-	require_once("model/Controller.php");
-	require_once("model/User.class.php");
+	// require_once("model/Service.class.php");
+	// require_once("model/Controller.php");
+	// require_once("model/User.class.php");
 
 	$controller = new Controller();
 
@@ -44,6 +46,8 @@ if ($_GET['oauth_token']) {
 			$user->date = date('m/d/Y');
 			$user->token = $token->oauth_token;				
 			$user->secret = $token->oauth_token_secret;
+			//entra como false para ativar ele quando salvar o profile
+			$user->active = false;
 
 			$controller->save_user($user);
 			

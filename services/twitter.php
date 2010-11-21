@@ -2,11 +2,6 @@
 
 session_start();
 
-// require_once("../model/Service.class.php");
-// require_once("../model/Controller.php");
-// require_once("../model/Twitter.class.php");
-// require_once("../util/Message.class.php");
-
 include realpath($_SERVER["DOCUMENT_ROOT"]) . '/classes.php';
 
 $username = $_REQUEST['username'];

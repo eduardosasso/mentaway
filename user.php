@@ -2,14 +2,6 @@
 /*
 	TODO Essa pagina de html tem q ser generica... talvez com template.
 */
-$script_name = dirname($_SERVER["SCRIPT_NAME"]);
-$base_url = '';
-
-if ($script_name != '/') {
-	$base_url = dirname($_SERVER["SCRIPT_NAME"]);
-}
-
-define('BASE_URL',$base_url);
 
 ?>
 <!doctype html>
@@ -43,14 +35,14 @@ define('BASE_URL',$base_url);
 
 
   <!-- CSS : implied media="all" -->
-  <link rel="stylesheet" href="<?php echo BASE_URL ?>/css/style.css?v=1">
+  <link rel="stylesheet" href="/css/style.css?v=1">
 
   <!-- For the less-enabled mobile browsers like Opera Mini -->
-  <link rel="stylesheet" media="handheld" href="<?php echo BASE_URL ?>/css/handheld.css?v=1">
+  <link rel="stylesheet" media="handheld" href="/css/handheld.css?v=1">
 
  
   <!-- All JavaScript at the bottom, except for Modernizr which enables HTML5 elements & feature detects -->
-  <script src="<?php echo BASE_URL ?>/js/modernizr-1.5.min.js"></script>
+  <script src="/js/modernizr-1.5.min.js"></script>
 
 </head>
 
@@ -288,34 +280,12 @@ define('BASE_URL',$base_url);
 	<script src="http://ajax.microsoft.com/ajax/jquery.validate/1.7/jquery.validate.pack.js"></script>
 	
 	<script type="text/javascript" charset="utf-8">
-			base_url = "<?php echo BASE_URL; ?>"
-			
 			$('#map_type').val('<?php echo $user->maptype ?>');
 	</script>
 
-	<script src="<?php echo BASE_URL ?>/js/util.js?v=1"></script>
-  <script src="<?php echo BASE_URL ?>/js/user.js?v=1"></script>
-  <script src="<?php echo BASE_URL ?>/js/user-ui.js?v=1"></script>
-
-	<script type="text/javascript" charset="utf-8">
-	  var is_ssl = ("https:" == document.location.protocol);
-	  var asset_host = is_ssl ? "https://s3.amazonaws.com/getsatisfaction.com/" : "http://s3.amazonaws.com/getsatisfaction.com/";
-	  document.write(unescape("%3Cscript src='" + asset_host + "javascripts/feedback-v2.js' type='text/javascript'%3E%3C/script%3E"));
-	</script>
-
-	<script type="text/javascript" charset="utf-8">
-	  var feedback_widget_options = {};
-
-	  feedback_widget_options.display = "overlay";  
-	  feedback_widget_options.company = "mentaway";
-	  feedback_widget_options.placement = "left";
-	  feedback_widget_options.color = "#222";
-	  feedback_widget_options.style = "idea";
-
-	  var feedback_widget = new GSFN.feedback_widget(feedback_widget_options);
-	</script>
-
-
+	<script src="/js/util.js?v=1"></script>
+  <script src="/js/user.js?v=1"></script>
+  <script src="/js/user-ui.js?v=1"></script>
 
   <!--[if lt IE 7 ]>
     <script src="js/dd_belatedpng.js?v=1"></script>

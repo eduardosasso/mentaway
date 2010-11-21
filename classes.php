@@ -6,4 +6,10 @@
 
 	require_once realpath($_SERVER["DOCUMENT_ROOT"]) . '/app/Settings.class.php';
 	include realpath($_SERVER["DOCUMENT_ROOT"]) . '/lib/autoloader/Autoloader.php';
+	
+	//se o ambiente é local sempre mostra erros na tela
+	if (Settings::get_env() == Settings::LOCAL) {
+		ini_set('display_errors', TRUE);
+		ini_set('display_startup_errors', TRUE);	
+	}	
 ?>
