@@ -64,7 +64,7 @@
 			<a href="/<?php echo $user->username ?>" id="logo"><img src="/images/mentaway-logo.png" alt="Mentaway" width="195" height="64"/></a> 
 
 			<div id="user">
-				<img src="<?php echo $user->picture ?>" />
+				<a href="/<?php echo $user->username ?>"><img src="<?php echo $user->picture ?>" /></a>
 				<?php echo $username_and_or_user_menu ?>
 				<p class="location"><?php echo $user->location ?></p>
 				<p class="url"><a href="<?php echo $user->site ?>"><?php echo $user->site ?></a></p>
@@ -81,6 +81,9 @@
 			if (!$messages) {
 				$class="hidden";
 			}
+
+			$user_page = 'http://' . $_SERVER['HTTP_HOST'] . '/' . $user->username;
+			
 		?>
 		<div id="messages" class='<?php echo "$class $message_type" ?>'>			
 			<?php echo $messages ?>
@@ -107,9 +110,21 @@
 					$has_flickr = !empty($flickr);
 					$has_posterous = !empty($posterous);
 					
-					$help = "Click on the service image to Add or Remove them. 
-										<p>If you have a Posterous account you can set it up and use Mentaway as your travel blogging. How cool is that!</p>
-										<p>More services like Gowalla, Facebook, Tumblr and others will be included in the future.</p>";
+					$help = "<strong>Click on the service image</strong> to <strong>Add</strong> or <strong>Remove</strong> a service. 
+										<p>If you add Flickr you have to <strong>to add geo-location to your photos</strong> so we can put them automatically on your map.
+										<strong><a href='http://www.flickr.com/help/map/#204' TARGET='_blank'>Click here</a></strong> to see how to configure.</p>
+										
+										<p>If you add <strong>Twitter</strong> you have to include <strong>#m</strong> to your tweets and also <strong>enable geo-location</strong>. 
+										<strong><a href='http://support.twitter.com/articles/118492-new-how-to-tweet-with-your-location-on-mobile-devices' TARGET='_blank'>Click here</a></strong> to see how to configure.</p> 
+					
+										<p>If you have a <strong>Posterous</strong> account you can setup and use Mentaway as your travel blogging. 
+										Just <strong>add the tag Mentaway</strong> to your posts and we take care of the rest.</p>
+										
+										<p><strong>Tip:</strong> If you have an iPhone check out <strong><a href='http://instagr.am/' TARGET='_blank'>Instagram</a></strong>, it makes really easy to take pictures and upload them to Flickr with <strong>geo-location</strong>
+										and also have Twitter and Foursquare integration which makes it a great tool for populating your Mentaway.</p>
+										
+										<p>More services like Gowalla, Facebook, Tumblr and others will be included in the future.</p>
+										<p>Your Mentaway page is: <strong><a href='$user_page' TARGET='_blank'>$user_page</a></strong>";
 				?>
 
 			<div id="services_block" class="list-services">
@@ -156,8 +171,11 @@
 		<?php endif ?> 
 
 		<?php if ($page == 'profile'): ?>
-			<?php
-				$help = "There is nothing new here. Just update your info if needed and you are all set. <p>If you are a new user this will be a quick three steps process.</p>"
+			<?php				
+				$help = "Update your profile info. <p>Fields marked with <strong>*</strong> are required.</p>
+									<p>If you are a <strong>new user</strong> this will be a <strong>quick three steps process.</strong></p>
+									<p>Don't forget to <strong>setup your services</strong> otherwise we won't be able to fetch your updates.</p>
+									<p>Your Mentaway page is: <strong><a href='$user_page' TARGET='_blank'>$user_page</a></strong>";
 			?>
 			
 			<div id="profile_block">
@@ -167,23 +185,23 @@
 					<div id="username">
 						<label for="username">Username</label>
 						<input type="text" name="username" value="<?php echo $user->username ?>" class="required" readonly>
-						<span class="tip">http://beta.mentaway.com/<strong><?php echo $user->username ?></strong></span>
+						<span class="tip">http://<?php echo $_SERVER['HTTP_HOST'] ?>/<strong><?php echo $user->username ?></strong></span>
 					</div>
 
 					<div id="avatar">
 						<!-- <span class="">&nbsp;</span> -->
 						<img src="<?php echo $user->picture ?>" alt="User picture" border="0" />
 					</div>					
-
-					<div id="fullname">
-						<label for="fullname">Full Name *</label>
-						<input type="text" name="fullname" value="<?php echo $user->fullname ?>" class="required">
-					</div>	
 					
 					<div id="email">
 						<label for="email">Email *</label>
 						<input type="email" name="email" value="<?php echo $user->email ?>" class="required email">
 					</div>
+
+					<div id="fullname">
+						<label for="fullname">Full Name *</label>
+						<input type="text" name="fullname" value="<?php echo $user->fullname ?>" class="required">
+					</div>	
 
 					<div id="bio">
 						<label for="bio">Short Bio</label>
@@ -230,7 +248,8 @@
 			<?php
 				$help = "Mentaway is in beta, so we are trying to figure it out the best way to explore this feature.
 									<p><strong>Tip:</strong> You can set a past date on the begin date of your trip, this way we can collect checkins and pictures taken on a previous trip for example.</p>
-									<p>If you just want to play with just type anything on the Trip's name so we can get you up un running...</p>"
+									<p>If you just want to play with just type anything on the Trip's name so we can get you up un running...</p>
+									<p>Your Mentaway page is: <strong><a href='$user_page' TARGET='_blank'>$user_page</a></strong>";
 			?>
 			<div id="trip_block">
 				<h3>Set your trip</h3>

@@ -53,7 +53,7 @@ if ($_GET['oauth_token']) {
 			
 			$_SESSION['id'] = $id;
 			
-			header('location: /user/profile');	
+			header("location: /user/profile/$user->username");	
 		// } else {
 		// 			//tentou criar um user sem invite, da uma mensagem e redireciona para a home....
 		// 			Message::show("Sorry but only invited users for now.", Message::ERROR);
@@ -71,19 +71,19 @@ if ($_GET['oauth_token']) {
 		$controller->save_user($user);
 		
 		if (empty($user->email)) {
-			header('location: /user/profile');
+			header("location: /user/profile/$user->username");
 			return;			
 		}
 		
 		if (count($user->services) == 0) {
 			//usuario ja foi criado mas nao tem nenhum servico
-			header('location: /user/services');
+			header("location: /user/services/$user->username");
 			return;
 		};
 		
 		if (count($user->trips) == 0) {
 			//usuario ja foi criado mas nao tem trip
-			header('location: /user/trips');
+			header("location: /user/trips/$user->username");
 			return;
 		};
 

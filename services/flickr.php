@@ -49,9 +49,9 @@
 		
 		$response = $controller->add_user_service($username, $service);	
 		
-		Message::show("Flickr configured... Don't forget to set Geo location on your pictures.<p>If you have an iPhone you should definitely check out Instagram to do this.</p>");	
+		Message::show("Flickr configured... Don't forget to add geo-location to your pictures.</p>");	
 		
-		header( 'Location: /user/services');
+		header("Location: /user/services/$username");
 	}
 
 	// if (empty($redirect)) {

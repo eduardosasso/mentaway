@@ -29,13 +29,13 @@ if ($token && $secret) {
 	*/
 	$response = $controller->add_user_service($username, $service);	
 	//manda devolta para a pagina de user so pra atualizar a UI
-	Message::show("Twitter configured... Add '#m' to your tweets and dont forget to enable geolocation on twitter.",Message::INFO);
+	Message::show("Twitter configured... Add '#m' to your tweets and don't forget to enable geo-location on Twitter.",Message::INFO);
 	
 	
 	/*
 		TODO esse conceito ta meio tosco, ele chega aqui por ajax e faz um echo com a url para retornar, tem q melhorar
 	*/
-	echo "/user/services";
+	echo "/user/services/$username";
 	
 }
 

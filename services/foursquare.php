@@ -34,9 +34,9 @@ if ($oauth_token) {
 	
 	$response = $controller->add_user_service($username, $service);
 	
-	Message::Show("Foursquare check!");
+	Message::Show("Done! We will get all your Foursquare Checkins automatically from now on.");
 
-	header( 'Location: '  . '/user/services');	
+	header( 'Location: '  . '/user/services/' . $username);	
 	
 	// echo $token->oauth_token;
 	// 	echo "<br>";

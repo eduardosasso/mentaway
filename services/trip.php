@@ -66,21 +66,21 @@ function add_trip() {
 	$user = $controller->get_user($username);
 	
 	if (count($user->trips) == 0) {
-		echo "/user/trips";			
+		echo "/user/trips/$username";			
 		return;
 	};
 	
 	if (empty($user->email)) {
-		echo "/user/profile";
+		echo "/user/profile/$username";
 		return;			
 	}
 	
 	if (count($user->services) == 0) {
-		echo "/user/services";
+		echo "/user/services/$username";
 		return;
 	};
 	
-	echo 'Trip configured. Everything from now on will be tracked as your current trip.';	
+	echo 'Trip configured.';	
 }
 
 function get_trip() {

@@ -31,9 +31,9 @@ $user->active = true;
 $controller->save_user($user);
 
 if (count($user->services) == 0) {
-	echo "/user/services";
+	echo "/user/services/$user->username";
 } elseif (count($user->trips) == 0) {
-	echo "/user/trips";
+	echo "/user/trips/$user->username";
 } else {
 	echo "Done. Now go have some fun!";
 }

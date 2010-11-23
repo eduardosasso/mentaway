@@ -85,7 +85,7 @@
 			</div>
 
 			<div id="user">
-				<img src="<?php echo $user->picture ?>" />
+				<a href="/<?php echo $user->username ?>"><img src="<?php echo $user->picture ?>" /></a>
 				<?php echo $username_and_or_user_menu ?>
 				<p class="location"><?php echo $user->location ?></p>
 				<p class="url"><a href="<?php echo $site ?>"><?php echo $user->site ?></a></p>

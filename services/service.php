@@ -17,21 +17,21 @@ switch ($action) {
 		$user = $controller->get_user($username);
 		
 		if (empty($user->email)) {
-			echo "/user/profile";
+			echo "/user/profile/$user->username";
 			return;			
 		}
 		
 		if (count($user->services) == 0) {
-			echo "/user/services";
+			echo "/user/services/$user->username";
 			return;
 		};
 		
 		if (count($user->trips) == 0) {
-			echo "/user/trips";			
+			echo "/user/trips/$user->username";			
 			return;
 		};
 		
-		echo "Yeah, i've got this.";
+		echo "Done! Services saved.";
 		break;	
 }
 
