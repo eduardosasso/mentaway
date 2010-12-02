@@ -44,10 +44,10 @@
 
 	<script type="text/javascript" charset="utf-8">
 		user = "<?php echo $user->username ?>"
+		logged_in = "<?php echo $logged_in ?>"
 	</script>
 
 </head>
-
 
 <!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
 
@@ -58,11 +58,7 @@
 <!--[if (gt IE 9)|!(IE)]><!--> <body> <!--<![endif]-->
 	<input type="hidden" value="<?php echo $user->username ?>" id="username">
 	
-	<?php if ($messages): ?>
-		<div id="messages">
-			<?php echo $messages ?>
-		</div>			
-	<?php endif ?>
+	<?php echo $messages ?>
 	
 	<div id="map"></div>
 	
@@ -145,7 +141,7 @@
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 
 	<script src="http://maps.google.com/maps/api/js?sensor=false"></script> 
-	
+
 	<script src="js/plugins.js?v=1"></script>
 	<script src="js/util.js?v=1"></script>
 	<script src="js/user.js?v=1"></script>

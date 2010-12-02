@@ -76,18 +76,9 @@
 	
 	<div class="content">
 		
-		<?php
-			$class = "";
-			if (!$messages) {
-				$class="hidden";
-			}
+		<?php	$user_page = 'http://' . $_SERVER['HTTP_HOST'] . '/' . $user->username; ?>
 
-			$user_page = 'http://' . $_SERVER['HTTP_HOST'] . '/' . $user->username;
-			
-		?>
-		<div id="messages" class='<?php echo "$class $message_type" ?>'>			
-			<?php echo $messages ?>
-		</div>			
+		<?php echo $messages ?>
 				
 		<div id="panel_user">
 			
