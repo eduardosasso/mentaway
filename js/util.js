@@ -17,16 +17,16 @@ var Util = {
 	
 	message: function(message, type) {
 		messages_el = $('#messages');
-		container = $('div.content');
-		
-		if (container.length == 0) {
-			container = $('body');
-		};
+		page = $('body').attr('id');
 		
 		if (messages_el.length == 0) {
 			div_messages = $('<div/>').attr('id','messages').addClass(type).html(message);
 			
-			$(container).prepend(div_messages);
+			if (page == 'app') {
+				$('#map').before(div_messages);
+			} else if (page == 'user') {
+				$('.content').prepend(div_messages);
+			};
 			
 		} else {
 			messages_el.removeClass().addClass(type).html(message).show();

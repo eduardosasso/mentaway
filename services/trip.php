@@ -80,7 +80,7 @@ function add_trip() {
 		return;
 	};
 	
-	echo 'Trip configured.';	
+	echo "/$username";
 }
 
 function get_trip() {

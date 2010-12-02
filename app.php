@@ -51,43 +51,46 @@
 
 <!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
 
-<!--[if lt IE 7 ]> <body class="ie6"> <![endif]-->
-<!--[if IE 7 ]>    <body class="ie7"> <![endif]-->
-<!--[if IE 8 ]>    <body class="ie8"> <![endif]-->
-<!--[if IE 9 ]>    <body class="ie9"> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!--> <body> <!--<![endif]-->
-	<input type="hidden" value="<?php echo $user->username ?>" id="username">
-	
-	<?php echo $messages ?>
-	
-	<div id="map"></div>
-	
+<!--[if lt IE 7 ]> <body id="app" class="ie6"> <![endif]-->
+<!--[if IE 7 ]>    <body id="app" class="ie7"> <![endif]-->
+<!--[if IE 8 ]>    <body id="app" class="ie8"> <![endif]-->
+<!--[if IE 9 ]>    <body id="app" class="ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <body id="app"> <!--<![endif]-->
 	<div id="fb-root"></div>
 	
-	<div id="header">
-		<a href="#" id="logo"><img src="images/mentaway-logo.png" alt="Mentaway - Keep tracking of your adventures" /></a>
+	<input type="hidden" value="<?php echo $user->username ?>" id="username">
+	
+	<div id="content">
+		<div id="header">
+			<a href="#" id="logo"><img src="images/mentaway-logo.png" alt="Mentaway - Keep tracking of your adventures" /></a>
+
+			<div class="wrap">
+
+				<ul id="main-nav">
+					<li id="diary"><a href="">Diary</a></li>
+					<li class="disabled-feature">History</li>
+					<li class="disabled-feature">Stats</li>
+				</ul>
+
+				<div id="info">
+					<h1></h1>
+					<h4 class="trip-status"></h4>
+				</div>
+
+				<div id="user">
+					<a href="/<?php echo $user->username ?>"><img src="<?php echo $user->picture ?>" /></a>
+					<?php echo $username_and_or_user_menu ?>
+					<p class="location"><?php echo $user->location ?></p>
+					<p class="url"><a href="<?php echo $site ?>"><?php echo $user->site ?></a></p>
+				</div>	
+
+			</div>		
+		</div>
+
+		<?php echo $messages ?>
 		
-		<div class="wrap">
-
-			<ul id="main-nav">
-				<li id="diary"><a href="">Diary</a></li>
-				<li class="disabled-feature">History</li>
-				<li class="disabled-feature">Stats</li>
-			</ul>
-
-			<div id="info">
-				<h1></h1>
-				<h4 class="trip-status"></h4>
-			</div>
-
-			<div id="user">
-				<a href="/<?php echo $user->username ?>"><img src="<?php echo $user->picture ?>" /></a>
-				<?php echo $username_and_or_user_menu ?>
-				<p class="location"><?php echo $user->location ?></p>
-				<p class="url"><a href="<?php echo $site ?>"><?php echo $user->site ?></a></p>
-			</div>	
-
-		</div>		
+		<div id="map"></div>
+		
 	</div>
 	
 	<div id="panel1">

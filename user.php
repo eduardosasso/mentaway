@@ -49,11 +49,11 @@
 
 <!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
 
-<!--[if lt IE 7 ]> <body class="user-page ie6"> <![endif]-->
-<!--[if IE 7 ]>    <body class="user-page ie7"> <![endif]-->
-<!--[if IE 8 ]>    <body class="user-page ie8"> <![endif]-->
-<!--[if IE 9 ]>    <body class="user-page ie9"> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!--> <body class="user-page"> <!--<![endif]-->
+<!--[if lt IE 7 ]> <body id="user" class="user-page ie6"> <![endif]-->
+<!--[if IE 7 ]>    <body id="user" class="user-page ie7"> <![endif]-->
+<!--[if IE 8 ]>    <body id="user" class="user-page ie8"> <![endif]-->
+<!--[if IE 9 ]>    <body id="user" class="user-page ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <body id="user" class="user-page"> <!--<![endif]-->
 	
 	<div id="fb-root"></div>
 	

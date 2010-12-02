@@ -60,12 +60,12 @@ var Map = {
 			streetViewControl: true,
 			mapTypeControlOptions: {
 				style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
-				position: google.maps.ControlPosition.BOTTOM_RIGHT
+				position: google.maps.ControlPosition.TOP_RIGHT
 			},
 			navigationControl: true,
 			navigationControlOptions: {
-				style: google.maps.NavigationControlStyle.SMALL,
-				position: google.maps.ControlPosition.BOTTOM_LEFT 
+				style: google.maps.NavigationControlStyle.MEDIUM,
+				position: google.maps.ControlPosition.TOP_LEFT 
 			},
 			scaleControl: false
 		}

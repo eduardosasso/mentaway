@@ -155,7 +155,7 @@ a:link { -webkit-tap-highlight-color: #FF5E99; }
 
 
 /* always force a scrollbar in non-IE */
-html { overflow-y: scroll; }
+/*html { overflow-y: scroll; }*/
 
 /* make buttons play nice in IE:    
    www.viget.com/inspire/styling-the-button-element-in-internet-explorer/ */
@@ -200,7 +200,17 @@ button {  width: auto; overflow: visible; }
 /* mentaway custom style */
 html { height: 100% }
 body { height: 100%; margin: 0px; padding: 0px }
-#map { height: 100% }
+
+#map { 
+	min-height: 100%; 
+	height: auto !important; /*Cause footer to stick to bottom in IE 6*/
+	height: 100%; 
+}
+
+#app #content {
+	position: relative;
+	height:100%;
+}
 
 @font-face {
   font-family: "Mentaway";
@@ -275,6 +285,23 @@ div.help-sidebar p {
 }
 
 /* Messages */
+#app #messages {
+/*	margin: 0 auto;
+	position: relative;
+	top: 150px;
+	width: 200px;
+	z-index: 90;
+*/	
+	margin-bottom: 0px;		
+	
+	position:fixed;
+  z-index: 100;  
+  top:50%;  
+  left:50%;  
+  margin:-200px 0 0 -200px;  
+  width:400px;  
+}
+
 #messages.error {
 	text-align: center;
 	color: #FFF;
@@ -293,14 +320,17 @@ div.help-sidebar p {
 }
 
 #header{
-	position: absolute;
 	top: 0px;
 	width: 100%;
 	height: 100px;
 	color: #7A6957;
-	margin-bottom: 30px;
 	z-index: 90;
 }
+
+#user #header {
+	margin-bottom: 30px;
+}
+
 .login-register #header,
 .user-page #header{
 	position: relative;
