@@ -94,10 +94,32 @@ if ($args[0] == 'user') {
 		} else {
 			$logged_in = !empty($_SESSION['id']);
 
-			if ($logged_in && count($user->services) == 0) {
-				Message::show("Sorry but only invited users for now.", Message::ERROR);
+			if ($logged_in) {
+				if (count($user->services) == 0) {
+					Message::show("Before going to your Mentaway page make sure you include some services otherwise we won't have anything to show :(", Message::ERROR);
+					header("Location: /user/services/$user->username");
+					return;
+				}
+				
+				// $placemarks = $controller->get_placemarks($user->username);
+				// 				
+				// 				if (count($placemarks) == 0) {
+				// 					Message::show("Updating your services. Hang on...", Message::INFO);
+				// 					$strCookie = 'PHPSESSID=' . $_COOKIE['PHPSESSID'] . '; path=/';
+				// 
+				// 					session_write_close();
+				// 
+				// 					$ch = curl_init('http://mentaway.dev/update-user.php');
+				// 					curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+				// 					curl_setopt( $ch, CURLOPT_COOKIE, $strCookie );
+				// 					curl_setopt($ch, CURLOPT_TIMEOUT, 1);
+				// 					$response = curl_exec($ch);
+				// 					curl_close($ch);
+				// 				} 
+				
 			}
-				$messages = Message::get();
+			
+			$messages = Message::get();
 			
 			include("app.php");
 		}

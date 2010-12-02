@@ -83,7 +83,6 @@
 		<div id="panel_user">
 			
 			<?php echo $registration_steps ?>
-
 			
 			<!--
 			TODO melhor eh cada tipo (services, profile e trips) ter sua propria pagina, tem q usar templates para padronizar header e outros detalhes comuns

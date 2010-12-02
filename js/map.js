@@ -245,8 +245,16 @@ var Map = {
 		this.get_placemarks(function(placemarks){
 			if (placemarks.length == 0) {
 				//se caiu aqui eh pq o user eh nao usou o mentaway ainda entao seta o mapa em algum lugar padrao...
-				
-				//Util.message('This user doesnt have anything on h');
+
+				if (logged_in) {
+					Util.message('Updating services. This may take a while. Hang on...', 'info');
+					
+					$.post('/update-user.php', {username: user}, function(data) {
+						window.location.reload(true);
+					});
+				} else {
+					//Util.message('Updating services. Hang on...', 'error');
+				}
 				
 				Panel.hide();
 				Panel_aux.hide();
