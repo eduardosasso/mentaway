@@ -68,8 +68,12 @@
 
 				<ul id="main-nav">
 					<li id="diary"><a href="">Diary</a></li>
-					<li class="disabled-feature">History</li>
-					<li class="disabled-feature">Stats</li>
+					<!-- <li class="disabled-feature">Stats</li>
+					<li class="disabled-feature">History</li> -->
+					<?php if ($logged_in == false): ?>
+						<li class=""><a href="/">Login</a></li>
+					<?php endif ?>
+					
 				</ul>
 
 				<div id="info">
@@ -81,7 +85,7 @@
 					<a href="/<?php echo $user->username ?>"><img src="<?php echo $user->picture ?>" /></a>
 					<?php echo $username_and_or_user_menu ?>
 					<p class="location"><?php echo $user->location ?></p>
-					<p class="url"><a href="<?php echo $site ?>"><?php echo $user->site ?></a></p>
+					<p class="url"><a href="<?php echo $user->site ?>"><?php echo $user->site ?></a></p>
 				</div>	
 
 			</div>		
@@ -98,7 +102,7 @@
 		<div class="column">
 			<p class="dates"></p>
 			<div id="via">
-				<span>sent via <a href="#" class="source"></a></span>
+				<span class="invisible">sent via <a href="#" class="source"></a></span>
 				<div class="icon"></div>
 			</div>
 			<h2></h2>
