@@ -5,7 +5,7 @@ var User = {
 	init: function(username){
 		this.name = username;
 		
-		this.get_user(username);
+		//this.get_user(username);
 	},
 	
 	insert_update: function(args, callback) {

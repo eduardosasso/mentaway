@@ -11,6 +11,7 @@ var Map = {
 		container_el: $("#content"),
 		map_el: $("#map"),
 		user: '',
+		maptype: '',
 		active_icon: 'images/mark-active.png',
 		default_icon: 'images/marks.png'
 	},
@@ -56,7 +57,7 @@ var Map = {
 		var map_options = {
 			zoom: 5,
 			center: lat_long,
-			mapTypeId: eval('google.maps.MapTypeId.' + User.maptype),
+			mapTypeId: eval('google.maps.MapTypeId.' + this.options.maptype),
 			streetViewControl: true,
 			mapTypeControlOptions: {
 				style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,

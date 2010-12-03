@@ -44,6 +44,7 @@
 
 	<script type="text/javascript" charset="utf-8">
 		user = "<?php echo $user->username ?>"
+		maptype = "<?php echo $user->maptype ?>"
 		logged_in = "<?php echo $logged_in ?>"
 	</script>
 

@@ -289,7 +289,7 @@
 	<script src="http://ajax.microsoft.com/ajax/jquery.validate/1.7/jquery.validate.pack.js"></script>
 	
 	<script type="text/javascript" charset="utf-8">
-			$('#map_type').val('<?php echo $user->maptype ?>');
+			$('#maptype').val('<?php echo $user->maptype ?>');
 	</script>
 
 	<script src="/js/util.js?v=1"></script>
