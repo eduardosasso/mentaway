@@ -8,7 +8,8 @@ class View {
 		
 		$username  = $user->username; 
 		
-		if (!empty($id)) {
+		//se tiver sessao, e o id da sessao for igual o username é pq ta conectado
+		if (!empty($id) && $username == $id) {
 			$username_and_or_menu = "<h3><a href='#' id='user_menu_header'>" . $user->fullname . "</a></h3>
 				<div id='user_menu'>
 				<ul>
@@ -22,12 +23,15 @@ class View {
 		return $username_and_or_menu;
 	}
 	
-	public static function show_facebook_metatags($placemark, $fullname) {
+	public static function show_facebook_metatags($placemark, $user) {
 		// <meta property='og:url' content='http://beta.mentaway.com/eduardosasso/318'/>
 		$title = $placemark->value->name;
 		$description = $placemark->value->description;
 		$lat = $placemark->value->lat;
 		$long = $placemark->value->long;
+		
+		$fullname = $user->fullname;
+		$username = $user->username;
 		
 		$service = $placemark->value->service;
 		

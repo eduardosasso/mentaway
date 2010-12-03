@@ -13,21 +13,8 @@ class CouchDB implements DatabaseInterface {
 		$this->db = new couchClient($url,$database);
 	}
 	
-	private function escape_special_char($id) {
-		//underscore é reservado para id, se vier simula um scape para gravar...
-		if (Helper::startsWith($id, '_')) {
-			return '/' . $id;
-		} else {
-			return $id;
-		}
-	}
-	
-	private function unescape_special_char($id) {
-		return str_replace('/_' , '_', $id);
-	}
-	
 	public function save($document) {
-		$document->_id = $this->escape_special_char($document->_id);
+		$document->_id = Helper::escape_special_char($document->_id);
 		
 		/*
 			TODO Tem q tratar o retorno e excecoes
@@ -43,9 +30,10 @@ class CouchDB implements DatabaseInterface {
 		// 		  if (doc.lat)
 		// 		    emit(doc.user, doc);
 		// 		}
-		
-		$placemarks = $this->db->startkey($user)->endkey($user)->getView('placemark','placemarks');
-		
+		$username = Helper::unescape_special_char($user);
+	
+		$placemarks = $this->db->startkey($username)->endkey($username)->getView('placemark','placemarks');
+	
 		return $placemarks;
 	}
 	
@@ -144,11 +132,11 @@ class CouchDB implements DatabaseInterface {
 	}
 		
 	public function get_user($username) {
-		$username = $this->escape_special_char($username);
+		$username = Helper::escape_special_char($username);
 
 		try {
 			$result = $this->db->getDoc($username);
-			$result->_id = $this->unescape_special_char($result->_id);
+			$result->_id = Helper::unescape_special_char($result->_id);
 			
 		} catch (couchException $e) {
 			/*

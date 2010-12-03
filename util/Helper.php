@@ -45,6 +45,28 @@ class Helper {
 		if($case){return (strcmp(substr($haystack, 0, strlen($needle)),$needle)===0);}
 		return (strcasecmp(substr($haystack, 0, strlen($needle)),$needle)===0);
 	}
+	
+	public static function linkify($ret) {
+		$ret = preg_replace("#(^|[\n ])([\w]+?://[\w]+[^ \"\n\r\t< ]*)#", "\\1<a href=\"\\2\">\\2</a>", $ret);
+		$ret = preg_replace("#(^|[\n ])((www|ftp)\.[^ \"\t\n\r< ]*)#", "\\1<a href=\"http://\\2\">\\2</a>", $ret);
+		$ret = preg_replace("/@(\w+)/", "<a href=\"http://www.twitter.com/\\1\" target=\"_blank\">@\\1</a>", $ret);
+		$ret = preg_replace("/#(\w+)/", "<a href=\"http://search.twitter.com/search?q=\\1\">#\\1</a>", $ret);
+
+		return $ret;
+	}
+	
+	public static function escape_special_char($id) {
+		//underscore é reservado para id, se vier simula um scape para gravar...
+		if (Helper::startsWith($id, '_')) {
+			return '/' . $id;
+		} else {
+			return $id;
+		}
+	}
+	
+	public static function unescape_special_char($id) {
+		return str_replace('/_' , '_', $id);
+	}
 
 } 
 

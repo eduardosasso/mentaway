@@ -14,7 +14,7 @@ $users = $controller->get_all_users();
 foreach ($users as $key => $user) {
 
 	foreach ($user->value->services as $key => $service) {
-		$username = $user->id;
+		$username = Helper::unescape_special_char($user->id);
 		$classname = $service->name;
 
 		$object = new $classname;

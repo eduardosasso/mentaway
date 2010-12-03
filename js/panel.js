@@ -9,7 +9,7 @@ var Panel_aux = {
 	},
 		
 	set_title: function(title){
-		this.el.title.text(title);
+		this.el.title.html(title);
 	},
 
 	set_date: function(timestamp){
@@ -58,7 +58,7 @@ var Panel = {
 	},
 	
 	set_title: function(title){
-		this.el.title.text(title);
+		this.el.title.html(title);
 	},
 
 	set_date: function(timestamp){
@@ -95,9 +95,11 @@ var Panel = {
 	},
 			
 	update: function(placemark){		
+//		console.log(placemark);
 		//define a tag title da pagina
 		//$('title').text(placemark.user + ': ' + placemark.name);
 		
+//		var description = Util.linkify(placemark.description);
 		var description = placemark.description;
 		
 		if (description == null) description = '';
@@ -125,8 +127,10 @@ var Panel = {
 			
 			description = img + description;
 		}	
+
+		title = Util.linkify(placemark.name);
 		
-		this.set_title(placemark.name);
+		this.set_title(title);
 		this.set_date(placemark.timestamp);
 		this.set_description(description);
 		this.set_service(placemark.service);

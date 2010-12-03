@@ -44,6 +44,21 @@ var Util = {
 		return url;
 	},
 	
+	linkify: function(text) {
+		text = text.replace(/(https?:\/\/\S+)/gi, function (s) {
+			return '<a href="' + s + '">' + s + '</a>';
+		});
+
+		text = text.replace(/(^|)@(\w+)/gi, function (s) {
+			return '<a href="http://twitter.com/' + s + '">' + s + '</a>';
+		});
+
+		text = text.replace(/(^|)#(\w+)/gi, function (s) {
+			return '<a href="http://search.twitter.com/search?q=' + s.replace(/#/,'%23') + '">' + s + '</a>';
+		});
+		return text;
+	},
+	
 	add_comments: function(){
 		var url = Util.get_pretty_url();
 		return '<fb:comments width="360" xid="'+ Map.get_current_idx() +'" simple="1" url="'+ url + '"></fb:comments>';

@@ -83,7 +83,7 @@ if ($args[0] == 'user') {
 				$placemark = $controller->get_placemark($username, $id);
 								
 				//se a requisicao eh feita pela facebook entao so escreve as tags na tela e nada mais.
-				echo View::show_facebook_metatags($placemark, $user->fullname);
+				echo View::show_facebook_metatags($placemark, $user);
 				
 			} else {
 				$url = "$app_url/$username#$id";
