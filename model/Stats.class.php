@@ -75,7 +75,7 @@ class Stats extends AbstractService {
 		public function how_many_days($timestamp){
 			$date = date(DATE_RFC822, $timestamp); 			
 			//return $date;
-			return nicetime($date);
+			return Helper::nicetime($date);
 		}
 				
 		public function update_trip_status($trip, $placemarks){			

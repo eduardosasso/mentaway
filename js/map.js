@@ -250,7 +250,11 @@ var Map = {
 					Util.message('Updating services. This may take a while. Hang on...', 'info');
 					
 					$.post('/update-user.php', {username: user}, function(data) {
-						window.location.reload(true);
+						if (jQuery.trim(data) == 0) {
+							Util.message("Sorry, but we didn't find any check-in, tweet or photo to add to your map at this time.", 'error');
+						} else {
+							window.location.reload(true);
+						}
 					});
 				} else {
 					//Util.message('Updating services. Hang on...', 'error');

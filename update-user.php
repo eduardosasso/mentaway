@@ -16,6 +16,9 @@ foreach ($user->services as $key => $service) {
 	$object->get_updates($username);
 }
 
+//retorna o número de registros encontrados... dai quem chamou sabe o q fazer baseado se retornou >1 ou zero
+echo count($controller->get_placemarks($username));
+
 //atualiza stats
 // $stats = new Stats();
 // $stats->get_updates($username);	
