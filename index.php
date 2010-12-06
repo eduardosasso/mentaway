@@ -30,9 +30,8 @@
   <link rel="shortcut icon" href="favicon.ico"> 
   <link rel="apple-touch-icon" href="/apple-touch-icon.png"> 
  
- 
   <!-- CSS : implied media="all" --> 
-  <link rel="stylesheet" href="css/style.css?v=1">
+  <link rel="stylesheet" href="<?php echo Helper::auto_version('/css/style.css'); ?>">
  
   <!-- For the less-enabled mobile browsers like Opera Mini --> 
   <link rel="stylesheet" media="handheld" href="css/handheld.css?v=1"> 
@@ -100,19 +99,24 @@
 	</div>
 		
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-	<script src="/js/util.js?v=1"></script>
-	<script src="/js/login.js?v=1"></script>
+
+  <script src="<?php echo Helper::auto_version('/js/util.js'); ?>"></script>
+  <script src="<?php echo Helper::auto_version('/js/login.js'); ?>"></script>
 	
-	<script> 
-   var _gaq = [['_setAccount', 'UA-18487026-1'], ['_trackPageview']];
-   (function(d, t) {
-    var g = d.createElement(t),
-        s = d.getElementsByTagName(t)[0];
-    g.async = true;
-    g.src = '//www.google-analytics.com/ga.js';
-    s.parentNode.insertBefore(g, s);
-   })(document, 'script');
-  </script> 
+	<?php if (Settings::get_env() != Settings::LOCAL): ?>
+  	<!-- asynchronous google analytics: mathiasbynens.be/notes/async-analytics-snippet 
+	       change the UA-XXXXX-X to be your site's ID -->
+	  <script>
+	   var _gaq = [['_setAccount', 'UA-18487026-1'], ['_trackPageview']];
+	   (function(d, t) {
+	    var g = d.createElement(t),
+	        s = d.getElementsByTagName(t)[0];
+	    g.async = true;
+	    g.src = '//www.google-analytics.com/ga.js';
+	    s.parentNode.insertBefore(g, s);
+	   })(document, 'script');
+	  </script>
+	<?php endif ?>
   
 	
 </body>
