@@ -201,7 +201,7 @@ button {  width: auto; overflow: visible; }
 html { height: 100% }
 body { height: 100%; margin: 0px; padding: 0px }
 
-#map { 
+#map {
 	min-height: 90%; 
 	height: auto !important; /*Cause footer to stick to bottom in IE 6*/
 	height: 90%; 

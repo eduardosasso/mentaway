@@ -32,7 +32,7 @@
 
 
   <!-- CSS : implied media="all" -->
-  <link rel="stylesheet" href="css/style.css?v=1">
+  <link rel="stylesheet" href="<?php echo Helper::auto_version('/css/style.css'); ?>">
   <link rel="stylesheet" href="js/fancybox/jquery.fancybox-1.3.1.css">
 
   <!-- For the less-enabled mobile browsers like Opera Mini -->
@@ -150,31 +150,33 @@
 
 	<script src="http://maps.google.com/maps/api/js?sensor=false"></script> 
 
-	<script src="js/plugins.js?v=1"></script>
-	<script src="js/util.js?v=1"></script>
-	<script src="js/user.js?v=1"></script>
-	<script src="js/panel.js?v=1"></script>
-	<script src="js/diary.js?v=1"></script>
-	<script src="js/nav.js?v=1"></script>
-	<script src="js/map.js?v=1"></script>
-  <script src="js/script.js?v=1"></script>
+	<script src="<?php echo Helper::auto_version('/js/plugins.js'); ?>"></script>
+	<script src="<?php echo Helper::auto_version('/js/util.js'); ?>"></script>
+	<script src="<?php echo Helper::auto_version('/js/user.js'); ?>"></script>
+	<script src="<?php echo Helper::auto_version('/js/panel.js'); ?>"></script>
+	<script src="<?php echo Helper::auto_version('/js/diary.js'); ?>"></script>
+	<script src="<?php echo Helper::auto_version('/js/nav.js'); ?>"></script>
+	<script src="<?php echo Helper::auto_version('/js/map.js'); ?>"></script>
+  <script src="<?php echo Helper::auto_version('/js/script.js'); ?>"></script>
 
   <!--[if lt IE 7 ]>
     <script src="js/dd_belatedpng.js?v=1"></script>
   <![endif]-->
 
-  <!-- asynchronous google analytics: mathiasbynens.be/notes/async-analytics-snippet 
-       change the UA-XXXXX-X to be your site's ID -->
-  <script>
-   var _gaq = [['_setAccount', 'UA-18487026-1'], ['_trackPageview']];
-   (function(d, t) {
-    var g = d.createElement(t),
-        s = d.getElementsByTagName(t)[0];
-    g.async = true;
-    g.src = '//www.google-analytics.com/ga.js';
-    s.parentNode.insertBefore(g, s);
-   })(document, 'script');
-  </script>
+	<?php if (Settings::get_env() != Settings::LOCAL): ?>
+  	<!-- asynchronous google analytics: mathiasbynens.be/notes/async-analytics-snippet 
+	       change the UA-XXXXX-X to be your site's ID -->
+	  <script>
+	   var _gaq = [['_setAccount', 'UA-18487026-1'], ['_trackPageview']];
+	   (function(d, t) {
+	    var g = d.createElement(t),
+	        s = d.getElementsByTagName(t)[0];
+	    g.async = true;
+	    g.src = '//www.google-analytics.com/ga.js';
+	    s.parentNode.insertBefore(g, s);
+	   })(document, 'script');
+	  </script>
+	<?php endif ?>
   
 </body>
 </html>
