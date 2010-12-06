@@ -1,30 +1,21 @@
 <?php 
-require_once("DatabaseInterface.php");
-require_once("Service.class.php");
-require_once("Trip.class.php");
-
-require_once "lib/couchdb/couch.php";
-require_once "lib/couchdb/couchClient.php";
-require_once "lib/couchdb/couchDocument.php";
-
-require_once "lib/HelperFunctions.php";
+include realpath($_SERVER["DOCUMENT_ROOT"]) . '/classes.php';
 
 class CouchDB implements DatabaseInterface { 
 	
 	private $db;
 	
 	function __construct() {
-		$url = "http://localhost:5984/";
-
-		//via ssh tunnel base quente.
-		//$url = "http://localhost:5985/";
-		
+		$url = Settings::get_couchdb_url();
+	
 		$database = "mentaway";
 		
 		$this->db = new couchClient($url,$database);
 	}
 	
 	public function save($document) {
+		$document->_id = Helper::escape_special_char($document->_id);
+		
 		/*
 			TODO Tem q tratar o retorno e excecoes
 		*/
@@ -39,9 +30,10 @@ class CouchDB implements DatabaseInterface {
 		// 		  if (doc.lat)
 		// 		    emit(doc.user, doc);
 		// 		}
-		
-		$placemarks = $this->db->startkey($user)->endkey($user)->getView('placemark','placemarks');
-		
+		$username = Helper::unescape_special_char($user);
+	
+		$placemarks = $this->db->startkey($username)->endkey($username)->getView('placemark','placemarks');
+	
 		return $placemarks;
 	}
 	
@@ -140,8 +132,12 @@ class CouchDB implements DatabaseInterface {
 	}
 		
 	public function get_user($username) {
+		$username = Helper::escape_special_char($username);
+
 		try {
 			$result = $this->db->getDoc($username);
+			$result->_id = Helper::unescape_special_char($result->_id);
+			
 		} catch (couchException $e) {
 			/*
 				TODO tratar melhor o erro ver exatamente o que eh.

@@ -1,25 +1,18 @@
 <?php
 session_start();
 
-require_once("../model/Service.class.php");
-require_once("../model/Controller.php");
+include realpath($_SERVER["DOCUMENT_ROOT"]) . '/classes.php';
 
-require_once("../model/lib/foursquare/EpiCurl.php");
-require_once("../model/lib/foursquare/EpiOAuth.php");
-require_once("../model/lib/foursquare/EpiFoursquare.php");
-require_once("../util/Message.class.php");
+$key_secret = Settings::get_foursquare_oauth_key();
 
-$consumer_key = "3ZJVNOQBLHDFE3YKW3BJ1XQZG0XRJWLN4EVNR3WYRKEO0FED";								 
-$consumer_secret = "YLMEQHX1LO5K0XDGWCEQKNI0WXRPWNTKM05VXELYZ30J42C2";
+$consumer_key = $key_secret[0];
+$consumer_secret = $key_secret[1];
 
 $oauth_token = isset($_REQUEST['oauth_token']) ? $_REQUEST['oauth_token'] : '';
 $username = $_REQUEST['username'];
 
 //se o token vier populado significa que eh o callback do oauth
 if ($oauth_token) {
-	// error_reporting(E_ALL);
-	// 	ini_set('display_errors', TRUE);
-	// 	ini_set('display_startup_errors', TRUE);
 	
 	$foursquareObj = new EpiFoursquare($consumer_key, $consumer_secret);
 	
@@ -41,9 +34,9 @@ if ($oauth_token) {
 	
 	$response = $controller->add_user_service($username, $service);
 	
-	Message::Show("Foursquare check!");
+	Message::Show("Done! We will get all your Foursquare Checkins automatically from now on.");
 
-	header( 'Location: '  . '/user/services');	
+	header( 'Location: '  . '/user/services/' . $username);	
 	
 	// echo $token->oauth_token;
 	// 	echo "<br>";

@@ -1,10 +1,6 @@
 <?php 
 
-require_once("lib/HelperFunctions.php");
-require_once("AbstractService.class.php");
-require_once("Controller.php");
-require_once("Placemark.class.php");
-require_once("Status.class.php");
+include realpath($_SERVER["DOCUMENT_ROOT"]) . '/classes.php';
 
 /*
 	TODO Deve percorrer todos os placemarks do usuario para a trip ativa e identificar informacoes como cidades visitadas, fotos tiradas, dias na estrada etc...
@@ -69,7 +65,7 @@ class Stats extends AbstractService {
 			}
 			
 			if ($message) {
-				$message .= ' visited so far';
+				$message .= ' visited';
 			}
 
 			return $message;
@@ -79,7 +75,7 @@ class Stats extends AbstractService {
 		public function how_many_days($timestamp){
 			$date = date(DATE_RFC822, $timestamp); 			
 			//return $date;
-			return nicetime($date);
+			return Helper::nicetime($date);
 		}
 				
 		public function update_trip_status($trip, $placemarks){			
@@ -133,14 +129,14 @@ class Stats extends AbstractService {
 			
 			$locations = $this->format_location_message($status);
 			
-			if (isset($trip->begin)) {
-				$how_many_days = $this->how_many_days(strtotime($trip->begin));
-				$how_many_days .= 'on the road, ';
-			} else {
-				$how_many_days = '';
-			}
+			// if (isset($trip->begin)) {
+			// 	$how_many_days = $this->how_many_days(strtotime($trip->begin));
+			// 	$how_many_days .= 'on the road, ';
+			// } else {
+			// 	$how_many_days = '';
+			// }
 
-			$status->message = $how_many_days . $locations; 
+			$status->message = $locations; 
 			
 			return $status;			
 			

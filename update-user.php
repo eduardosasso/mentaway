@@ -1,19 +1,12 @@
 <?php
-//error_reporting(E_ALL);
-ini_set('display_errors', TRUE);
-ini_set('display_startup_errors', TRUE);
-
-require_once("model/Controller.php");
-require_once("model/Foursquare.class.php");
-require_once("model/Twitter.class.php");
-require_once("model/Flickr.class.php");
-require_once("model/Stats.class.php");
+include realpath($_SERVER["DOCUMENT_ROOT"]) . '/classes.php';
 
 set_time_limit(0);
 
 $controller = new Controller();
 
-$username = 'arasmus';
+$username = $_REQUEST['username'];
+
 $user = $controller->get_user($username);
 
 foreach ($user->services as $key => $service) {
@@ -23,9 +16,12 @@ foreach ($user->services as $key => $service) {
 	$object->get_updates($username);
 }
 
+//retorna o número de registros encontrados... dai quem chamou sabe o q fazer baseado se retornou >1 ou zero
+echo count($controller->get_placemarks($username));
+
 //atualiza stats
-$stats = new Stats();
-$stats->get_updates($username);	
+// $stats = new Stats();
+// $stats->get_updates($username);	
 
 
 ?>

@@ -1,15 +1,13 @@
 <?php 
-require_once("AbstractService.class.php");
-require_once("Controller.php");
-require_once("Placemark.class.php");
-
-require_once("lib/flickr/phpFlickr.php");
+include realpath($_SERVER["DOCUMENT_ROOT"]) . '/classes.php';
 
 class Flickr extends AbstractService { 
 	
 	public function get_updates($username){
-		$api_key = "abf2e4a70a2362dcc429faf6060954a1";
-		$api_secret = "d4e88e847732c369";
+		$key_secret = Settings::get_flickr_oauth_key();		
+		
+		$api_key = $key_secret[0];
+		$api_secret = $key_secret[1];
 		
 		$servicename = 'flickr';
 		

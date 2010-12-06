@@ -5,14 +5,7 @@
 		tem que recuperar marcacao baseado em data
 */
 
-// error_reporting(E_ALL);
-// ini_set('display_errors', TRUE);
-// ini_set('display_startup_errors', TRUE);
-
-require_once("User.class.php");
-require_once("Placemark.class.php");
-require_once("Posterous.class.php");
-require_once("DatabaseFactory.php");
+include realpath($_SERVER["DOCUMENT_ROOT"]) . '/classes.php';
 
 class Controller {
 	

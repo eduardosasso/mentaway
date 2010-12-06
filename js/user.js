@@ -5,7 +5,7 @@ var User = {
 	init: function(username){
 		this.name = username;
 		
-		this.get_user(username);
+		//this.get_user(username);
 	},
 	
 	insert_update: function(args, callback) {
@@ -13,7 +13,7 @@ var User = {
 			TODO validar form
 		*/
 		
-		url = base_url + '/services/profile.php';
+		url = '/services/profile.php';
 
 		$.post(url, args, function(data){
 				callback(data);
@@ -33,7 +33,7 @@ var User = {
 		// 	desc: desc
 		// }
 
-		url = base_url + '/services/trip.php';
+		url = '/services/trip.php';
 
 		$.post(url, params, function(data){
 			callback(data);
@@ -46,7 +46,7 @@ var User = {
 			username: username,
 		}
 		
-		url = base_url + '/services/trip.php';
+		url = '/services/trip.php';
 
 		$.get(url,args, function(data){
 			callback(data);
@@ -59,7 +59,7 @@ var User = {
 			uid: username,
 		}
 		
-		url = base_url + '/ajax.php';
+		url = '/ajax.php';
 
 		$.get(url,args, function(data){
 			User.maptype = data.maptype;
@@ -72,7 +72,7 @@ var User = {
 			username: user,
 		}
 		
-		url = base_url + '/services/trip.php';
+		url = '/services/trip.php';
 
 		$.get(url,args, function(data){
 			callback(data);
@@ -88,7 +88,7 @@ var User = {
 			username: this.name
 		}
 
-		url = base_url + '/services/' + service + '.php';
+		url = '/services/' + service + '.php';
 		
 		
 		$.get(url,args, function(url){
@@ -138,7 +138,7 @@ var User = {
 			site: site
 		}
 
-		url = base_url + '/services/posterous.php';
+		url = '/services/posterous.php';
 
 		$.get(url,args, function(data){
 			//callback(data);
@@ -151,7 +151,7 @@ var User = {
 			username: this.name
 		}
 
-		url = base_url + '/services/twitter.php';
+		url = '/services/twitter.php';
 
 		$.get(url,args, function(data){
 			callback(data);

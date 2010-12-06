@@ -1,8 +1,10 @@
 <?php 
 session_start();
 
-require_once("model/Controller.php");
-require_once("model/View.php");
+//inclui manual pq esse cara seta variaveis logo apos a classe
+include("util/Message.class.php");
+
+include realpath($_SERVER["DOCUMENT_ROOT"]) . '/classes.php';
 
 $controller = new Controller();
 
@@ -53,9 +55,11 @@ if ($args[0] == 'user') {
 	$username_and_or_user_menu = View::show_username_and_menu($user);
 
 	$registration_steps = View::show_steps_registration($user, $page);
-	
-	include("util/Message.class.php");
-	
+
+	/*
+		TODO recupera as mensagens de erro, ideial era ter um pre-proccess antes de qualquer include para recuperar isso. - drupal
+	*/
+	$messages = Message::get();
 	include($args[0].".php");
 
 } else {
@@ -79,7 +83,7 @@ if ($args[0] == 'user') {
 				$placemark = $controller->get_placemark($username, $id);
 								
 				//se a requisicao eh feita pela facebook entao so escreve as tags na tela e nada mais.
-				echo View::show_facebook_metatags($placemark, $user->fullname);
+				echo View::show_facebook_metatags($placemark, $user);
 				
 			} else {
 				$url = "$app_url/$username#$id";
@@ -87,7 +91,20 @@ if ($args[0] == 'user') {
 				header("Location: $url");
 			}			
 			
-		} else {			
+		} else {
+			$logged_in = !empty($_SESSION['id']);
+
+			if ($logged_in) {
+				if (count($user->services) == 0) {
+					Message::show("Before going to your Mentaway page make sure you include some services otherwise we won't have anything to show :(", Message::ERROR);
+					header("Location: /user/services/$user->username");
+					return;
+				}
+				
+			}
+			
+			$messages = Message::get();
+			
 			include("app.php");
 		}
 
@@ -95,7 +112,7 @@ if ($args[0] == 'user') {
 		//se nao eh user vai para pagina 404
 		include("404.php");  
 	}
-	
+
 }
 
 function is_facebook_bot() {

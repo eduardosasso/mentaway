@@ -1,10 +1,8 @@
 <?php
-// error_reporting(E_ALL);
-// ini_set('display_errors', TRUE);
-// ini_set('display_startup_errors', TRUE);
+// require_once("../model/Trip.class.php");
+// require_once("../model/Controller.php");
 
-require_once("../model/Trip.class.php");
-require_once("../model/Controller.php");
+include realpath($_SERVER["DOCUMENT_ROOT"]) . '/classes.php';
 
 $action = $_REQUEST['action'];
 
@@ -68,21 +66,21 @@ function add_trip() {
 	$user = $controller->get_user($username);
 	
 	if (count($user->trips) == 0) {
-		echo "/user/trips";			
+		echo "/user/trips/$username";			
 		return;
 	};
 	
 	if (empty($user->email)) {
-		echo "/user/profile";
+		echo "/user/profile/$username";
 		return;			
 	}
 	
 	if (count($user->services) == 0) {
-		echo "/user/services";
+		echo "/user/services/$username";
 		return;
 	};
 	
-	echo 'Trip configured. Everything from now on will be tracked as your current trip.';	
+	echo "/$username";
 }
 
 function get_trip() {

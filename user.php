@@ -2,14 +2,6 @@
 /*
 	TODO Essa pagina de html tem q ser generica... talvez com template.
 */
-$script_name = dirname($_SERVER["SCRIPT_NAME"]);
-$base_url = '';
-
-if ($script_name != '/') {
-	$base_url = dirname($_SERVER["SCRIPT_NAME"]);
-}
-
-define('BASE_URL',$base_url);
 
 ?>
 <!doctype html>
@@ -43,25 +35,25 @@ define('BASE_URL',$base_url);
 
 
   <!-- CSS : implied media="all" -->
-  <link rel="stylesheet" href="<?php echo BASE_URL ?>/css/style.css?v=1">
+  <link rel="stylesheet" href="/css/style.css?v=1">
 
   <!-- For the less-enabled mobile browsers like Opera Mini -->
-  <link rel="stylesheet" media="handheld" href="<?php echo BASE_URL ?>/css/handheld.css?v=1">
+  <link rel="stylesheet" media="handheld" href="/css/handheld.css?v=1">
 
  
   <!-- All JavaScript at the bottom, except for Modernizr which enables HTML5 elements & feature detects -->
-  <script src="<?php echo BASE_URL ?>/js/modernizr-1.5.min.js"></script>
+  <script src="/js/modernizr-1.5.min.js"></script>
 
 </head>
 
 
 <!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
 
-<!--[if lt IE 7 ]> <body class="user-page ie6"> <![endif]-->
-<!--[if IE 7 ]>    <body class="user-page ie7"> <![endif]-->
-<!--[if IE 8 ]>    <body class="user-page ie8"> <![endif]-->
-<!--[if IE 9 ]>    <body class="user-page ie9"> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!--> <body class="user-page"> <!--<![endif]-->
+<!--[if lt IE 7 ]> <body id="user" class="user-page ie6"> <![endif]-->
+<!--[if IE 7 ]>    <body id="user" class="user-page ie7"> <![endif]-->
+<!--[if IE 8 ]>    <body id="user" class="user-page ie8"> <![endif]-->
+<!--[if IE 9 ]>    <body id="user" class="user-page ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <body id="user" class="user-page"> <!--<![endif]-->
 	
 	<div id="fb-root"></div>
 	
@@ -72,7 +64,7 @@ define('BASE_URL',$base_url);
 			<a href="/<?php echo $user->username ?>" id="logo"><img src="/images/mentaway-logo.png" alt="Mentaway" width="195" height="64"/></a> 
 
 			<div id="user">
-				<img src="<?php echo $user->picture ?>" />
+				<a href="/<?php echo $user->username ?>"><img src="<?php echo $user->picture ?>" /></a>
 				<?php echo $username_and_or_user_menu ?>
 				<p class="location"><?php echo $user->location ?></p>
 				<p class="url"><a href="<?php echo $user->site ?>"><?php echo $user->site ?></a></p>
@@ -84,20 +76,13 @@ define('BASE_URL',$base_url);
 	
 	<div class="content">
 		
-		<?php
-			$class = "";
-			if (!$messages) {
-				$class="hidden";
-			}
-		?>
-		<div id="messages" class='<?php echo "$class $message_type" ?>'>			
-			<?php echo $messages ?>
-		</div>			
+		<?php	$user_page = 'http://' . $_SERVER['HTTP_HOST'] . '/' . $user->username; ?>
+
+		<?php echo $messages ?>
 				
 		<div id="panel_user">
 			
 			<?php echo $registration_steps ?>
-
 			
 			<!--
 			TODO melhor eh cada tipo (services, profile e trips) ter sua propria pagina, tem q usar templates para padronizar header e outros detalhes comuns
@@ -115,9 +100,21 @@ define('BASE_URL',$base_url);
 					$has_flickr = !empty($flickr);
 					$has_posterous = !empty($posterous);
 					
-					$help = "Click on the service image to Add or Remove them. 
-										<p>If you have a Posterous account you can set it up and use Mentaway as your travel blogging. How cool is that!</p>
-										<p>More services like Gowalla, Facebook, Tumblr and others will be included in the future.</p>";
+					$help = "<strong>Click on the service image</strong> to <strong>Add</strong> or <strong>Remove</strong> a service. 
+										<p>If you add Flickr you have to <strong>to add geo-location to your photos</strong> so we can put them automatically on your map.
+										<strong><a href='http://www.flickr.com/help/map/#204' TARGET='_blank'>Click here</a></strong> to see how to configure.</p>
+										
+										<p>If you add <strong>Twitter</strong> you have to include <strong>#m</strong> to your tweets and also <strong>enable geo-location</strong>. 
+										<strong><a href='http://support.twitter.com/articles/118492-new-how-to-tweet-with-your-location-on-mobile-devices' TARGET='_blank'>Click here</a></strong> to see how to configure.</p> 
+					
+										<p>If you have a <strong>Posterous</strong> account you can setup and use Mentaway as your travel blogging. 
+										Just <strong>add the tag Mentaway</strong> to your posts and we take care of the rest.</p>
+										
+										<p><strong>Tip:</strong> If you have an iPhone check out <strong><a href='http://instagr.am/' TARGET='_blank'>Instagram</a></strong>, it makes really easy to take pictures and upload them to Flickr with <strong>geo-location</strong>
+										and also have Twitter and Foursquare integration which makes it a great tool for populating your Mentaway.</p>
+										
+										<p>More services like Gowalla, Facebook, Tumblr and others will be included in the future.</p>
+										<p>Your Mentaway page is: <strong><a href='$user_page' TARGET='_blank'>$user_page</a></strong>";
 				?>
 
 			<div id="services_block" class="list-services">
@@ -164,8 +161,11 @@ define('BASE_URL',$base_url);
 		<?php endif ?> 
 
 		<?php if ($page == 'profile'): ?>
-			<?php
-				$help = "There is nothing new here. Just update your info if needed and you are all set. <p>If you are a new user this will be a quick three steps process.</p>"
+			<?php				
+				$help = "Update your profile info. <p>Fields marked with <strong>*</strong> are required.</p>
+									<p>If you are a <strong>new user</strong> this will be a <strong>quick three steps process.</strong></p>
+									<p>Don't forget to <strong>setup your services</strong> otherwise we won't be able to fetch your updates.</p>
+									<p>Your Mentaway page is: <strong><a href='$user_page' TARGET='_blank'>$user_page</a></strong>";
 			?>
 			
 			<div id="profile_block">
@@ -175,23 +175,23 @@ define('BASE_URL',$base_url);
 					<div id="username">
 						<label for="username">Username</label>
 						<input type="text" name="username" value="<?php echo $user->username ?>" class="required" readonly>
-						<span class="tip">http://beta.mentaway.com/<strong><?php echo $user->username ?></strong></span>
+						<span class="tip">http://<?php echo $_SERVER['HTTP_HOST'] ?>/<strong><?php echo $user->username ?></strong></span>
 					</div>
 
 					<div id="avatar">
 						<!-- <span class="">&nbsp;</span> -->
 						<img src="<?php echo $user->picture ?>" alt="User picture" border="0" />
 					</div>					
-
-					<div id="fullname">
-						<label for="fullname">Full Name *</label>
-						<input type="text" name="fullname" value="<?php echo $user->fullname ?>" class="required">
-					</div>	
 					
 					<div id="email">
 						<label for="email">Email *</label>
 						<input type="email" name="email" value="<?php echo $user->email ?>" class="required email">
 					</div>
+
+					<div id="fullname">
+						<label for="fullname">Full Name *</label>
+						<input type="text" name="fullname" value="<?php echo $user->fullname ?>" class="required">
+					</div>	
 
 					<div id="bio">
 						<label for="bio">Short Bio</label>
@@ -238,7 +238,8 @@ define('BASE_URL',$base_url);
 			<?php
 				$help = "Mentaway is in beta, so we are trying to figure it out the best way to explore this feature.
 									<p><strong>Tip:</strong> You can set a past date on the begin date of your trip, this way we can collect checkins and pictures taken on a previous trip for example.</p>
-									<p>If you just want to play with just type anything on the Trip's name so we can get you up un running...</p>"
+									<p>If you just want to play with just type anything on the Trip's name so we can get you up un running...</p>
+									<p>Your Mentaway page is: <strong><a href='$user_page' TARGET='_blank'>$user_page</a></strong>";
 			?>
 			<div id="trip_block">
 				<h3>Set your trip</h3>
@@ -288,34 +289,13 @@ define('BASE_URL',$base_url);
 	<script src="http://ajax.microsoft.com/ajax/jquery.validate/1.7/jquery.validate.pack.js"></script>
 	
 	<script type="text/javascript" charset="utf-8">
-			base_url = "<?php echo BASE_URL; ?>"
-			
-			$('#map_type').val('<?php echo $user->maptype ?>');
+		if ('<?php echo $user->maptype ?>' != '')
+			$('#maptype').val('<?php echo $user->maptype ?>');
 	</script>
 
-	<script src="<?php echo BASE_URL ?>/js/util.js?v=1"></script>
-  <script src="<?php echo BASE_URL ?>/js/user.js?v=1"></script>
-  <script src="<?php echo BASE_URL ?>/js/user-ui.js?v=1"></script>
-
-	<script type="text/javascript" charset="utf-8">
-	  var is_ssl = ("https:" == document.location.protocol);
-	  var asset_host = is_ssl ? "https://s3.amazonaws.com/getsatisfaction.com/" : "http://s3.amazonaws.com/getsatisfaction.com/";
-	  document.write(unescape("%3Cscript src='" + asset_host + "javascripts/feedback-v2.js' type='text/javascript'%3E%3C/script%3E"));
-	</script>
-
-	<script type="text/javascript" charset="utf-8">
-	  var feedback_widget_options = {};
-
-	  feedback_widget_options.display = "overlay";  
-	  feedback_widget_options.company = "mentaway";
-	  feedback_widget_options.placement = "left";
-	  feedback_widget_options.color = "#222";
-	  feedback_widget_options.style = "idea";
-
-	  var feedback_widget = new GSFN.feedback_widget(feedback_widget_options);
-	</script>
-
-
+	<script src="/js/util.js?v=1"></script>
+  <script src="/js/user.js?v=1"></script>
+  <script src="/js/user-ui.js?v=1"></script>
 
   <!--[if lt IE 7 ]>
     <script src="js/dd_belatedpng.js?v=1"></script>

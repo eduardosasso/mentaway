@@ -11,6 +11,7 @@ var Map = {
 		container_el: $("#content"),
 		map_el: $("#map"),
 		user: '',
+		maptype: '',
 		active_icon: 'images/mark-active.png',
 		default_icon: 'images/marks.png'
 	},
@@ -56,16 +57,16 @@ var Map = {
 		var map_options = {
 			zoom: 5,
 			center: lat_long,
-			mapTypeId: eval('google.maps.MapTypeId.' + User.maptype),
+			mapTypeId: eval('google.maps.MapTypeId.' + this.options.maptype),
 			streetViewControl: true,
 			mapTypeControlOptions: {
 				style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
-				position: google.maps.ControlPosition.BOTTOM_RIGHT
+				position: google.maps.ControlPosition.TOP_RIGHT
 			},
 			navigationControl: true,
 			navigationControlOptions: {
-				style: google.maps.NavigationControlStyle.SMALL,
-				position: google.maps.ControlPosition.BOTTOM_LEFT 
+				style: google.maps.NavigationControlStyle.MEDIUM,
+				position: google.maps.ControlPosition.TOP_LEFT 
 			},
 			scaleControl: false
 		}
@@ -245,8 +246,20 @@ var Map = {
 		this.get_placemarks(function(placemarks){
 			if (placemarks.length == 0) {
 				//se caiu aqui eh pq o user eh nao usou o mentaway ainda entao seta o mapa em algum lugar padrao...
-				
-				//Util.message('This user doesnt have anything on h');
+
+				if (logged_in) {
+					Util.message('Updating services. This may take a while. Hang on...', 'info');
+					
+					$.post('/update-user.php', {username: user}, function(data) {
+						if (jQuery.trim(data) == 0) {
+							Util.message("Sorry, but we didn't find any check-in, tweet or photo to add to your map at this time.", 'error');
+						} else {
+							window.location.reload(true);
+						}
+					});
+				} else {
+					//Util.message('Updating services. Hang on...', 'error');
+				}
 				
 				Panel.hide();
 				Panel_aux.hide();

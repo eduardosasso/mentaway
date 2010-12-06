@@ -1,7 +1,5 @@
 <?php 
-$root = realpath($_SERVER["DOCUMENT_ROOT"]);
-require_once("$root/model/Twitter.class.php");
-require_once("$root/model/DatabaseFactory.php");
+include realpath($_SERVER["DOCUMENT_ROOT"]) . '/classes.php';
 
 //phpunit tests/model/TwitterTest.php
 class TwitterTest extends PHPUnit_Framework_TestCase {

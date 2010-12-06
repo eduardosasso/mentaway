@@ -16,7 +16,21 @@ var Util = {
 	},
 	
 	message: function(message, type) {
-		$('#messages').removeClass().addClass(type).html(message).show();
+		messages_el = $('#messages');
+		page = $('body').attr('id');
+		
+		if (messages_el.length == 0) {
+			div_messages = $('<div/>').attr('id','messages').addClass(type).html(message);
+			
+			if (page == 'app') {
+				$('#map').before(div_messages);
+			} else if (page == 'user') {
+				$('.content').prepend(div_messages);
+			};
+			
+		} else {
+			messages_el.removeClass().addClass(type).html(message).show();
+		}
 	},
 	
 	is_url: function(arg){
@@ -28,6 +42,21 @@ var Util = {
 		var url = location.href;
 		url = url.replace('#','/');
 		return url;
+	},
+	
+	linkify: function(text) {
+		text = text.replace(/(https?:\/\/\S+)/gi, function (s) {
+			return '<a href="' + s + '">' + s + '</a>';
+		});
+
+		text = text.replace(/(^|)@(\w+)/gi, function (s) {
+			return '<a href="http://twitter.com/' + s + '">' + s + '</a>';
+		});
+
+		text = text.replace(/(^|)#(\w+)/gi, function (s) {
+			return '<a href="http://search.twitter.com/search?q=' + s.replace(/#/,'%23') + '">' + s + '</a>';
+		});
+		return text;
 	},
 	
 	add_comments: function(){

@@ -1,18 +1,14 @@
 <?php 
-require_once("AbstractService.class.php");
-require_once("Controller.php");
-require_once("Placemark.class.php");
 
-require_once("lib/twitter/EpiCurlTwitter.php");
-require_once("lib/twitter/EpiOAuthTwitter.php");
-require_once("lib/twitter/EpiTwitter.php");
-
+include realpath($_SERVER["DOCUMENT_ROOT"]) . '/classes.php';
 
 class Twitter extends AbstractService { 
 
 	public function get_updates($username){
-		$consumer_key = "rJHgm4ewnT6VqD7MFThA";
-		$consumer_secret = "88QKvizTTHlIsmPlv93t4tRPIKTNf7lQx4ZnZwPduI";
+		$key_secret = Settings::get_twitter_oauth_key();
+
+		$consumer_key = $key_secret[0];
+		$consumer_secret = $key_secret[1];
 
 		$servicename = 'twitter';
 

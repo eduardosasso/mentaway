@@ -1,5 +1,6 @@
 <?php 
-require_once("CouchDB.php");
+
+include realpath($_SERVER["DOCUMENT_ROOT"]) . '/classes.php';
 
 //Singleton Factory basico para abstrair o banco de dados utilizado pelo resto da app
 class DatabaseFactory {

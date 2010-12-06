@@ -1,23 +1,21 @@
 <?php
 session_start();
 
-include 'model/lib/twitter/EpiCurlTwitter.php';
-include 'model/lib/twitter/EpiOAuthTwitter.php';
-include 'model/lib/twitter/EpiTwitter.php';
-include 'model/User.class.php';
-include 'util/Message.class.php';
+include realpath($_SERVER["DOCUMENT_ROOT"]) . '/classes.php';
 
-$consumer_key = "rJHgm4ewnT6VqD7MFThA";
-$consumer_secret = "88QKvizTTHlIsmPlv93t4tRPIKTNf7lQx4ZnZwPduI";
+$key_secret = Settings::get_twitter_oauth_key();
+
+$consumer_key = $key_secret[0];
+$consumer_secret = $key_secret[1];
 
 $twitterObj = new EpiTwitter($consumer_key, $consumer_secret);
 
 //se o token vier populado significa que eh o callback do oauth
 if ($_GET['oauth_token']) {
 
-	require_once("model/Service.class.php");
-	require_once("model/Controller.php");
-	require_once("model/User.class.php");
+	// require_once("model/Service.class.php");
+	// require_once("model/Controller.php");
+	// require_once("model/User.class.php");
 
 	$controller = new Controller();
 
@@ -48,12 +46,14 @@ if ($_GET['oauth_token']) {
 			$user->date = date('m/d/Y');
 			$user->token = $token->oauth_token;				
 			$user->secret = $token->oauth_token_secret;
+			//entra como false para ativar ele quando salvar o profile
+			$user->active = false;
 
 			$controller->save_user($user);
 			
 			$_SESSION['id'] = $id;
 			
-			header('location: /user/profile');	
+			header("location: /user/profile/$user->username");	
 		// } else {
 		// 			//tentou criar um user sem invite, da uma mensagem e redireciona para a home....
 		// 			Message::show("Sorry but only invited users for now.", Message::ERROR);
@@ -71,19 +71,19 @@ if ($_GET['oauth_token']) {
 		$controller->save_user($user);
 		
 		if (empty($user->email)) {
-			header('location: /user/profile');
+			header("location: /user/profile/$user->username");
 			return;			
 		}
 		
 		if (count($user->services) == 0) {
 			//usuario ja foi criado mas nao tem nenhum servico
-			header('location: /user/services');
+			header("location: /user/services/$user->username");
 			return;
 		};
 		
 		if (count($user->trips) == 0) {
 			//usuario ja foi criado mas nao tem trip
-			header('location: /user/trips');
+			header("location: /user/trips/$user->username");
 			return;
 		};
 

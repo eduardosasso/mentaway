@@ -1,7 +1,7 @@
 var base_url='';
 
 $(document).ready(function() {	
-	Map.init({user: user});
+	Map.init({user: user, maptype: maptype});
 
 	Diary.init(user);
 	

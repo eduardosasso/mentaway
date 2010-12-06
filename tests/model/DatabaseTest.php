@@ -1,9 +1,5 @@
 <?php 
-$root = realpath($_SERVER["DOCUMENT_ROOT"]);
-
-require_once("$root/model/DatabaseFactory.php");
-require_once("$root/model/User.class.php");
-require_once("$root/model/Service.class.php");
+include realpath($_SERVER["DOCUMENT_ROOT"]) . '/classes.php';
 
 //phpunit tests/model/DatabaseTest.php
 class DatabaseTest extends PHPUnit_Framework_TestCase {
@@ -72,7 +68,7 @@ class DatabaseTest extends PHPUnit_Framework_TestCase {
 			print_r($response);		
 		}
 		
-		public function test_add_user_trip(){
+		public function xtest_add_user_trip(){
 			$username = 'eduardosasso';
 			
 			$db = DatabaseFactory::get_provider();
@@ -103,7 +99,7 @@ class DatabaseTest extends PHPUnit_Framework_TestCase {
 			print_r($response);
 		}
 		
-		public function xxxtestCleanDatabase() {
+		public function testCleanDatabase() {
 			$db = DatabaseFactory::get_provider();
 			$db->clean_database();
 		}
