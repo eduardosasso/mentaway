@@ -22,7 +22,7 @@ var Map = {
 	
 	init: function(options) {			
 		this.options = $.extend(this.options,options);
-		this.show();
+		//this.show();
 	},
 	
 	get_map_el: function(){

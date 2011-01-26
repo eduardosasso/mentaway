@@ -1,0 +1,130 @@
+@content-width: 560px;
+@sidebar-width: 160px;
+@width-minus-scroll: @content-width - 20;
+@margin-top: 15px;
+@font-size: 11px;
+@hover-color: #E9E9E9;
+@aux-text-color: #999;
+
+.content-padding{
+	padding: 10px 0px 10px 0px;
+}
+
+.border-bottom{
+	border-color: @hover-color;
+	border-width: 1px 0px 0px;
+	border-style: solid;
+}
+
+body{
+	color: #333;
+	font-family: 'lucida grande', tahoma, verdana, arial, sans-serif;
+	font-size: @font-size;
+	text-align: left;	
+}
+
+.link {
+	color: #3B5998;
+	text-decoration: none;
+}
+
+h1 {
+	color: #1C2A47;
+	font-size: @font-size;
+	font-weight: bold;
+	margin: 0px;
+}
+
+#container{
+	width: 100%;
+	margin: 0px;
+	padding: 0px;	
+}
+
+#main-header {
+	padding-bottom: 10px;
+	width: 100%;
+	height: 64px;
+	
+	img{
+		float: left;
+		width: 195px;
+		height: 64px;
+	}
+	
+	nav{
+		float:left;
+		
+		ul{
+			list-style-type: none;
+			
+			li {
+				display: inline;
+			}
+		}
+	}
+}
+
+#content{
+	width: @content-width;
+	float: left;
+
+	#map{
+		height:200px;
+	}
+	
+	#placemarks{
+		height: 400px;
+		display: block;
+		overflow:hidden;		
+		width: @width-minus-scroll;
+		margin-top: @margin-top;
+		
+		article{
+			figure {
+				float:left;
+				margin: 0px 10px 10px 0px;
+			}		
+			
+			float: left;
+			width: 100%;
+			
+			.border-bottom;
+			.content-padding;
+			
+			> div {
+				float:left;
+			}
+			
+			.description{
+				margin-top:5px;
+				color:black;
+			}
+			
+			footer {
+				color: @aux-text-color;
+				
+				p.address{
+					margin: 0px;
+					height:13px;
+					
+				}
+				
+				.content-padding;
+			}
+			
+		}
+		
+		article:hover{
+			background-color: #EDEFF4;
+			cursor: pointer;
+		}
+		
+	}
+	
+}
+
+#sidebar{
+	width: @sidebar-width;
+	float: right;
+}
