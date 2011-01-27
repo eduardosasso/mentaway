@@ -1,5 +1,11 @@
 <?php 
 class Helper {
+	public static function cmp_timestamp($a, $b) {
+	 if ( $a->value->timestamp < $b->value->timestamp ) return 1;
+	    if ( $a->value->timestamp > $b->value->timestamp ) return -1;
+	    return 0; // equality
+	}
+	
 	public static function showdate($timestamp) // $date -- time(); value
 	{
 		$difference = time() - $timestamp;

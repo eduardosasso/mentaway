@@ -4,6 +4,31 @@ include realpath($_SERVER["DOCUMENT_ROOT"]) . '/classes.php';
 //phpunit tests/model/DatabaseTest.php
 class DatabaseTest extends PHPUnit_Framework_TestCase {
 	
+		public function xtest_get_full_user(){
+			$db = DatabaseFactory::get_provider();
+			
+			$fullname = "Refilmagem";
+			
+			$users = $db->get_user_full($fullname);
+			
+			print_r($users);
+		}
+		
+		public function test_add_friends(){
+			$db = DatabaseFactory::get_provider();
+			
+			$username = "eduardosasso";
+			$friends = array('abduzeedo','gismullr');
+			
+			$user = $db->add_friends($username, $friends);
+			
+			echo "<pre>";
+			print_r($user);
+			echo "</pre>";
+			
+			
+		}
+	
 		public function xxtest_date_conversion() {
 			$time = strtotime('Mon, 5 Jul 10 22:53:21 -3');
 			print $time . ' ';
@@ -99,7 +124,7 @@ class DatabaseTest extends PHPUnit_Framework_TestCase {
 			print_r($response);
 		}
 		
-		public function testCleanDatabase() {
+		public function xtestCleanDatabase() {
 			$db = DatabaseFactory::get_provider();
 			$db->clean_database();
 		}

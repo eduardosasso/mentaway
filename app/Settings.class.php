@@ -10,7 +10,12 @@ class Settings {
 			$domain = $_SERVER["SERVER_NAME"];
 		} else {
 			//se ta testando com phpunit não  vai ter SERVER_NAME entao assume que é local			
-			$domain = Settings::LOCAL;			
+			$domain = Settings::LOCAL;		
+			return $domain;	
+		}
+		
+		if (isset($_ENV['USER']) && $_ENV['USER'] == 'eduardosasso') {
+			return Settings::LOCAL;
 		}
 
 		switch ($domain) {
@@ -41,6 +46,18 @@ class Settings {
 		$key_secret[] = $consumer_secret;
 		
 		return $key_secret;		
+	}
+	
+	public static function get_facebook_oauth_key(){
+		$appId =  '136687686378472';
+		$secret = 'cc7fd1a64d2a02f07622de9355c34de8';
+		
+		$key_secret = array();
+		$key_secret[] = $appId;
+		$key_secret[] = $secret;
+		
+		return $key_secret;
+		
 	}
 	
 	public static function get_foursquare_oauth_key() {

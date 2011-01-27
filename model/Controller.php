@@ -81,6 +81,17 @@ class Controller {
 		return $posts;
 	}
 	
+	public function get_user_full($fullname) {
+		$db = DatabaseFactory::get_provider();
+		$user = $db->get_user_full($fullname);
+		return $user;
+	}
+	
+	public function get_user_fbid($facebook_id){
+		$db = DatabaseFactory::get_provider();
+		$user = $db->get_user_fbid($facebook_id);
+		return $user;
+	}
 
 	function get_all_users(){
 		$db = DatabaseFactory::get_provider();

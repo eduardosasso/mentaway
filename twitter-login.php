@@ -1,8 +1,4 @@
 <?php
-session_start();
-
-include realpath($_SERVER["DOCUMENT_ROOT"]) . '/classes.php';
-
 $key_secret = Settings::get_twitter_oauth_key();
 
 $consumer_key = $key_secret[0];

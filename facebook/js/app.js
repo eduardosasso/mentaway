@@ -1,6 +1,5 @@
 $(function(){
-	
-	$('article').mouseenter(function(){
+	$('article').mouseover(function(){
 		geocoder = new google.maps.Geocoder();
 		var lat_ = $(this).attr('data-lat');
 		var long_ = $(this).attr('data-long');
@@ -10,6 +9,10 @@ $(function(){
 		$this_ = $(this);
 		
 		geocoder.geocode( { 'location': latlng}, function(results, status) {
+			if (!results) {
+				return;
+			};
+			
 			formatted_address_ = results[0].formatted_address;
 			
 			address_ = $('p.address', $this_);
