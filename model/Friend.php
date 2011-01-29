@@ -6,7 +6,7 @@ class Friend {
 	public function find_facebook_friends($username){
 		$key_secret = Settings::get_facebook_oauth_key();
 
-		try {
+		//try {
 			$facebook = new Facebook(array(
 				'appId' => $key_secret[0],
 				'secret' => $key_secret[1],
@@ -21,9 +21,9 @@ class Friend {
 
 			return $friends['data'];
 			
-		} catch (Exception $e) {
+		//} catch (Exception $e) {
 			error_log($e->getMessage());
-		}
+		//}
 	}
 	
 	public function follow_facebook_friends($username){
@@ -46,15 +46,29 @@ class Friend {
 			}			
 			$friend = $controller->get_user_fbid($friend_id);
 			
+			
 			if ($friend) {
-				$friends[] = $friend;			
+				//faz o meu amigo me seguir tb
+				$me = $username;
+				
+				$friend_obj = $friend->value;
+				if (isset($friend_obj->friends)) {
+					$friend_friends = $friend_obj->friends;
+				}
+				$friend_friends[] = $me;
+				$friend_friends = array_unique($friend_friends);
+				$friend_obj->friends = $friend_friends;
+				
+				$controller->save_user($friend_obj);
+				
+				$friends[] = $friend->id;			
 			}
 		}
+		//amigos se seguem, eu sigo ele, ele me segue tb dai.
 		$friends = array_unique($friends);
-
-		// echo "<pre>";
-		// print_r($friends);
-		// echo "</pre>";
+		$user->friends = $friends;
+		
+		$controller->save_user($user);		
 	}
 	
 }

@@ -15,6 +15,9 @@ ini_set('display_startup_errors', TRUE);
 // 
 // $data = $facebook->getSignedRequest();
 
+/*
+	TODO setar atributo active do user para false
+*/
 
 /*
 	TODO aqui ou tem que remover o usuario ou setar um flag dizendo q ele ta desabilitado.

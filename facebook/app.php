@@ -12,24 +12,12 @@ if (isset($_REQUEST['settings'])) {
 	return;
 }
 
-$user_picture = "https://graph.facebook.com/$user_id/picture";
-
 $controller = new Controller();
 
 $user = $controller->get_user_fbid($user_id);
 
-$placemarks = $controller->get_placemarks($user->username);
-/*
-	TODO 
-		arrumar a view  e trazer ordenado por timestamp desc
-		combinar os placemarks dos usuarios em 1 e ordenar
-*/
-
-usort($placemarks, "Helper::cmp_timestamp");
-
-//$friends = $facebook->api("me/friends");
-
-//se é usuario usa o php abaixo para todas as operacoes q tem q fazer... para esse new user
+$placemarks = $controller->get_timeline($user->id);
+$avatar = array();
 ?>
 
 <div id="container">
@@ -48,6 +36,13 @@ usort($placemarks, "Helper::cmp_timestamp");
 
 		<section id="placemarks">
 			<?php foreach ($placemarks as $placemark): ?>
+				<?php
+					if (empty($avatar[$placemark->key])) {
+						$user_fb = $controller->get_user_service($placemark->key, "facebook");
+						$avatar[$placemark->key] = $user_fb->secret;
+					}
+					$user_picture = "https://graph.facebook.com/". $avatar[$placemark->key] . "/picture";
+				?>
 				<article class="article" data-lat="<?php echo $placemark->value->lat ?>" data-long="<?php echo $placemark->value->long ?>">
 					<figure>
 						<img src="<?php echo $user_picture; ?>">

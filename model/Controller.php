@@ -9,11 +9,28 @@ include realpath($_SERVER["DOCUMENT_ROOT"]) . '/classes.php';
 
 class Controller {
 	
-	function get_placemarks($user){
+	function get_placemarks($username){
 		$db = DatabaseFactory::get_provider();
-		$placemarks = $db->get_placemarks($user);
+		$placemarks = $db->get_placemarks($username);
 
 		return $placemarks->rows;
+	}
+
+	function get_timeline($username){
+		$user = $this->get_user($username);
+		
+		$placemarks = $this->get_placemarks($username);
+		
+		if (isset($user->friends) && count($user->friends)>0) {
+			foreach ($user->friends as $friend) {
+				$friend_placemarks = $this->get_placemarks($friend);
+				$placemarks = array_merge($placemarks, $friend_placemarks);
+			}
+		}
+		
+		usort($placemarks, "Helper::cmp_timestamp");
+		
+		return $placemarks;
 	}
 	
 	function get_placemark($user, $checkin_id) {

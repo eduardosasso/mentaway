@@ -9,11 +9,11 @@ class FriendTest extends PHPUnit_Framework_TestCase {
 		$friend->follow_facebook_friends($username);
 	}
 	
-	public function xtest_find_on_facebook(){
+	public function xtest_find_facebook_friends(){
 		$username = 'eduardosasso';
 		$friend = new Friend();
 		
-		$friends = $friend->find_on_facebook($username);
+		$friends = $friend->find_facebook_friends($username);
 		
 		echo "<pre>";
 		print_r($friends);

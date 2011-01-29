@@ -138,7 +138,7 @@ class CouchDB implements DatabaseInterface {
 	public function get_user_fbid($facebook_id) {
 		$user = $this->db->key($facebook_id)->getView('users','facebook_id');	
 		if ($user->rows) {
-			return $user;
+			return $user->rows[0];
 		}		
 	}
 	

@@ -33,7 +33,8 @@ if (isset($_REQUEST['twitter']) && $_REQUEST['oauth_token']) {
 
 				$controller->add_user_service($username, $service);
 				
-				$controller->follow_facebook_friends($user);
+				$friend = new Friend();
+				$friend->follow_facebook_friends($username);
 			}
 		}		
 }
