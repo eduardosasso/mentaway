@@ -75,17 +75,60 @@ h1 {
 		}
 	}
 	
+	nav{
+		float:left;
+		clear:both;
+
+		ul{
+			list-style-type: none;
+			-webkit-padding-start: 0px;
+
+			li {
+				display: inline;
+			}
+		}
+	}
+	
 }
 
-#content{
+#page{
+	clear:both;
 	width: @content-width;
 	float: left;
+}	
 
+#page.settings {
+	.services{
+		.service.active {
+			opacity: 0.4;
+		}
+		.service{
+			float: left;
+			width: 200px;
+			img {
+				float: left;
+				margin-right: 5px;
+			}
+			.detail {
+				float:left;
+				width: 163px;
+				p {
+					color: @aux-text-color;
+				}
+				h3, p {
+					margin:0px;
+				}
+			}
+		}
+	}
+}
+	
+#page.timeline{
 	#map{
 		height:200px;
 	}
 	
-	#placemarks{
+	#timeline{
 		height: 400px;
 		display: block;
 		overflow:hidden;		

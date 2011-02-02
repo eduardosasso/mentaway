@@ -28,7 +28,6 @@
 	
 <?php
 
-//error_reporting(E_ALL);
 ini_set('display_errors', TRUE);
 ini_set('display_startup_errors', TRUE);
 
@@ -59,7 +58,7 @@ if (empty($data['user_id'])) {
 		"next"=>"http://apps.facebook.com/mentaway/new", 
 		"cancel_url"=>"http://facebook.com"));
 
-	include("welcome.php");
+	include("page/welcome.php");
 
 } else {
 	$user_id = $data['user_id'];

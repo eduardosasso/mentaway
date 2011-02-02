@@ -3,8 +3,9 @@ $placemarks = $controller->get_timeline($user->id);
 
 $fb_user_id = array();
 ?>
+<div id="map"></div>
 
-<section id="placemarks">
+<section id="timeline">
 	<?php foreach ($placemarks as $placemark): ?>
 		<?php
 			if (empty($avatar[$placemark->key])) {
@@ -13,7 +14,7 @@ $fb_user_id = array();
 			}
 			$user_picture = "https://graph.facebook.com/". $fb_user_id[$placemark->key] . "/picture";
 		?>
-		<article class="article" 
+		<article class="item" 
 			data-placemark= "<?php echo $placemark->value->name ?>"
 			data-user_id= "<?php echo $fb_user_id[$placemark->key] ?>"
 			data-lat="<?php echo $placemark->value->lat ?>" data-long="<?php echo $placemark->value->long ?>">

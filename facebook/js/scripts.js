@@ -1,13 +1,26 @@
 $(function(){
-	$("a.top-location").click(function(e){
+	
+	$(".redirect").click(function(e){
 		href_ = $(this).attr('href');
+		
+		if (!href_) href_ = $(this).attr('data-url');
+
+		e.stopPropagation();
+
+		top.location.href = "http://apps.facebook.com/mentaway" + href_;
+		return false;
+	});	
+	
+	$(".external").click(function(e){
+		href_ = $(this).attr('href');
+		
+		if (!href_) href_ = $(this).attr('data-url');
 
 		e.stopPropagation();
 
 		top.location.href = href_;
 		return false;
-
-	});	
+	});
 	
 	FB.init({
     appId  : '136687686378472',

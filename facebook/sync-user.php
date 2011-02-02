@@ -1,7 +1,7 @@
 <?php require('../twitter-login.php'); ?>
 <h1>Do you already have an account on Mentaway?</h1>
 
-<a href='<?php echo $twitter_url ?>' id="twitter-login" class="top-location">
+<a href='<?php echo $twitter_url ?>' id="twitter-login" class="redirect">
 	<img src='../images/sign-in-with-twitter-d.png'/>
 </a>	
 

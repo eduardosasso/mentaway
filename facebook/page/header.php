@@ -4,15 +4,6 @@
 	$cities = $controller->get_cities_visited($username);
 	$states = $controller->get_states_visited($username);
 	$countries = $controller->get_countries_visited($username);
-	
-	//$session = $facebook->getSession();
-	
-$session = json_encode($facebook->getSession());	
-$url = urlencode("http://mentaway.dev/facebook/?");
-
-// echo "<pre>";
-// print_r($session);
-// echo "</pre>";
 
 ?>
 

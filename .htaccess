@@ -166,6 +166,10 @@ RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
 RewriteRule ^(.*)\.[\d]{10}\.(css|js)$ $1.$2 [L]
 
 RewriteBase /
+
+RewriteCond %{REQUEST_URI} \/services\/
+RewriteRule ^(.*)$ services/controller.php?q=$1 [L,QSA]
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI} !=/favicon.ico

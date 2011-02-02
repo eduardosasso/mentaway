@@ -7,26 +7,34 @@ if (isset($_REQUEST['new'])) {
 	return;
 }
 
-if (isset($_REQUEST['settings'])) {
-	include "settings.php";
+if (isset($_REQUEST['services'])) {
+	if (isset($_REQUEST['add'])) {
+		include "services/foursquare.php";
+	}
 	return;
+}
+
+
+$page = "timeline";
+
+if (isset($_REQUEST['settings'])) {
+	//include "settings.php";
+	$page = "settings";
 }
 
 ?>
 
 <div id="container">	
 	<header id="main-header">
-		<?php include "header.php"; ?>
+		<?php include "page/header.php"; ?>
+		<?php include "page/menu.php"; ?>		
 	</header>
 
-	<div id="content">
-		<div id="map"></div>
-		<?php include "placemarks.php"; ?>
+	<div id="page" class="<?php echo $page ?>">
+		<?php include "page/$page.php"; ?>
 	</div>
 
 	<div id="sidebar">
-		<?php if (Settings::get_env() == Settings::PROD): ?>
-			<?php include "adsense-vertical.php"; ?>	
-		<?php endif ?>		
+		<?php include "ads.php"; ?>		
 	</div>
 </div>
