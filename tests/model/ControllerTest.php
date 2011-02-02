@@ -3,6 +3,16 @@ include realpath($_SERVER["DOCUMENT_ROOT"]) . '/classes.php';
 
 //phpunit tests/model/ControllerTest.php
 class ControllerTest extends PHPUnit_Framework_TestCase {
+	public function test_get_view(){
+		$controller = new Controller();
+		$viewx = $controller->get_view('users', 'facebook_id', '631466850');
+		
+		echo "<pre>";
+		print_r($viewx);
+		echo "</pre>";
+		
+	}
+
 		public function xxtest_get_placemarks() {
 			$controller = new Controller();
 			
@@ -13,7 +23,28 @@ class ControllerTest extends PHPUnit_Framework_TestCase {
 			echo '</pre>';
 		}
 		
-		public function test_get_placemark() {
+		public function xtest_get_cities_list(){
+			$controller = new Controller();
+			
+			$cities = $controller->get_cities_visited('eduardosasso');
+			$states = $controller->get_states_visited('eduardosasso');
+			$countries = $controller->get_countries_visited('eduardosasso');
+			
+			echo '<pre>';
+			print_r($cities);
+			echo '</pre>';
+			
+			echo '<pre>';
+			print_r($states);
+			echo '</pre>';
+			
+			echo '<pre>';
+			print_r($countries);
+			echo '</pre>';
+			
+		}
+		
+		public function xxtest_get_placemark() {
 			$controller = new Controller();
 			
 			$placemark = $controller->get_placemark('eduardosasso', 310);

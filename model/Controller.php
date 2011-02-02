@@ -38,6 +38,46 @@ class Controller {
 		return $placemarks[$checkin_id];		
 	}
 	
+	public function get_cities_visited($username) {
+		$cities = count((array)$this->get_cities_list($username));
+		return $cities;
+	}
+	
+	public function get_countries_visited($username) {
+		$countries = count((array)$this->get_countries_list($username));
+		return $countries;
+	}
+	
+	public function get_states_visited($username) {
+		$states = count((array)$this->get_states_list($username));
+		return $states;
+	}	
+	
+	
+	public function get_cities_list($username) {
+		$user = $this->get_user($username);
+		$cities = $user->trips[0]->status->cities;
+		return $cities;
+	}
+	
+	public function get_states_list($username) {
+		$user = $this->get_user($username);
+		$states = $user->trips[0]->status->states;
+		return $states;
+	}
+	
+	public function get_countries_list($username) {
+		$user = $this->get_user($username);
+		$countries = $user->trips[0]->status->countries;
+		return $countries;
+	}
+	
+	public function get_view($design_document, $view_name, $key) {
+		$db = DatabaseFactory::get_provider();
+		$view = $db->get_view($design_document, $view_name, $key);	
+		return $view;
+	}
+	
 	function get_placemarks_starting_from($user, $timestamp){
 		$placemarks = $this->get_placemarks($user);
 		

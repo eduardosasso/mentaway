@@ -58,7 +58,6 @@ class CouchDB implements DatabaseInterface {
 		return $this->save($user);
 	}
 	
-	
 	public function add_user_service($username, Service $service) {
 		$user = $this->get_user($username);
 		
@@ -133,6 +132,13 @@ class CouchDB implements DatabaseInterface {
 		if ($user->rows) {
 			return $user;
 		}		
+	}
+	
+	public function get_view($design_document, $view_name, $key) {
+		if (!empty($key)) {
+			$result = $this->db->key($key)->getView($design_document, $view_name);	
+			return $result;
+		}
 	}
 	
 	public function get_user_fbid($facebook_id) {

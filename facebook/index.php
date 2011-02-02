@@ -7,9 +7,24 @@
 	<title>Mentaway Facebook App</title>
 	<link rel="stylesheet/less" href="<?php echo Helper::auto_version('css/facebook.less'); ?>">
 	<link rel="stylesheet" href="css/google-wave-scroll.css" type="text/css" media="screen" charset="utf-8" />
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+	<script src="http://maps.google.com/maps/api/js?sensor=false"></script>	
+	<script src="js/head.load.min.js"></script>
+	<script>
+		head.js("https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js",
+						"js/less-1.0.41.min.js",
+						"http://connect.facebook.net/en_US/all.js",
+						"js/scripts.js", 
+						"https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js",
+						"js/google-wave-scrollbar/mousewheel.js",
+						"js/google-wave-scrollbar/gwave-scroll-pane-0.1.js",
+						"js/underscore-min.js",
+						"/js/map.js",
+						"js/app.js");						
+	</script>
 </head>
 <body>
+
+<div id="fb-root"></div>
 	
 <?php
 
@@ -26,6 +41,8 @@ $facebook = new Facebook(array(
 	));
 
 $data = $facebook->getSignedRequest();
+
+$controller = new Controller();
 
 //se tiver vazio é pq não autorizou ou não ta logado no fb
 if (empty($data['user_id'])) {
@@ -46,14 +63,12 @@ if (empty($data['user_id'])) {
 
 } else {
 	$user_id = $data['user_id'];
+	$user = $controller->get_user_fbid($user_id);
+	$username = $user->id;
 
 	include("app.php");
 }
 
 ?>
-
-<script src="js/less-1.0.41.min.js"></script>
-<script src="<?php echo Helper::auto_version('js/scripts.js'); ?>"></script>
-
 </body>
 </html>
