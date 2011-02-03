@@ -3,7 +3,14 @@ include realpath($_SERVER["DOCUMENT_ROOT"]) . '/classes.php';
 
 //phpunit tests/model/ControllerTest.php
 class ControllerTest extends PHPUnit_Framework_TestCase {
-	public function test_get_view(){
+	public function test_clean_string(){
+		$str = "áção A 12";
+		$str = Helper::clean_string($str);
+		echo "$str";
+		
+	}
+	
+	public function xxtest_get_view(){
 		$controller = new Controller();
 		$viewx = $controller->get_view('users', 'facebook_id', '631466850');
 		

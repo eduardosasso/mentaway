@@ -1,10 +1,9 @@
 <?php
-	$profile_picture = "https://graph.facebook.com/". $user_id . "/picture";
-	
-	$cities = $controller->get_cities_visited($username);
-	$states = $controller->get_states_visited($username);
-	$countries = $controller->get_countries_visited($username);
+$profile_picture = "https://graph.facebook.com/". $user_id . "/picture";
 
+$cities = $controller->get_cities_visited($username);
+$states = $controller->get_states_visited($username);
+$countries = $controller->get_countries_visited($username);
 ?>
 
 <img src="<?php echo $profile_picture ?>" class="profile">
@@ -17,7 +16,9 @@
 		<p class="label">Countries</p>
 	</div>
 	<div>
-		<p class="number"><?php echo $states ?></p>
+		<p class="number">
+			<a href="#" id="states"><?php echo $states ?></a>
+		</p>
 		<p class="label">States</p>
 	</div>
 	<div>

@@ -1,3 +1,7 @@
+window.fbAsyncInit = function() {
+  FB.Canvas.setAutoResize();
+}
+
 $(function(){
 	
 	$(".redirect").click(function(e){

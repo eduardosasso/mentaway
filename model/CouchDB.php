@@ -8,7 +8,7 @@ class CouchDB implements DatabaseInterface {
 	function __construct() {
 		$url = Settings::get_couchdb_url();
 	
-		$database = "mentaway";
+		$database = "mentaway-fb";
 		
 		$this->db = new couchClient($url,$database);
 	}
@@ -35,6 +35,14 @@ class CouchDB implements DatabaseInterface {
 		$placemarks = $this->db->startkey($username)->endkey($username)->getView('placemark','placemarks');
 	
 		return $placemarks;
+	}
+	
+	public function clean_database_users(){
+		$users = $this->db->getView('users','users');
+
+		foreach ($users->rows as $row ) {
+			$this->db->deleteDoc($row->value);
+		}
 	}
 	
 	//Remove documentos poara teste
@@ -141,11 +149,22 @@ class CouchDB implements DatabaseInterface {
 		}
 	}
 	
-	public function get_user_fbid($facebook_id) {
-		$user = $this->db->key($facebook_id)->getView('users','facebook_id');	
+	//tenta achar um usuario que usava a versao antiga atraves do token de algum servico
+	//funcao util para realizar sync de usuario antigo com a app no facebook
+	public function find_old_user($token) {
+		$user = $this->db->key($token)->getView('users','find_old');	
 		if ($user->rows) {
 			return $user->rows[0];
-		}		
+		}				
+	}
+	
+	public function get_doc($id){
+		try {
+			$doc = $this->db->getDoc($id);
+			return $doc;			
+		} catch (Exception $e) {
+			return;
+		}
 	}
 	
 	public function get_all_users() {
@@ -159,20 +178,7 @@ class CouchDB implements DatabaseInterface {
 	}
 		
 	public function get_user($username) {
-		$username = Helper::escape_special_char($username);
-
-		try {
-			$result = $this->db->getDoc($username);
-			$result->_id = Helper::unescape_special_char($result->_id);
-			
-		} catch (couchException $e) {
-			/*
-				TODO tratar melhor o erro ver exatamente o que eh.
-				como solucao temp retorno null indicando q usuario nao foi encontrado
-			*/
-			$result = null;
-		}				
-		return $result;		
+		return $this->get_doc($username);
 	}
 	
 }

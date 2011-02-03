@@ -6,14 +6,8 @@ class User {
 	public $username;
 	public $fullname;
 	public $email;
-	public $picture;
-	public $site;
-	public $token;
-	public $secret;
-	public $bio;
 	public $date;
-	public $notification; //true or false se ele quer receber alguma coisa por email
-	public $maptype;
+	public $status;
 	public $services = array(); 
 	public $trips = array();
 	

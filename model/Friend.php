@@ -44,7 +44,7 @@ class Friend {
 			if ($servicename == 'facebook') {
 				$friend_id = $value['id'];
 			}			
-			$friend = $controller->get_user_fbid($friend_id);
+			$friend = $controller->get_user_by_id($friend_id);
 			
 			
 			if ($friend) {

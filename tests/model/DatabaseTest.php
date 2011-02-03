@@ -3,7 +3,21 @@ include realpath($_SERVER["DOCUMENT_ROOT"]) . '/classes.php';
 
 //phpunit tests/model/DatabaseTest.php
 class DatabaseTest extends PHPUnit_Framework_TestCase {
-	
+		public function xtest_clean_database_users(){
+			$db = DatabaseFactory::get_provider();
+			$db->clean_database_users();
+		}
+		public function xxxtest_find_old_user(){
+			$token = '5PY1LKTYUR1LFAQMD2SH4B52JHFIO04XDYPZMQYEKUWB0QWR';
+			
+			$db = DatabaseFactory::get_provider();
+			$user = $db->find_old_user($token);
+			
+			echo "<pre>";
+			print_r($user);
+			echo "</pre>";			
+		}
+		
 		public function xtest_get_full_user(){
 			$db = DatabaseFactory::get_provider();
 			
@@ -14,7 +28,7 @@ class DatabaseTest extends PHPUnit_Framework_TestCase {
 			print_r($users);
 		}
 		
-		public function test_add_friends(){
+		public function xtest_add_friends(){
 			$db = DatabaseFactory::get_provider();
 			
 			$username = "eduardosasso";
@@ -124,7 +138,7 @@ class DatabaseTest extends PHPUnit_Framework_TestCase {
 			print_r($response);
 		}
 		
-		public function xtestCleanDatabase() {
+		public function testCleanDatabase() {
 			$db = DatabaseFactory::get_provider();
 			$db->clean_database();
 		}

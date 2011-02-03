@@ -55,21 +55,30 @@ class Controller {
 	
 	
 	public function get_cities_list($username) {
-		$user = $this->get_user($username);
-		$cities = $user->trips[0]->status->cities;
-		return $cities;
+		try {
+			$user = $this->get_user($username);
+			$cities = $user->trips[0]->status->cities;
+			return $cities;			
+		} catch (Exception $e) {
+		}
 	}
 	
 	public function get_states_list($username) {
-		$user = $this->get_user($username);
-		$states = $user->trips[0]->status->states;
-		return $states;
+		try {
+			$user = $this->get_user($username);
+			$states = $user->trips[0]->status->states;
+			return $states;			
+		} catch (Exception $e) {
+		}
 	}
 	
 	public function get_countries_list($username) {
-		$user = $this->get_user($username);
-		$countries = $user->trips[0]->status->countries;
-		return $countries;
+		try {
+			$user = $this->get_user($username);
+			$countries = $user->trips[0]->status->countries;
+			return $countries;			
+		} catch (Exception $e) {			
+		}
 	}
 	
 	public function get_view($design_document, $view_name, $key) {
@@ -144,9 +153,9 @@ class Controller {
 		return $user;
 	}
 	
-	public function get_user_fbid($facebook_id){
+	public function get_user_by_id($user_id){
 		$db = DatabaseFactory::get_provider();
-		$user = $db->get_user_fbid($facebook_id);
+		$user = $db->get_doc($user_id);
 		return $user;
 	}
 
@@ -229,6 +238,40 @@ class Controller {
 		$response = $db->add_user_service($username, $service);
 		
 		return $response;		
+	}
+	
+	function new_user(){
+		$key_secret = Settings::get_facebook_oauth_key();
+
+		$facebook = new Facebook(array(
+			'appId' => $key_secret[0],
+			'secret' => $key_secret[1],
+			'cookie' => true,
+			));
+		
+		$auth_ = $facebook->getSession();
+		$fb_user_ = $facebook->api('/me');
+		
+		//tenta achar um user com esse id no bd
+		//se achar é pq é um user antigo q cancelou e voltou novamente
+		$user_ = $this->get_user_by_id($fb_user_['id']);
+		if (!$user_) {
+			$user_ = new User();
+		}
+
+		$username_ = $fb_user_['name'] . ' ' . $fb_user_['id'];
+		$token_ = $auth_['access_token'];
+		
+		$user_->_id = $fb_user_['id'];
+		$user_->username = Helper::clean_string($username_);
+		$user_->fullname = $fb_user_['name'];
+		$user_->email = $fb_user_['email'];
+		$user_->date = date('m/d/Y');
+		$user_->token = $token_;	
+		
+		$saved_user = $this->save_user($user_);
+		
+		return $this->get_user_by_id($saved_user->id);
 	}
 	
 	/*

@@ -1,5 +1,28 @@
 head.ready(function(){
 	
+	$('a#states').click(function(){
+	
+		
+		// var fbml = '<fb:header icon="true" decoration="add_border">Hello World!</fb:header><fb:profile-pic uid="5526183"></fb:profile-pic>';
+		// 
+			//convida amigos
+				// FB.ui({
+				//     method: 'apprequests',
+				//     message:  'teste',
+				// 		data: 'data',
+				//     size: {width:200,height:480}, width:300,height:500
+				// });
+		
+				// FB.ui({
+				// 					method: 'fbml.dialog',
+				// 					message:  'teste',
+				// 					data: 'data',
+				// 					fbml: fbml_,
+				// 					size: {width:200,height:480}, width:300,height:500
+				// 				});
+				
+	});
+	
 	$('a#countries').click(function(){
 		get_db_view("users", "stats", FB.getSession().access_token, function(data){
 			countries = data.rows[0].value.countries;

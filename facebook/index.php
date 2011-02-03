@@ -41,8 +41,6 @@ $facebook = new Facebook(array(
 
 $data = $facebook->getSignedRequest();
 
-$controller = new Controller();
-
 //se tiver vazio é pq não autorizou ou não ta logado no fb
 if (empty($data['user_id'])) {
 	$req_perms = "publish_stream,
@@ -61,10 +59,6 @@ if (empty($data['user_id'])) {
 	include("page/welcome.php");
 
 } else {
-	$user_id = $data['user_id'];
-	$user = $controller->get_user_fbid($user_id);
-	$username = $user->id;
-
 	include("app.php");
 }
 

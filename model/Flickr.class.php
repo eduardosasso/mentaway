@@ -39,7 +39,7 @@ class Flickr extends AbstractService {
 			$timestamp = strtotime($photo['datetaken']);
 			
 			$placemark = new Placemark();
-			$placemark->_id = $timestamp . '|flickr';
+			$placemark->_id = $timestamp . "|$username|flickr";
 			$placemark->name = $photo['title'];
 			$placemark->image = $image_url;
 			$placemark->description = $description;

@@ -1,24 +1,22 @@
 <?php
 
+$controller = new Controller();
+$user_id = $data['user_id'];
+
 if (isset($_REQUEST['new'])) {
-	//se for um novo usuario passa para a tela intermediaria para sincronizar com
-	//conta antiga do mentaway
-	include "sync-user.php";
-	return;
+	//novo usuario. cria a conta e vai para a pagina de settings para incluir servicos.
+	$user = $controller->new_user();
+	$username = $user->_id;
+	
+	$page = "settings";
+} else {
+	$user = $controller->get_user($user_id);
+	$username = $user->_id;
+
+	$page = "timeline";
 }
-
-if (isset($_REQUEST['services'])) {
-	if (isset($_REQUEST['add'])) {
-		include "services/foursquare.php";
-	}
-	return;
-}
-
-
-$page = "timeline";
 
 if (isset($_REQUEST['settings'])) {
-	//include "settings.php";
 	$page = "settings";
 }
 

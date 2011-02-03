@@ -1,22 +1,20 @@
-<?php require('../twitter-login.php'); ?>
-<h1>Do you already have an account on Mentaway?</h1>
 
-<a href='<?php echo $twitter_url ?>' id="twitter-login" class="redirect">
-	<img src='../images/sign-in-with-twitter-d.png'/>
-</a>	
-
-<div id="old-account">
-	botao do twitter
-	
-</div>
-
-<div id="new-account">
-<!--
-	TODO faz um novo request passando service/?new-user criando automaticamente o user e ja liberando os servicos...
--->
-</div>
 
 <?php
+/*
+ 	1. cria user e seta status como pendente
+	2. quando adicionar o primeiro servico pega o token depois de autorizado e procura usuario antigo
+	3. se achou user antigo pega o servico facebook do usuario novo e adiciona no antigo 
+	4. no antigo remove campos não mais usados como token secret picture etc
+	5. remove o usuario com status pendente.
+	6. o usuario antigo passa a ser o usuario novo. sincronizado
+	
+  . colocar todas as contas para status inativo para não ficar atualizando para quem não usa.
+	. na classe de update deve verifica se a conta é ativa antes de atualizar os placemarks
+ 		
+ */
+
+
 /*
 	TODO
 		1. Pergunta pro user se ele ja tem uma conta no mentaway

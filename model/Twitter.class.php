@@ -51,7 +51,7 @@ class Twitter extends AbstractService {
 					$text = preg_replace('/#mentaway/' ,'', $text);
 
 					$placemark = new Placemark();
-					$placemark->_id = $timestamp . '|twitter';
+					$placemark->_id = $timestamp . "|$username|twitter";
 					$placemark->name = trim($text);
 					$placemark->image = $image;
 					//$placemark->description = $shout;
