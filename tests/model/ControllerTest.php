@@ -4,7 +4,12 @@ include realpath($_SERVER["DOCUMENT_ROOT"]) . '/classes.php';
 //phpunit tests/model/ControllerTest.php
 class ControllerTest extends PHPUnit_Framework_TestCase {
 	
-	public function test_notification() {
+	public function test_add_queue(){
+		$uid ='631466850';
+		Queue::add('foursquare_worker', $uid);
+	}
+	
+	public function xtest_notification() {
 		$uid ='631466850';
 		$page = "timeline";
 		

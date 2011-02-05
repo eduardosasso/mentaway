@@ -4,7 +4,7 @@ $messages = Notification::get($username, $page);
 
 <div id="messages">
 <?php foreach ($messages as $key => $message): ?>
-	<div class="message <?php echo $message->value->format ?>">
+	<div class="message <?php echo $message->value->format ?>" id="<?php echo $message->value->_id ?>">
 		<div class="close">
 			<a href="#" class="close">
 				<img src="/images/close.png"/>

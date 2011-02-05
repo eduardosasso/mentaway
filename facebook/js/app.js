@@ -105,17 +105,13 @@ head.ready(function(){
 
 	});
 	
-	previous_marker = '';
-	
 	Map.init({maptype: 'ROADMAP'});
 	Map.add('-20.468189', '-59.589844');
 	Map.set_zoom(2);
 	
-	$('#placemarks').gWaveScrollPane();
+	$('#timeline').gWaveScrollPane();
 	
 	$('#placemarks article').click(function(){
-		if (previous_marker) previous_marker.setMap(null); 
-		
 		lat_ = $(this).attr('data-lat');
 		long_ = $(this).attr('data-long');
 		
@@ -136,8 +132,6 @@ head.ready(function(){
 			TODO ver se o usuario mudou o zoom se sim manter o dele
 		*/
 		Map.gmap.setZoom(15);
-		
-		previous_marker = marker;
 		
 	});
 		

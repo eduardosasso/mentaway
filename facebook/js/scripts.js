@@ -29,7 +29,14 @@ $(function(){
 	$('#messages .close').click(function(e){
 		e.stopPropagation();
 		
-		$(this).closest('.message').remove();
+		message_ = $(this).closest('.message');
+		
+		console.log(message_.attr('id'));
+
+		//remove do db a mensagem se for persistente
+		$.post('/facebook/ajax/delete.php', {docid: message_.attr('id')});
+		
+		message_.remove();		
 		
 		return false;
 		
@@ -53,7 +60,7 @@ get_db_view = function(dd, vn, k, callback) {
 		key: k
 	}
 
-	$.get('/facebook/couchjs.php', args_, function(data){
+	$.get('/facebook/ajax/views.php', args_, function(data){
 		callback.call(this_, data);
 	});
 	
