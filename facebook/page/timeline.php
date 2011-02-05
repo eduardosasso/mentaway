@@ -11,7 +11,7 @@ $fb_user_id = array();
 		
 		<article class="item" 
 			data-placemark= "<?php echo $placemark->value->name ?>"
-			data-user_id= "<?php echo $placemark->user ?>"
+			data-user_id= "<?php echo $placemark->value->user ?>"
 			data-lat="<?php echo $placemark->value->lat ?>" data-long="<?php echo $placemark->value->long ?>">
 			<figure>
 				<img src="<?php echo $user_picture; ?>">

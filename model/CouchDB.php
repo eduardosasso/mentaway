@@ -50,9 +50,15 @@ class CouchDB implements DatabaseInterface {
 	}
 	
 	//Remove documentos poara teste
-	public function clean_database() {
-		$all_or_nothing = true;
+	public function clean_database_user($username) {
+		$placemarks = $this->db->key($username)->getView('placemark','placemarks');
 		
+		foreach ($placemarks->rows as $row ) {
+			$this->db->deleteDoc($row->value);
+		}		
+	}
+	
+	public function clean_database() {	
 		$placemarks = $this->db->getView('placemark','placemarks');
 		
 		foreach ($placemarks->rows as $row ) {

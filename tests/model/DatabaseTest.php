@@ -138,9 +138,15 @@ class DatabaseTest extends PHPUnit_Framework_TestCase {
 			print_r($response);
 		}
 		
-		public function testCleanDatabase() {
+		public function xtest_clean_database() {
 			$db = DatabaseFactory::get_provider();
 			$db->clean_database();
+		}
+		
+		public function test_clean_database_user(){
+			$username = '631466850';
+			$db = DatabaseFactory::get_provider();
+			$db->clean_database_user($username);
 		}
 		
 }
