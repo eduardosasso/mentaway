@@ -26,6 +26,15 @@ $(function(){
 		return false;
 	});
 	
+	$('#messages .close').click(function(e){
+		e.stopPropagation();
+		
+		$(this).closest('.message').remove();
+		
+		return false;
+		
+	});	
+	
 	FB.init({
     appId  : '136687686378472',
     status : true, // check login status

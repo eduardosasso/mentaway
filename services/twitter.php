@@ -27,6 +27,10 @@ if ($_GET['oauth_token']) {
 	$service->secret = $token->oauth_token_secret;
 	
 	$response = $controller->add_user_service($username, $service);
+	
+	/*
+		TODO seguir o @mentaway
+	*/
 
 	header("Location: http://apps.facebook.com/mentaway/settings");	
 

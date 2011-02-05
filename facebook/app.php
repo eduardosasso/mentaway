@@ -29,6 +29,7 @@ if (isset($_REQUEST['settings'])) {
 	</header>
 
 	<div id="page" class="<?php echo $page ?>">
+		<?php include "page/messages.php"; ?>
 		<?php include "page/$page.php"; ?>
 	</div>
 

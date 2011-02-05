@@ -13,6 +13,10 @@ class CouchDB implements DatabaseInterface {
 		$this->db = new couchClient($url,$database);
 	}
 	
+	public function get(){
+		return $this->db;
+	}
+	
 	public function save($document) {
 		$document->_id = Helper::escape_special_char($document->_id);
 		

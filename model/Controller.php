@@ -271,6 +271,23 @@ class Controller {
 		
 		$saved_user = $this->save_user($user_);
 		
+		//Adiciona as paginas de blank slate para instrucoes iniciais para os usuarios.
+		$message = new Message();
+		$message->file = 'blank/timeline.php';
+		$message->page = 'timeline';
+		$message->uid = $fb_user_['id'];
+		$message->persistent = 'true';
+
+		Notification::add($message);
+		
+		$message = new Message();
+		$message->file = 'blank/settings.php';
+		$message->page = 'settings';
+		$message->uid = $fb_user_['id'];
+		$message->persistent = 'true';
+		
+		Notification::add($message);
+		
 		return $this->get_user_by_id($saved_user->id);
 	}
 	

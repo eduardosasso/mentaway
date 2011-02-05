@@ -3,7 +3,35 @@ include realpath($_SERVER["DOCUMENT_ROOT"]) . '/classes.php';
 
 //phpunit tests/model/ControllerTest.php
 class ControllerTest extends PHPUnit_Framework_TestCase {
-	public function test_clean_string(){
+	
+	public function test_notification() {
+		$uid ='631466850';
+		$page = "timeline";
+		
+		// $message = new Message();
+		// $message->file = 'blank/timeline.php';
+		// $message->page = 'timeline';
+		// $message->uid = '631466850';
+		// $message->persistent = 'true';
+		// 
+		// Notification::add($message);
+		
+		$message = new Message();
+		$message->file = 'blank/settings.php';
+		$message->page = 'settings';
+		$message->uid = '631466850';
+		$message->persistent = 'true';
+		
+		Notification::add($message);
+		
+//		$messages = Notification::get($uid, $page);
+
+		// echo "<pre>";
+		// 	print_r($messages);
+		// 	echo "</pre>";
+	}
+	
+	public function xtest_clean_string(){
 		$str = "áção A 12";
 		$str = Helper::clean_string($str);
 		echo "$str";
