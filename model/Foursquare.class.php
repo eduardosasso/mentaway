@@ -37,7 +37,7 @@ class Foursquare extends AbstractService {
 			$timestamp = strtotime($checkin->created);
 			
 			$placemark = new Placemark();
-			$placemark->_id = uniqid() . '-' . $checkin->venue->name;
+			$placemark->_id = $timestamp . "|$username|foursquare";
 			$placemark->name = $checkin->venue->name;
 			$placemark->image = $icon;
 			$placemark->description = $shout;

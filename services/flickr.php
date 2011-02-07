@@ -42,6 +42,8 @@ if (empty($_GET['frob'])) {
 
 	$response = $controller->add_user_service($username, $service);	
 
+	Queue::add('flickr_worker', $username);
+
 	header("Location: http://apps.facebook.com/mentaway/settings");	
 }
 

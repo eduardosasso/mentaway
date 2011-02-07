@@ -13,17 +13,12 @@ class Flickr extends AbstractService {
 		
 		$controller = new Controller();
 		
-		$trip = $controller->get_current_trip($username);
-		
-		//mysql datetime format YYYY-MM-DD HH:MM:SS
-		$date_trip = date("Y-m-d G:i:s", strtotime($trip->begin));
-		
 		$service = $controller->get_user_service($username, $servicename);
 		
 		$f = new phpFlickr($api_key, $api_secret);
 		$f->setToken($service->token);
 		
-		$args = array("extras"=>"geo,date_taken", "min_taken_date"=>$date_trip);
+		$args = array("extras"=>"geo,date_taken");
 		$photos = $f->photos_getWithGeoData($args);
 		
 		foreach ($photos['photo'] as $key => $photo) {

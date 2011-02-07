@@ -10,7 +10,7 @@
 	<script src="http://maps.google.com/maps/api/js?sensor=false"></script>	
 	<script src="js/head.load.min.js"></script>
 	<script>
-		head.js("https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js",
+		head.js("https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js",
 						"js/less-1.0.41.min.js",
 						"http://connect.facebook.net/en_US/all.js",
 						"js/scripts.js", 

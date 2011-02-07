@@ -139,6 +139,9 @@ class CouchDB implements DatabaseInterface {
 			}
 		}
 		
+		$key = array("$username", "$service_id");
+		$placemarks = $db->get()->startkey($key)->endkey($key)->getView('placemark','by_service_type');
+				
 		$response = $this->save_user($user);
 
 		return $response;

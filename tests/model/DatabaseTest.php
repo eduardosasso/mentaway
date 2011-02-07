@@ -3,6 +3,25 @@ include realpath($_SERVER["DOCUMENT_ROOT"]) . '/classes.php';
 
 //phpunit tests/model/DatabaseTest.php
 class DatabaseTest extends PHPUnit_Framework_TestCase {
+		public function test_remove_user_service_items(){
+			$data = array("username"=>"631466850","service"=>"flickr");
+			
+			Queue::add('delete_placemarks_worker', $data );
+			
+			// $db = DatabaseFactory::get_provider();
+			// 
+			// $username = "631466850";
+			// $service_id = "flickr";
+			// 
+			// $key = array("$username", "$service_id");
+			// $placemarks = $db->get()->startkey($key)->endkey($key)->getView('placemark','by_service_type');
+			// 
+			// foreach ($placemarks->rows as $key => $placemark) {
+			// 	$db->get()->deleteDoc($placemark->value);
+			// }
+			
+		}
+	
 		public function xtest_clean_database_users(){
 			$db = DatabaseFactory::get_provider();
 			$db->clean_database_users();
@@ -143,7 +162,7 @@ class DatabaseTest extends PHPUnit_Framework_TestCase {
 			$db->clean_database();
 		}
 		
-		public function test_clean_database_user(){
+		public function xxtest_clean_database_user(){
 			$username = '631466850';
 			$db = DatabaseFactory::get_provider();
 			$db->clean_database_user($username);
