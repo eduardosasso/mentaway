@@ -44,6 +44,7 @@ class Friend {
 			if ($servicename == 'facebook') {
 				$friend_id = $value['id'];
 			}			
+			//procura o amigo do facebook no mentaway
 			$friend = $controller->get_user($friend_id);
 			
 			if ($friend) {
@@ -61,6 +62,8 @@ class Friend {
 				
 				$controller->save_user($friend_obj);
 				
+				$this->update_placemarks($friend_obj);
+				
 				$friends[] = $friend->_id;
 			}
 		}
@@ -69,7 +72,25 @@ class Friend {
 		$friends = array_unique($friends);
 		$user->friends = $friends;
 		
-		$controller->save_user($user);		
+		//loops no placemarks de cada amigo
+		//atualiza o timeline com os novos amigos
+		
+		$controller->save_user($user);	
+		$this->update_placemarks($user);
+	}
+	
+	public function update_placemarks($user) {
+		//atualiza o placemark do usuario adicionando seus amigos na lista.
+		$controller = new Controller();
+		$placemarks = $controller->get_placemarks($user->_id);
+		
+		if (isset($user->friends)) {
+			foreach ($placemarks as $key => $placemark) {
+				$placemark->value->friends = $user->friends;
+
+				$controller->save($placemark->value);
+			}
+		}		
 	}
 	
 }

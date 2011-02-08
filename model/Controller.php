@@ -17,20 +17,27 @@ class Controller {
 	}
 
 	function get_timeline($username){
-		$user = $this->get_user($username);
+		$db = DatabaseFactory::get_provider();
 		
-		$placemarks = $this->get_placemarks($username);
+		$key = array("$username", array());
+		$end_key = array("$username");
 		
-		if (isset($user->friends) && count($user->friends)>0) {
-			foreach ($user->friends as $friend) {
-				$friend_placemarks = $this->get_placemarks($friend);
-				$placemarks = array_merge($placemarks, $friend_placemarks);
-			}
-		}
+		$timeline = $db->get()->descending(true)->limit(100)->startkey($key)->endkey($end_key)->getView('placemark','timeline');
 		
-		usort($placemarks, "Helper::cmp_timestamp");
+		// $user = $this->get_user($username);
+		// 		
+		// 		$placemarks = $this->get_placemarks($username);
+		// 		
+		// 		if (isset($user->friends) && count($user->friends)>0) {
+		// 			foreach ($user->friends as $friend) {
+		// 				$friend_placemarks = $this->get_placemarks($friend);
+		// 				$placemarks = array_merge($placemarks, $friend_placemarks);
+		// 			}
+		// 		}
+		// 		
+		// 		usort($placemarks, "Helper::cmp_timestamp");
 		
-		return $placemarks;
+		return $timeline->rows;
 	}
 	
 	function get_placemark($user, $checkin_id) {
@@ -288,35 +295,28 @@ class Controller {
 		
 		Notification::add($message);
 		
-		//logo que criou o user manda uma tarefa para o queue ver se ele tem algum checkin no places...
-		Queue::add('facebook_places_worker', $fb_user_['id']);
-		
 		//segue meus amigos
 		Queue::add('follow_friends_worker', $fb_user_['id']);
+
+		//logo que criou o user manda uma tarefa para o queue ver se ele tem algum checkin no places...
+		Queue::add('facebook_places_worker', $fb_user_['id']);		
 		
 		return $this->get_user_by_id($saved_user->id);
 	}
+
+	function save($doc) {
+		$db = DatabaseFactory::get_provider();
+
+		$result = $db->save($doc);
+
+		return $result;
+	}
 	
-	/*
-		TODO tem q criar, ou alterar na mesma funcao
-	*/
 	function save_user($user) {		
 			$db = DatabaseFactory::get_provider();
 			
-			// /*
-			// 	TODO tem q retornar para o usuario para ver se nao deu erro
-			// 	fields vem serializado com todos os campos, explodir...
-			// */
-			// $user = new User();
-			// $user->_id = $fields;
-			// $user->username = $fields;
-			// $user->fullname = $fields;
-			
 			$result = $db->save_user($user);
 			
-			/*
-				TODO tem q tratar melhor para dar uma saida amigavel de erro ou successo para o usuario
-			*/
 			return $result;
 		}
 }

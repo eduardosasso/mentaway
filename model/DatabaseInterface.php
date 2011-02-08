@@ -2,7 +2,7 @@
 interface DatabaseInterface
 {
 	public function save($document);
-	public function get_placemarks($user, $trip = '');
+	public function get_placemarks($user);
 	
 	public function save_user($user);
 	public function add_user_service($username, Service $service);

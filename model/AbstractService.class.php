@@ -18,6 +18,10 @@ abstract class AbstractService {
 			*/
 			$user = $db->get_user($username);
 			$trip = $user->trips[0];
+			
+			if (isset($user->friends)) {
+				$document->friends = $user->friends;
+			}
 
 			//se a trip do cara tem data de inicio respeita ela na hora de salvar os checkins, se nao tem nada pega tudo.
 			if (isset($trip->begin)) {

@@ -7,6 +7,8 @@ class Foursquare_Worker extends Worker {
 		
 		$foursquare = new Foursquare();		
 		$foursquare->get_updates($username);
+		
+		Queue::add('stats_worker', $username);
 	}
 }
 

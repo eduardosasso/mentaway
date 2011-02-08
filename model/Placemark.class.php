@@ -6,6 +6,9 @@ class Placemark {
 	public $image;
 	public $lat;
 	public $long;
+	public $city;
+	public $state;
+	public $country;
 	public $date;
 	public $service;
 	public $user;

@@ -18,25 +18,20 @@ class CouchDB implements DatabaseInterface {
 	}
 	
 	public function save($document) {
-		$document->_id = Helper::escape_special_char($document->_id);
+		unset($document->_deleted_conflicts);
 		
-		/*
-			TODO Tem q tratar o retorno e excecoes
-		*/
 		$response = $this->db->storeDoc($document);
 		
 		return $response;
 	}
 	
-	public function get_placemarks($user, $trip = '') {
-		// codigo da view
-		// function(doc) {
-		// 		  if (doc.lat)
-		// 		    emit(doc.user, doc);
-		// 		}
-		$username = Helper::unescape_special_char($user);
-	
-		$placemarks = $this->db->startkey($username)->endkey($username)->getView('placemark','placemarks');
+	public function get_placemarks($user) {
+		//recupera os ultimos (mais recentes) 100 placemarks de um usuario
+		
+		$key = array("$user", array());
+		$end_key = array("$user");
+		
+		$placemarks = $this->db->descending(true)->limit(100)->startkey($key)->endkey($end_key)->getView('placemark','placemarks');
 	
 		return $placemarks;
 	}
@@ -51,7 +46,7 @@ class CouchDB implements DatabaseInterface {
 	
 	//Remove documentos poara teste
 	public function clean_database_user($username) {
-		$placemarks = $this->db->key($username)->getView('placemark','placemarks');
+		$placemarks = $this->db->key($username)->getView('placemark','all');
 		
 		foreach ($placemarks->rows as $row ) {
 			$this->db->deleteDoc($row->value);
@@ -59,7 +54,7 @@ class CouchDB implements DatabaseInterface {
 	}
 	
 	public function clean_database() {	
-		$placemarks = $this->db->getView('placemark','placemarks');
+		$placemarks = $this->db->getView('placemark','all');
 		
 		foreach ($placemarks->rows as $row ) {
 			$this->db->deleteDoc($row->value);
@@ -138,9 +133,6 @@ class CouchDB implements DatabaseInterface {
 				$user->services = $temp_array;
 			}
 		}
-		
-		$key = array("$username", "$service_id");
-		$placemarks = $db->get()->startkey($key)->endkey($key)->getView('placemark','by_service_type');
 				
 		$response = $this->save_user($user);
 

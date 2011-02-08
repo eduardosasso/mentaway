@@ -7,6 +7,7 @@ class Follow_Friends_Worker extends Worker {
 		
 		$friend = new Friend();
 		$friend->follow_facebook_friends($username);
+
 	}
 }
 

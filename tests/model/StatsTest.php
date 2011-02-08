@@ -3,15 +3,15 @@ include realpath($_SERVER["DOCUMENT_ROOT"]) . '/classes.php';
 
 //phpunit tests/model/StatsTest.php
 class StatsTest extends PHPUnit_Framework_TestCase {
-		public function xtest_get_updates() {
-			$username = 'kenjiyamamoto';
+		public function test_get_updates() {
+			$username = '631466850';
 
 			$stats = new Stats();
 			$stats = $stats->get_updates($username);
 			
 		}
 		
-		public function test_how_many_days() {
+		public function xtest_how_many_days() {
 			$stats = new Stats();
 			
 			$trip_date = strtotime('01/01/2010');

@@ -7,6 +7,8 @@ class Flickr_Worker extends Worker {
 
 		$flickr = new Flickr();		
 		$flickr->get_updates($username);
+		
+		Queue::add('stats_worker', $username);		
 	}
 }
 

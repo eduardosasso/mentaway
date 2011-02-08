@@ -2,9 +2,6 @@
 
 include realpath($_SERVER["DOCUMENT_ROOT"]) . '/classes.php';
 
-/*
-	TODO Deve percorrer todos os placemarks do usuario para a trip ativa e identificar informacoes como cidades visitadas, fotos tiradas, dias na estrada etc...
-*/
 class Stats extends AbstractService {
 	
 		const CITY =  1;
@@ -28,58 +25,26 @@ class Stats extends AbstractService {
 				$trip->_id = 'trip';
 			}
 			
-			/*
-				TODO aqui tem q ser os placemarks da trip atual
-			*/			
-			if (isset($trip->status->last_update)) {
-				$placemarks = $controller->get_placemarks_starting_from($username, $trip->status->last_update);
-			}	else {
-				$placemarks = $controller->get_placemarks($username);
-			}
+			//pega so os placemarks do user q estao sem o geocode reverso
+			$db = DatabaseFactory::get_provider();
+			$placemarks = $db->get()->key($username)->getView('placemark','reverse_geo');
 			
-			if (empty($placemarks)) {
+			if (empty($placemarks->rows)) {
 				return;
 			}	
 
-			$trip->status = $this->update_trip_status($trip, $placemarks);
+			$trip->status = $this->update_trip_status($trip, $placemarks->rows);
 			
 			$controller->add_user_trip($username, $trip);
 			
 		}	
 				
-		public function format_location_message($status){
-			$cities = count($status->cities);
-			$states = count($status->states);
-			$countries = count($status->countries);
+		public function update_trip_status($trip, $placemarks){
+			$db = DatabaseFactory::get_provider();
 			
-			if ($cities > 1) {
-				$message = "$cities cities";
+			if (isset($trip->status)) {
+				$status = $trip->status;
 			}
-			
-			if ($states > 1) {
-				$message .= ", $states states";
-			}
-			
-			if ($countries > 1) {
-				$message .= " and $countries countries";
-			}
-			
-			if ($message) {
-				$message .= ' visited';
-			}
-
-			return $message;
-			
-		}
-		
-		public function how_many_days($timestamp){
-			$date = date(DATE_RFC822, $timestamp); 			
-			//return $date;
-			return Helper::nicetime($date);
-		}
-				
-		public function update_trip_status($trip, $placemarks){			
-			$status = $trip->status;
 			
 			if (empty($status)) {
 				$status->cities = array();
@@ -108,36 +73,26 @@ class Stats extends AbstractService {
 						switch ($address_type) {
 							case self::CITY:
 							$status->cities[] = $name;
+							$placemark->value->city = $name;
 							break;
 							case self::STATE:
 							$status->states[] = $name;
+							$placemark->value->state = $name;
 							break;
 							case self::COUNTRY:	
 							$status->countries[] = $name;
+							$placemark->value->country = $name;
 							break;
 						}
-					}	
+					}					
+					$db->save($placemark->value);	
 				}
 			}
-			
-			$last_placemark = end($placemarks);
-			$status->last_update = $last_placemark->value->timestamp;
 			
 			$status->cities = array_unique($status->cities);
 			$status->states = array_unique($status->states);
 			$status->countries = array_unique($status->countries);
-			
-			$locations = $this->format_location_message($status);
-			
-			// if (isset($trip->begin)) {
-			// 	$how_many_days = $this->how_many_days(strtotime($trip->begin));
-			// 	$how_many_days .= 'on the road, ';
-			// } else {
-			// 	$how_many_days = '';
-			// }
 
-			$status->message = $locations; 
-			
 			return $status;			
 			
 		}
@@ -158,7 +113,6 @@ class Stats extends AbstractService {
 
 			curl_setopt($ch, CURLOPT_URL, $url);
 			curl_setopt($ch, CURLOPT_HEADER,0);
-//			curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER["HTTP_USER_AGENT"]);
 			curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 

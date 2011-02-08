@@ -7,6 +7,8 @@ class Facebook_Places_Worker extends Worker {
 		
 		$places = new Facebook_Places();
 		$places->get_updates($username);
+		
+		Queue::add('stats_worker', $username);		
 	}
 }
 
