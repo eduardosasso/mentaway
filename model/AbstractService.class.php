@@ -11,17 +11,14 @@ abstract class AbstractService {
 		try {
 			$db = DatabaseFactory::get_provider();
 
-			/*
-				TODO Salva somente se a data do placemark eh maior ou igual a data da trip atual
-				Esse metodo nao esta performatico pois recupera o user a cada Save, melhorar...
-				E aqui tem q pegar a trip padrao e nao a trip 0
-			*/
 			$user = $db->get_user($username);
 			$trip = $user->trips[0];
 			
 			if (isset($user->friends)) {
 				$document->friends = $user->friends;
 			}
+			
+			$document->fullname = $user->fullname;
 
 			//se a trip do cara tem data de inicio respeita ela na hora de salvar os checkins, se nao tem nada pega tudo.
 			if (isset($trip->begin)) {

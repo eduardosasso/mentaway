@@ -5,11 +5,12 @@ $fb_user_id = array();
 ?>
 <div id="map"></div>
 
-<section id="timeline">
-	<?php foreach ($placemarks as $placemark): ?>		
-		<?php	$user_picture = "https://graph.facebook.com/". $placemark->value->user . "/picture"; ?>
-		
-		<article class="item" 
+<div id="timeline">
+	<section>
+		<?php foreach ($placemarks as $placemark): ?>		
+			<?php	$user_picture = "https://graph.facebook.com/". $placemark->value->user . "/picture"; ?>
+
+			<article class="item" 
 			data-placemark= "<?php echo $placemark->value->name ?>"
 			data-user_id= "<?php echo $placemark->value->user ?>"
 			data-lat="<?php echo $placemark->value->lat ?>" data-long="<?php echo $placemark->value->long ?>">
@@ -19,26 +20,35 @@ $fb_user_id = array();
 
 			<div>
 				<header>							
-					<h1><?php echo $placemark->value->name; ?></h1>
-				</header>
+					<h2><?php echo $placemark->value->fullname; ?></h1>
+						<h1><?php echo $placemark->value->name; ?></h1>
+						<p class="address">
+							<?php if ($placemark->value->city): ?>
+								<?php echo $placemark->value->city . ', ' . $placemark->value->state . ' - ' . $placemark->value->country ?>
+							<?php endif ?>						
+						</p>
+					</header>
 
-				<div class="description">
-					<?php echo $placemark->value->description; ?>
-					<?php if ($placemark->value->service=='flickr'): ?>
-						<img src="<?php echo str_replace('_t.','_m.', $placemark->value->image); ?>">
-					<?php endif ?>
+					<div class="description">
+						<?php echo $placemark->value->description; ?>
+						<?php if ($placemark->value->service=='flickr'): ?>
+							<img src="<?php echo str_replace('_t.','_m.', $placemark->value->image); ?>">
+						<?php endif ?>
+					</div>
+
+					<footer>
+						<time datetime="<?php echo $placemark->value->date ?>">
+							<?php echo Helper::showdate($placemark->value->timestamp); ?> via <?php echo $placemark->value->service; ?>
+						</time>
+						<div class="share"></div>
+					</footer>
 				</div>
+			</article>
+			<div style="clear:both"></div>
 
-				<footer>
-					<p class="address"></p>
-					<time datetime="<?php echo $placemark->value->date ?>">
-						<?php echo Helper::showdate($placemark->value->timestamp); ?> via <?php echo $placemark->value->service; ?>
-					</time>
-					<div class="share"></div>
-				</footer>
-			</div>
-		</article>
-		<div style="clear:both"></div>
-
-	<?php endforeach ?>
-</section>
+		<?php endforeach ?>
+	</section>
+</div>
+<div id="sidebar">
+	<?php include "ads.php"; ?>		
+</div>

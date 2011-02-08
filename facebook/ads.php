@@ -1,4 +1,4 @@
-<?php if (Settings::get_env() == Settings::PROD): ?>
+<?php //if (Settings::get_env() == Settings::PROD): ?>
 
 <script type="text/javascript"><!--
 google_ad_client = "ca-pub-8046450694828694";
@@ -12,4 +12,4 @@ google_ad_height = 600;
 src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 </script>
 
-<?php endif ?>
+<?php //endif ?>

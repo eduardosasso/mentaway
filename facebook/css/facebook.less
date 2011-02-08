@@ -1,4 +1,4 @@
-@content-width: 560px;
+@content-width: 100%;
 @sidebar-width: 160px;
 @width-minus-scroll: @content-width - 20;
 @margin-top: 15px;
@@ -71,7 +71,6 @@ h1 {
 	
 
 }
-
 
 #main-header {
 	padding-bottom: 10px;
@@ -161,45 +160,56 @@ h1 {
 	}
 	
 	#timeline{
-		height: 400px;
-		display: block;
-		overflow:hidden;		
-		width: @width-minus-scroll;
-		margin-top: @margin-top;
+		width: 550px;
+		float:left;
 		
-		article{
-			figure {
-				float:left;
-				margin: 0px 10px 10px 0px;
-			}		
-			
-			float: left;
-			width: 100%;
-			
-			.border-bottom;
-			.content-padding;
-			
-			> div {
-				float:left;
-			}
-			
-			.description{
-				margin-top:5px;
-				color:black;
-			}
-			
-			footer {
-				color: @aux-text-color;
-				
-				p.address{
-					margin: 0px;
-					height:13px;
-					
+		section {
+			display: block;
+			overflow:hidden;		
+		
+			margin-top: @margin-top;
+
+			article{
+				header {
+					p.address{
+						margin: 0px;
+						height:13px;
+
+					}
 				}
-				
+
+				figure {
+					float:left;
+					margin: 0px 10px 10px 0px;
+				}		
+
+				float: left;
+				width: 100%;
+
+				.border-bottom;
 				.content-padding;
+
+				> div {
+					float:left;
+					width:100%;
+				}
+
+				.description{
+					margin-top:5px;
+					color:black;
+				}
+
+				footer {
+					color: @aux-text-color;
+
+					.share {
+						padding-top: 10px;
+						height: 20px;
+					}
+
+					.content-padding;
+				}
 			}
-			
 		}
 		
 		article:hover{

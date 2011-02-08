@@ -25,7 +25,12 @@ abstract class Worker{
 			$job = $this->pheanstalk->watch($tube)->ignore('default')->reserve();
 
 			$data = json_decode($job->getData());
-			$this->process($data);
+			
+			try {
+				$this->process($data);
+			} catch (Exception $e) {
+				Log::write($e->getMessage());
+			}
 
 			$this->pheanstalk->delete($job);
 

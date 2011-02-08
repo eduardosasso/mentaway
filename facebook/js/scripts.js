@@ -1,6 +1,13 @@
 window.fbAsyncInit = function() {
-  FB.Canvas.setAutoResize();
-}
+	FB.init({
+    appId  : '136687686378472',
+    status : true, // check login status
+    cookie : true, // enable cookies to allow the server to access the session
+    xfbml  : true  // parse XFBML
+  });
+
+	//FB.Canvas.setAutoResize();	
+};
 
 $(function(){
 	
@@ -30,8 +37,6 @@ $(function(){
 		e.stopPropagation();
 		
 		message_ = $(this).closest('.message');
-		
-		console.log(message_.attr('id'));
 
 		//remove do db a mensagem se for persistente
 		$.post('/facebook/ajax/delete.php', {docid: message_.attr('id')});
@@ -41,13 +46,6 @@ $(function(){
 		return false;
 		
 	});	
-	
-	FB.init({
-    appId  : '136687686378472',
-    status : true, // check login status
-    cookie : true, // enable cookies to allow the server to access the session
-    xfbml  : true  // parse XFBML
-  });
 
 });
 

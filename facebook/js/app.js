@@ -1,5 +1,4 @@
 head.ready(function(){
-	
 	$('a#states').click(function(){
 	
 		
@@ -62,8 +61,7 @@ head.ready(function(){
 		
 	});
 	
-	$('article').mouseover(function(){
-		geocoder = new google.maps.Geocoder();
+	$('article').mouseover(function(){		
 		var lat_ = $(this).attr('data-lat');
 		var long_ = $(this).attr('data-long');
 		var user_id = $(this).attr('data-user_id');
@@ -74,7 +72,7 @@ head.ready(function(){
 		$this_ = $(this);
 		
 		var url_ = 'http://mentaway.com/' + user_id + '/' + placemark;
-		var like_ = '<fb:like show_faces="true" width="450" href="' + url_ + '"></fb:like>';
+		var like_ = '<fb:like show_faces="false" layout="button_count" width="90" href="' + url_ + '"></fb:like>';
 		
 		$('article').removeClass('active');
 		$(this).addClass('active');
@@ -87,31 +85,46 @@ head.ready(function(){
 			FB.XFBML.parse(el_);
 		}
 		
-		geocoder.geocode( { 'location': latlng}, function(results, status) {
-			if (!results) {
-				return;
-			};
-			
-			formatted_address_ = results[0].formatted_address;
-			
-			address_ = $('p.address', $this_);
-			//console.log(address_);
-			
-			if (address_.text() == '') {
-				address_.text(formatted_address_);
-			}
-			
-		});
+		//geocoder = new google.maps.Geocoder();
+		// geocoder.geocode( { 'location': latlng}, function(results, status) {
+		// 			if (!results) {
+		// 				return;
+		// 			};
+		// 			
+		// 			formatted_address_ = results[0].formatted_address;
+		// 			
+		// 			address_ = $('p.address', $this_);
+		// 			//console.log(address_);
+		// 			
+		// 			if (address_.text() == '') {
+		// 				address_.text(formatted_address_);
+		// 			}
+		// 			
+		// 		});
 
 	});
+
+	previous_marker = '';
 	
 	Map.init({maptype: 'ROADMAP'});
 	Map.add('-20.468189', '-59.589844');
 	Map.set_zoom(2);
 	
-	$('#timeline').gWaveScrollPane();
+	//arruma a altura do scroll interno dinamicamente
+	$('#timeline section').css('height', $(window).height());
 	
-	$('#placemarks article').click(function(){
+	$('#timeline section').gWaveScrollPane();
+	
+	FB.Canvas.setAutoResize();
+	
+	$('#timeline article').click(function(){
+		if (!previous_marker) {
+			//se não teve nenhum placemark entao seta um zoom padrao
+			Map.gmap.setZoom(15);
+		} else {
+			previous_marker.setMap(null); 
+		}	
+		
 		lat_ = $(this).attr('data-lat');
 		long_ = $(this).attr('data-long');
 		
@@ -128,10 +141,7 @@ head.ready(function(){
 
 		Map.gmap.panTo(latlng);
 		
-		/*
-			TODO ver se o usuario mudou o zoom se sim manter o dele
-		*/
-		Map.gmap.setZoom(15);
+		previous_marker = marker;
 		
 	});
 		
