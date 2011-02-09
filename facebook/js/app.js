@@ -111,9 +111,9 @@ head.ready(function(){
 	Map.set_zoom(2);
 	
 	//arruma a altura do scroll interno dinamicamente
-	$('#timeline section').css('height', $(window).height());
+	$('#timeline').css('height', $(window).height());
 	
-	$('#timeline section').gWaveScrollPane();
+	$('#timeline').gWaveScrollPane();
 	
 	FB.Canvas.setAutoResize();
 	

@@ -32,4 +32,6 @@ if (isset($_REQUEST['settings'])) {
 		<?php include "page/messages.php"; ?>
 		<?php include "page/$page.php"; ?>
 	</div>
+
+	
 </div>

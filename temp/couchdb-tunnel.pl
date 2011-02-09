@@ -16,7 +16,8 @@
 ## 
 
 $remote_user = "root";
-$remote_host = "69.164.201.65";
+#$remote_host = "69.164.201.65";
+$remote_host = "173.255.196.81";
 $remote_port = "5984";
 $remote_ip   = "127.0.0.1";
 
