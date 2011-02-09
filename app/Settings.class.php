@@ -3,7 +3,7 @@
 class Settings {
 	const LOCAL = 'mentaway.dev';
 	const PROD = 'mentaway.com';
-	const DEV = 'beta.mentaway.com';	
+	const DEV = 'fb.mentaway.com';	
 	
 	public static function get_env() {
 		if (isset($_SERVER["SERVER_NAME"])) {

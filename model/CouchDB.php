@@ -54,11 +54,16 @@ class CouchDB implements DatabaseInterface {
 	}
 	
 	public function clean_database() {	
-		$placemarks = $this->db->getView('placemark','all');
+		$placemarks = $this->db->getAllDocs('placemark','all');
 		
 		foreach ($placemarks->rows as $row ) {
 			$this->db->deleteDoc($row->value);
 		}
+		// $docs = $this->db->include_docs(true)->getAllDocs();
+		// 	
+		// foreach ($docs->rows as $row ) {
+		// 	$this->db->deleteDoc($row->doc);
+		// }
 	}
 	
 	public function save_user($user) {
