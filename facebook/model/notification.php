@@ -40,6 +40,46 @@ class Notification {
 
 }
 
+private static function set_fb_counter($username, $count) {
+	$key_secret = Settings::get_facebook_oauth_key();
+
+	$facebook = new Facebook(array(
+		'appId' => $key_secret[0],
+		'secret' => $key_secret[1],
+		'cookie' => true
+		));
+		
+	$controller = new Controller();
+	$user = $controller->get_user($username);
+
+	$facebook->api(array(
+		'method' => 'dashboard.setCount',
+		'uid' => $user->_id,
+		'count' => $count,
+		'access_token' => $user->token
+		));
+}
+
+//zera o contador ao lado do icone da app no fb
+public static function clean_counter($username) {
+	Notification::set_fb_counter($username,0);
+}
+
+//inc no contador do fb para o user ou para os amigos dele, sinalizando novidades
+public static function inc_counter($username, $friends = true) {
+	if ($friends) {
+		$controller = new Controller();
+		$user = $controller->get_user($username);
+		
+		foreach ($user->friends as $friend) {
+			Notification::set_fb_counter($friend,1);
+		}
+	} else {
+		Notification::set_fb_counter($username,1);
+	}	
+}
+
+
 private static function update_or_remove($messages){
 	$db = DatabaseFactory::get_provider();
 

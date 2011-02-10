@@ -1,15 +1,12 @@
-window.fbAsyncInit = function() {
+head.ready(function(){
+	$("a.lightbox").fancybox();
+	
 	FB.init({
     appId  : '136687686378472',
     status : true, // check login status
     cookie : true, // enable cookies to allow the server to access the session
     xfbml  : true  // parse XFBML
   });
-
-	//FB.Canvas.setAutoResize();	
-};
-
-$(function(){
 	
 	$(".redirect").click(function(e){
 		href_ = $(this).attr('href');

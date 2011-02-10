@@ -1,10 +1,13 @@
-@content-width: 560px;
+@content-width: 550px;
 @sidebar-width: 160px;
 @width-minus-scroll: @content-width - 20;
 @margin-top: 15px;
 @font-size: 11px;
+@font-size-big: 14px;
 @hover-color: #E9E9E9;
-@aux-text-color: #999;
+@aux-text-color: lighten(@color, 30%);
+@blue-font:#3B5998;
+@color:#333;
 
 .content-padding{
 	padding: 10px 0px 10px 0px;
@@ -16,8 +19,14 @@
 	border-style: solid;
 }
 
+.border-total{
+	border-color: @hover-color;
+	border-width: 1px;
+	border-style: solid;
+}
+
 body{
-	color: #333;
+	color: @color;
 	font-family: 'lucida grande', tahoma, verdana, arial, sans-serif;
 	font-size: @font-size;
 	text-align: left;	
@@ -30,15 +39,23 @@ body{
 
 h1 {
 	color: #1C2A47;
+	font-size: @font-size-big;
+	font-weight: bold;
+	margin: 4px 0px;
+}
+h2 {
+	color: @blue-font;
 	font-size: @font-size;
 	font-weight: bold;
 	margin: 0px;
 }
 
 #container{
-	width: 100%;
+	width: 720px;
 	margin: 0px;
-	padding: 0px;	
+	padding: 10px;	
+	float: left;
+	.border-total;
 }
 
 .message {
@@ -68,8 +85,6 @@ h1 {
 .message.error {
 	background-color: #F7746D;
 	border: 2px solid #F74A40;		
-	
-
 }
 
 #main-header {
@@ -119,7 +134,7 @@ h1 {
 			}
 		}
 	}
-	
+
 }
 
 #page{
@@ -170,13 +185,16 @@ h1 {
 				p.address{
 					margin: 0px;
 					height:13px;
-					
+					color: @aux-text-color;
 				}
 			}
 			
 			figure {
 				float:left;
 				margin: 0px 10px 10px 0px;
+				width: 50px;
+				height: 50px;
+				display: block;
 			}		
 			
 			float: left;
@@ -186,18 +204,18 @@ h1 {
 			.content-padding;
 			
 			> div {
-				float:left;
-				width:100%;
+				width:@width-minus-scroll - 60;
+				float: right;
 			}
 			
 			.description{
-				margin-top:5px;
+				margin:10px 0;
 				color:black;
 			}
 			
 			footer {
 				color: @aux-text-color;
-				
+				padding: 0 !important;
 				.share {
 					padding-top: 10px;
 					height: 20px;

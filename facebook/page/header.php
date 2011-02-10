@@ -22,7 +22,9 @@ $countries = $controller->get_countries_visited($username);
 		<p class="label">States</p>
 	</div>
 	<div>
-		<p class="number"><?php echo $cities ?></p>
+		<p class="number">
+			<a href="#" id="cities"><?php echo $cities ?></a>
+		</p>
 		<p class="label">Cities</p>
 	</div>
 	<div style="clear:both"></div>

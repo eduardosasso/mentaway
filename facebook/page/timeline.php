@@ -31,7 +31,9 @@ $fb_user_id = array();
 				<div class="description">
 					<?php echo $placemark->value->description; ?>
 					<?php if ($placemark->value->service=='flickr'): ?>
-						<img src="<?php echo str_replace('_t.','_m.', $placemark->value->image); ?>">
+						<a href="<?php echo str_replace('_t.','_b.', $placemark->value->image); ?>" class="lightbox">
+							<img src="<?php echo str_replace('_t.','_m.', $placemark->value->image); ?>">
+						</a>						
 					<?php endif ?>
 				</div>
 

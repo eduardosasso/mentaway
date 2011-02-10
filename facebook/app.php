@@ -1,7 +1,10 @@
 <?php
 
 $controller = new Controller();
-$user_id = $data['user_id'];
+//$user_id = $data['user_id'];
+$user_id = $session['uid'];
+
+Notification::clean_counter($user_id);
 
 if (isset($_REQUEST['new'])) {
 	//novo usuario. cria a conta e vai para a pagina de settings para incluir servicos.

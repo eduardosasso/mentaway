@@ -1,25 +1,52 @@
 head.ready(function(){
 	$('a#states').click(function(){
+		get_db_view("users", "stats", FB.getSession().access_token, function(data){
+			states = data.rows[0].value.states;
+			//pega os valores do objeto e converte em array. via underscore.js
+			states = _.values(states);
+			
+			states_list = states.join("|");
+			states_print = states.join(", ");
+			
+			var picture_ = 'http://maps.google.com/maps/api/staticmap?size=900x400&maptype=roadmap&markers='+ states_list + '&sensor=false';
+
+			var publish = {
+				method: 'feed',
+				message: '',
+				name: 'Some places I\'ve been',
+				description: states_print,
+				link: picture_,
+				picture: picture_
+			};
+
+			FB.ui(publish);
+			
+		});		
+	});
 	
-		
-		// var fbml = '<fb:header icon="true" decoration="add_border">Hello World!</fb:header><fb:profile-pic uid="5526183"></fb:profile-pic>';
-		// 
-			//convida amigos
-				// FB.ui({
-				//     method: 'apprequests',
-				//     message:  'teste',
-				// 		data: 'data',
-				//     size: {width:200,height:480}, width:300,height:500
-				// });
-		
-				// FB.ui({
-				// 					method: 'fbml.dialog',
-				// 					message:  'teste',
-				// 					data: 'data',
-				// 					fbml: fbml_,
-				// 					size: {width:200,height:480}, width:300,height:500
-				// 				});
-				
+	$('a#cities').click(function(){
+		get_db_view("users", "stats", FB.getSession().access_token, function(data){
+			cities = data.rows[0].value.cities;
+			//pega os valores do objeto e converte em array. via underscore.js
+			cities = _.values(cities);
+			
+			cities_list = cities.join("|");
+			cities_print = cities.join(", ");
+			
+			var picture_ = 'http://maps.google.com/maps/api/staticmap?size=900x400&maptype=roadmap&markers='+ cities_list + '&sensor=false';
+
+			var publish = {
+				method: 'feed',
+				message: '',
+				name: 'Some places I\'ve been',
+				description: cities_print,
+				link: picture_,
+				picture: picture_
+			};
+
+			FB.ui(publish);
+			
+		});		
 	});
 	
 	$('a#countries').click(function(){
@@ -36,7 +63,7 @@ head.ready(function(){
 			var publish = {
 				method: 'feed',
 				message: '',
-				name: 'Countries i\'ve visited',
+				name: 'Countries I\'ve visited',
 				description: countries_print,
 				link: picture_,
 				picture: picture_

@@ -19,7 +19,45 @@ class DatabaseTest extends PHPUnit_Framework_TestCase {
 			// foreach ($placemarks->rows as $key => $placemark) {
 			// 	$db->get()->deleteDoc($placemark->value);
 			// }
+		}
+		
+		public function test_inc_counter(){
+			$key_secret = Settings::get_facebook_oauth_key();
 			
+			$facebook = new Facebook(array(
+				'appId' => $key_secret[0],
+				'secret' => $key_secret[1],
+				'cookie' => true
+				));
+			
+			$username = "1335915461";
+			
+			$controller = new Controller();
+			$user = $controller->get_user($username);
+			
+			echo "<pre>";
+			print_r($user->token);
+			echo "</pre>";
+			
+			$uid = "1335915461";
+
+			$facebook->api(array(
+				'method' => 'dashboard.setCount',
+				'uid' => $uid,
+				'count' => 12,
+				'access_token' => $user->token
+				));
+		}
+		
+		public function xtest_save(){
+			$db = DatabaseFactory::get_provider();
+			$doc = $db->get()->getDoc("1297254477|631466850|foursquare");
+			unset($doc->_rev);
+			
+			$res = $db->save($doc);
+						echo "<pre>";
+						print_r($res);
+						echo "</pre>";
 		}
 	
 		public function xtest_clean_database_users(){
@@ -168,7 +206,7 @@ class DatabaseTest extends PHPUnit_Framework_TestCase {
 			$db->clean_database();
 		}
 		
-		public function test_clean_database_user(){
+		public function xtest_clean_database_user(){
 			$username = '631466850';
 			$db = DatabaseFactory::get_provider();
 			$db->clean_database_user($username);
