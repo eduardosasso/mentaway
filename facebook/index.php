@@ -39,6 +39,12 @@ $facebook = new Facebook(array(
 	'cookie' => true,
 	));
 
+$session = $facebook->getSession();
+
+echo "<pre>";
+print_r($session);
+echo "</pre>";
+
 $data = $facebook->getSignedRequest();
 
 //se tiver vazio é pq não autorizou ou não ta logado no fb
