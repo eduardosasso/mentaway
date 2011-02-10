@@ -8,27 +8,25 @@ class Settings {
 	public static function get_env() {
 		if (isset($_SERVER["SERVER_NAME"])) {
 			$domain = $_SERVER["SERVER_NAME"];
-		} else {
-			//se ta testando com phpunit não  vai ter SERVER_NAME entao assume que é local			
-			$domain = Settings::LOCAL;		
-			return $domain;	
-		}
-		
+
+			switch ($domain) {
+				case Settings::LOCAL:
+					return Settings::LOCAL;
+					break;
+				case Settings::PROD:
+					return Settings::PROD;
+					break;
+				default:
+					return Settings::DEV;
+					break;
+			}
+		} 
+
 		if (isset($_ENV['USER']) && $_ENV['USER'] == 'eduardosasso') {
 			return Settings::LOCAL;
-		}
-
-		switch ($domain) {
-			case Settings::LOCAL:
-				return Settings::LOCAL;
-				break;
-			case Settings::PROD:
-				return Settings::PROD;
-				break;
-			default:
-				return Settings::DEV;
-				break;
-		}		
+		} 
+		
+		return Settings::DEV;
 		
 	}
 	
