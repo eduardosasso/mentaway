@@ -163,13 +163,13 @@ class DatabaseTest extends PHPUnit_Framework_TestCase {
 			print_r($response);
 		}
 		
-		public function test_clean_database() {
+		public function xest_clean_database() {
 			$db = DatabaseFactory::get_provider();
 			$db->clean_database();
 		}
 		
-		public function xtest_clean_database_user(){
-			$username = '1335915461';
+		public function test_clean_database_user(){
+			$username = '631466850';
 			$db = DatabaseFactory::get_provider();
 			$db->clean_database_user($username);
 		}

@@ -46,7 +46,7 @@ class CouchDB implements DatabaseInterface {
 	
 	//Remove documentos poara teste
 	public function clean_database_user($username) {
-		$placemarks = $this->db->key($username)->getView('placemark','all');
+		$placemarks = $this->db->key($username)->include_docs(true)->getView('placemark','all');
 		
 		foreach ($placemarks->rows as $row ) {
 			$this->db->deleteDoc($row->value);
@@ -54,7 +54,7 @@ class CouchDB implements DatabaseInterface {
 	}
 	
 	public function clean_database() {	
-		$placemarks = $this->db->key($username)->include_docs(true)->getView('placemark','all');
+		$placemarks = $this->db->include_docs(true)->getView('placemark','all');
 		
 		foreach ($placemarks->rows as $row ) {
 			$this->db->deleteDoc($row->value);
