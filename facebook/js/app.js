@@ -76,10 +76,10 @@ head.ready(function(){
 	});
 	
 	FB.Event.subscribe('edge.create', function(response) {
-		var user_id = $('article.active').attr('data-user_id');
+		var user_id = $('article.hover').attr('data-user_id');
 		
-		var title = $('article.active h1').text();
-		var body = jQuery.trim($('article.active div.description').text());
+		var title = $('article.hover h1').text();
+		var body = jQuery.trim($('article.hover div.description').text());
 		
 		var picture_ = 'http://mentaway.com/images/facebook_like.png';
 		message_ = "Likes " + body + ' @ ' + title; 
@@ -88,21 +88,15 @@ head.ready(function(){
 		
 	});
 	
-	$('article').mouseover(function(){		
-		var lat_ = $(this).attr('data-lat');
-		var long_ = $(this).attr('data-long');
+	$('article').mouseover(function(){
+		$('article').removeClass('hover');
+		$(this).addClass('hover');
+		
 		var user_id = $(this).attr('data-user_id');
 		var placemark = $(this).attr('data-placemark');
 				
-		var latlng = new google.maps.LatLng(lat_, long_);
-		
-		$this_ = $(this);
-		
 		var url_ = 'http://mentaway.com/' + user_id + '/' + placemark;
-		var like_ = '<fb:like show_faces="false" layout="button_count" width="90" href="' + url_ + '"></fb:like>';
-		
-		$('article').removeClass('active');
-		$(this).addClass('active');
+		var like_ = '<fb:like show_faces="true" layout="box_count" href="' + url_ + '"></fb:like>';
 		
 		if ($('.share', $(this)).html() == "")  {
 			$('.share', $(this)).html(like_);
@@ -111,23 +105,6 @@ head.ready(function(){
 			
 			FB.XFBML.parse(el_);
 		}
-		
-		//geocoder = new google.maps.Geocoder();
-		// geocoder.geocode( { 'location': latlng}, function(results, status) {
-		// 			if (!results) {
-		// 				return;
-		// 			};
-		// 			
-		// 			formatted_address_ = results[0].formatted_address;
-		// 			
-		// 			address_ = $('p.address', $this_);
-		// 			//console.log(address_);
-		// 			
-		// 			if (address_.text() == '') {
-		// 				address_.text(formatted_address_);
-		// 			}
-		// 			
-		// 		});
 
 	});
 
@@ -145,6 +122,9 @@ head.ready(function(){
 	FB.Canvas.setAutoResize();
 	
 	$('#timeline article').click(function(){
+		$('article').removeClass('active');
+		$(this).addClass('active');
+		
 		if (!previous_marker) {
 			//se não teve nenhum placemark entao seta um zoom padrao
 			Map.gmap.setZoom(15);
@@ -171,5 +151,7 @@ head.ready(function(){
 		previous_marker = marker;
 		
 	});
+	
+	$('#timeline article:first').trigger('click');
 		
 });

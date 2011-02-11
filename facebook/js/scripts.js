@@ -1,4 +1,5 @@
 head.ready(function(){
+
 	$("a.lightbox").fancybox();
 	
 	FB.init({
