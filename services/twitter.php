@@ -28,9 +28,8 @@ if ($_GET['oauth_token']) {
 	
 	$response = $controller->add_user_service($username, $service);
 	
-	/*
-		TODO seguir o @mentaway
-	*/
+	Twitter::follow_mentaway($username);	
+	Twitter::shout($username,"I just added Twitter to my @mentaway account.");
 
 	header("Location: http://apps.facebook.com/mentaway/settings");	
 

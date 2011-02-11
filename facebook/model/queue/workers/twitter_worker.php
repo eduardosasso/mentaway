@@ -5,8 +5,8 @@ class Twitter_Worker extends Worker {
 	protected function process($data) {
 		$username = $data;
 		
-		$foursquare = new Twitter();		
-		$foursquare->get_updates($username);
+		$twitter = new Twitter();		
+		$twitter->get_updates($username);
 		
 		Queue::add('twitter_worker', $username);
 	}

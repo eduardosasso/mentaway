@@ -27,7 +27,6 @@ $countries = $controller->get_countries_visited($username);
 		</p>
 		<p class="label">Cities</p>
 	</div>
-	<div style="clear:both"></div>
 </div>
 
-<img src="../images/mentaway-logo.png" alt="Mentaway logo" class="logo">
+<img src="/facebook/images/logo.png" alt="Mentaway logo" class="logo">

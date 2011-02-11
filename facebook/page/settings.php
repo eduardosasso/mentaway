@@ -15,7 +15,7 @@ $flickr_active = ($controller->get_user_service($username, 'flickr') ? 'active' 
 	<div class="services">
 
 		<div id="foursquare" class="service <?php echo $foursquare_active ?>">
-			<img src="/images/foursquare-32x32.png"/>
+			<img src="/facebook/images/foursquare-32x32.png"/>
 			<div class="detail">
 				<h3>Foursquare</h3>
 				<p>Captures all your checkins</p>
@@ -29,7 +29,7 @@ $flickr_active = ($controller->get_user_service($username, 'flickr') ? 'active' 
 		</div>
 		
 		<div id="twitter" class="service <?php echo $twitter_active ?>">
-			<img src="/images/twitter-32x32.png"/>
+			<img src="/facebook/images/twitter-32x32.png"/>
 			<div class="detail">
 				<h3>Twitter</h3>
 				<p>Enable geolocation and add #m to your tweets</p>
@@ -43,7 +43,7 @@ $flickr_active = ($controller->get_user_service($username, 'flickr') ? 'active' 
 		</div>
 		
 		<div id="flickr" class="service <?php echo $flickr_active ?>">
-			<img src="/images/flickr-32x32.png"/>
+			<img src="/facebook/images/flickr-32x32.png"/>
 			<div class="detail">
 				<h3>Flickr</h3>
 				<p>Include geolocation info to your photos</p>

@@ -97,6 +97,64 @@ class Twitter extends AbstractService {
 		return $result;
 
 	}
+	
+	public static function shout($username, $text){
+		$key_secret = Settings::get_twitter_oauth_key();
+
+		$consumer_key = $key_secret[0];
+		$consumer_secret = $key_secret[1];
+
+		$servicename = 'twitter';
+
+		$controller = new Controller();
+
+		$service = $controller->get_user_service($username, $servicename);
+
+		if (empty($service->token) || empty($service->secret)) {
+			return;
+		}
+
+		try {
+			$twitter = new EpiTwitter($consumer_key, $consumer_secret, $service->token, $service->secret);
+			$twitter->useAsynchronous();
+
+			$params = array("status" => $text);
+			$tweets = $twitter->post('/statuses/update.json', $params);
+
+		} catch (Exception $e) {
+			Log::write($e->getMessage());
+		}
+
+	}
+	
+	public static function follow_mentaway($username) {
+		$key_secret = Settings::get_twitter_oauth_key();
+
+		$consumer_key = $key_secret[0];
+		$consumer_secret = $key_secret[1];
+
+		$servicename = 'twitter';
+
+		$controller = new Controller();
+
+		$service = $controller->get_user_service($username, $servicename);
+
+		if (empty($service->token) || empty($service->secret)) {
+			return;
+		}
+
+		try {
+			$twitter = new EpiTwitter($consumer_key, $consumer_secret, $service->token, $service->secret);
+			$twitter->useAsynchronous();
+
+			$params = array("screen_name" => "mentaway", "follow" => "true");
+			$tweets = $twitter->post('/friendships/create.json', $params);
+			
+		} catch (Exception $e) {
+		 	Log::write($e->getMessage());
+		}
+		
+	}
 
 }
 ?>

@@ -49,3 +49,7 @@ $fb_user_id = array();
 
 	<?php endforeach ?>
 </section>
+
+<div id="sidebar">
+		<?php include "ads.php"; ?>		
+</div>
