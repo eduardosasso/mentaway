@@ -4,7 +4,6 @@ include realpath($_SERVER["DOCUMENT_ROOT"]) . '/classes.php';
 class Delete_Placemarks_Worker extends Worker
 {
 	protected function process($data) {
-		echo $data->service;
 		$db = DatabaseFactory::get_provider();
 
 		$username = $data->username;

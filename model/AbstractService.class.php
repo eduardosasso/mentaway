@@ -22,6 +22,7 @@ abstract class AbstractService {
 			$db->save($document);
 			
 			if ($this->notified == false) {
+				Log::write("$username - inc do contador");
 				//notifica os amigos desse usuario q ele tem novidades.
 				//so entra aqui 1 vez por servico quando tem novidade para ser mais rapido. 
 				Notification::inc_counter($username);

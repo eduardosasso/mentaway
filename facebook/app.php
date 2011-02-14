@@ -1,7 +1,6 @@
 <?php
 
 $controller = new Controller();
-//$user_id = $data['user_id'];
 $user_id = $session['uid'];
 
 Notification::clean_counter($user_id);

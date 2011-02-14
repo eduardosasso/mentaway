@@ -41,23 +41,28 @@ class Notification {
 }
 
 private static function set_fb_counter($username, $count) {
-	$key_secret = Settings::get_facebook_oauth_key();
+	try {
+		$key_secret = Settings::get_facebook_oauth_key();
 
-	$facebook = new Facebook(array(
-		'appId' => $key_secret[0],
-		'secret' => $key_secret[1],
-		'cookie' => true
-		));
-		
-	$controller = new Controller();
-	$user = $controller->get_user($username);
+		$facebook = new Facebook(array(
+			'appId' => $key_secret[0],
+			'secret' => $key_secret[1],
+			'cookie' => true
+			));
 
-	$facebook->api(array(
-		'method' => 'dashboard.setCount',
-		'uid' => $user->_id,
-		'count' => $count,
-		'access_token' => $user->token
-		));
+		$controller = new Controller();
+		$user = $controller->get_user($username);
+
+		$facebook->api(array(
+			'method' => 'dashboard.setCount',
+			'uid' => $user->_id,
+			'count' => $count,
+			'access_token' => $user->token
+			));	
+	} catch (Exception $e) {
+		Log::write($e->getMessage());
+	}
+	
 }
 
 //zera o contador ao lado do icone da app no fb

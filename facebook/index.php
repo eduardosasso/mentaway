@@ -46,7 +46,7 @@ $session = $facebook->getSession();
 $data = $facebook->getSignedRequest();
 
 //se tiver vazio é pq não autorizou ou não ta logado no fb
-if (empty($session) && empty($data['user_id'])) {
+if (empty($data['user_id'])) {
 	$req_perms = "publish_stream,
 		offline_access,
 		read_stream,
@@ -66,6 +66,8 @@ if (empty($session) && empty($data['user_id'])) {
 	include("app.php");
 }
 
+	include("analytics.php");
 ?>
+
 </body>
 </html>
