@@ -13,19 +13,19 @@ $friends = count($user->friends);
 <div class="stats">
 	<div>
 		<p class="number">
-			<a href="#" id="countries"><?php echo $countries ?></a>
+			<a href="#" id="countries" data-uid="<?php echo $user_id ?>"><?php echo $countries ?></a>
 		</p>
 		<p class="label">Countries</p>
 	</div>
 	<div>
 		<p class="number">
-			<a href="#" id="states"><?php echo $states ?></a>
+			<a href="#" id="states" data-uid="<?php echo $user_id ?>"><?php echo $states ?></a>
 		</p>
 		<p class="label">States</p>
 	</div>
 	<div>
 		<p class="number">
-			<a href="#" id="cities"><?php echo $cities ?></a>
+			<a href="#" id="cities" data-uid="<?php echo $user_id ?>"><?php echo $cities ?></a>
 		</p>
 		<p class="label">Cities</p>
 	</div>

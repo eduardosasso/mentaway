@@ -1,6 +1,6 @@
 head.ready(function(){
-	$('a#states').click(function(){
-		get_db_view("users", "stats", FB.getSession().access_token, function(data){
+	$('a#states, #states_stats_btn').click(function(){
+		get_db_view("users", "stats", $(this).attr('data-uid'), function(data){
 			states = data.rows[0].value.states;
 			//pega os valores do objeto e converte em array. via underscore.js
 			states = _.values(states);
@@ -13,7 +13,7 @@ head.ready(function(){
 			var publish = {
 				method: 'feed',
 				message: '',
-				name: 'Some places I\'ve been',
+				name: 'States map',
 				description: states_print,
 				link: picture_,
 				picture: picture_
@@ -24,8 +24,8 @@ head.ready(function(){
 		});		
 	});
 	
-	$('a#cities').click(function(){
-		get_db_view("users", "stats", FB.getSession().access_token, function(data){
+	$('a#cities, #cities_stats_btn').click(function(){
+		get_db_view("users", "stats", $(this).attr('data-uid'), function(data){
 			cities = data.rows[0].value.cities;
 			//pega os valores do objeto e converte em array. via underscore.js
 			cities = _.values(cities);
@@ -38,7 +38,7 @@ head.ready(function(){
 			var publish = {
 				method: 'feed',
 				message: '',
-				name: 'Some places I\'ve been',
+				name: 'Cities map',
 				description: cities_print,
 				link: picture_,
 				picture: picture_
@@ -49,8 +49,8 @@ head.ready(function(){
 		});		
 	});
 	
-	$('a#countries').click(function(){
-		get_db_view("users", "stats", FB.getSession().access_token, function(data){
+	$('a#countries, #countries_stats_btn').click(function(){
+		get_db_view("users", "stats", $(this).attr('data-uid'), function(data){
 			countries = data.rows[0].value.countries;
 			//pega os valores do objeto e converte em array. via underscore.js
 			countries = _.values(countries);
@@ -63,7 +63,7 @@ head.ready(function(){
 			var publish = {
 				method: 'feed',
 				message: '',
-				name: 'Countries I\'ve visited',
+				name: 'Countries map',
 				description: countries_print,
 				link: picture_,
 				picture: picture_
