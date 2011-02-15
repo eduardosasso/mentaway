@@ -51,8 +51,13 @@ head.ready(function(){
 			message: 'If you love traveling you should definitely check out this app.' ,
 			filters: '["app_non_users"]'
 		});
-	})
+	});
 
+	$('.stats .friends a').click(function(e){
+		e.stopPropagation();
+		$('#friends_link').trigger('click');
+		return false;
+	})
 
 });
 

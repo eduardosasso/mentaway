@@ -4,10 +4,11 @@ $controller = new Controller();
 $user_id = $session['uid'];
 
 $page_url = $_SERVER['QUERY_STRING'];
-$which_page = "/(settings|timeline|new|user)/";
+$which_page = "/(settings|timeline|new|user|friends)/";
 
-preg_match($which_page, $page_url, $page_requested);
-$page_requested = $page_requested[0];
+preg_match_all($which_page, $page_url, $page_matches);
+
+$page_requested = $page_matches[0][0];
 
 Notification::clean_counter($user_id);
 
@@ -26,18 +27,31 @@ switch ($page_requested) {
 		$page = "settings";
 		
 		break;
+	case 'friends':
+		$user = $controller->get_user($user_id);
+		$page = "friends";
+				
+		break;
 	case 'user':
+		$page = $page_matches[0][1];
+		
+		if (!$page) {
+			$page = "timeline";
+		}
+
 		//recupera o user do query string entre /....&
-		preg_match("/\/(.*?)&/", $page_url, $matches);
-		$user_id_ = $matches[1];
+		preg_match("/\/(.*?)[&|\/]/", $page_url, $matches);
+		$user_id_ = $matches[1];		
 		
 		$user = $controller->get_user($user_id_);
 		$username = $user->_id;
 		$user_id = $user->_id;
 		
-		$placemarks = $controller->get_placemarks($username);
-		
-		$page = "timeline";
+		switch ($page) {
+			case 'timeline':
+				$placemarks = $controller->get_placemarks($username);
+				break;
+		}
 		
 		break;
 		
