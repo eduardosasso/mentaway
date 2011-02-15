@@ -44,6 +44,15 @@ head.ready(function(){
 		return false;
 		
 	});	
+	
+	$('#invite_friends').find('input').click(function(){
+		FB.ui({
+			method: 'apprequests',
+			message: 'If you love traveling you should definitely check out this app.' ,
+			filters: '["app_non_users"]'
+		});
+	})
+
 
 });
 

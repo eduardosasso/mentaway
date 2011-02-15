@@ -1,0 +1,10 @@
+.connect_widget,
+.connected,
+.profile_pic,
+.wallkit_subtitle {
+	display:none !important;
+}
+
+.composer {
+	padding:0px !important;
+}

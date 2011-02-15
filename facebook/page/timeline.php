@@ -1,9 +1,3 @@
-<?php
-$placemarks = $controller->get_timeline($username);
-
-$fb_user_id = array();
-?>
-
 <div class="shadow">
 	<div id="map"></div>
 </div>
@@ -14,15 +8,16 @@ $fb_user_id = array();
 
 		<article class="item" 
 		data-placemark= "<?php echo $placemark->value->name ?>"
+		data-xid = "<?php echo str_replace('|','_', $placemark->value->_id) ?>"
 		data-user_id= "<?php echo $placemark->value->user ?>"
 		data-lat="<?php echo $placemark->value->lat ?>" data-long="<?php echo $placemark->value->long ?>">
 		<figure>
-			<img src="<?php echo $user_picture; ?>">
+			<a href="/user/<?php echo $placemark->value->user; ?>" class="redirect"><img src="<?php echo $user_picture; ?>"></a>
 		</figure>
 
 		<div>
 			<header>							
-				<h2><?php echo $placemark->value->fullname; ?></h1>
+				<h2><a href="/user/<?php echo $placemark->value->user; ?>" class="redirect"><?php echo $placemark->value->fullname; ?></a></h1>
 					<h1><?php echo $placemark->value->name; ?></h1>
 				</header>
 
@@ -43,6 +38,7 @@ $fb_user_id = array();
 					</p>
 					<time datetime="<?php echo $placemark->value->date ?>">
 						<?php echo Helper::showdate($placemark->value->timestamp); ?> via <span class="service_name"><?php echo $placemark->value->service; ?></span>
+						<a href="#" class="comment_link">Comment</a>
 					</time>
 					<div class="share"></div>
 				</footer>
@@ -54,5 +50,5 @@ $fb_user_id = array();
 </section>
 
 <div id="sidebar">
-	<?php include "ads.php"; ?>		
+	<?php include "page/sidebar.php"; ?>		
 </div>

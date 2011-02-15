@@ -31,7 +31,7 @@ class CouchDB implements DatabaseInterface {
 		$key = array("$user", array());
 		$end_key = array("$user");
 		
-		$placemarks = $this->db->descending(true)->limit(100)->startkey($key)->endkey($end_key)->getView('placemark','placemarks');
+		$placemarks = $this->db->descending(true)->limit(500)->startkey($key)->endkey($end_key)->getView('placemark','placemarks');
 	
 		return $placemarks;
 	}

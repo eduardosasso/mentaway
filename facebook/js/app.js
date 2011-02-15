@@ -88,6 +88,39 @@ head.ready(function(){
 		
 	});
 	
+	FB.Event.subscribe('comments.add', function(response) {	
+		var xid_ = $('article.hover').attr('data-xid');
+		
+		FB.api({
+			method: 'comments.get', 
+			xid: xid_
+		}, function (res) {
+			var user_id = $('article.hover').attr('data-user_id');
+			
+			var title_ = $('article.hover h1').text();
+			var body_ = jQuery.trim($('article.hover div.description').text());
+			var caption_ = $('article.hover p.address').text();
+			var img_ = $('article.hover .description img').attr('src');
+			
+			var link_ = 'http://apps.facebook.com/mentaway/';
+			if (img_) {
+				link_ = $('article.hover .description a.lightbox').attr('href');
+			};
+			
+			var params = {};
+			params['message'] = res[0].text;
+			params['name'] = title_;
+			params['caption'] = caption_;
+			params['description'] = body_;
+			params['link'] = link_;
+			params['picture'] = img_;
+			
+			FB.api('/'+ user_id + '/feed', 'post', params);
+		});
+		
+	});
+	
+	
 	$('article').mouseover(function(){
 		$('article').removeClass('hover');
 		$(this).addClass('hover');
@@ -96,16 +129,29 @@ head.ready(function(){
 		var placemark = $(this).attr('data-placemark');
 				
 		var url_ = 'http://mentaway.com/' + user_id + '/' + placemark;
-		var like_ = '<fb:like show_faces="true" layout="box_count" href="' + url_ + '"></fb:like>';
-		
-		if ($('.share', $(this)).html() == "")  {
-			$('.share', $(this)).html(like_);
-			
-			el_ = $('.share', $(this)).get(0);
-			
-			FB.XFBML.parse(el_);
-		}
+		//var like_ = '<fb:like show_faces="true" layout="box_count" href="' + url_ + '"></fb:like>';
 
+	});
+	
+	$('.comment_link').click(function(e){
+		e.stopPropagation();
+		item = $(this).closest('article');
+		var user_id = $(item).attr('data-user_id');
+		var xid_ = $(item).attr('data-xid');
+		
+		var like_ = '<fb:comments numposts="10" width="400" publish_feed="false" simple="1" show_form="true" notify="true" canpost="true" xid="'+ xid_ +'" css="http://fb.mentaway.com/facebook/css/fb_comments3.css" send_notification_uid="'+ user_id + '"></fb:comments>';
+		
+		if ($('.share', $(item)).html() == "")  {
+			$('.share', $(item)).html(like_);
+			
+			el_ = $('.share', $(item)).get(0);
+			
+			FB.XFBML.parse(el_);		
+		}
+		
+		$('.share', $(item)).toggle();
+		
+		return false;			
 	});
 
 	previous_marker = '';

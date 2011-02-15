@@ -82,9 +82,57 @@ h2 {
 	z-index: 1;
 	
 }
-.scrollbar-container {
-	
+
+.fb_edge_widget_with_comment span.fb_edge_comment_widget
+{
+    left: -350px !important;
 }
+
+/*.connect_comment_widget .nub
+{
+    background: transparent url(http://static.ak.fbcdn.net/rsrc.php/zv/r/agyQHs6yLID.gif) no-repeat 8px 0px;
+    height: 6px;
+    left: 0px;
+    line-height: 0;
+    margin: 0px;
+    padding: 0px;
+    position: absolute;
+    top: 0px;
+    width: 20px;
+    z-index: 2;
+    visibility: hidden!important;
+}
+*/
+input[type="button"] {
+	background: #EEE url(http://static.ak.fbcdn.net/rsrc.php/zD/r/B4K_BWwP7P5.png) repeat 0 0;
+	border: 1px solid #999;
+	border-bottom-color: #888;
+	box-shadow: 0 1px 0 rgba(0, 0, 0, .1);
+	-webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, .1);
+	cursor: pointer;
+	display: -moz-inline-box;
+	display: inline-block;
+	font-size: 11px;
+	font-weight: bold;
+	line-height: normal !important;
+	padding: 2px 6px;
+	text-align: center;
+	text-decoration: none;
+	vertical-align: top;
+	white-space: nowrap;
+}
+input[type="button"]:active {
+	background: #CCC;
+}
+
+#invite_friends{
+	text-align: center;
+	border: solid 1px #DDD;
+	background-color: #F2F2F2;
+	padding: 20px;
+	margin-bottom: 15px;
+}
+
 .message {
 	margin: 0px 0px 10px 0px;
 	
@@ -242,28 +290,7 @@ h2 {
 				p {
 					color: @aux-text-color;
 					margin: 2px 0 5px !important;
-				}
-				input {
-					background: #EEE url(http://static.ak.fbcdn.net/rsrc.php/zD/r/B4K_BWwP7P5.png) repeat 0 0;
-					border: 1px solid #999;
-					border-bottom-color: #888;
-					box-shadow: 0 1px 0 rgba(0, 0, 0, .1);
-					-webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, .1);
-					cursor: pointer;
-					display: -moz-inline-box;
-					display: inline-block;
-					font-size: 11px;
-					font-weight: bold;
-					line-height: normal !important;
-					padding: 2px 6px;
-					text-align: center;
-					text-decoration: none;
-					vertical-align: top;
-					white-space: nowrap;
-				}
-				input:active {
-					background: #CCC;
-				}
+				}				
 				h3, p {
 					margin:0px;
 				}
@@ -329,7 +356,10 @@ h2 {
 					height:13px;
 					color: @aux-text-color;
 				}
-				.share {
+				.share{
+					display:none;
+				}
+/*				.share {
 					padding:10px 0 0 !important;
 					height: 80px;
 					position: absolute;
@@ -341,7 +371,7 @@ h2 {
 				.share:hover {
 					opacity: 1;
 				}
-				.service_name {
+*/				.service_name {
 					text-transform: capitalize;
 				}
 				.content-padding;
