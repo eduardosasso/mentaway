@@ -4,7 +4,7 @@ $controller = new Controller();
 $user_id = $session['uid'];
 
 $page_url = $_SERVER['QUERY_STRING'];
-$which_page = "/(settings|timeline|new|user|friends|stats)/";
+$which_page = "/(settings|timeline|new|user|friends|stats|help)/";
 
 preg_match_all($which_page, $page_url, $page_matches);
 
@@ -63,7 +63,10 @@ switch ($page) {
 		
 		$placemarks = $controller->get_timeline($username);
 		
-		$page = "timeline";
+		if (empty($page)) {
+			$page = "timeline";
+		}
+
 		break;
 }
 

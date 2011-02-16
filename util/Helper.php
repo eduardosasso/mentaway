@@ -6,6 +6,27 @@ class Helper {
 	    return 0; // equality
 	}
 	
+	public static function plural($count, $singular, $plural = 's') {
+		if ($plural == 's') {
+			$plural = $singular . $plural;
+		}
+		return ($count == 1 ? $singular : $plural);
+	}
+	
+	public static function format_location($country, $state, $city){
+		if ($city) {
+			$city_state[] = $city;
+		}
+		
+		if ($state) {
+			$city_state[] = $state;
+		}
+
+		$city_state = implode(", " , $city_state);
+
+		return "$city_state - $country";
+	} 
+	
 	public static function showdate($timestamp) // $date -- time(); value
 	{
 		$difference = time() - $timestamp;

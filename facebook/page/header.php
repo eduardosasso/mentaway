@@ -15,19 +15,19 @@ $friends = count($user->friends);
 		<p class="number">
 			<a href="#" id="countries" data-uid="<?php echo $user_id ?>"><?php echo $countries ?></a>
 		</p>
-		<p class="label">Countries</p>
+		<p class="label"><?php echo Helper::plural($countries, 'Country', 'Countries'); ?></p>
 	</div>
 	<div>
 		<p class="number">
 			<a href="#" id="states" data-uid="<?php echo $user_id ?>"><?php echo $states ?></a>
 		</p>
-		<p class="label">States</p>
+		<p class="label"><?php echo Helper::plural($states, 'State'); ?></p>
 	</div>
 	<div>
 		<p class="number">
 			<a href="#" id="cities" data-uid="<?php echo $user_id ?>"><?php echo $cities ?></a>
 		</p>
-		<p class="label">Cities</p>
+		<p class="label"><?php echo Helper::plural($cities, 'City', 'Cities'); ?></p>
 	</div>
 	<?php if ($friends >0): ?>
 		<div class="friends">

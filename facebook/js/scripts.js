@@ -57,6 +57,14 @@ head.ready(function(){
 		e.stopPropagation();
 		$('#friends_link').trigger('click');
 		return false;
+	});
+	
+	$('section#help article h1').click(function(e){
+		e.stopPropagation();
+		
+		$(this).next('div').toggle();
+
+		return false;
 	})
 
 });

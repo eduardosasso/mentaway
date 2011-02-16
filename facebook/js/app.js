@@ -139,7 +139,7 @@ head.ready(function(){
 		var user_id = $(item).attr('data-user_id');
 		var xid_ = $(item).attr('data-xid');
 		
-		var like_ = '<fb:comments numposts="10" width="400" publish_feed="false" simple="1" show_form="true" notify="true" canpost="true" xid="'+ xid_ +'" css="http://fb.mentaway.com/facebook/css/fb_comments3.css" send_notification_uid="'+ user_id + '"></fb:comments>';
+		var like_ = '<fb:comments numposts="10" width="400" publish_feed="false" simple="1" show_form="true" notify="true" canpost="true" xid="'+ xid_ +'" css="http://fb.mentaway.com/facebook/css/fb_comments6.css" send_notification_uid="'+ user_id + '"></fb:comments>';
 		
 		if ($('.share', $(item)).html() == "")  {
 			$('.share', $(item)).html(like_);
@@ -154,16 +154,28 @@ head.ready(function(){
 		return false;			
 	});
 
-	previous_marker = '';
-	
-	Map.init({maptype: 'ROADMAP'});
-	Map.add('-20.468189', '-59.589844');
-	Map.set_zoom(2);
+	if ($('section#timeline').length > 0) {
+		previous_marker = '';
+
+		Map.init({maptype: 'ROADMAP'});
+		Map.add('-20.468189', '-59.589844');
+		Map.set_zoom(2);		
+	};
 	
 	//arruma a altura do scroll interno dinamicamente
-	$('#timeline').css('height', $(window).height());
+	window_height_ = $(window).height();
+	$('section#timeline').css('height', window_height_);
 	
-	$('#timeline').gWaveScrollPane();
+	if ($('section#friends').css('height') < window_height_) {
+		$('section#friends').css('height', window_height_);	
+	};
+	
+	console.log($('section#settings').height());
+	if ($('section#settings').css('height') < window_height_) {
+		$('section#settings').css('height', window_height_);	
+	};
+	
+	$('section#timeline').gWaveScrollPane();
 	
 	FB.Canvas.setAutoResize();
 	

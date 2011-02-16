@@ -88,6 +88,20 @@ class Controller {
 		}
 	}
 	
+	public function get_last_place_visited($username){
+		try {
+			$db = DatabaseFactory::get_provider();
+			$key = array("$username", array());
+			$end_key = array("$username");
+
+			$last_place = $db->get()->descending(true)->limit(1)->startkey($key)->endkey($end_key)->getView('users','last_place_visited');
+			return $last_place->rows[0]->value;
+			
+		} catch (Exception $e) {
+			
+		}
+	}
+	
 	public function get_view($design_document, $view_name, $key) {
 		$db = DatabaseFactory::get_provider();
 		$view = $db->get_view($design_document, $view_name, $key);	

@@ -32,8 +32,8 @@
 
 				<footer>
 					<p class="address">
-						<?php if ($placemark->value->city): ?>
-							<?php echo $placemark->value->city . ', ' . $placemark->value->state . ' - ' . $placemark->value->country ?>
+						<?php if ($placemark->value->country): ?>
+							<?php echo Helper::format_location($placemark->value->country, $placemark->value->state, $placemark->value->city); ?>
 						<?php endif ?>						
 					</p>
 					<time datetime="<?php echo $placemark->value->date ?>">

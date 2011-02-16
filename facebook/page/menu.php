@@ -13,6 +13,8 @@
 		$url_prefix .= $matches[1] . '/';
 	}
 	
+	$status = ($controller->get_countries_visited($user_id)  > 0);
+	
 ?>
 
 <nav class="menu">
@@ -23,11 +25,15 @@
 			<li><a href="<?php echo $url_prefix; ?>friends" id="friends_link" class="redirect <?php echo css($page,'friends'); ?>">Friends</a></li>
 		<?php endif ?>
 		
-		<li><a href="<?php echo $url_prefix; ?>stats" class="redirect <?php echo css($page,'stats'); ?>">Stats</a></li>
+		<?php if ($status): ?>
+			<li><a href="<?php echo $url_prefix; ?>stats" class="redirect <?php echo css($page,'stats'); ?>">Stats</a></li>
+		<?php endif ?>		
 		
 		<?php if ($session['uid'] == $user_id): ?>			
 			<li><a href="/settings" class="redirect <?php echo css($page,'settings'); ?>">Settings</a></li>
 		<?php endif ?>
+		
+		<li class="help"><a href="<?php echo $url_prefix; ?>help" class="redirect <?php echo css($page,'help'); ?>">Help</a></li>
 		
 	</ul>
 </nav>

@@ -7,6 +7,7 @@
 @hover-color: #E9E9E9;
 @aux-text-color: lighten(@color, 30%);
 @blue-font:#3B5998;
+@bg_pink: #F7746D;
 @color:#333;
 @bg_blue: #D8DFEA;
 
@@ -42,7 +43,13 @@ body{
 	font-size: @font-size;
 	text-align: left;	
 }
-
+a:link, a:active, a:visited {
+	color:@blue-font;
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: underline;
+}
 .link {
 	color: #3B5998;
 	text-decoration: none;
@@ -81,6 +88,11 @@ h2 {
 	position: relative;
 	z-index: 1;
 	
+}
+
+#sidebar{
+	width: @sidebar-width;
+	float: right;
 }
 
 .fb_edge_widget_with_comment span.fb_edge_comment_widget
@@ -126,11 +138,18 @@ input[type="button"]:active {
 }
 
 #invite_friends{
-	text-align: center;
-	border: solid 1px #DDD;
-	background-color: #F2F2F2;
-	padding: 20px;
-	margin-bottom: 15px;
+	margin-bottom: 20px;
+	
+	input[type="button"] {
+		background-color: #69A74E;
+		background-position: 0 -96px;
+		border-color: #3B6E22 #3B6E22 #2C5115;
+		color: #FFF;
+		font-size: @font-size-big;
+		width: @sidebar-width;
+		text-align: center;
+		padding: 4px 0;	
+	}
 }
 
 .message {
@@ -158,8 +177,8 @@ input[type="button"]:active {
 }
 
 .message.error {
-	background-color: #F7746D;
-	border: 2px solid #F74A40;		
+	background-color: @bg_pink;
+	border: 2px solid @bg_pink;		
 }
 
 #main-header {
@@ -203,6 +222,15 @@ input[type="button"]:active {
 				margin:0px;
 			}
 		}
+		div.friends {
+			background: lighten(@bg_pink, 23%);
+			p.number a, p.label {
+				color: @bg_pink;
+			}
+		}
+		div.friends:hover {
+			background: lighten(@bg_pink, 26%);
+		}
 		div:hover {
 			background: lighten(@bg_blue, 5%);
 			cursor: pointer;
@@ -213,14 +241,22 @@ input[type="button"]:active {
 		height: 36px;
 		clear:both;
 		padding: 15px 0 5px;
+		width: @content-width;
+		display: block;
 		ul{
 			list-style-type: none;
 			padding: 0;
 			margin: 0;
 			height:25px;
-					line-height: 25px;
-					border-bottom: 1px solid #EDEDED;
-
+			line-height: 25px;
+			border-bottom: 1px solid #EDEDED;
+			
+			li.help {
+				float:right;
+			}		
+			li.help a {
+				margin: 0;
+			}
 			li {
 				display: inline;
 				font-weight: bold;
@@ -233,6 +269,8 @@ input[type="button"]:active {
 					float: left;
 					font-size: 13px;
 					margin-right: 15px;
+					border-bottom: 1px solid #EDEDED;
+					-webkit-transition: border-color 0.4s ease-out;
 
 				}
 				a.active {
@@ -299,12 +337,28 @@ input[type="button"]:active {
 	}
 }
 	
-#page.timeline{
-	
+#page.timeline{	
 	#map{
 		height:215px;
 	}
-	#timeline{
+}
+	#page #friends {
+		margin-top: 0px !important;
+		padding-top: 0px !important;
+		width: @content-width !important;
+		article {
+			width: @content-width !important;
+			.border-bottom;
+		}
+		h1 {
+			margin: 0;			
+		}
+		p.address {
+			margin: 3px 0 10px;
+			color: @aux-text-color;
+		}
+	}
+	#timeline, #friends{
 		background: #fff;
 		display: block;
 		overflow:hidden;		
@@ -318,10 +372,11 @@ input[type="button"]:active {
 			-moz-transition: background 0.4s ease;
 			-khtml-transition: background 0.4s ease;
 			transition: background 0.4s ease;
-			header {
-				
-			}
-			
+			width:@width-minus-scroll;
+			float: left;
+			margin-bottom: 1px;
+			.border-bottom;
+			.content-padding;			
 			figure {
 				float:left;
 				margin: 0px 10px 10px 10px;
@@ -330,11 +385,7 @@ input[type="button"]:active {
 				display: block;
 			}		
 			
-			float: left;
 			
-			
-			.border-bottom;
-			.content-padding;
 			
 			> div {
 				width:@width-minus-scroll - 150;
@@ -346,6 +397,9 @@ input[type="button"]:active {
 			.description{
 				margin:4px 0 15px;
 				color:black;
+				img {
+					margin: 10px 0 0;
+				}
 			}
 			
 			footer {
@@ -379,17 +433,68 @@ input[type="button"]:active {
 			
 		}
 		
-		article:hover, article.active{
-			background-color: #EDEFF4;
+		article:hover{
+			
 			cursor: pointer;
 			.border-bottom-blue;
 		}
+		article.active{
+			background: darken(#EDEFF4, 3%);
+		}
 		
 	}
-	
+span.pill {
+	background: @bg_blue;
+	color: @blue-font;
+	-webkit-border-radius:4px;
+	padding: 2px 6px;
+	margin: 0 4px 6px 0;
+	display: block;
+	float: left;
+}	
+#stats {
+	padding-left: 40px;
+	article {
+		padding: 0 0 20px;
+		margin: 20px 0 0;
+		width: 640px;
+		position: relative;
+		.border-bottom;
+		h1 {
+			font-size:18px;
+			margin-bottom: 10px;
+			float: left;
+		}
+		img{
+			margin-top: 6px;
+		}
+		
+		.share {
+			margin: 3px 0 0 8px;
+			float: left;
+			clear: none;
+			opacity: 0.5;
+		}
+		.share:hover {
+			opacity: 1;
+		}
+		header {
+			> div {
+			clear: both;
+		}
+		}
+	}		
 }
 
-#sidebar{
-	width: @sidebar-width;
-	float: right;
+#help {
+	article {
+		h1 {
+			color:#1C2A47;
+			font-size: 16px;
+		}
+		div {
+			display:none;
+		}	
+	}	
 }
+

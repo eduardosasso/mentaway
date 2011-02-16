@@ -1,0 +1,46 @@
+.connect_widget,
+.connected,
+.profile_pic,
+.wallkit_subtitle {
+	display:none !important;
+}
+.wallkit_post {
+	clear: both !important;
+    float: left !important; 
+    width: 100% !important;
+    background: #EDEFF4;
+    border: 1px solid #FFFFFF;
+    margin: 1px 0 0 0;
+    padding: 5px;
+}
+.composer {
+	padding:0px !important;
+}
+.wallkit_post .wallkit_postcontent {
+	margin-left: 32px !important;
+}
+.wallkit_post .wallkit_profilepic img.img {
+	width: 32px !important;
+	height: 32px !important;
+}
+.wallkit_post .wallkit_postcontent h4 .wall_time {
+	display: none !important;
+}
+.wallkit_post .wallkit_postcontent h4,
+.wallkit_post .wallkit_postcontent h4 a {
+	float: left !important;
+}
+.wallkit_post .wallkit_postcontent div {
+	color: #000 !important;
+	padding: 0 !important;
+	margin: 0 !important;
+}
+.wallkit_post div.wallkit_actionset {
+	display: none !important;
+}
+.wallkit_form {
+	padding: 5px !important;
+	background: #EDEFF4;
+	margin: 12px 0 1px;
+	border: 1px solid #FFF;
+}
