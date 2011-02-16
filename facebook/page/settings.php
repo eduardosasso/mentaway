@@ -6,7 +6,7 @@ $flickr_active = ($controller->get_user_service($username, 'flickr') ? 'active' 
 
 ?>
 
-<section>
+<section id="settings">
 	<header>
 		<h1>Services synchronization</h1>
 		<div>

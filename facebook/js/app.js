@@ -164,15 +164,15 @@ head.ready(function(){
 	
 	//arruma a altura do scroll interno dinamicamente
 	window_height_ = $(window).height();
-	$('section#timeline').css('height', window_height_);
-	
-	if ($('section#friends').css('height') < window_height_) {
-		$('section#friends').css('height', window_height_);	
+
+	$('section#timeline, section#settings').css('height', window_height_);
+
+	if ($('section#friends').length >0) {
+		if ($('section#friends').get(0).offsetHeight < window_height_) {
+			$('section#friends').css('height', window_height_);	
+		}
 	};
-	
-	//console.log($('section#settings').get(0).offsetHeight);
-	$('section#settings').css('height', $(window).height());	
-	
+ 	
 	$('section#timeline').gWaveScrollPane();
 	
 	FB.Canvas.setAutoResize();
