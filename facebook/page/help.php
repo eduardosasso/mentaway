@@ -2,8 +2,9 @@
 	<header>
 		<h1>We help you</h1>
 		<div>
-			<p>You have questions, we have answers. The list bellow shows the most common questions people ask about Mentaway.</p>
-			<p>If you don't find your answer bellow please contact us at <a href="mailto:help@mentaway.com">help@mentaway.com</a>. We will be glad to help.</p>			
+			<p>You have questions, we have answers. The list bellow shows the most common questions people ask about Mentaway.<br />
+				If you don't find your answer bellow please contact us at <a href="mailto:help@mentaway.com">help@mentaway.com</a>. We will be glad to help.
+			</p>			
 		</div>
 	</header>
 	

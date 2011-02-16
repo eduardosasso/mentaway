@@ -11,6 +11,10 @@
 @color:#333;
 @bg_blue: #D8DFEA;
 
+article, aside, figure, footer, header, hgroup, nav, section { 
+	display:block; 
+}
+
 .round-corner {
 	-webkit-border-radius:6px;
 	-moz-border-radius:6px;
@@ -100,6 +104,24 @@ h2 {
     left: -350px !important;
 }
 
+section {
+	> header {
+		font-size: 12px;
+		padding: 0 0px 10px;
+		color: @aux-text-color;
+		h1 {
+			font-size:14px;
+			color: @color;
+			margin-bottom: 5px;
+		}
+		>div {
+			line-height: 20px;
+			p {
+				margin: 0;
+			}
+		}
+	}	
+}
 /*.connect_comment_widget .nub
 {
     background: transparent url(http://static.ak.fbcdn.net/rsrc.php/zv/r/agyQHs6yLID.gif) no-repeat 8px 0px;
@@ -137,9 +159,7 @@ input[type="button"]:active {
 	background: #CCC;
 }
 
-#invite_friends{
-	margin-bottom: 20px;
-	
+#invite_friends{	
 	input[type="button"] {
 		background-color: #69A74E;
 		background-position: 0 -96px;
@@ -299,12 +319,6 @@ input[type="button"]:active {
 }	
 
 #page.settings {
-	header {
-		padding: 0px 0 30px;
-		p {
-			margin: 0;
-		}
-	}
 	.services{
 		padding-left: 25px;
 		.service.active {
@@ -453,15 +467,17 @@ span.pill {
 	float: left;
 }	
 #stats {
-	padding-left: 40px;
+	> header {
+		padding-bottom:0 important;	
+	}
 	article {
 		padding: 0 0 20px;
-		margin: 20px 0 0;
+		margin: 0 0 20px 40px;
 		width: 640px;
 		position: relative;
 		.border-bottom;
 		h1 {
-			font-size:18px;
+			font-size:14px;
 			margin-bottom: 10px;
 			float: left;
 		}
@@ -470,7 +486,7 @@ span.pill {
 		}
 		
 		.share {
-			margin: 3px 0 0 8px;
+			margin: 1px 0 0 8px;
 			float: left;
 			clear: none;
 			opacity: 0.5;
@@ -485,15 +501,28 @@ span.pill {
 		}
 	}		
 }
-
 #help {
 	article {
 		h1 {
 			color:#1C2A47;
-			font-size: 16px;
+			font-size: @font-size-big;
+			cursor: pointer;
+			padding:10px 0px 10px;
+			margin: 0;
+			
+					}
+		h1:hover {
+			text-decoration: underline;
 		}
 		div {
 			display:none;
+			padding: 0 10px 0;
+			line-height: 18px;
+			p {
+				margin: 0 0 10px 0px;
+				color: @color;
+				font-size: @font-size-big;
+			}
 		}	
 	}	
 }

@@ -170,10 +170,8 @@ head.ready(function(){
 		$('section#friends').css('height', window_height_);	
 	};
 	
-	console.log($('section#settings').height());
-	if ($('section#settings').css('height') < window_height_) {
-		$('section#settings').css('height', window_height_);	
-	};
+	//console.log($('section#settings').get(0).offsetHeight);
+	$('section#settings').css('height', $(window).height());	
 	
 	$('section#timeline').gWaveScrollPane();
 	
