@@ -6,16 +6,21 @@ $flickr_active = ($controller->get_user_service($username, 'flickr') ? 'active' 
 
 ?>
 
-<section>
+<section id="settings">
 	<header>
-		<h1>Integration</h1>
-		<p>Configure the services you want to integrate to Mentaway.</p>
+		<h1>Services synchronization</h1>
+		<div>
+			<p>Configure the services you want integrate to Mentaway.<br />
+			This step is optional. If you don't add any service you can still see your friend's timeline.</p>
+		</div>
+		
+		
 	</header>
 	
 	<div class="services">
 
 		<div id="foursquare" class="service <?php echo $foursquare_active ?>">
-			<img src="/images/foursquare-32x32.png"/>
+			<img src="/facebook/images/foursquare-32x32.png"/>
 			<div class="detail">
 				<h3>Foursquare</h3>
 				<p>Captures all your checkins</p>
@@ -29,7 +34,7 @@ $flickr_active = ($controller->get_user_service($username, 'flickr') ? 'active' 
 		</div>
 		
 		<div id="twitter" class="service <?php echo $twitter_active ?>">
-			<img src="/images/twitter-32x32.png"/>
+			<img src="/facebook/images/twitter-32x32.png"/>
 			<div class="detail">
 				<h3>Twitter</h3>
 				<p>Enable geolocation and add #m to your tweets</p>
@@ -43,7 +48,7 @@ $flickr_active = ($controller->get_user_service($username, 'flickr') ? 'active' 
 		</div>
 		
 		<div id="flickr" class="service <?php echo $flickr_active ?>">
-			<img src="/images/flickr-32x32.png"/>
+			<img src="/facebook/images/flickr-32x32.png"/>
 			<div class="detail">
 				<h3>Flickr</h3>
 				<p>Include geolocation info to your photos</p>

@@ -88,6 +88,20 @@ class Controller {
 		}
 	}
 	
+	public function get_last_place_visited($username){
+		try {
+			$db = DatabaseFactory::get_provider();
+			$key = array("$username", array());
+			$end_key = array("$username");
+
+			$last_place = $db->get()->descending(true)->limit(1)->startkey($key)->endkey($end_key)->getView('users','last_place_visited');
+			return $last_place->rows[0]->value;
+			
+		} catch (Exception $e) {
+			
+		}
+	}
+	
 	public function get_view($design_document, $view_name, $key) {
 		$db = DatabaseFactory::get_provider();
 		$view = $db->get_view($design_document, $view_name, $key);	
@@ -265,12 +279,20 @@ class Controller {
 		if (!$user_) {
 			$user_ = new User();
 		}
-
+		
+		//se o usuario tem o vanity name setado entao usa ele como username.
+		//facebook.com/username
 		$username_ = $fb_user_['name'] . ' ' . $fb_user_['id'];
+		if (isset($fb_user_['link'])) {
+			preg_match("/[^\/]*$/", $fb_user_['link'], $matches);
+			$username_ = $matches[0];
+		}
+		
+		$user_->username = Helper::clean_string($username_);
+		
 		$token_ = $auth_['access_token'];
 		
 		$user_->_id = $fb_user_['id'];
-		$user_->username = Helper::clean_string($username_);
 		$user_->fullname = $fb_user_['name'];
 		$user_->email = $fb_user_['email'];
 		$user_->date = date('m/d/Y');

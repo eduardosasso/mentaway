@@ -6,12 +6,12 @@ class FriendTest extends PHPUnit_Framework_TestCase {
 	public function test_follow_friends(){
 		$username = '1335915461';
 		
-		$controller = new Controller();
-		$user = $controller->get_user($username);
-		
+		// $controller = new Controller();
+		// 		$user = $controller->get_user($username);
+		// 		
 		$friend = new Friend();
-		//$friend->follow_facebook_friends($username);
-		$friend->update_placemarks($user);
+		$friend->follow_facebook_friends($username);
+		//$friend->update_placemarks($user);
 	}
 	
 	public function xtest_find_facebook_friends(){

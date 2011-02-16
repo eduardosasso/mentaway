@@ -3,12 +3,22 @@ include realpath($_SERVER["DOCUMENT_ROOT"]) . '/classes.php';
 
 //phpunit tests/model/TwitterTest.php
 class TwitterTest extends PHPUnit_Framework_TestCase {
-		public function test_get_updates() {
+	public function xtest_follow(){
+		$username = '631466850';
+		Twitter::follow_mentaway($username);
+	}
+	
+	public function test_shout(){
+		$username = '631466850';
+		Twitter::shout($username,"Testing twitter from @mentaway");
+	}
+
+		public function xtest_get_updates() {
 			// $db = DatabaseFactory::get_provider();
 			// 
 			// $db->clean_database();
 			
-			$username = 'arasmus';
+			$username = '631466850';
 
 			$twitter = new Twitter();
 			$placemarks = $twitter->get_updates($username);

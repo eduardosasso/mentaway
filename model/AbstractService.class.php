@@ -2,7 +2,7 @@
 include realpath($_SERVER["DOCUMENT_ROOT"]) . '/classes.php';
 
 abstract class AbstractService {
-	
+	private $notified = false;
 	//deve retornar um array do objeto placemarks...
 	abstract protected function get_updates($username);
 	
@@ -12,7 +12,6 @@ abstract class AbstractService {
 			$db = DatabaseFactory::get_provider();
 
 			$user = $db->get_user($username);
-			$trip = $user->trips[0];
 			
 			if (isset($user->friends)) {
 				$document->friends = $user->friends;
@@ -20,19 +19,17 @@ abstract class AbstractService {
 			
 			$document->fullname = $user->fullname;
 
-			//se a trip do cara tem data de inicio respeita ela na hora de salvar os checkins, se nao tem nada pega tudo.
-			if (isset($trip->begin)) {
-				if ($document->timestamp >= strtotime($trip->begin)) {
-					$db->save($document);
-				}
-			} else {
-				$db->save($document);
+			$db->save($document);
+			
+			if ($this->notified == false) {
+				Log::write("$username - inc do contador");
+				//notifica os amigos desse usuario q ele tem novidades.
+				//so entra aqui 1 vez por servico quando tem novidade para ser mais rapido. 
+				Notification::inc_counter($username);
+				$this->notified == true;
 			}
 
-		} catch (Exception $e) {
-			/*
-				TODO tratar melhor... por enquanto nao faz nada, so evita o erro
-			*/
+		} catch (Exception $e) {			
 		}
 	}
 	

@@ -7,6 +7,7 @@
 	<title>Mentaway Facebook App</title>
 	<link rel="stylesheet/less" href="<?php echo Helper::auto_version('css/facebook.less'); ?>">
 	<link rel="stylesheet" href="css/google-wave-scroll.css" type="text/css" media="screen" charset="utf-8" />
+  <link rel="stylesheet" href="../js/fancybox/jquery.fancybox-1.3.1.css">
 	<script src="http://maps.google.com/maps/api/js?sensor=false"></script>	
 	<script src="js/head.load.min.js"></script>
 	<script>
@@ -18,6 +19,7 @@
 						"js/google-wave-scrollbar/mousewheel.js",
 						"js/google-wave-scrollbar/gwave-scroll-pane-0.1.js",
 						"js/underscore-min.js",
+						"../js/fancybox/jquery.fancybox-1.3.1.pack.js",
 						"/js/map.js",
 						"js/app.js");						
 	</script>
@@ -40,10 +42,6 @@ $facebook = new Facebook(array(
 	));
 
 $session = $facebook->getSession();
-
-echo "<pre>";
-print_r($session);
-echo "</pre>";
 
 $data = $facebook->getSignedRequest();
 
@@ -68,6 +66,8 @@ if (empty($data['user_id'])) {
 	include("app.php");
 }
 
+	include("analytics.php");
 ?>
+
 </body>
 </html>
