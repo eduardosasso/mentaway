@@ -55,10 +55,9 @@ if (empty($data['user_id'])) {
 		user_location,
 		user_likes,
 		publish_checkins";
-		
+
 	$auth_url = $facebook->getLoginUrl(array("req_perms"=>$req_perms,
-		"next"=>"http://apps.facebook.com/mentaway/new", 
-		"cancel_url"=>"http://facebook.com"));
+		"next"=>"http://apps.facebook.com/mentaway/"));
 
 	include("page/welcome.php");
 
@@ -66,7 +65,7 @@ if (empty($data['user_id'])) {
 	include("app.php");
 }
 
-	include("analytics.php");
+include("analytics.php");
 ?>
 
 </body>

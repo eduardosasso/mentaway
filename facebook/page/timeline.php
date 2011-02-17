@@ -18,11 +18,11 @@
 		<div>
 			<header>							
 				<h2><a href="/user/<?php echo $placemark->value->user; ?>" class="redirect"><?php echo $placemark->value->fullname; ?></a></h1>
-					<h1><?php echo $placemark->value->name; ?></h1>
+					<h1><?php echo Helper::linkify($placemark->value->name); ?></h1>
 				</header>
 
 				<div class="description">
-					<?php echo $placemark->value->description; ?>
+					<?php echo Helper::linkify($placemark->value->description); ?>
 					<?php if ($placemark->value->service=='flickr'): ?>
 						<a href="<?php echo str_replace('_t.','_b.', $placemark->value->image); ?>" class="lightbox">
 							<img src="<?php echo str_replace('_t.','_m.', $placemark->value->image); ?>">
