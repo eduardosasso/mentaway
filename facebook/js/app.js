@@ -159,7 +159,18 @@ head.ready(function(){
 
 		Map.init({maptype: 'ROADMAP'});
 		Map.add('-20.468189', '-59.589844');
-		Map.set_zoom(2);		
+		Map.set_zoom(2);
+		
+		var adUnitDiv = document.createElement('div');
+		var adUnitOptions = {
+			format: google.maps.adsense.AdFormat.BUTTON,
+			position: google.maps.ControlPosition.RIGHT,
+			map: Map.gmap,
+			visible: true,
+			publisherId: 'pub-8046450694828694'
+		}
+		adUnit = new google.maps.adsense.AdUnit(adUnitDiv, adUnitOptions);	
+				
 	};
 	
 	//arruma a altura do scroll interno dinamicamente

@@ -22,12 +22,12 @@
 				</header>
 
 				<div class="description">
-					<?php echo Helper::linkify($placemark->value->description); ?>
 					<?php if ($placemark->value->service=='flickr'): ?>
 						<a href="<?php echo str_replace('_t.','_b.', $placemark->value->image); ?>" class="lightbox">
 							<img src="<?php echo str_replace('_t.','_m.', $placemark->value->image); ?>">
 						</a>						
 					<?php endif ?>
+					<p class="body"><?php echo Helper::linkify($placemark->value->description); ?></p>
 				</div>
 
 				<footer>
@@ -48,7 +48,3 @@
 
 	<?php endforeach ?>
 </section>
-
-<div id="sidebar">
-	<?php include "page/sidebar.php"; ?>		
-</div>

@@ -4,7 +4,7 @@ $controller = new Controller();
 $user_id = $session['uid'];
 
 $page_url = $_SERVER['QUERY_STRING'];
-$which_page = "/(settings|timeline|user|friends|stats|help)/";
+$which_page = "/(settings|timeline|user|friends|stats|help|about)/";
 
 preg_match_all($which_page, $page_url, $page_matches);
 

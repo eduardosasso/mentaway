@@ -8,7 +8,8 @@
 	<link rel="stylesheet/less" href="<?php echo Helper::auto_version('css/facebook.less'); ?>">
 	<link rel="stylesheet" href="css/google-wave-scroll.css" type="text/css" media="screen" charset="utf-8" />
   <link rel="stylesheet" href="../js/fancybox/jquery.fancybox-1.3.1.css">
-	<script src="http://maps.google.com/maps/api/js?sensor=false"></script>	
+	<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+	<script src="http://maps.google.com/maps/api/js?libraries=adsense&sensor=false"></script>	
 	<script src="js/head.load.min.js"></script>
 	<script>
 		head.js("https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js",
