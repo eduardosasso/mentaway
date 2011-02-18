@@ -8,7 +8,7 @@ class TwitterTest extends PHPUnit_Framework_TestCase {
 		Twitter::follow_mentaway($username);
 	}
 	
-	public function test_shout(){
+	public function xxxtest_shout(){
 		$username = '631466850';
 		Twitter::shout($username,"Testing twitter from @mentaway");
 	}
@@ -33,19 +33,21 @@ class TwitterTest extends PHPUnit_Framework_TestCase {
 			$placemarks = $twitter->validate($username);			
 		}	
 		
-		public function xxxtest_twitpic_replace() {
-			$pattern = "#http://twitpic.com/(\w+)#";
+		public function test_twitpic_replace() {
+			$pattern = "(http:\/\/twitpic.com\/(\w+))";
+			$ygrog =	"(http:\/\/yfrog.com\/(\w+))";
+			$plixi = "(http:\/\/plixi.com\/.+\/(\w+))";
 			
-			$text = "Mentaway Sneak Peak Source Code :-) #m http://twitpic.com/2qdh1d";
+			$text = "Mentaway Sneak Peak Source http://plixi.com/p/77168253 Code :-) #m";
 			
-			$res = preg_replace($pattern ,'', $text);
-			$res = preg_replace('/#m/' ,'', $res);
-			$res = preg_replace('/#mentaway/' ,'', $res);
-			echo trim($res);
+			// $res = preg_replace($pattern ,'', $text);
+			// $res = preg_replace('/#m/' ,'', $res);
+			// $res = preg_replace('/#mentaway/' ,'', $res);
+			//echo trim($res);
 			
-			//$res = preg_match('#http://twitpic.com/(\w+)#',$text, $matches);
+			preg_match($plixi,$text, $matches);
 			
-			//print_r($matches);
+			print_r($matches);
 		}
 
 }

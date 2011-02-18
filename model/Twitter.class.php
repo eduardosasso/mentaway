@@ -39,14 +39,32 @@ class Twitter extends AbstractService {
 					$lat = $tweet->geo->coordinates[0];
 					$long = $tweet->geo->coordinates[1];
 
-					$twitpic = '#http://twitpic.com/(\w+)#';
 					$image = '';
+					$lightbox = false;
+					
+					$twitpic = '(http:\/\/twitpic.com\/(\w+))';
 					if (preg_match($twitpic, $text, $matches) > 0) {
 						$image = 'http://twitpic.com/show/thumb/' . $matches[1];
+						$image_url = $matches[0];
+						$text = preg_replace($matches[0] ,'', $text);
+					}
+					
+					$yfrog = '(http:\/\/yfrog.com\/(\w+))';
+					if (preg_match($yfrog, $text, $matches) > 0) {
+						$image = $matches[0] . ".th.jpg";
+						$image_url = $matches[0];
+						$text = preg_replace($matches[0] ,'', $text);
+					}
+					
+					$plixi = '(http:\/\/plixi.com\/.+\/(\w+))';
+					if (preg_match($plixi, $text, $matches) > 0) {
+						$image = "http://api.plixi.com/api/tpapi.svc/imagefromurl?size=small&url=" . urlencode($matches[0]);
+						$image_url = "http://api.plixi.com/api/tpapi.svc/imagefromurl?size=medium&url=" . urlencode($matches[0]);
+						$text = preg_replace($matches[0] ,'', $text);
+						$lightbox = true;
 					}
 
 					//retira hash e image do twitter...
-					$text = preg_replace($twitpic ,'', $text);
 					$text = preg_replace('/#m/' ,'', $text);
 					$text = preg_replace('/#mentaway/' ,'', $text);
 
@@ -54,7 +72,8 @@ class Twitter extends AbstractService {
 					$placemark->_id = $timestamp . "|$username|twitter";
 					$placemark->name = trim($text);
 					$placemark->image = $image;
-					//$placemark->description = $shout;
+					$placemark->image_url = $image_url;					
+					$placemark->lightbox = $lightbox;
 					$placemark->date = $tweet->created_at;
 					$placemark->timestamp = $timestamp;
 					$placemark->lat = $lat;

@@ -19,7 +19,7 @@
 
 <nav class="menu">
 	<ul>
-		<?php if ($session['uid'] != $user_id): ?>			
+		<?php if ($matches): ?>			
 			<li><a href="/" class="redirect">Home</a></li>
 		<?php endif ?>
 		

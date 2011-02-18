@@ -9,9 +9,9 @@ include realpath($_SERVER["DOCUMENT_ROOT"]) . '/classes.php';
 
 class Controller {
 	
-	function get_placemarks($username){
+	function get_placemarks($username, $limit = 100){
 		$db = DatabaseFactory::get_provider();
-		$placemarks = $db->get_placemarks($username);
+		$placemarks = $db->get_placemarks($username, $limit);
 
 		return $placemarks->rows;
 	}

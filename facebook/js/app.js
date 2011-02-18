@@ -1,4 +1,5 @@
 head.ready(function(){
+	console.dir(head);
 	$('a#states, #states_stats_btn').click(function(){
 		get_db_view("users", "stats", $(this).attr('data-uid'), function(data){
 			states = data.rows[0].value.states;
@@ -176,7 +177,9 @@ head.ready(function(){
 	//arruma a altura do scroll interno dinamicamente
 	window_height_ = $(window).height();
 
-	$('section#timeline, section#settings').css('height', window_height_);
+	//$('section#timeline, section#settings').css('height', window_height_);
+	
+	//$('section#timeline, section#settings').css('height', 800); 
 
 	if ($('section#friends').length >0) {
 		if ($('section#friends').get(0).offsetHeight < window_height_) {
@@ -184,9 +187,15 @@ head.ready(function(){
 		}
 	};
  	
-	$('section#timeline').gWaveScrollPane();
+	if ((navigator.userAgent.indexOf('iPhone') != -1) || (navigator.userAgent.indexOf('iPod') != -1) || (navigator.userAgent.indexOf('iPad') != -1)) {
+		$('section#timeline nav').touchScroll();
+		$('section#timeline').css("overflow-y", "auto");	
+	} else {
+		$('section#timeline').gWaveScrollPane();
+		$('section#timeline').css("overflow", "hidden");	
+	}
 	
-	FB.Canvas.setAutoResize();
+	FB.Canvas.setAutoResize(); 
 	
 	$('#timeline article').click(function(){
 		$('article').removeClass('active');

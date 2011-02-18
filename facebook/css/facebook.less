@@ -46,6 +46,7 @@ body{
 	font-family: 'lucida grande', tahoma, verdana, arial, sans-serif;
 	font-size: @font-size;
 	text-align: left;	
+	overflow-y: hidden;
 }
 a:link, a:active, a:visited {
 	color:@blue-font;
@@ -364,9 +365,10 @@ input[type="button"]:active {
 }
 	
 #page.timeline{	
+position: relative;
 	#map{
 		height:215px;
-	}
+	}	
 }
 	#page #friends {
 		margin-top: 0px !important;
@@ -384,10 +386,38 @@ input[type="button"]:active {
 			color: @aux-text-color;
 		}
 	}
+	
+	/* Timeline height for different browsers */
+	.lt-1920 #timeline {
+		height: 450px;
+	}
+	.lt-1680 #timeline {
+		height: 450px;
+	}
+	.lt-1440 #timeline {
+		height: 350px;
+	}
+	.lt-1280 #timeline {
+		height: 320px;
+	}
+	.lt-1024 #timeline {
+		height: 500px;
+	}	
+	/****/
+	
+	#timeline { 
+		/* This is specialy for iPad touch scroll */     
+        nav {
+             display: block !important;
+             height: 100% !important;
+             -webkit-perspective: 1000 !important;
+             -webkit-backface-visibility: hidden !important;
+            }
+         /****/
+	}
 	#timeline, #friends{
 		background: #fff;
-		display: block;
-		overflow:hidden;		
+		display: block;		
 		width: @width-minus-scroll;
 		float: left;
 		margin-top: -20px;
