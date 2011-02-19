@@ -389,13 +389,13 @@ position: relative;
 	
 	/* Timeline height for different browsers */
 	.lt-1920 #timeline {
-		height: 450px;
+		height: 650px;
 	}
 	.lt-1680 #timeline {
-		height: 450px;
+		height: 650px;
 	}
 	.lt-1440 #timeline {
-		height: 350px;
+		height: 650px;
 	}
 	.lt-1280 #timeline {
 		height: 320px;
@@ -447,6 +447,7 @@ position: relative;
 				width:@width-minus-scroll - 190;
 				float: left;
 				padding-right: 120px;
+				position: relative;
 				
 			}
 			
@@ -456,6 +457,12 @@ position: relative;
 				img {
 					margin: 0px 15px 15px 0;
 					float: left;
+				}
+				img.icon {
+					position: absolute;
+					float: none;
+					right: 10px;
+					top: 5px;
 				}
 				p {
 					margin: 0 0 8px;

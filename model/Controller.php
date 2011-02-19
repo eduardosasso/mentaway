@@ -207,7 +207,7 @@ class Controller {
 		$db = DatabaseFactory::get_provider();
 		$user = $db->get_user($username);
 		
-		foreach ($user->services as $key => $service) {
+		foreach ($user->services as $service) {
 			if ($service->_id == $servicename) {
 				return $service;
 			}

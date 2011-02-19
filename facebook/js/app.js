@@ -1,5 +1,4 @@
 head.ready(function(){
-	console.dir(head);
 	$('a#states, #states_stats_btn').click(function(){
 		get_db_view("users", "stats", $(this).attr('data-uid'), function(data){
 			states = data.rows[0].value.states;
@@ -101,12 +100,16 @@ head.ready(function(){
 			var title_ = $('article.hover h1').text();
 			var body_ = jQuery.trim($('article.hover div.description').text());
 			var caption_ = $('article.hover p.address').text();
-			var img_ = $('article.hover .description img').attr('src');
+			var img_ = $('article.hover .description img:not(.icon)').attr('src');
 			
 			var link_ = 'http://apps.facebook.com/mentaway/';
 			if (img_) {
 				link_ = $('article.hover .description a.lightbox').attr('href');
-			};
+			} else {
+				lat_ = $('article.hover').attr('data-lat');
+				long_ = $('article.hover').attr('data-long');
+				img_ = "http://foursquare.com/mapproxy/"+ lat_ + "/" + long_ +"/map.png";
+			}
 			
 			var params = {};
 			params['message'] = res[0].text;
@@ -176,6 +179,8 @@ head.ready(function(){
 	
 	//arruma a altura do scroll interno dinamicamente
 	window_height_ = $(window).height();
+	
+	//console.log($(parent).index().height());
 
 	//$('section#timeline, section#settings').css('height', window_height_);
 	
@@ -191,6 +196,7 @@ head.ready(function(){
 		$('section#timeline nav').touchScroll();
 		$('section#timeline').css("overflow-y", "auto");	
 	} else {
+		$('section#timeline').css('height', ($(top.window).height() - 400));
 		$('section#timeline').gWaveScrollPane();
 		$('section#timeline').css("overflow", "hidden");	
 	}

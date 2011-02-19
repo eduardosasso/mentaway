@@ -14,6 +14,9 @@ class Helper {
 	}
 	
 	public static function format_location($country, $state, $city){
+		if (empty($country)) {
+			return;
+		}
 		if ($city) {
 			$city_state[] = $city;
 		}
@@ -24,7 +27,7 @@ class Helper {
 
 		$city_state = implode(", " , $city_state);
 
-		return "$city_state - $country";
+		return "in $city_state - $country";
 	} 
 	
 	public static function http_req($url){

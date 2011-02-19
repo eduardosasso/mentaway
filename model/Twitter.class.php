@@ -15,11 +15,15 @@ class Twitter extends AbstractService {
 		$controller = new Controller();
 
 		$service = $controller->get_user_service($username, $servicename);
-
+		
 		if (empty($service->token) || empty($service->secret)) {
 			return;
 		}
-
+		
+		echo "<pre>";
+		print_r($service);
+		echo "</pre>";
+		
 		try {
 			$twitter = new EpiTwitter($consumer_key, $consumer_secret, $service->token, $service->secret);
 
@@ -34,6 +38,7 @@ class Twitter extends AbstractService {
 
 				//tem q ter geo habilitado + hash #m para identificar tweet do mentaway
 				if (isset($tweet->geo) && (preg_match($pattern,$text) > 0 || preg_match($pattern_short,$text) > 0)) {
+					echo "$text";
 					$timestamp = strtotime($tweet->created_at);
 
 					$lat = $tweet->geo->coordinates[0];
@@ -43,21 +48,19 @@ class Twitter extends AbstractService {
 					$lightbox = false;
 					
 					$twitpic = '(http:\/\/twitpic.com\/(\w+))';
+					$yfrog = '(http:\/\/yfrog.com\/(\w+))';
+					$plixi = '(http:\/\/plixi.com\/.+\/(\w+))';
+
 					if (preg_match($twitpic, $text, $matches) > 0) {
 						$image = 'http://twitpic.com/show/thumb/' . $matches[1];
 						$image_url = $matches[0];
 						$text = preg_replace($matches[0] ,'', $text);
-					}
-					
-					$yfrog = '(http:\/\/yfrog.com\/(\w+))';
-					if (preg_match($yfrog, $text, $matches) > 0) {
+					} elseif (preg_match($yfrog, $text, $matches) > 0) {
 						$image = $matches[0] . ".th.jpg";
-						$image_url = $matches[0];
+						$image_url = $matches[0] . ":iphone";
+						$lightbox = true;
 						$text = preg_replace($matches[0] ,'', $text);
-					}
-					
-					$plixi = '(http:\/\/plixi.com\/.+\/(\w+))';
-					if (preg_match($plixi, $text, $matches) > 0) {
+					}elseif (preg_match($plixi, $text, $matches) > 0) {
 						$image = "http://api.plixi.com/api/tpapi.svc/imagefromurl?size=small&url=" . urlencode($matches[0]);
 						$image_url = "http://api.plixi.com/api/tpapi.svc/imagefromurl?size=medium&url=" . urlencode($matches[0]);
 						$text = preg_replace($matches[0] ,'', $text);
@@ -83,12 +86,13 @@ class Twitter extends AbstractService {
 
 					$placemarks[] = $placemark;
 
-					parent::save($placemark, $username);
+					//parent::save($placemark, $username);
 				}
 			}
 
 			return $placemarks;
 		} catch (Exception $e) {
+			echo $e->getMessage();
 			/*
 				TODO por algum motivo nao conseguiu pegar o twitter... identificar melhor, talvez removendo a autorizacao da conta para testar o erro
 				//usuarios arasmus - EpiTwitterNotAuthorizedException

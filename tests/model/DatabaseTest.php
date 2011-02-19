@@ -3,7 +3,7 @@ include realpath($_SERVER["DOCUMENT_ROOT"]) . '/classes.php';
 
 //phpunit tests/model/DatabaseTest.php
 class DatabaseTest extends PHPUnit_Framework_TestCase {
-		public function test_remove_user_service_items(){
+		public function xtest_remove_user_service_items(){
 			//$data = array("username"=>"631466850","service"=>"flickr");
 			
 			$db = DatabaseFactory::get_provider();
@@ -203,7 +203,7 @@ class DatabaseTest extends PHPUnit_Framework_TestCase {
 			print_r($response);
 		}
 		
-		public function xest_clean_database() {
+		public function test_clean_database() {
 			$db = DatabaseFactory::get_provider();
 			$db->clean_database();
 		}

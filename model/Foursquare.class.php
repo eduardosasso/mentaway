@@ -58,7 +58,7 @@ class Foursquare extends AbstractService {
 			
 			if ($checkin->photos->count > 0) {
 				$placemark->lightbox = true;
-				$placemark->image = $checkin->photos->items[0]->sizes->items[1]->url;
+				$placemark->image = $checkin->photos->items[0]->sizes->items[2]->url;
 				$placemark->image_url = $checkin->photos->items[0]->sizes->items[0]->url;				
 			}
 			

@@ -23,8 +23,8 @@ class Flickr extends AbstractService {
 		
 		foreach ($photos['photo'] as $key => $photo) {
 			//http://farm{farm-id}.static.flickr.com/{server-id}/{id}_{secret}_[mstb].jpg
-			$image = 'http://farm' . $photo['farm'] . '.static.flickr.com/' . $photo['server'] . '/' . $photo['id'] . '_' . $photo['secret'] . '_b.jpg';
-			$image_url = 'http://farm' . $photo['farm'] . '.static.flickr.com/' . $photo['server'] . '/' . $photo['id'] . '_' . $photo['secret'] . '_m.jpg';
+			$image = 'http://farm' . $photo['farm'] . '.static.flickr.com/' . $photo['server'] . '/' . $photo['id'] . '_' . $photo['secret'] . '_m.jpg';
+			$image_url = 'http://farm' . $photo['farm'] . '.static.flickr.com/' . $photo['server'] . '/' . $photo['id'] . '_' . $photo['secret'] . '_b.jpg';
 			
 			$description = '';
 			$info = $f->photos_getInfo($photo['id']);

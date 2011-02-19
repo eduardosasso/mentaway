@@ -24,6 +24,7 @@
 
 					<div class="description">
 						<?php
+							$img = '';
 							if ($placemark->value->image) {
 								$img = $placemark->value->image;
 								$img = "<img src='$img'>";
@@ -36,7 +37,10 @@
 									
 									$img = "<a href='$image_url' $class>$img</a>";									
 								}
-							}							
+							}elseif ($placemark->value->icon) {
+								$icon = $placemark->value->icon;
+								$img = "<img src='$icon' class='icon'>";
+							}
 						?>												
 						<?php echo $img ?>
 						<p class="body"><?php echo Helper::linkify($placemark->value->description); ?></p>
