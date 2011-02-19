@@ -1,6 +1,29 @@
 head.ready(function(){
 
-	$("a.lightbox").fancybox();
+	$("section#timeline article a.twitter").click(function(){
+		$.embedly($(this).attr('href'), {}, function(oembed, dict){
+			jQuery.facebox({ image: oembed.url });
+		});		
+		return false;
+	});
+	
+	$("section#timeline article a.flickr").facebox();
+	
+	// $("a.lightbox").fancybox({
+	// 	'scrolling'		: 'no',
+	// 	'autoScale'			:	'true',
+	// 	'autoDimensions'		:	'true',
+	// 	'centerOnScroll'		:	'false',	 	
+	// 	'type': 'iframe',
+	//  	'width': '612',
+	// 	'height': '612',
+	// });
+	
+	// $("a.lightbox").facebox(function(){
+	// 	$.embedly($(this).attr('href'), {}, function(oembed, dict){
+	// 		jQuery.facebox({ image: oembed.url });
+	// 	});
+	// });
 	
 	FB.init({
     appId  : '136687686378472',

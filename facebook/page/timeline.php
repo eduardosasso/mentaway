@@ -32,7 +32,7 @@
 								if ($placemark->value->image_url) {
 									$image_url = $placemark->value->image_url;
 									if ($placemark->value->lightbox == 'true') {
-										$class = "class='lightbox'";
+										$class = "class='lightbox ". $placemark->value->service . "'";
 									}
 									
 									$img = "<a href='$image_url' $class>$img</a>";									
@@ -63,5 +63,15 @@
 			<div style="clear:both"></div>
 
 		<?php endforeach ?>
+		<?php
+			//hacking: coloca espacos vazios para conseguir ver o ultimo timeline em qualquer resolucao
+			//fiz isso pq não consigo pegar o viewport do browser por causa do xss em iframe.
+		?>		
+		<article class="void"></article>
+		<div style="clear:both"></div>
+		<article class="void"></article>
+		<div style="clear:both"></div>
+		<article class="void"></article>
+		<div style="clear:both"></div>		
 	</nav>
 </section>

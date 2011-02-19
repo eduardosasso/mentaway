@@ -179,12 +179,8 @@ head.ready(function(){
 	
 	//arruma a altura do scroll interno dinamicamente
 	window_height_ = $(window).height();
-	
-	//console.log($(parent).index().height());
 
 	//$('section#timeline, section#settings').css('height', window_height_);
-	
-	//$('section#timeline, section#settings').css('height', 800); 
 
 	if ($('section#friends').length >0) {
 		if ($('section#friends').get(0).offsetHeight < window_height_) {
@@ -196,7 +192,12 @@ head.ready(function(){
 		$('section#timeline nav').touchScroll();
 		$('section#timeline').css("overflow-y", "auto");	
 	} else {
-		$('section#timeline').css('height', ($(top.window).height() - 400));
+		$('section#timeline').css('height', 620);
+		
+		//nav_height = $('section#timeline nav').height();
+		//$('section#timeline nav').height(nav_height + 300);
+		
+		
 		$('section#timeline').gWaveScrollPane();
 		$('section#timeline').css("overflow", "hidden");	
 	}

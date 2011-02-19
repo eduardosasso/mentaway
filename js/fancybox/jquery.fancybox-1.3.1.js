@@ -632,16 +632,16 @@
 
 					imgPreloader = new Image();
 
-					imgPreloader.onerror = function() {
-						fancybox_error();
-					};
-
+					// imgPreloader.onerror = function() {
+					// 				fancybox_error();
+					// 			};
+			
 					imgPreloader.onload = function() {
-						imgPreloader.onerror = null;
+						//imgPreloader.onerror = null;
 						imgPreloader.onload = null;
 						fancybox_process_image();
 					};
-
+					console.log(href);
 					imgPreloader.src = href;
 		
 				break;

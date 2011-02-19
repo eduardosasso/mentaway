@@ -48,6 +48,7 @@ body{
 	text-align: left;	
 	overflow-y: hidden;
 }
+
 a:link, a:active, a:visited {
 	color:@blue-font;
 	text-decoration: none;
@@ -363,6 +364,11 @@ input[type="button"]:active {
 		}
 	}
 }
+
+/*hacking para conseguir ver o ultimo item do timeline em qualquer resolucao*/
+article.void {
+	height:125px;
+}
 	
 #page.timeline{	
 position: relative;
@@ -388,7 +394,7 @@ position: relative;
 	}
 	
 	/* Timeline height for different browsers */
-	.lt-1920 #timeline {
+/*	.11920 #timeline {
 		height: 650px;
 	}
 	.lt-1680 #timeline {
@@ -398,8 +404,8 @@ position: relative;
 		height: 650px;
 	}
 	.lt-1280 #timeline {
-		height: 320px;
-	}
+		height: 500px;
+	}*/
 	.lt-1024 #timeline {
 		height: 500px;
 	}	

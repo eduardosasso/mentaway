@@ -18,7 +18,7 @@ class TwitterTest extends PHPUnit_Framework_TestCase {
 			// 
 			// $db->clean_database();
 			
-			$username = '1335915461';
+			$username = '631466850';
 
 			$twitter = new Twitter();
 			$placemarks = $twitter->get_updates($username);
@@ -37,15 +37,16 @@ class TwitterTest extends PHPUnit_Framework_TestCase {
 			$pattern = "(http:\/\/twitpic.com\/(\w+))";
 			$ygrog =	"(http:\/\/yfrog.com\/(\w+))";
 			$plixi = "(http:\/\/plixi.com\/.+\/(\w+))";
+			$instagram = "(http:\/\/instagr.am\/.+\/(\w+))";
 			
-			$text = "Mentaway Sneak Peak Source http://plixi.com/p/77168253 Code :-) #m";
+			$text = "kevinrose: .@summertomato has no AT&T coverage so I've enabled my Verizon iPhone hotspot to power her instagram addiction, h http://instagr.am/p/BsXWM/";
 			
 			// $res = preg_replace($pattern ,'', $text);
 			// $res = preg_replace('/#m/' ,'', $res);
 			// $res = preg_replace('/#mentaway/' ,'', $res);
 			//echo trim($res);
 			
-			preg_match($plixi,$text, $matches);
+			preg_match($instagram,$text, $matches);
 			
 			print_r($matches);
 		}

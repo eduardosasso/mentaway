@@ -9,7 +9,7 @@
 	<script src="js/head.min.js"></script>
 	<link rel="stylesheet/less" href="<?php echo Helper::auto_version('css/facebook.less'); ?>">
 	<link rel="stylesheet" href="css/google-wave-scroll.css" type="text/css" media="screen" charset="utf-8" />
-  <link rel="stylesheet" href="../js/fancybox/jquery.fancybox-1.3.1.css">
+  <link rel="stylesheet" href="js/facebox/facebox.css">
 	<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
 	<script src="http://maps.google.com/maps/api/js?libraries=adsense&sensor=false"></script>	
 	<script>
@@ -21,7 +21,8 @@
 						"js/google-wave-scrollbar/mousewheel.js",
 						"js/google-wave-scrollbar/gwave-scroll-pane-0.1.js",
 						"js/underscore-min.js",
-						"../js/fancybox/jquery.fancybox-1.3.1.pack.js",
+						"js/jquery.embedly.min.js",						
+						"js/facebox/facebox.js",
 						"js/touch-scroll.js",
 						"/js/map.js",
 						"js/app.js");						
