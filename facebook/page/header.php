@@ -8,7 +8,7 @@ $countries = $controller->get_countries_visited($user_id);
 $friends = count($user->friends);
 ?>
 
-<a href="/user/<?php echo $user_id; ?>" class="redirect"><img src="<?php echo $profile_picture ?>" class="profile">
+<a href="/user/<?php echo $user_id; ?>" class="redirect"><img src="<?php echo $profile_picture ?>" class="profile"></a>
 
 <div class="stats">
 	<div>

@@ -1,12 +1,12 @@
 head.ready(function(){
 	$('a#states, #states_stats_btn').click(function(){
 		get_db_view("users", "stats", $(this).attr('data-uid'), function(data){
-			states = data.rows[0].value.states;
+			states_ = data.rows[0].value.states;
 			//pega os valores do objeto e converte em array. via underscore.js
-			states = _.values(states);
+			states_ = _.values(states_);
 			
-			states_list = states.join("|");
-			states_print = states.join(", ");
+			states_list = states_.join("|");
+			states_print = states_.join(", ");
 			
 			var picture_ = 'http://maps.google.com/maps/api/staticmap?size=900x400&maptype=roadmap&markers='+ states_list + '&sensor=false';
 
@@ -26,12 +26,12 @@ head.ready(function(){
 	
 	$('a#cities, #cities_stats_btn').click(function(){
 		get_db_view("users", "stats", $(this).attr('data-uid'), function(data){
-			cities = data.rows[0].value.cities;
+			cities_ = data.rows[0].value.cities;
 			//pega os valores do objeto e converte em array. via underscore.js
-			cities = _.values(cities);
+			cities_ = _.values(cities_);
 			
-			cities_list = cities.join("|");
-			cities_print = cities.join(", ");
+			cities_list = cities_.join("|");
+			cities_print = cities_.join(", ");
 			
 			var picture_ = 'http://maps.google.com/maps/api/staticmap?size=900x400&maptype=roadmap&markers='+ cities_list + '&sensor=false';
 
@@ -51,12 +51,12 @@ head.ready(function(){
 	
 	$('a#countries, #countries_stats_btn').click(function(){
 		get_db_view("users", "stats", $(this).attr('data-uid'), function(data){
-			countries = data.rows[0].value.countries;
+			countries_ = data.rows[0].value.countries;
 			//pega os valores do objeto e converte em array. via underscore.js
-			countries = _.values(countries);
+			countries_ = _.values(countries_);
 			
-			countries_list = countries.join("|");
-			countries_print = countries.join(", ");
+			countries_list = countries_.join("|");
+			countries_print = countries_.join(", ");
 			
 			var picture_ = 'http://maps.google.com/maps/api/staticmap?size=900x400&maptype=roadmap&markers='+ countries_list + '&sensor=false';
 
@@ -125,35 +125,55 @@ head.ready(function(){
 	});
 	
 	
-	$('article').mouseover(function(){
+	$('#timeline article').mouseover(function(){
 		$('article').removeClass('hover');
 		$(this).addClass('hover');
 		
-		var user_id = $(this).attr('data-user_id');
-		var placemark = $(this).attr('data-placemark');
-				
-		var url_ = 'http://mentaway.com/' + user_id + '/' + placemark;
+		xid_ = $(this).attr('data-xid');
+
+		//recupera o número de comentários
+		this_ = $(this);
+		if ($('.comment_link', $(this_)).hasClass('count') == false) {
+			FB.api({
+				method: 'comments.get',
+				xid: xid_
+			}, function(response) {
+				comments_ = eval(response);
+				if (comments_ && comments_.length > 0) {
+					comments_count_ = comments_.length;
+					$('.comment_link', $(this_)).addClass('count');
+					comment_label_ = ' comments';
+					if (comments_count_ == 1 ) comment_label_ = ' comment';
+					$('.comment_link', $(this_)).html(comments_count_ + comment_label_);
+				};
+			});
+		}
+
+		// var user_id = $(this).attr('data-user_id');
+		// 		var placemark = $(this).attr('data-placemark');
+
+		//var url_ = 'http://mentaway.com/' + user_id + '/' + placemark;
 		//var like_ = '<fb:like show_faces="true" layout="box_count" href="' + url_ + '"></fb:like>';
 
 	});
 	
 	$('.comment_link').click(function(e){
 		e.stopPropagation();
-		item = $(this).closest('article');
-		var user_id = $(item).attr('data-user_id');
-		var xid_ = $(item).attr('data-xid');
+		item_ = $(this).closest('article');
+		var user_id = $(item_).attr('data-user_id');
+		var xid_ = $(item_).attr('data-xid');
 		
 		var like_ = '<fb:comments numposts="10" width="400" publish_feed="false" simple="1" show_form="true" notify="true" canpost="true" xid="'+ xid_ +'" css="http://fb.mentaway.com/facebook/css/fb_comments6.css" send_notification_uid="'+ user_id + '"></fb:comments>';
 		
-		if ($('.share', $(item)).html() == "")  {
-			$('.share', $(item)).html(like_);
+		if ($('.share', $(item_)).html() == "")  {
+			$('.share', $(item_)).html(like_);
 			
-			el_ = $('.share', $(item)).get(0);
+			el_ = $('.share', $(item_)).get(0);
 			
 			FB.XFBML.parse(el_);		
 		}
 		
-		$('.share', $(item)).toggle();
+		$('.share', $(item_)).toggle();
 		
 		return false;			
 	});
@@ -173,7 +193,7 @@ head.ready(function(){
 			visible: true,
 			publisherId: 'pub-8046450694828694'
 		}
-		adUnit = new google.maps.adsense.AdUnit(adUnitDiv, adUnitOptions);	
+		adUnit_ = new google.maps.adsense.AdUnit(adUnitDiv, adUnitOptions);	
 				
 	};
 	
@@ -182,11 +202,7 @@ head.ready(function(){
 
 	//$('section#timeline, section#settings').css('height', window_height_);
 
-	if ($('section#friends').length >0) {
-		if ($('section#friends').get(0).offsetHeight < window_height_) {
-			$('section#friends').css('height', window_height_);	
-		}
-	};
+	$('section#friends, section#settings').css('height', window_height_);	
  	
 	if ((navigator.userAgent.indexOf('iPhone') != -1) || (navigator.userAgent.indexOf('iPod') != -1) || (navigator.userAgent.indexOf('iPad') != -1)) {
 		$('section#timeline nav').touchScroll();
@@ -217,6 +233,7 @@ head.ready(function(){
 		
 		lat_ = $(this).attr('data-lat');
 		long_ = $(this).attr('data-long');
+		xid_ = $(this).attr('data-xid');
 		
 		var latlng = new google.maps.LatLng(
 			parseFloat(lat_),
@@ -232,6 +249,26 @@ head.ready(function(){
 		Map.gmap.panTo(latlng);
 		
 		previous_marker = marker;
+		
+		xid_ = $(this).attr('data-xid');
+		
+		//recupera o número de comentários
+		this_ = $(this);
+		if ($('.comment_link', $(this_)).hasClass('count') == false) {
+			FB.api({
+				method: 'comments.get',
+				xid: xid_
+			}, function(response) {
+				comments_ = eval(response);
+				if (comments_ && comments_.length > 0) {
+					comments_count_ = comments_.length;
+					$('.comment_link', $(this_)).addClass('count');
+					comment_label_ = ' comments';
+					if (comments_count_ == 1 ) comment_label_ = ' comment';
+					$('.comment_link', $(this_)).html(comments_count_ + comment_label_);
+				};
+			});
+		}	
 		
 	});
 	

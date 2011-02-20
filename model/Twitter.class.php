@@ -66,7 +66,7 @@ class Twitter extends AbstractService {
 						$text = str_replace($matches[0] ,'', $text);
 						$lightbox = true;
 					} elseif (preg_match($instagram, $text, $matches) > 0) {
-						$image = $matches[0] . "/media/";
+						$image = $matches[0] . "/media/?size=t";
 						$image_url = $matches[0] . "/media/?size=l";
 						$text = str_replace($matches[0] ,'', $text);
 						$lightbox = true;
