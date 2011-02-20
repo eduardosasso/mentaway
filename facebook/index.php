@@ -6,26 +6,26 @@
 <head>
 	<meta charset="utf-8">
 	<title>Mentaway Facebook App</title>
-	<script src="js/head.min.js"></script>
-	<link rel="stylesheet/less" href="<?php echo Helper::auto_version('css/facebook.less'); ?>">
-	<link rel="stylesheet" href="css/google-wave-scroll.css" type="text/css" media="screen" charset="utf-8" />
-  <link rel="stylesheet" href="js/facebox/facebox.css">
+	<script src="/facebook/js/head.min.js"></script>
+	<link rel="stylesheet/less" href="/facebook/css/facebook.less">
+	<link rel="stylesheet" href="/facebook/css/google-wave-scroll.css" type="text/css" media="screen" charset="utf-8" />
+  <link rel="stylesheet" href="/facebook/js/facebox/facebox.css">
 	<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
 	<script src="http://maps.google.com/maps/api/js?libraries=adsense&sensor=false"></script>	
 	<script>
 		head.js("https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js",
-						"js/less-1.0.41.min.js",
+						"/facebook/js/less-1.0.41.min.js",
 						"http://connect.facebook.net/en_US/all.js",
-						"js/scripts.js", 
+						"/facebook/js/scripts.js", 
 						"https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js",
-						"js/google-wave-scrollbar/mousewheel.js",
-						"js/google-wave-scrollbar/gwave-scroll-pane-0.1.js",
-						"js/underscore-min.js",
-						"js/jquery.embedly.min.js",						
-						"js/facebox/facebox.js",
-						"js/touch-scroll.js",
+						"/facebook/js/google-wave-scrollbar/mousewheel.js",
+						"/facebook/js/google-wave-scrollbar/gwave-scroll-pane-0.1.js",
+						"/facebook/js/underscore-min.js",
+						"/facebook/js/jquery.embedly.min.js",						
+						"/facebook/js/facebox/facebox.js",
+						"/facebook/js/touch-scroll.js",
 						"/js/map.js",
-						"js/app.js");						
+						"/facebook/js/app.js");						
 	</script>
 </head>
 <body>

@@ -49,8 +49,9 @@ class Twitter extends AbstractService {
 					$instagram = "/(http:\/\/instagr.am\/.+\/(\w+))/";
 
 					if (preg_match($twitpic, $text, $matches) > 0) {
-						$image = 'http://twitpic.com/show/thumb/' . $matches[1];
+						$image = 'http://twitpic.com/show/thumb/' . $matches[2];
 						$image_url = $matches[0];
+						$lightbox = true;
 						$text = str_replace($matches[0] ,'', $text);
 					} elseif (preg_match($yfrog, $text, $matches) > 0) {
 						$image = $matches[0] . ".th.jpg";

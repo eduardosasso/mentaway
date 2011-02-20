@@ -167,13 +167,14 @@ RewriteRule ^(.*)\.[\d]{10}\.(css|js)$ $1.$2 [L]
 
 RewriteBase /
 
-RewriteCond %{REQUEST_URI} \/services\/
-RewriteRule ^(.*)$ services/controller.php?q=$1 [L,QSA]
-
+# RewriteCond %{REQUEST_URI} \/services\/
+# RewriteRule ^(.*)$ services/controller.php?q=$1 [L,QSA]
+#
+RewriteCond %{REQUEST_URI} \/facebook\/ 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_URI} !=/favicon.ico
-RewriteRule ^(.*)$ controller.php?q=$1 [L,QSA]
+RewriteRule ^(.*)$ facebook/index.php?q=$1 [L,QSA]
 
 # without -MultiViews, Apache will give a 404 for a rewrite if a folder of the same name does not exist (e.g. “/blog/hello”)
 #   webmasterworld.com/apache/3808792.htm

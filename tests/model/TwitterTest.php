@@ -13,7 +13,7 @@ class TwitterTest extends PHPUnit_Framework_TestCase {
 		Twitter::shout($username,"Testing twitter from @mentaway");
 	}
 
-		public function test_get_updates() {
+		public function xxxtest_get_updates() {
 			// $db = DatabaseFactory::get_provider();
 			// 
 			// $db->clean_database();
@@ -33,20 +33,20 @@ class TwitterTest extends PHPUnit_Framework_TestCase {
 			$placemarks = $twitter->validate($username);			
 		}	
 		
-		public function xtest_twitpic_replace() {
-			$pattern = "(http:\/\/twitpic.com\/(\w+))";
+		public function test_twitpic_replace() {
+			$pattern = "/(http:\/\/twitpic.com\/(\w+))/";
 			$ygrog =	"(http:\/\/yfrog.com\/(\w+))";
 			$plixi = "(http:\/\/plixi.com\/.+\/(\w+))";
 			$instagram = "(http:\/\/instagr.am\/.+\/(\w+))";
 			
-			$text = "kevinrose: .@summertomato has no AT&T coverage so I've enabled my Verizon iPhone hotspot to power her instagram addiction, h http://instagr.am/p/BsXWM/";
+			$text = "Testing oEmbed support on Mentaway #m http://twitpic.com/41kqqg";
 			
 			// $res = preg_replace($pattern ,'', $text);
 			// $res = preg_replace('/#m/' ,'', $res);
 			// $res = preg_replace('/#mentaway/' ,'', $res);
 			//echo trim($res);
 			
-			preg_match($instagram,$text, $matches);
+			preg_match($pattern,$text, $matches);
 			
 			print_r($matches);
 		}

@@ -25,6 +25,9 @@
 					<div class="description">
 						<?php
 							$img = '';
+							$class = '';
+							$img_url = '';
+							$icon = '';
 							if ($placemark->value->image) {
 								$img = $placemark->value->image;
 								$img = "<img src='$img'>";

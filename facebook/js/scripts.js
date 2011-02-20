@@ -1,13 +1,17 @@
 head.ready(function(){
 
-	$("section#timeline article a.twitter").click(function(){
-		$.embedly($(this).attr('href'), {}, function(oembed, dict){
+	$("section#timeline article a.twitter").click(function(e){
+		href_ = $(this).attr('href');
+		
+		$.embedly(href_, {}, function(oembed, dict){
 			jQuery.facebox({ image: oembed.url });
-		});		
+		});
+		
+		e.stopPropagation();		
 		return false;
 	});
 	
-	$("section#timeline article a.flickr").facebox();
+	$("section#timeline article a.flickr, section#timeline article a.foursquare").facebox();
 	
 	// $("a.lightbox").fancybox({
 	// 	'scrolling'		: 'no',

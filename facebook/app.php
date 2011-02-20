@@ -4,6 +4,7 @@ $controller = new Controller();
 $user_id = $session['uid'];
 
 $page_url = urldecode($_SERVER['QUERY_STRING']);
+
 $which_page = "/(settings|timeline|user|friends|stats|help|about)/";
 
 preg_match_all($which_page, $page_url, $page_matches);
@@ -33,7 +34,7 @@ if ($controller->is_user($user_id)) {
 			}
 
 			//recupera o user do query string entre /....&
-			preg_match("/\/(.*?)[&|\/]/", $page_url, $matches);
+			preg_match("/\/(\d*?)[&|\/]/", $page_url, $matches);
 			$user_id_ = $matches[1];		
 
 			$user = $controller->get_user($user_id_);
