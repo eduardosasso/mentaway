@@ -23,7 +23,8 @@ class Flickr extends AbstractService {
 		
 		foreach ($photos['photo'] as $key => $photo) {
 			//http://farm{farm-id}.static.flickr.com/{server-id}/{id}_{secret}_[mstb].jpg
-			$image_url = 'http://farm' . $photo['farm'] . '.static.flickr.com/' . $photo['server'] . '/' . $photo['id'] . '_' . $photo['secret'] . '_t.jpg';
+			$image = 'http://farm' . $photo['farm'] . '.static.flickr.com/' . $photo['server'] . '/' . $photo['id'] . '_' . $photo['secret'] . '_m.jpg';
+			$image_url = 'http://farm' . $photo['farm'] . '.static.flickr.com/' . $photo['server'] . '/' . $photo['id'] . '_' . $photo['secret'] . '_b.jpg';
 			
 			$description = '';
 			$info = $f->photos_getInfo($photo['id']);
@@ -36,13 +37,15 @@ class Flickr extends AbstractService {
 			$placemark = new Placemark();
 			$placemark->_id = $timestamp . "|$username|flickr";
 			$placemark->name = $photo['title'];
-			$placemark->image = $image_url;
+			$placemark->image = $image;
+			$placemark->image_url = $image_url;
 			$placemark->description = $description;
 			$placemark->date = $photo['datetaken'];
 			$placemark->timestamp = $timestamp;
 			$placemark->lat = $photo['latitude'];
 			$placemark->long = $photo['longitude'];
 			$placemark->service = 'flickr';
+			$placemark->lightbox = true;
 			$placemark->user = $username;
 			
 			$placemarks[] = $placemark;

@@ -22,7 +22,7 @@ $friends = $user->friends;
 			
 			$last_place = $controller->get_last_place_visited($friend->_id);
 			
-			$last_place = "in " . Helper::format_location($last_place[0], $last_place[1], $last_place[2]); 
+			$last_place = Helper::format_location($last_place[0], $last_place[1], $last_place[2]); 
 
 		?>
 		

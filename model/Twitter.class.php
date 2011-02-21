@@ -15,11 +15,11 @@ class Twitter extends AbstractService {
 		$controller = new Controller();
 
 		$service = $controller->get_user_service($username, $servicename);
-
+		
 		if (empty($service->token) || empty($service->secret)) {
 			return;
 		}
-
+		
 		try {
 			$twitter = new EpiTwitter($consumer_key, $consumer_secret, $service->token, $service->secret);
 
@@ -39,22 +39,49 @@ class Twitter extends AbstractService {
 					$lat = $tweet->geo->coordinates[0];
 					$long = $tweet->geo->coordinates[1];
 
-					$twitpic = '#http://twitpic.com/(\w+)#';
 					$image = '';
+					$image_url = '';
+					$lightbox = false;
+					
+					$twitpic = '/(http:\/\/twitpic.com\/(\w+))/';
+					$yfrog = '/(http:\/\/yfrog.com\/(\w+))/';
+					$plixi = '/(http:\/\/plixi.com\/.+\/(\w+))/';
+					$instagram = "/(http:\/\/instagr.am\/.+\/(\w+))/";
+
 					if (preg_match($twitpic, $text, $matches) > 0) {
-						$image = 'http://twitpic.com/show/thumb/' . $matches[1];
+						$image = 'http://twitpic.com/show/thumb/' . $matches[2];
+						$image_url = $matches[0];
+						$lightbox = true;
+						$text = str_replace($matches[0] ,'', $text);
+					} elseif (preg_match($yfrog, $text, $matches) > 0) {
+						$image = $matches[0] . ".th.jpg";
+						//$image_url = $matches[0] . ":iphone";
+						$image_url = $matches[0];
+						$lightbox = true;
+						$text = str_replace($matches[0] ,'', $text);
+					} elseif (preg_match($plixi, $text, $matches) > 0) {
+						$image = "http://api.plixi.com/api/tpapi.svc/imagefromurl?size=small&url=" . urlencode($matches[0]);
+						//$image_url = "http://api.plixi.com/api/tpapi.svc/imagefromurl?size=medium&url=" . urlencode($matches[0]);
+						$image_url = $matches[0];
+						$text = str_replace($matches[0] ,'', $text);
+						$lightbox = true;
+					} elseif (preg_match($instagram, $text, $matches) > 0) {
+						$image = $matches[0] . "/media/?size=t";
+						$image_url = $matches[0] . "/media/?size=l";
+						$text = str_replace($matches[0] ,'', $text);
+						$lightbox = true;
 					}
 
 					//retira hash e image do twitter...
-					$text = preg_replace($twitpic ,'', $text);
-					$text = preg_replace('/#m/' ,'', $text);
-					$text = preg_replace('/#mentaway/' ,'', $text);
+					$text = str_replace('#mentaway' ,'', $text);
+					$text = str_replace('#m' ,'', $text);
 
 					$placemark = new Placemark();
 					$placemark->_id = $timestamp . "|$username|twitter";
 					$placemark->name = trim($text);
 					$placemark->image = $image;
-					//$placemark->description = $shout;
+					$placemark->image_url = $image_url;					
+					$placemark->lightbox = $lightbox;
 					$placemark->date = $tweet->created_at;
 					$placemark->timestamp = $timestamp;
 					$placemark->lat = $lat;
@@ -70,6 +97,7 @@ class Twitter extends AbstractService {
 
 			return $placemarks;
 		} catch (Exception $e) {
+			//echo $e->getMessage();
 			/*
 				TODO por algum motivo nao conseguiu pegar o twitter... identificar melhor, talvez removendo a autorizacao da conta para testar o erro
 				//usuarios arasmus - EpiTwitterNotAuthorizedException

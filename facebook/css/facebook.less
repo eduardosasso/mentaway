@@ -1,6 +1,6 @@
 @content-width: 720px;
 @sidebar-width: 200px;
-@width-minus-scroll: @content-width - 230;
+@width-minus-scroll: @content-width - 20;
 @margin-top: 15px;
 @font-size: 11px;
 @font-size-big: 13px;
@@ -46,7 +46,9 @@ body{
 	font-family: 'lucida grande', tahoma, verdana, arial, sans-serif;
 	font-size: @font-size;
 	text-align: left;	
+	overflow-y: hidden;
 }
+
 a:link, a:active, a:visited {
 	color:@blue-font;
 	text-decoration: none;
@@ -72,8 +74,12 @@ h2 {
 	margin: 0px;
 }
 
+img {
+	border: 0;
+}
+
 #container{
-	width: 720px;
+	width: @content-width;
 	margin: 0px;
 	padding: 10px;	
 	float: left;
@@ -122,6 +128,7 @@ section {
 		}
 	}	
 }
+
 /*.connect_comment_widget .nub
 {
     background: transparent url(http://static.ak.fbcdn.net/rsrc.php/zv/r/agyQHs6yLID.gif) no-repeat 8px 0px;
@@ -158,7 +165,6 @@ input[type="button"] {
 input[type="button"]:active {
 	background: #CCC;
 }
-
 #invite_friends{	
 	input[type="button"] {
 		background-color: #69A74E;
@@ -283,7 +289,7 @@ input[type="button"]:active {
 			line-height: 25px;
 			border-bottom: 1px solid #EDEDED;
 			
-			li.help {
+			li.help, li.about {
 				float:right;
 			}		
 			li.help a {
@@ -332,6 +338,7 @@ input[type="button"]:active {
 
 #page.settings {
 	.services{
+		padding-top: 12px;
 		padding-left: 25px;
 		.service.active {
 			opacity: 0.4;
@@ -362,11 +369,17 @@ input[type="button"]:active {
 		}
 	}
 }
+
+/*hacking para conseguir ver o ultimo item do timeline em qualquer resolucao*/
+article.void {
+	height:125px;
+}
 	
 #page.timeline{	
+position: relative;
 	#map{
 		height:215px;
-	}
+	}	
 }
 	#page #friends {
 		margin-top: 0px !important;
@@ -384,10 +397,38 @@ input[type="button"]:active {
 			color: @aux-text-color;
 		}
 	}
+	
+	/* Timeline height for different browsers */
+/*	.11920 #timeline {
+		height: 650px;
+	}
+	.lt-1680 #timeline {
+		height: 650px;
+	}
+	.lt-1440 #timeline {
+		height: 650px;
+	}
+	.lt-1280 #timeline {
+		height: 500px;
+	}*/
+	.lt-1024 #timeline {
+		height: 500px;
+	}	
+	/****/
+	
+	#timeline { 
+		/* This is specialy for iPad touch scroll */     
+        nav {
+             display: block !important;
+             height: 100% !important;
+             -webkit-perspective: 1000 !important;
+             -webkit-backface-visibility: hidden !important;
+            }
+         /****/
+	}
 	#timeline, #friends{
 		background: #fff;
-		display: block;
-		overflow:hidden;		
+		display: block;		
 		width: @width-minus-scroll;
 		float: left;
 		margin-top: -20px;
@@ -414,23 +455,35 @@ input[type="button"]:active {
 			
 			
 			> div {
-				width:@width-minus-scroll - 150;
+				width:@width-minus-scroll - 190;
 				float: left;
-				padding-right: 80px;
+				padding-right: 120px;
+				position: relative;
 				
 			}
 			
 			.description{
-				margin:4px 0 15px;
+				margin:10px 0 15px;
 				color:black;
 				img {
-					margin: 10px 0 0;
+					margin: 0px 15px 15px 0;
+					float: left;
+				}
+				img.icon {
+					position: absolute;
+					float: none;
+					right: 10px;
+					top: 5px;
+				}
+				p {
+					margin: 0 0 8px;
 				}
 			}
 			
 			footer {
 				color: @aux-text-color;
-				padding: 0 !important;
+				padding:0 !important;
+				clear: both;
 				p.address{
 					margin: 0px 0px 4px;
 					height:13px;
@@ -537,5 +590,91 @@ span.pill {
 			}
 		}	
 	}	
+}
+
+/** Welcome **/
+
+#main_welcome {
+	width: @content-width;
+	background-color: #FFF;
+	.border-total;
+	header {
+		width: 100%;
+		padding:0 !important;
+	}
+	#content {
+		padding: 0 30px 30px;
+	}
+	h1 {
+		width:@content-width;
+		height: 72px;
+		background: url(../images/logo_welcome.png) center top no-repeat;
+		text-indent: -90000px;
+		margin: 30px 0px;
+	}
+	input[type="button"].external {
+		background-color: #69A74E;
+		background-position: 0 -96px;
+		border-color: #3B6E22 #3B6E22 #2C5115;
+		color: #FFF;
+		font-size: 14px;
+		text-align: center;
+		padding: 6px 15px;	
+		margin: 10px 0 0 ;
+	}
+	.slogan {
+		width: @content-width -120px;	
+		position: relative;
+		display: block;
+		clear: both;
+		height: 55px;
+		margin: 0 60px 30px;
+		padding-bottom: 30px;
+		.border-bottom;
+		
+	}
+	h2 {
+		width: 388px;
+		height: 53px;
+		float: left;	
+		background: url(../images/slogan.png) center center no-repeat;	
+		text-indent: -9000px;
+		margin: 0 20px 0 60px;
+	}
+	h3 {
+		margin: 0 0 6px;
+		color: @color;
+		font-size: 20px;
+	}
+	section {
+		color: @color;
+		font-size: @font-size-big;
+		height: 120px;
+		padding: 70px 0;
+	}
+	section#txt_1 {
+		background: url(../images/img_1_home.png) 30px center no-repeat;
+		padding-left: 340px;	
+	}
+	section#txt_2 {
+		background: url(../images/img_2_home.png) 360px center no-repeat;
+		padding-right: 340px;	
+		text-align: right;
+		margin-top: -10px;
+	}
+	section#txt_3 {
+		background: url(../images/img_3_home.png) 30px center no-repeat;
+		padding-left: 340px;
+		margin-top: -10px;	
+	}
+	section#txt_4 {
+		background: url(../images/img_4_home.png) 360px center no-repeat;
+		padding-right: 340px;	
+		text-align: right;
+		margin-top: -10px;
+	}
+	p {
+		margin: 0;
+	}
 }
 

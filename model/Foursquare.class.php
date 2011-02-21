@@ -15,14 +15,19 @@ class Foursquare extends AbstractService {
 		
 		$service = $controller->get_user_service($username, $servicename);
 		
-		$foursquare = new EpiFoursquare($consumer_key, $consumer_secret, $service->token, $service->secret);
+		// $foursquare = new EpiFoursquare($consumer_key, $consumer_secret, $service->token, $service->secret);
+		// 		
+		// 		$history = $foursquare->get('/history.json', array('l' => 250));
+		// 		$history = json_decode($history->responseText);
 		
-		$history = $foursquare->get('/history.json', array('l' => 250));
-		$history = json_decode($history->responseText);
+		$url = "https://api.foursquare.com/v2/users/self/checkins?limit=250&oauth_token=" . $service->secret;
+		
+		$res = Helper::http_req($url);
+		$history = json_decode($res);
 		
 		$placemarks = array();
 		
-		foreach ($history->checkins as $key => $checkin) {
+		foreach ($history->response->checkins->items as $checkin) {
 			
 			$shout = '';
 			if (isset($checkin->shout)) {
@@ -30,23 +35,32 @@ class Foursquare extends AbstractService {
 			}
 			
 			$icon = '';
-			if (isset($checkin->venue->primarycategory->iconurl)) {
-				$icon = $checkin->venue->primarycategory->iconurl;
+			if (isset($checkin->venue->categories[0]->icon)) {
+				$icon = $checkin->venue->categories[0]->icon;
 			}
 			
-			$timestamp = strtotime($checkin->created);
+			$timestamp = $checkin->createdAt;
 			
 			$placemark = new Placemark();
 			$placemark->_id = $timestamp . "|$username|foursquare";
 			$placemark->name = $checkin->venue->name;
-			$placemark->image = $icon;
+			$placemark->icon = $icon;
 			$placemark->description = $shout;
-			$placemark->date = $checkin->created;
+			$placemark->date = $checkin->createdAt;
 			$placemark->timestamp = $timestamp;
-			$placemark->lat = $checkin->venue->geolat;
-			$placemark->long = $checkin->venue->geolong;
+			$placemark->lat = $checkin->venue->location->lat;
+			$placemark->long = $checkin->venue->location->lng;
+			// $placemark->city = $checkin->venue->location->city;
+			// $placemark->state = $checkin->venue->location->state;
+			// $placemark->country = $checkin->venue->location->country;
 			$placemark->service = $servicename;
 			$placemark->user = $username;
+			
+			if ($checkin->photos->count > 0) {
+				$placemark->lightbox = true;
+				$placemark->image = $checkin->photos->items[0]->sizes->items[2]->url;
+				$placemark->image_url = $checkin->photos->items[0]->sizes->items[0]->url;				
+			}
 			
 			$placemarks[] = $placemark;
 

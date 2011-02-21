@@ -8,11 +8,11 @@ $countries = $controller->get_countries_visited($user_id);
 $friends = count($user->friends);
 ?>
 
-<img src="<?php echo $profile_picture ?>" class="profile">
+<a href="/user/<?php echo $user_id; ?>" class="redirect"><img src="<?php echo $profile_picture ?>" class="profile"></a>
 
 <div class="stats">
 	<div>
-		<p class="number">
+		<p class="number"> 
 			<a href="#" id="countries" data-uid="<?php echo $user_id ?>"><?php echo $countries ?></a>
 		</p>
 		<p class="label"><?php echo Helper::plural($countries, 'Country', 'Countries'); ?></p>
@@ -39,4 +39,4 @@ $friends = count($user->friends);
 	<?php endif ?>
 </div>
 
-<a href="/" class="redirect"><img src="/facebook/images/logo.png" alt="Mentaway logo" class="logo"></a>
+<a href="/" class="redirect"><img src="/facebook/images/logo.png" alt="Mentaway" class="logo"></a>

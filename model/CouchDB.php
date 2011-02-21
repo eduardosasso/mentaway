@@ -25,13 +25,17 @@ class CouchDB implements DatabaseInterface {
 		return $response;
 	}
 	
-	public function get_placemarks($user) {
+	public function get_placemarks($user, $limit = 100) {
 		//recupera os ultimos (mais recentes) 100 placemarks de um usuario
 		
 		$key = array("$user", array());
 		$end_key = array("$user");
 		
-		$placemarks = $this->db->descending(true)->limit(500)->startkey($key)->endkey($end_key)->getView('placemark','placemarks');
+		if ($limit == 0) {
+			$placemarks = $this->db->descending(true)->startkey($key)->endkey($end_key)->getView('placemark','placemarks');
+		} else {
+			$placemarks = $this->db->descending(true)->limit($limit)->startkey($key)->endkey($end_key)->getView('placemark','placemarks');
+		}
 	
 		return $placemarks;
 	}

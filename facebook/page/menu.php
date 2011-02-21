@@ -19,11 +19,13 @@
 
 <nav class="menu">
 	<ul>
+		<?php if ($matches): ?>			
+			<li><a href="/" class="redirect">Home</a></li>
+		<?php endif ?>
+		
 		<li><a href="<?php echo $url_prefix; ?>" class="redirect <?php echo css($page,'timeline'); ?>">Timeline</a></li>
 		
-		<?php if ($friends >0): ?>
-			<li><a href="<?php echo $url_prefix; ?>friends" id="friends_link" class="redirect <?php echo css($page,'friends'); ?>">Friends</a></li>
-		<?php endif ?>
+		<li><a href="<?php echo $url_prefix; ?>friends" id="friends_link" class="redirect <?php echo css($page,'friends'); ?>">Friends</a></li>
 		
 		<?php if ($status): ?>
 			<li><a href="<?php echo $url_prefix; ?>stats" class="redirect <?php echo css($page,'stats'); ?>">Stats</a></li>
@@ -34,6 +36,7 @@
 		<?php endif ?>
 		
 		<li class="help"><a href="<?php echo $url_prefix; ?>help" class="redirect <?php echo css($page,'help'); ?>">Help</a></li>
+		<li class="about"><a href="<?php echo $url_prefix; ?>about" class="redirect <?php echo css($page,'about'); ?>">About</a></li>
 		
 	</ul>
 </nav>
