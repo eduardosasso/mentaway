@@ -7,7 +7,8 @@
 	<meta charset="utf-8">
 	<title>Mentaway Facebook App</title>
 	<script src="/facebook/js/head.min.js"></script>
-	<link rel="stylesheet/less" href="/facebook/css/facebook.less">
+	<!-- <link rel="stylesheet/less" href="/facebook/css/facebook.less"> -->
+	<link rel="stylesheet" href="<?php echo Helper::auto_version('/facebook/css/facebook.css') ?>">
 	<link rel="stylesheet" href="/facebook/css/google-wave-scroll.css" type="text/css" media="screen" charset="utf-8" />
   <link rel="stylesheet" href="/facebook/js/facebox/facebox.css">
 	<script src="http://maps.google.com/maps/api/js?sensor=false"></script>

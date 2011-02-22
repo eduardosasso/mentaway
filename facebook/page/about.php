@@ -6,6 +6,8 @@
 			<p>
 				In mid 2010 we were planning a trip to California and my girlfriend (<a href="http://twitter.com/gismullr">@gismullr</a>) was thinking about writing a blog telling our experiences during the trip.
 				That idea was nice, but as lazy as I am I thought to myself that I would rather be surfing and visiting places then sitting at a desk uploading photos and writing.
+			</p>
+			<p>
 				That kept me thinking for a couple of days until in one of those rare moments of inspiration I came up with the concept of Mentaway, a service that would automatically track and organize your trips and also help friends and family to see places you have been, countries you visited...and a lot of other nice features.			
 			</p>
 			<p>
@@ -30,18 +32,18 @@
 		<article class="team">
 			<h2>Team</h2>
 			<div class="team_member">
-				<img src="https://graph.facebook.com/631466850/picture">
-				<h3>Eduardo Sasso</h3>
+				<a href="http://facebook.com/sasso.eduardo"><img src="https://graph.facebook.com/631466850/picture"></a>
+				<h3><a href="http://facebook.com/sasso.eduardo">Eduardo Sasso</a></h3>
 				<p>Software Developer. Low profile, a bit unsocial. <a href="http://twitter.com/eduardosasso">@eduardosasso</a></p>
 			</div>
 			<div class="team_member">
-				<img src="https://graph.facebook.com/1335915461/picture">
-				<h3>Gisele Muller</h3>
+				<a href="http://facebook.com/gisele.muller"><img src="https://graph.facebook.com/1335915461/picture"></a>
+				<h3><a href="http://facebook.com/gisele.muller">Gisele Muller</a></h3>
 				<p>Geek girl. Bizdev. Writer. <a href="http://twitter.com/gismullr">@gismullr</a></p>
 			</div>	
 			<div class="team_member last">
-				<img src="https://graph.facebook.com/100000032825630/picture">
-				<h3>Fabiano Meneguetti</h3>
+				<a href="http://www.facebook.com/fabiano.me"><img src="https://graph.facebook.com/100000032825630/picture"></a>
+				<h3><a href="http://www.facebook.com/fabiano.me">Fabiano Meneguetti</a></h3>
 				<p>Designer. HTML and CSS magician. Dog lover. <a href="http://twitter.com/fabianome">@fabianome</a></p>
 			</div>
 			<p class="mention">
