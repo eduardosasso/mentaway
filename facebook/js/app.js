@@ -163,7 +163,7 @@ head.ready(function(){
 		var user_id = $(item_).attr('data-user_id');
 		var xid_ = $(item_).attr('data-xid');
 		
-		var like_ = '<fb:comments numposts="10" width="400" publish_feed="false" simple="1" show_form="true" notify="true" canpost="true" xid="'+ xid_ +'" css="http://fb.mentaway.com/facebook/css/fb_comments6.css" send_notification_uid="'+ user_id + '"></fb:comments>';
+		var like_ = '<fb:comments numposts="10" width="510" publish_feed="false" simple="1" show_form="true" notify="true" canpost="true" xid="'+ xid_ +'" css="http://fb.mentaway.com/facebook/css/fb_comments7.css" send_notification_uid="'+ user_id + '"></fb:comments>';
 		
 		if ($('.share', $(item_)).html() == "")  {
 			$('.share', $(item_)).html(like_);
@@ -202,7 +202,7 @@ head.ready(function(){
 
 	//$('section#timeline, section#settings').css('height', window_height_);
 
-	$('section#friends, section#settings').css('height', window_height_);	
+	$('section#friends, section#settings, section#about').css('height', window_height_);	
  	
 	if ((navigator.userAgent.indexOf('iPhone') != -1) || (navigator.userAgent.indexOf('iPod') != -1) || (navigator.userAgent.indexOf('iPad') != -1)) {
 		$('section#timeline nav').touchScroll();
