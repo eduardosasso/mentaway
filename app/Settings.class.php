@@ -92,7 +92,10 @@ class Settings {
 	
 	public static function get_couchdb_url() {
 		$url = 'http://localhost:5984/';
-		//$url = 'http://localhost:5985/';
+		
+		if (Settings::get_env() == Settings::LOCAL) {
+			$url = 'http://localhost:5985/';
+		}
 		
 		// if (Settings::get_env() == Settings::LOCAL) {
 		// 	//via ssh tunnel base quente.

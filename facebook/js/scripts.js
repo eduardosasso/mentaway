@@ -95,6 +95,8 @@ head.ready(function(){
 
 		return false;
 	})
+	
+	Geo.update_placemarks();
 
 });
 
@@ -109,6 +111,7 @@ get_db_view = function(dd, vn, k, callback) {
 
 	$.get('/facebook/ajax/views.php', args_, function(data){
 		callback.call(this_, data);
-	});
-	
+	});	
 }	
+
+

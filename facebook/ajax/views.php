@@ -12,6 +12,8 @@ $key = $_REQUEST['key'];
 $controller = new Controller();
 $view = $controller->get_view($design_document, $view_name, $key);
 
+error_log(print_r($view,1));
+
 print json_encode($view); 
 
 ?>
