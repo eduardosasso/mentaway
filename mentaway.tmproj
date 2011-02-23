@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>currentDocument</key>
-	<string>facebook/page/welcome.php</string>
+	<string>ajax.php</string>
 	<key>documents</key>
 	<array>
 		<dict>
@@ -34,6 +34,20 @@
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
 			<integer>143</integer>
+		</dict>
+		<key>ajax.php</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>25</integer>
+				<key>line</key>
+				<integer>10</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
 		</dict>
 		<key>app/Settings.class.php</key>
 		<dict>
@@ -338,7 +352,7 @@
 				<key>column</key>
 				<integer>0</integer>
 				<key>line</key>
-				<integer>12</integer>
+				<integer>13</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
@@ -487,6 +501,20 @@
 			<key>firstVisibleLine</key>
 			<integer>41</integer>
 		</dict>
+		<key>model/Stats.class.php</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>0</integer>
+				<key>line</key>
+				<integer>111</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>70</integer>
+		</dict>
 		<key>model/Twitter.class.php</key>
 		<dict>
 			<key>caret</key>
@@ -633,6 +661,36 @@
 			<key>firstVisibleLine</key>
 			<integer>0</integer>
 		</dict>
+		<key>tests/model/StatsTest.php</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>35</integer>
+				<key>line</key>
+				<integer>3</integer>
+			</dict>
+			<key>columnSelection</key>
+			<false/>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+			<key>selectFrom</key>
+			<dict>
+				<key>column</key>
+				<integer>2</integer>
+				<key>line</key>
+				<integer>3</integer>
+			</dict>
+			<key>selectTo</key>
+			<dict>
+				<key>column</key>
+				<integer>35</integer>
+				<key>line</key>
+				<integer>3</integer>
+			</dict>
+		</dict>
 		<key>tests/model/TwitterTest.php</key>
 		<dict>
 			<key>caret</key>
@@ -711,6 +769,9 @@
 		<string>facebook/js/scripts.js</string>
 		<string>facebook/js/app.js</string>
 		<string>facebook/page/welcome.php</string>
+		<string>model/Stats.class.php</string>
+		<string>ajax.php</string>
+		<string>tests/model/StatsTest.php</string>
 		<string>facebook/page/header.php</string>
 		<string>facebook/index.php</string>
 		<string>.htaccess</string>
