@@ -158,7 +158,7 @@
 	<article>
 		<h1>I really like Mentaway? How can I support the service?</h1>
 		<div>
-			<p>That's awesome. We support donations over Paypal.</p>
+			<p>That's awesome. We accept donations over PayPal.</p>
 			<p>Just click in one of the buttons bellow and make us happy. Thanks!</p>
 			<input type="button" value="$2/Month Subscription" data-url="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=J43F3URDGZQYE" class="external">
 			<input type="button" value="$5/Month Subscription" data-url="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=EFQHU45ZC6BM2" class="external">

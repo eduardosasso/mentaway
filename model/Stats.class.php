@@ -28,7 +28,7 @@ class Stats extends AbstractService {
 			//pega so os placemarks do user q estao sem o geocode reverso
 			$db = DatabaseFactory::get_provider();
 			$placemarks = $db->get()->key($username)->getView('placemark','reverse_geo');
-			
+		
 			if (empty($placemarks->rows)) {
 				return;
 			}	
@@ -108,7 +108,7 @@ class Stats extends AbstractService {
 		
 		public function reverse_geo($lat, $long){
 			$url = "http://maps.googleapis.com/maps/api/geocode/json?latlng=$lat,$long&sensor=false";
-
+			
 			$ch = curl_init();
 
 			curl_setopt($ch, CURLOPT_URL, $url);

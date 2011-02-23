@@ -1,5 +1,9 @@
 <?php
-$friends = $user->friends;	
+$friends = array();
+if (isset($user->friends)) {
+	$friends = $user->friends;
+}
+
 ?>
 
 <section id="friends">

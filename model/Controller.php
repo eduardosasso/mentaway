@@ -296,6 +296,7 @@ class Controller {
 		$user_->fullname = $fb_user_['name'];
 		$user_->email = $fb_user_['email'];
 		$user_->date = date('m/d/Y');
+		$user_->timestamp = strtotime($user_->date);
 		$user_->token = $token_;	
 		
 		$saved_user = $this->save_user($user_);

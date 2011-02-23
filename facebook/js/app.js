@@ -185,15 +185,17 @@ head.ready(function(){
 		Map.add('-20.468189', '-59.589844');
 		Map.set_zoom(2);
 		
-		var adUnitDiv = document.createElement('div');
-		var adUnitOptions = {
-			format: google.maps.adsense.AdFormat.BUTTON,
-			position: google.maps.ControlPosition.RIGHT,
-			map: Map.gmap,
-			visible: true,
-			publisherId: 'pub-8046450694828694'
+		if ($('section#timeline article:not(.void)').length > 0) {
+			var adUnitDiv = document.createElement('div');
+			var adUnitOptions = {
+				format: google.maps.adsense.AdFormat.BUTTON,
+				position: google.maps.ControlPosition.RIGHT,
+				map: Map.gmap,
+				visible: true,
+				publisherId: 'pub-8046450694828694'
+			}
+			adUnit_ = new google.maps.adsense.AdUnit(adUnitDiv, adUnitOptions);
 		}
-		adUnit_ = new google.maps.adsense.AdUnit(adUnitDiv, adUnitOptions);	
 				
 	};
 	
@@ -214,9 +216,13 @@ head.ready(function(){
 		//nav_height = $('section#timeline nav').height();
 		//$('section#timeline nav').height(nav_height + 300);
 		
+		if ($('section#timeline article:not(.void)').length == 0) {
+			$('section#timeline').hide();
+		} else {
+			$('section#timeline').gWaveScrollPane();
+			$('section#timeline').css("overflow", "hidden");
+		}
 		
-		$('section#timeline').gWaveScrollPane();
-		$('section#timeline').css("overflow", "hidden");	
 	}
 	
 	FB.Canvas.setAutoResize(); 
@@ -273,6 +279,6 @@ head.ready(function(){
 		
 	});
 	
-	$('#timeline article:first').trigger('click');
+	$('section#timeline article:first:visible').trigger('click');
 		
 });
