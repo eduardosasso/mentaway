@@ -4,7 +4,7 @@ include realpath($_SERVER["DOCUMENT_ROOT"]) . '/classes.php';
 //phpunit tests/model/StatsTest.php
 class StatsTest extends PHPUnit_Framework_TestCase {
 		public function test_get_updates() {
-			$username = '631466850';
+			$username = '1290379877';
 
 			$stats = new Stats();
 			$stats = $stats->get_updates($username);

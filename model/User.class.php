@@ -10,6 +10,7 @@ class User {
 	public $status;
 	public $services = array(); 
 	public $trips = array();
+	public $friends = array();
 	
 	function set_service(Service $service) {
 		$this->services[] = $service;

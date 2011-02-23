@@ -163,7 +163,7 @@ head.ready(function(){
 		var user_id = $(item_).attr('data-user_id');
 		var xid_ = $(item_).attr('data-xid');
 		
-		var like_ = '<fb:comments numposts="10" width="510" publish_feed="false" simple="1" show_form="true" notify="true" canpost="true" xid="'+ xid_ +'" css="http://fb.mentaway.com/facebook/css/fb_comments7.css" send_notification_uid="'+ user_id + '"></fb:comments>';
+		var like_ = '<fb:comments numposts="10" width="510" publish_feed="false" simple="1" show_form="true" notify="true" canpost="true" xid="'+ xid_ +'" css="http://fb.mentaway.com/facebook/css/fb_comments8.css" send_notification_uid="'+ user_id + '"></fb:comments>';
 		
 		if ($('.share', $(item_)).html() == "")  {
 			$('.share', $(item_)).html(like_);
@@ -185,15 +185,17 @@ head.ready(function(){
 		Map.add('-20.468189', '-59.589844');
 		Map.set_zoom(2);
 		
-		var adUnitDiv = document.createElement('div');
-		var adUnitOptions = {
-			format: google.maps.adsense.AdFormat.BUTTON,
-			position: google.maps.ControlPosition.RIGHT,
-			map: Map.gmap,
-			visible: true,
-			publisherId: 'pub-8046450694828694'
+		if ($('section#timeline article:not(.void)').length > 0) {
+			var adUnitDiv = document.createElement('div');
+			var adUnitOptions = {
+				format: google.maps.adsense.AdFormat.BUTTON,
+				position: google.maps.ControlPosition.RIGHT,
+				map: Map.gmap,
+				visible: true,
+				publisherId: 'pub-8046450694828694'
+			}
+			adUnit_ = new google.maps.adsense.AdUnit(adUnitDiv, adUnitOptions);
 		}
-		adUnit_ = new google.maps.adsense.AdUnit(adUnitDiv, adUnitOptions);	
 				
 	};
 	
@@ -202,7 +204,8 @@ head.ready(function(){
 
 	//$('section#timeline, section#settings').css('height', window_height_);
 
-	$('section#friends, section#settings, section#about').css('height', window_height_);	
+	$('section#friends, section#settings, section#about').css('min-height', window_height_);	
+	$('section#help').css('min-height', 900);
  	
 	if ((navigator.userAgent.indexOf('iPhone') != -1) || (navigator.userAgent.indexOf('iPod') != -1) || (navigator.userAgent.indexOf('iPad') != -1)) {
 		$('section#timeline nav').touchScroll();
@@ -213,9 +216,13 @@ head.ready(function(){
 		//nav_height = $('section#timeline nav').height();
 		//$('section#timeline nav').height(nav_height + 300);
 		
+		if ($('section#timeline article:not(.void)').length == 0) {
+			$('section#timeline').hide();
+		} else {
+			$('section#timeline').gWaveScrollPane();
+			$('section#timeline').css("overflow", "hidden");
+		}
 		
-		$('section#timeline').gWaveScrollPane();
-		$('section#timeline').css("overflow", "hidden");	
 	}
 	
 	FB.Canvas.setAutoResize(); 
@@ -272,6 +279,6 @@ head.ready(function(){
 		
 	});
 	
-	$('#timeline article:first').trigger('click');
+	$('section#timeline article:first:visible').trigger('click');
 		
 });

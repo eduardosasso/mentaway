@@ -90,6 +90,8 @@ head.ready(function(){
 		e.stopPropagation();
 		
 		$(this).next('div').toggle();
+		
+		FB.Canvas.setAutoResize(); 
 
 		return false;
 	})
