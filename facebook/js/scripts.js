@@ -96,7 +96,14 @@ head.ready(function(){
 		return false;
 	})
 	
+	
+	//atualiza os checkins com dados de pais, estado e cidade.	
 	Geo.update_placemarks();
+	
+	FB.api('/me', function(response) {
+		page_ = $('div#page').attr('class');
+	  $('head title').text(response.name + ' - ' + page_);
+	});
 
 });
 
