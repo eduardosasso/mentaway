@@ -160,7 +160,7 @@ class CouchDB implements DatabaseInterface {
 		if (!empty($key)) {
 			$result = $this->db->key($key)->getView($design_document, $view_name);	
 			return $result;
-		} elseif ($view_name == 'reverse_geo') {
+		} elseif ($view_name == 'reverse_geo' || $view_name == 'all') {
 			//se for essa view abre uma excecao e deixa recuperar via ajax sem key.
 			$result = $this->db->getView($design_document, $view_name);	
 			return $result;

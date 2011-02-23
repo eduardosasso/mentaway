@@ -5,9 +5,10 @@ var Geo = {
 	update_placemarks: function(){
 		//recupera checkins que não tem pais, estado, cidade
 		//get_db_view("placemark", "reverse_geo", "", function(data){
-			get_db_view("placemark", "reverse_geo", "", function(data){
+			get_db_view("placemark", "all", "", function(data){
 			idx = 0;
-			for (var start = 1; start <= data.total_rows; start++) {
+			//for (var start = 1; start <= data.total_rows; start++) {
+			for (var start = 1; start <= 50; start++) {
 				//espera 1seg a cada iteracao para não receber OVER_QUERY_LIMIT do gmap
 				_.delay(function(){
 					i_ = idx++;
@@ -33,7 +34,8 @@ var Geo = {
 			if (status_ == google.maps.GeocoderStatus.OK) {
 				geo_ = results_[0];
 				address_ = Geo.get_location_names(geo_);			
-				Geo.save_address(id_, address_);
+				console.log(geo_);
+				//Geo.save_address(id_, address_);
 			}
 		});
 	},
