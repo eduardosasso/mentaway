@@ -60,7 +60,7 @@ private static function set_fb_counter($username, $count) {
 			'access_token' => $user->token
 			));	
 	} catch (Exception $e) {
-		Log::write($e->getMessage());
+		//Log::write($e->getMessage());
 	}
 	
 }
