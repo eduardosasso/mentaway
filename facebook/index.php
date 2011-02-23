@@ -26,7 +26,8 @@
 						"/facebook/js/facebox/facebox.js",
 						"/facebook/js/touch-scroll.js",
 						"<?php echo Helper::auto_version('/js/map.js') ?>",
-						"<?php echo Helper::auto_version('/facebook/js/app.js') ?>");
+						"<?php echo Helper::auto_version('/facebook/js/app.js') ?>",
+						"<?php echo Helper::auto_version('/facebook/js/geo.js') ?>");
 	</script>
 </head>
 <body>
