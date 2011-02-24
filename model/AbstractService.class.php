@@ -22,26 +22,36 @@ abstract class AbstractService {
 			$db->save($document);
 
 			if (isset($document->country) && !empty($document->country)) {
+				Log::write("nao tem pais");
+				Log::write(print_r($document, 1));
+				
 				$trip = $user->trips[0];
 
 				if (isset($trip->status)) {
+					Log::write("tem trip status");
 					$status = $trip->status;
 				} else {
+					Log::write("não tem trip status");
 					$status->countries = array();
 					$status->states = array();
 					$status->cities = array();
 				}
 				
 				if (in_array($document->country, $status->countries) == false) {
+					Log::write($document->country . " não ta no array de paises");
+					
 					$status->cities[] = $document->city;
 					$status->states[] = $document->state;
 					$status->countries[] = $document->country;
 
-					$status->cities = array_unique($status->cities);
+					$Gstatus->cities = array_unique($status->cities);
 					$status->states = array_unique($status->states);
 					$status->countries = array_unique($status->countries);
 
 					$trip->status = $status;
+					
+					Log::write("Antes de salvar a trip");
+					Log::write(print_r($trip, 1));
 
 					$controller->add_user_trip($username, $trip);
 				}
