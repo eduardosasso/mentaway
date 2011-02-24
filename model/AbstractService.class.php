@@ -21,8 +21,30 @@ abstract class AbstractService {
 
 			$db->save($document);
 			
+			if (isset($document->country) && !empty($document->country)) {
+				$trip = $user->trips[0];
+				
+				if (isset($trip->status)) {
+					$status = $trip->status;
+					
+					if (in_array($document->country, $status->countries) == false) {
+						$status->cities[] = $document->city;
+						$status->states[] = $document->state;
+						$status->countries[] = $document->country;
+
+						$status->cities = array_unique($status->cities);
+						$status->states = array_unique($status->states);
+						$status->countries = array_unique($status->countries);
+
+						$trip->status = $status;
+
+						$controller->add_user_trip($username, $trip);
+					}
+				}
+			}
+			
 			if ($this->notified == false) {
-				Log::write("$username - inc do contador");
+				//Log::write("$username - inc do contador");
 				//notifica os amigos desse usuario q ele tem novidades.
 				//so entra aqui 1 vez por servico quando tem novidade para ser mais rapido. 
 				Notification::inc_counter($username);
@@ -30,6 +52,7 @@ abstract class AbstractService {
 			}
 
 		} catch (Exception $e) {			
+			Log::write($e->getMessage());
 		}
 	}
 	

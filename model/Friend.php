@@ -31,6 +31,30 @@ class Friend {
 		$this->follow_friends($username, $fb_friends,'facebook');		
 	}
 	
+	public function find_mutual_friends($username){
+		$fb_friends = $this->find_facebook_friends($username);
+		
+		$controller = new Controller();
+		$user = $controller->get_user($username);
+		
+		$mutual_friends = array();
+		
+		foreach ($fb_friends as $value) {
+			echo "<pre>";
+			print_r($value['id']);
+			echo "</pre>";
+			// //procura o amigo do facebook no mentaway
+			// 			$friend = $controller->get_user($value['id']);
+			// 			if ($friend) {
+			// 				$mutual_friends[] = $friend->fullname;
+			// 				echo $friend->fullname;
+			// 
+			// 			}
+		}	
+		
+		return $mutual_friends;
+	}
+	
 	private function follow_friends($username, $friend_list, $servicename){
 		$controller = new Controller();
 		$user = $controller->get_user($username);

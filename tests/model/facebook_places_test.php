@@ -15,7 +15,7 @@ class Facebook_Places_Test extends PHPUnit_Framework_TestCase {
 
 	}
 	
-	public function test_api(){
+	public function xtest_api(){
 		 
 		preg_match("/[^\/]*$/", "http://www.facebook.com/gisele.muller", $matches);
 		
