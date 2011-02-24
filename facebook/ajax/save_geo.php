@@ -27,12 +27,7 @@ if ($docid) {
 		//depois de salvar o geo tenta atualizar o stats do user.
 		$trip = $controller->get_current_trip($username);
 
-		Log::write("antes de tentar fazer o geo-reverso");
-		Log::write(print_r($doc, 1));
-
 		if (isset($doc->country) && !empty($doc->country)) {
-			Log::write("nao tem pais");
-			Log::write(print_r($doc, 1));
 
 			if (!isset($trip->name)) {
 				$trip->name = 'My Trip';
@@ -41,19 +36,18 @@ if ($docid) {
 			if (!isset($trip->_id)) {
 				$trip->_id = 'trip';
 			}
-
-			if (isset($trip->status)) {
-				Log::write("tem trip status");
-				$status = $trip->status;
-			} else {
-				Log::write("não tem trip status");
-				$status->countries = array();
-				$status->states = array();
+			
+			if (empty($status)) {
 				$status->cities = array();
+				$status->states = array();
+				$status->countries = array();
+			} else {
+				$status->cities = (array)$status->cities;
+				$status->states = (array)$status->states;
+				$status->countries = (array)$status->countries;
 			}
 
 			if (in_array($doc->country, $status->countries) == false) {
-				Log::write($doc->country . " não ta no array de paises");
 
 				$status->cities[] = $doc->city;
 				$status->states[] = $doc->state;
@@ -64,9 +58,6 @@ if ($docid) {
 				$status->countries = array_unique($status->countries);
 
 				$trip->status = $status;
-
-				Log::write("Antes de salvar a tripG");
-				Log::write(print_r($trip, 1));
 
 				$controller->add_user_trip($username, $trip);
 			}
