@@ -1,4 +1,5 @@
 head.ready(function(){
+	$.ajaxSetup({cache: false});
 
 	$("section#timeline article a.twitter").click(function(e){
 		href_ = $(this).attr('href');
@@ -100,10 +101,10 @@ head.ready(function(){
 	//atualiza os checkins com dados de pais, estado e cidade.	
 	Geo.update_placemarks();
 	
-	FB.api('/me', function(response) {
-		page_ = $('div#page').attr('class');
-	  $('head title').text(response.name + ' - ' + page_);
-	});
+	// FB.api('/me', function(response) {
+	// 		page_ = $('div#page').attr('class');
+	// 	  $('head title').text(response.name + ' - ' + page_);
+	// 	});
 
 });
 
