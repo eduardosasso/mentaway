@@ -21,6 +21,9 @@ abstract class AbstractService {
 
 			$db->save($document);
 
+			Log::write("antes de tentar fazer o geo-reverso");
+			Log::write(print_r($document, 1));
+			
 			if (isset($document->country) && !empty($document->country)) {
 				Log::write("nao tem pais");
 				Log::write(print_r($document, 1));
@@ -50,7 +53,7 @@ abstract class AbstractService {
 
 					$trip->status = $status;
 					
-					Log::write("Antes de salvar a trip");
+					Log::write("Antes de salvar a tripG");
 					Log::write(print_r($trip, 1));
 
 					$controller->add_user_trip($username, $trip);
