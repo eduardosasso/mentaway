@@ -22,7 +22,7 @@ if ($docid) {
 
 		$username = $doc->user;
 
-		$db->get()->storeDoc($doc);
+		$controller->save($doc);
 				
 		//depois de salvar o geo tenta atualizar o stats do user.
 		// $trip = $controller->get_current_trip($username);

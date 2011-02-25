@@ -22,13 +22,13 @@ class Friend {
 			return $friends['data'];
 			
 		} catch (Exception $e) {
-			error_log($e->getMessage());
+			Log::write($e->getMessage());
 		}
 	}
 	
 	public function follow_facebook_friends($username){
 		$fb_friends = $this->find_facebook_friends($username);
-		$this->follow_friends($username, $fb_friends,'facebook');		
+		$this->follow_friends($username, $fb_friends);		
 	}
 	
 	public function find_mutual_friends($username){
@@ -55,7 +55,7 @@ class Friend {
 		return $mutual_friends;
 	}
 	
-	private function follow_friends($username, $friend_list, $servicename){
+	private function follow_friends($username, $friend_list){
 		$controller = new Controller();
 		$user = $controller->get_user($username);
 		
@@ -64,13 +64,14 @@ class Friend {
 			$friends = $user->friends;
 		}
 		
+		//percorre lista de amigos do fb para achar amigos no mentaway
 		foreach ($friend_list as $value) {
-			if ($servicename == 'facebook') {
-				$friend_id = $value['id'];
-			}			
+			$friend_id = $value['id'];
+						
 			//procura o amigo do facebook no mentaway
 			$friend = $controller->get_user($friend_id);
 			
+			//se achou um amigo do facebook nomentaway entao segue...
 			if ($friend) {
 				//faz o meu amigo me seguir tb
 				$me = $username;

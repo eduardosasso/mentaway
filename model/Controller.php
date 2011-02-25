@@ -324,7 +324,7 @@ class Controller {
 		//logo que criou o user manda uma tarefa para o queue ver se ele tem algum checkin no places...
 		Queue::add('facebook_places_worker', $fb_user_['id']);		
 		
-		return $this->get_user_by_id($saved_user->id);
+		return $this->get_user_by_id($fb_user_['id']);
 	}
 
 	function save($doc) {

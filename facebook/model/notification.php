@@ -76,9 +76,12 @@ public static function inc_counter($username, $friends = true) {
 		$controller = new Controller();
 		$user = $controller->get_user($username);
 		
-		foreach ($user->friends as $friend) {
-			Notification::set_fb_counter($friend,1);
+		if (isset($user->friends)) {
+			foreach ($user->friends as $friend) {
+				Notification::set_fb_counter($friend,1);
+			}
 		}
+		
 	} else {
 		Notification::set_fb_counter($username,1);
 	}	
