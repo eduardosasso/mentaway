@@ -26,42 +26,47 @@ if ($docid) {
 				
 		//depois de salvar o geo tenta atualizar o stats do user.
 		// $trip = $controller->get_current_trip($username);
-		// 
-		// 		if (isset($doc->country) && !empty($doc->country)) {
-		// 
-		// 			if (!isset($trip->name)) {
-		// 				$trip->name = 'My Trip';
-		// 			}
-		// 
-		// 			if (!isset($trip->_id)) {
-		// 				$trip->_id = 'trip';
-		// 			}
-		// 			
-		// 			if (empty($status)) {
-		// 				$status->cities = array();
-		// 				$status->states = array();
-		// 				$status->countries = array();
-		// 			} else {
-		// 				$status->cities = (array)$status->cities;
-		// 				$status->states = (array)$status->states;
-		// 				$status->countries = (array)$status->countries;
-		// 			}
-		// 
-		// 			if (in_array($doc->country, $status->countries) == false) {
-		// 
-		// 				$status->cities[] = $doc->city;
-		// 				$status->states[] = $doc->state;
-		// 				$status->countries[] = $doc->country;
-		// 
-		// 				$Gstatus->cities = array_unique($status->cities);
-		// 				$status->states = array_unique($status->states);
-		// 				$status->countries = array_unique($status->countries);
-		// 
-		// 				$trip->status = $status;
-		// 
-		// 				$controller->add_user_trip($username, $trip);
-		// 			}
-		// 		}
+		if (isset($doc->country) && !empty($doc->country)) {
+			
+			$trip = $controller->get_current_trip($username);
+
+			if (!isset($trip->name)) {
+				$trip->name = 'My Trip';
+			}
+
+			if (!isset($trip->_id)) {
+				$trip->_id = 'trip';
+			}
+			
+			if (isset($trip->status)) {
+				$status = $trip->status;
+			}
+
+			if (empty($status)) {
+				$status->cities = array();
+				$status->states = array();
+				$status->countries = array();
+			} else {
+				$status->cities = (array)$status->cities;
+				$status->states = (array)$status->states;
+				$status->countries = (array)$status->countries;
+			}
+
+			if (in_array($doc->country, $status->countries) == false) {
+
+				$status->cities[] = $doc->city;
+				$status->states[] = $doc->state;
+				$status->countries[] = $doc->country;
+
+				$Gstatus->cities = array_unique($status->cities);
+				$status->states = array_unique($status->states);
+				$status->countries = array_unique($status->countries);
+
+				$trip->status = $status;
+
+				$controller->add_user_trip($username, $trip);
+			}
+		}
 		
 	} catch (Exception $e) {
 		Log::write($e->getMessage());

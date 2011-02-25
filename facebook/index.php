@@ -11,8 +11,7 @@
 	<link rel="stylesheet" href="<?php echo Helper::auto_version('/facebook/css/facebook.css') ?>">
 	<link rel="stylesheet" href="/facebook/css/google-wave-scroll.css" type="text/css" media="screen" charset="utf-8" />
   <link rel="stylesheet" href="/facebook/js/facebox/facebox.css">
-	<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
-	<script src="http://maps.google.com/maps/api/js?libraries=adsense&sensor=false"></script>	
+	<script src="http://maps.google.com/maps/api/js?libraries=adsense&sensor=false&language=en"></script>	
 	<script>
 		head.js("https://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js",
 						"/facebook/js/less-1.0.41.min.js",
