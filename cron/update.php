@@ -20,6 +20,8 @@ foreach ($users as $user) {
 		$service_name = $service->_id . '_worker';		
 		Queue::add($service_name, $username);
 	}
+	
+	//Queue::add('stats_worker', $username);
 }
 
 ?>

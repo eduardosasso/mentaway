@@ -7,7 +7,7 @@ class FoursquareTest extends PHPUnit_Framework_TestCase {
 			$db = DatabaseFactory::get_provider();
 			$controller = new Controller();
 			
-			$username = '1335915461';
+			$username = '631466850';
 					
 			//$service = $controller->get_user_service($username, 'foursquare');
 			

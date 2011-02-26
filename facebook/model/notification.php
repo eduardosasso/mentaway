@@ -41,28 +41,29 @@ class Notification {
 }
 
 private static function set_fb_counter($username, $count) {
+	//faz direto via curl a chamada para tentar ser o mais rapido possivel.
 	try {
+
 		$key_secret = Settings::get_facebook_oauth_key();
 
-		$facebook = new Facebook(array(
-			'appId' => $key_secret[0],
-			'secret' => $key_secret[1],
-			'cookie' => true
-			));
+		$key = $key_secret[0];
+		$token = $key_secret[1];
 
-		$controller = new Controller();
-		$user = $controller->get_user($username);
+		$url = "https://api.facebook.com/method/dashboard.setCount?uid=$username&count=$count&api_key=$key&format=json-strings&access_token=$key|$token";
 
-		$facebook->api(array(
-			'method' => 'dashboard.setCount',
-			'uid' => $user->_id,
-			'count' => $count,
-			'access_token' => $user->token
-			));	
+		$ch = curl_init();
+
+		curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_FRESH_CONNECT, true);
+		curl_setopt($ch, CURLOPT_NOBODY, true);
+
+		curl_exec($ch);
+		curl_close($ch);
+
 	} catch (Exception $e) {
-		//Log::write($e->getMessage());
+		Log::write($e->getMessage());
 	}
-	
+
 }
 
 //zera o contador ao lado do icone da app no fb

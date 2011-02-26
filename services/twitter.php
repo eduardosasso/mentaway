@@ -35,7 +35,9 @@ if ($oauth_token) {
 	}
 
 	// Twitter::follow_mentaway($username);	
-	// 	Twitter::shout($username,"I just added Twitter to my @mentaway account. http://goo.gl/Sggu5");
+	// Twitter::shout($username,"I just added Twitter to my @mentaway account. http://goo.gl/Sggu5");
+	
+	Queue::add('twitter_worker', $username);
 
 	header("Location: http://apps.facebook.com/mentaway/settings");	
 

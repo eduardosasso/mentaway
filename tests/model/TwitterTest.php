@@ -13,7 +13,7 @@ class TwitterTest extends PHPUnit_Framework_TestCase {
 		Twitter::shout($username,"Testing twitter from @mentaway");
 	}
 
-		public function xxxtest_get_updates() {
+		public function test_get_updates() {
 			// $db = DatabaseFactory::get_provider();
 			// 
 			// $db->clean_database();
@@ -33,7 +33,7 @@ class TwitterTest extends PHPUnit_Framework_TestCase {
 			$placemarks = $twitter->validate($username);			
 		}	
 		
-		public function test_twitpic_replace() {
+		public function xtest_twitpic_replace() {
 			$pattern = "/(http:\/\/twitpic.com\/(\w+))/";
 			$ygrog =	"(http:\/\/yfrog.com\/(\w+))";
 			$plixi = "(http:\/\/plixi.com\/.+\/(\w+))";

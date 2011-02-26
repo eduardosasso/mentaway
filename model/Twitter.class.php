@@ -23,8 +23,9 @@ class Twitter extends AbstractService {
 		try {
 			$twitter = new EpiTwitter($consumer_key, $consumer_secret, $service->token, $service->secret);
 
+			//$tweets = $twitter->get('/statuses/user_timeline.json', array("count"=>"200"));
 			$tweets = $twitter->get('/statuses/user_timeline.json');
-
+			
 			$placemarks = array();
 			$pattern = '/#mentaway/';
 			$pattern_short = '/#m/';
@@ -98,17 +99,8 @@ class Twitter extends AbstractService {
 			return $placemarks;
 		} catch (Exception $e) {
 			//echo $e->getMessage();
-			/*
-				TODO por algum motivo nao conseguiu pegar o twitter... identificar melhor, talvez removendo a autorizacao da conta para testar o erro
-				//usuarios arasmus - EpiTwitterNotAuthorizedException
-			*/
+			Log::write("Erro recuperando twitter - usuario $username");
 			
-			/*
-				TODO usar uma funcao log generica para poder plugar diferentes tipos de log.
-			*/
-			error_log("Erro recuperando twitter - usuario $username", 0);
-			
-			return;
 		}
 	}
 

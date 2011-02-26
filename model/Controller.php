@@ -185,6 +185,12 @@ class Controller {
 		$users = $db->get_all_users();
 		return $users;
 	}
+	
+	function get_doc($docid){
+		$db = DatabaseFactory::get_provider();
+		$doc = $db->get()->getDoc($docid);
+		return $doc;
+	}
 		
 	function get_user($username){
 		$db = DatabaseFactory::get_provider();
@@ -326,6 +332,14 @@ class Controller {
 		
 		return $this->get_user_by_id($fb_user_['id']);
 	}
+	
+	function save_user_friends($username, $friends) {
+		$user = $this->get_user($username);
+		
+		$user->friends = array_unique(array_merge((array)$user->friends, array_unique((array)$friends)));
+		$this->save($user);
+	}
+	
 
 	function save($doc) {
 		$db = DatabaseFactory::get_provider();

@@ -1,28 +1,33 @@
 <?php
-error_reporting(E_ALL);
+//Arquivo chamado pelo facebook quando um usuario desinstala a aplicacao
+
 ini_set('display_errors', TRUE);
 ini_set('display_startup_errors', TRUE);
 
-// include realpath($_SERVER["DOCUMENT_ROOT"]) . '/classes.php';
-// 
-// $key_secret = Settings::get_facebook_oauth_key();
-// 
-// $facebook = new Facebook(array(
-// 	'appId' => $key_secret[0],
-// 	'secret' => $key_secret[1],
-// 	'cookie' => true,
-// 	));
-// 
-// $data = $facebook->getSignedRequest();
+include realpath($_SERVER["DOCUMENT_ROOT"]) . '/classes.php';
 
-/*
-	TODO setar atributo active do user para false
-*/
+try {
+	$key_secret = Settings::get_facebook_oauth_key();
 
-/*
-	TODO aqui ou tem que remover o usuario ou setar um flag dizendo q ele ta desabilitado.
-*/
-error_log('removeu do facebook <pre>'.print_r($_REQUEST, 1).'</pre>');
-echo "aqui";
+	$facebook = new Facebook(array(
+		'appId' => $key_secret[0],
+		'secret' => $key_secret[1],
+		'cookie' => true,
+		));
+
+	$data = $facebook->getSignedRequest();
+	$username = $data['user_id'];
+
+	//remove todos os placemarks do usuario e o proprio user na sequencia.
+	$db = DatabaseFactory::get_provider();
+	$db->clean_database_user($username);
+
+	$user = $db->get()->getDoc($username);
+	$db->get()->deleteDoc($user);	
+} catch (Exception $e) {
+	Log::write($e->getMessage());
+	
+}
+
 
 ?>

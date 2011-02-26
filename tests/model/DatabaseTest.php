@@ -19,8 +19,8 @@ class DatabaseTest extends PHPUnit_Framework_TestCase {
 			}
 		}
 		
-		public function xxtest_inc_counter(){
-			$uid = "1335915461";
+		public function test_inc_counter(){
+			$uid = "631466850";
 			
 			Notification::inc_counter($uid);
 			
@@ -191,7 +191,6 @@ class DatabaseTest extends PHPUnit_Framework_TestCase {
 			
 		}
 		
-		
 		public function xtest_remove_user_service(){
 			$username = 'abduzeedo';
 			$service_id = 'twitter';
@@ -203,12 +202,12 @@ class DatabaseTest extends PHPUnit_Framework_TestCase {
 			print_r($response);
 		}
 		
-		public function test_clean_database() {
+		public function xtest_clean_database() {
 			$db = DatabaseFactory::get_provider();
 			$db->clean_database();
 		}
 		
-		public function xtest_clean_database_user(){
+		public function test_clean_database_user(){
 			$username = '631466850';
 			$db = DatabaseFactory::get_provider();
 			$db->clean_database_user($username);

@@ -2,7 +2,6 @@
 include realpath($_SERVER["DOCUMENT_ROOT"]) . '/classes.php';
 
 abstract class AbstractService {
-	private $notified = false;
 	//deve retornar um array do objeto placemarks...
 	abstract protected function get_updates($username);
 
@@ -20,14 +19,9 @@ abstract class AbstractService {
 			$document->fullname = $user->fullname;
 
 			$db->save($document);
-
-			if ($this->notified == false) {
-				//Log::write("$username - inc do contador");
-				//notifica os amigos desse usuario q ele tem novidades.
-				//so entra aqui 1 vez por servico quando tem novidade para ser mais rapido. 
-				Notification::inc_counter($username);
-				$this->notified == true;
-			}
+			
+			//coloca notificacao no fb para os amigos desse user.
+			Queue::add('notification_worker', $username);
 
 		} catch (Exception $e) {			
 			Log::write($e->getMessage());

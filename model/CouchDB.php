@@ -18,11 +18,20 @@ class CouchDB implements DatabaseInterface {
 	}
 	
 	public function save($document) {
-		unset($document->_deleted_conflicts);
-		
-		$response = $this->db->storeDoc($document);
-		
-		return $response;
+		try {
+			unset($document->_deleted_conflicts);
+			$response = $this->db->storeDoc($document);			
+			return $response;
+		} catch (Exception $e) {
+			//se deu conflict update entao tenta recuperar a ultima versao do doc e salva novamente
+			if ($e->getCode() == 409) {
+				$doc_last_rev = $this->db->getDoc($document->_id);
+				$document->_rev = $doc_last_rev->_rev;
+
+				$this->save($document);
+			}
+		}
+
 	}
 	
 	public function get_placemarks($user, $limit = 100) {
@@ -158,13 +167,15 @@ class CouchDB implements DatabaseInterface {
 	
 	public function get_view($design_document, $view_name, $key) {
 		if (!empty($key)) {
-			$result = $this->db->key($key)->getView($design_document, $view_name);	
-			return $result;
-		} elseif ($view_name == 'reverse_geo' || $view_name == 'all') {
-			//se for essa view abre uma excecao e deixa recuperar via ajax sem key.
-			$result = $this->db->getView($design_document, $view_name);	
-			return $result;
-		}
+			$result = $this->db->key($key)->getView($design_document, $view_name);
+			
+			//se ele chamou o geo_reverso via ajax primeiro vai tentar paro o usuario autenticado
+			//se não achar dai faz para outros users q precisam fazer geo reverso
+			if ($view_name == 'reverse_geo' && count($result->rows) == 0) {
+				$result = $this->db->getView($design_document, $view_name);	
+			}			
+			return $result;	
+		}	
 	}
 	
 	//tenta achar um usuario que usava a versao antiga atraves do token de algum servico
