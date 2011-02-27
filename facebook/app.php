@@ -1,5 +1,7 @@
 <?php
 
+try {
+	
 $controller = new Controller();
 $user_id = $session['uid'];
 
@@ -73,6 +75,10 @@ if ($controller->is_user($user_id)) {
 	$username = $user->_id;
 
 	$page = "settings";	
+}
+
+} catch (Exception $e) {
+	echo $e->getMessage();
 }
 
 ?>

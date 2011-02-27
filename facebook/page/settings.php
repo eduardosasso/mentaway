@@ -10,8 +10,9 @@ $flickr_active = ($controller->get_user_service($username, 'flickr') ? 'active' 
 	<header>
 		<h1>Services synchronization</h1>
 		<div>
-			<p>Configure the services you want integrate to Mentaway.<br />
-			This step is optional. If you don't add any service you can still see your friend's timeline.</p>
+			<p>Configure the services you want to integrate with Mentaway.<br />
+			This step is optional. But if you don't add any services we can't discover the places you've visited.<br \>
+			Either way you will always see your friend's timeline.</p>
 		</div>
 		
 		

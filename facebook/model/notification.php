@@ -23,22 +23,31 @@ class Notification {
 	}	
 
 	public static function get($uid, $page){
-		$db = DatabaseFactory::get_provider();
+		try {
+			$db = DatabaseFactory::get_provider();
 
-		//sintaxe para recuperar as mensagens de um usuario ordenados pela mais recente.
-		$startkey = array("$uid", "$page", array());
-		$endkey= array("$uid", "$page");
-		$messages = $db->get()->descending(true)->startkey($startkey)->endkey($endkey)->getView('notification','user');
+			//sintaxe para recuperar as mensagens de um usuario ordenados pela mais recente.
+			$startkey = array("$uid", "$page", array());
+			$endkey= array("$uid", "$page");
+			$messages = $db->get()->descending(true)->startkey($startkey)->endkey($endkey)->getView('notification','user');
 
-		Notification::update_or_remove($messages);
+			Notification::update_or_remove($messages);
 
-	if (count($messages->rows) > 0) {
-		return $messages->rows;
+			if (count($messages->rows) > 0) {
+				return $messages->rows;
+			}
+			
+		} catch (Exception $e) {
+			Log::write($e->getMessage());
+			//aqui vai cair se for geralmente um erro de bd, dai mostra uma mensagem basica
+			$message->value->format = 'error';
+			$message->value->body = '<p><strong>Wow. That was unexpected.</strong></p><p>Something has happened and we are working to fix it. We really sorry for that.</p>';
+			return array($message);
+		}
+
+		return array();
+
 	}
-	
-	return array();
-
-}
 
 private static function set_fb_counter($username, $count) {
 	//faz direto via curl a chamada para tentar ser o mais rapido possivel.

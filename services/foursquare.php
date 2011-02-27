@@ -56,6 +56,14 @@ try {
 
 } catch (Exception $e) {
 	Log::write($e->getMessage());
+
+	$message = new Message();
+	$message->page = 'settings';
+	$message->uid = $username;
+	$message->format = 'error';
+	$message->body = '<p>There was an error adding Foursquare. Please try again, and don\'t hesitate to contact us if it happens again.</p>';
+	Notification::add($message);
+	
 	header("Location: http://apps.facebook.com/mentaway/settings");	
 }
 

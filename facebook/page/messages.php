@@ -4,7 +4,7 @@ $messages = Notification::get($username, $page);
 
 <div id="messages">
 <?php foreach ($messages as $key => $message): ?>
-	<?php if ($message->value->persistent && $session['uid'] == $user_id): ?>
+	<?php if (($message->value->persistent && $session['uid'] == $user_id) || $message->value->format == 'error'): ?>
 		<div class="message <?php echo $message->value->format ?>" id="<?php echo $message->value->_id ?>">
 			<div class="close">
 				<a href="#" class="close">

@@ -210,16 +210,22 @@ class Controller {
 	
 	//retorna detalhes de acesso ao servico
 	function get_user_service($username, $servicename){
-		$db = DatabaseFactory::get_provider();
-		$user = $db->get_user($username);
-		
-		foreach ($user->services as $service) {
-			if ($service->_id == $servicename) {
-				return $service;
+		try {
+			$db = DatabaseFactory::get_provider();
+			$user = $db->get_user($username);
+
+			if (isset($user->services)== false) {
+				return;
 			}
-		}		
-		
-		return null;
+			
+			foreach ($user->services as $service) {
+				if ($service->_id == $servicename) {
+					return $service;
+				}
+			}
+		} catch (Exception $e) {
+
+		}
 	}
 	
 	function remove_user_service($username, $service_id) {
