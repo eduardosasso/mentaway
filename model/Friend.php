@@ -28,32 +28,11 @@ class Friend {
 	
 	public function follow_facebook_friends($username){
 		$fb_friends = $this->find_facebook_friends($username);
-		$this->follow_friends($username, $fb_friends);
-		//Queue::add('stats_worker', $username);
-	}
-	
-	public function find_mutual_friends($username){
-		$fb_friends = $this->find_facebook_friends($username);
-		
-		$controller = new Controller();
-		$user = $controller->get_user($username);
-		
-		$mutual_friends = array();
-		
-		foreach ($fb_friends as $value) {
-			echo "<pre>";
-			print_r($value['id']);
-			echo "</pre>";
-			// //procura o amigo do facebook no mentaway
-			// 			$friend = $controller->get_user($value['id']);
-			// 			if ($friend) {
-			// 				$mutual_friends[] = $friend->fullname;
-			// 				echo $friend->fullname;
-			// 
-			// 			}
-		}	
-		
-		return $mutual_friends;
+
+		if (count((array)$fb_friends) > 0 ) {
+			$this->follow_friends($username, $fb_friends);
+		}
+
 	}
 	
 	private function follow_friends($username, $friend_list){
@@ -68,24 +47,13 @@ class Friend {
 			//procura o amigo do facebook no mentaway
 			$friend = $controller->get_user($friend_id);
 			
-			//se achou um amigo do facebook nomentaway entao segue...
 			if ($friend) {
-				//faz o meu amigo me seguir tb
-				$me = $username;
-				
-				$friend_obj = $friend;
-				if (isset($friend_obj->friends)) {
-					$friend_friends = $friend_obj->friends;
-				}
-				
-				$friend_friends[] = $me;
-				$friend_friends = array_unique($friend_friends);
-				
-				$controller->save_user_friends($friend_obj->_id, $friend_friends);
-				
-				$this->update_placemarks($friend_obj->_id, $friend_friends);
-				
+				//se achou um amigo do facebook no mentaway entao segue...
 				$friends[] = $friend->_id;
+				
+				//faz o meu amigo me seguir tb
+				$me = $username;				
+				$this->save_user_friends($friend->_id, array($me));
 			}
 		}
 		
@@ -95,26 +63,62 @@ class Friend {
 		//loops no placemarks de cada amigo
 		//atualiza o timeline com os novos amigos
 		
-		$controller->save_user_friends($username, $friends);	
-		
-		//rodar como worker, atualizar o placemark um de cada vez.
-		$this->update_placemarks($username, $friends);
+		$this->save_user_friends($username, $friends);	
 	}
 	
-	public function update_placemarks($username, $friends) {
+	//quando um usuario desinstala a app do facebook, retira ele de amigo dos seus amigos
+	public function unfollow_me($username) {
+		$controller = new Controller();
+		$user = $controller->get_user($username);
+
+		foreach ($user->friends as $friend) {
+			$friend_user = $controller->get_user($friend);
+			
+			$friend_old_friends = array();
+			foreach ($friend_user->friends as $old_friend) {
+				if ($old_friend != $username) {
+					$friend_old_friends[] = $old_friend;
+				}			
+			}
+			
+			$friend_user->friends = $friend_old_friends;
+			
+			$controller->save_user($friend_user);
+			
+		}
 		
+	}
+	
+	public function update_placemarks($username) {
 		//atualiza o placemark do usuario adicionando seus amigos na lista.
 		$controller = new Controller();
 		$placemarks = $controller->get_placemarks($username, 50);
-		
-		if (count($friends) > 0) {
-			foreach ($placemarks as $key => $placemark) {
-				$data = array("type"=>"friends", "friends" => $friends, "docid"=> $placemark->value->_id);
-				
-				Log::write(print_r($data, true));
-				
-				Queue::add('update_checkins_worker', $data);
-			}
+
+		foreach ($placemarks as $placemark) {
+			$data = array("type"=>"friends", "username" => $username, "docid"=> $placemark->value->_id);
+
+			Queue::add('update_checkins_worker', $data);
+		}
+
+	}
+	
+	private function save_user_friends($username, $friends) {
+		if (count((array)$friends) > 0) {
+			$controller = new Controller();
+			$user = $controller->get_user($username);
+			
+			//so inclui amigos novos
+			foreach ($friends as $friend) {
+				if (in_array($friend, (array)$user->friends) == false) {
+					//quando achar um amigo novo entra aqui uma vez so, e ai autiliza em lote pra ser mais rapido
+					$user->friends = array_values(array_unique(array_merge((array)$user->friends, (array)$friends)));
+					
+					$controller->save($user);
+
+					$this->update_placemarks($username);
+					return;
+				}
+			}			
 		}		
 	}
 	

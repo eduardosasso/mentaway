@@ -64,7 +64,7 @@ class Controller {
 	public function get_cities_list($username) {
 		try {
 			$user = $this->get_user($username);
-			$cities = $user->trips[0]->status->cities;
+			$cities = $user->cities;
 			return $cities;			
 		} catch (Exception $e) {
 		}
@@ -73,7 +73,7 @@ class Controller {
 	public function get_states_list($username) {
 		try {
 			$user = $this->get_user($username);
-			$states = $user->trips[0]->status->states;
+			$states = $user->states;
 			return $states;			
 		} catch (Exception $e) {
 		}
@@ -82,7 +82,7 @@ class Controller {
 	public function get_countries_list($username) {
 		try {
 			$user = $this->get_user($username);
-			$countries = $user->trips[0]->status->countries;
+			$countries = $user->countries;
 			return $countries;			
 		} catch (Exception $e) {			
 		}
@@ -332,14 +332,6 @@ class Controller {
 		
 		return $this->get_user_by_id($fb_user_['id']);
 	}
-	
-	function save_user_friends($username, $friends) {
-		$user = $this->get_user($username);
-		
-		$user->friends = array_unique(array_merge((array)$user->friends, array_unique((array)$friends)));
-		$this->save($user);
-	}
-	
 
 	function save($doc) {
 		$db = DatabaseFactory::get_provider();

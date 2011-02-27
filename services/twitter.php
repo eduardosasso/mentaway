@@ -3,21 +3,22 @@ session_start();
 
 include realpath($_SERVER["DOCUMENT_ROOT"]) . '/classes.php';
 
-$key_secret = Settings::get_twitter_oauth_key();
+try {
+	$key_secret = Settings::get_twitter_oauth_key();
 
-$consumer_key = $key_secret[0];
-$consumer_secret = $key_secret[1];
+	$consumer_key = $key_secret[0];
+	$consumer_secret = $key_secret[1];
 
-$twitterObj = new EpiTwitter($consumer_key, $consumer_secret);
+	$twitterObj = new EpiTwitter($consumer_key, $consumer_secret);
 
-//se o token vier populado significa que eh o callback do oauth
-$oauth_token = $_GET['oauth_token'];
-if ($oauth_token) {
-	$username = $_SESSION['username'];
+	//se o token vier populado significa que eh o callback do oauth
+	$oauth_token = $_GET['oauth_token'];
+	if ($oauth_token) {
+		$username = $_SESSION['username'];
 
-	$controller = new Controller();
+		$controller = new Controller();
 
-	try {
+
 		$twitterObj->setToken($oauth_token);
 
 		$token = $twitterObj->getAccessToken();
@@ -29,26 +30,29 @@ if ($oauth_token) {
 		$service->secret = $token->oauth_token_secret;
 
 		$response = $controller->add_user_service($username, $service);
+		// Twitter::follow_mentaway($username);	
+		// Twitter::shout($username,"I just added Twitter to my @mentaway account. http://goo.gl/Sggu5");
 
-	} catch (Exception $e) {
-		Log::write($e->getMessage());
+		Queue::add('twitter_worker', $username);
+
+		header("Location: http://apps.facebook.com/mentaway/settings");	
+
+	} else {
+		if ($action == 'add') {
+			$_SESSION['username'] = $username;
+
+			$oauth_url = $twitterObj->getAuthenticateUrl();
+
+			header("Location: $oauth_url");	
+		}	
 	}
 
-	// Twitter::follow_mentaway($username);	
-	// Twitter::shout($username,"I just added Twitter to my @mentaway account. http://goo.gl/Sggu5");
-	
-	Queue::add('twitter_worker', $username);
+} catch (Exception $e) {
+	Log::write($e->getMessage());
+	//colocar um mensagem de erro como notificacao.
+	header("Location: http://apps.facebook.com/mentaway/settings");
 
-	header("Location: http://apps.facebook.com/mentaway/settings");	
-
-} else {
-	if ($action == 'add') {
-		$_SESSION['username'] = $username;
-
-		$oauth_url = $twitterObj->getAuthenticateUrl();
-
-		header("Location: $oauth_url");	
-	}	
 }
+
 
 ?>

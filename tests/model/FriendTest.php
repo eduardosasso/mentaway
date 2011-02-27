@@ -5,12 +5,15 @@ include realpath($_SERVER["DOCUMENT_ROOT"]) . '/classes.php';
 class FriendTest extends PHPUnit_Framework_TestCase {
 	public function test_follow_friends(){
 		$username = '631466850';
+		//$username = '1106857050';
+		
 		
 		// $controller = new Controller();
 		// 		$user = $controller->get_user($username);
 		// 		
 		$friend = new Friend();
 		$friend->follow_facebook_friends($username);
+		//$friend->unfollow_me($username);
 		//$friend->update_placemarks($user);
 	}
 	
@@ -27,7 +30,7 @@ class FriendTest extends PHPUnit_Framework_TestCase {
 		// echo "</pre>";
 		
 	}
-	
+
 }	
 	
 ?>

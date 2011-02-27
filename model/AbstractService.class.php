@@ -10,19 +10,20 @@ abstract class AbstractService {
 		try {
 			$db = DatabaseFactory::get_provider();
 
-			$user = $db->get_user($username);
-
-			if (isset($user->friends)) {
-				$document->friends = $user->friends;
-			}
-
-			$document->fullname = $user->fullname;
-
-			$db->save($document);
+			$has_doc = $db->get_doc($document->_id);
 			
-			//coloca notificacao no fb para os amigos desse user.
-			Queue::add('notification_worker', $username);
+			//quando recupera novos docs so tenta incluir se esse id não esta no banco
+			if ($has_doc == false) {
+				$user = $db->get_user($username);
 
+				if (isset($user->friends)) {
+					$document->friends = $user->friends;
+				}
+
+				$document->fullname = $user->fullname;
+
+				$db->save($document);
+			}
 		} catch (Exception $e) {			
 			Log::write($e->getMessage());
 		}

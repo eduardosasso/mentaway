@@ -71,21 +71,32 @@ public static function clean_counter($username) {
 	Notification::set_fb_counter($username,0);
 }
 
-//inc no contador do fb para o user ou para os amigos dele, sinalizando novidades
-public static function inc_counter($username, $friends = true) {
-	if ($friends) {
-		$controller = new Controller();
-		$user = $controller->get_user($username);
+public static function inc_counter($username) {
+	//faz direto via curl a chamada para tentar ser o mais rapido possivel.
+	try {
+
+		$key_secret = Settings::get_facebook_oauth_key();
+
+		$key = $key_secret[0];
+		$token = $key_secret[1];
+
+		$url = "https://api.facebook.com/method/dashboard.incrementCount?uid=$username&api_key=$key&format=json-strings&access_token=$key|$token";
 		
-		if (isset($user->friends)) {
-			foreach ($user->friends as $friend) {
-				Notification::set_fb_counter($friend,1);
-			}
-		}
-		
-	} else {
-		Notification::set_fb_counter($username,1);
-	}	
+		echo "$url";
+
+		$ch = curl_init();
+
+		curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_FRESH_CONNECT, true);
+		curl_setopt($ch, CURLOPT_NOBODY, true);
+
+		curl_exec($ch);
+		curl_close($ch);
+
+	} catch (Exception $e) {
+		Log::write($e->getMessage());
+	}
+
 }
 
 

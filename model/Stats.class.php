@@ -9,22 +9,6 @@ class Stats extends AbstractService {
 		const COUNTRY = 3;		
 
 		public function get_updates($username){
-			$controller = new Controller();
-
-			$trip = $controller->get_current_trip($username);
-
-			/*
-				TODO se a trip do cara ta quebrada seta alguns defaults para ele na hora de atualizar os stats
-				como vamos revisar a necessidade de trips isso quebra o galho
-			*/
-			if (!isset($trip->name)) {
-				$trip->name = 'My Trip';
-			}
-
-			if (!isset($trip->_id)) {
-				$trip->_id = 'trip';
-			}
-
 			//pega so os placemarks do user q estao sem o geocode reverso
 			$db = DatabaseFactory::get_provider();
 			$placemarks = $db->get()->key($username)->getView('placemark','reverse_geo');
@@ -33,28 +17,16 @@ class Stats extends AbstractService {
 				return;
 			}	
 
-			$trip->status = $this->update_trip_status($trip, $placemarks->rows);
-
-			$controller->add_user_trip($username, $trip);
+			$this->update_trip_status($username, $placemarks->rows);
 
 		}	
 
-		public function update_trip_status($trip, $placemarks){
-			$db = DatabaseFactory::get_provider();
-
-			if (isset($trip->status)) {
-				$status = $trip->status;
-			}
-
-			if (empty($status)) {
-				$status->cities = array();
-				$status->states = array();
-				$status->countries = array();
-			} else {
-				$status->cities = (array)$status->cities;
-				$status->states = (array)$status->states;
-				$status->countries = (array)$status->countries;
-			}
+		public function update_trip_status($username, $placemarks){
+			$controller = new Controller();
+			
+			$cities = array();
+			$states = array();
+			$countries = array();
 
 			foreach ($placemarks as $key => $placemark) {
 				$lat = $placemark->value->lat;
@@ -72,28 +44,30 @@ class Stats extends AbstractService {
 
 						switch ($address_type) {
 							case self::CITY:
-							$status->cities[] = $name;
+							$cities[] = $name;
 							$placemark->value->city = $name;
 							break;
 							case self::STATE:
-							$status->states[] = $name;
+							$states[] = $name;
 							$placemark->value->state = $name;
 							break;
 							case self::COUNTRY:	
-							$status->countries[] = $name;
+							$countries[] = $name;
 							$placemark->value->country = $name;
 							break;
 						}
 					}					
-					$db->save($placemark->value);	
+					$controller->save($placemark->value);	
 				}
 			}
-
-			$status->cities = array_unique($status->cities);
-			$status->states = array_unique($status->states);
-			$status->countries = array_unique($status->countries);
-
-			return $status;			
+			
+			$user = $controller->get_user($username);
+			
+			$user->cities = array_unique(array_merge((array)$user->cities, (array)$cities));
+			$user->states = array_unique(array_merge((array)$user->states, (array)$states));
+			$user->countries = array_unique(array_merge((array)$user->countries, (array)$countries));
+			
+			$controller->save($user);
 
 		}
 

@@ -21,6 +21,9 @@ foreach ($users as $user) {
 		Queue::add($service_name, $username);
 	}
 	
+	//procura novos amigos.
+	Queue::add('follow_friends_worker', $username);
+	
 	//Queue::add('stats_worker', $username);
 }
 

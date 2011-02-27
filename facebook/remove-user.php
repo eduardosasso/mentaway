@@ -17,6 +17,10 @@ try {
 
 	$data = $facebook->getSignedRequest();
 	$username = $data['user_id'];
+	
+	//faz meus amigos não me seguirem mais.
+	$friend = new Friend();
+	$friend->unfollow_me($username);
 
 	//remove todos os placemarks do usuario e o proprio user na sequencia.
 	$db = DatabaseFactory::get_provider();

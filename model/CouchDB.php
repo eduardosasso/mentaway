@@ -20,12 +20,32 @@ class CouchDB implements DatabaseInterface {
 	public function save($document) {
 		try {
 			unset($document->_deleted_conflicts);
-			$response = $this->db->storeDoc($document);			
+			$response = $this->db->storeDoc($document);
+			
+			//se for um registro novo, e tiver amigos entao notifica eles q tem novidade
+			if (isset($document->_rev) == false && isset($document->friends) && count((array)$document->friends) > 0) {
+				Queue::add('notification_worker', $document->friends);
+			}
+						
 			return $response;
 		} catch (Exception $e) {
 			//se deu conflict update entao tenta recuperar a ultima versao do doc e salva novamente
 			if ($e->getCode() == 409) {
 				$doc_last_rev = $this->db->getDoc($document->_id);
+				
+				if ($document->lat) {
+					//se for um placemark e deu conflito ao salvar recupera a ultima revisao e faz um sync dos amigos
+					$document->friends = array_values(array_unique(array_merge((array)$doc_last_rev->friends, (array)$document->friends)));
+				} elseif ($document->fullname) {
+					//ta atualizando o usuario entao tem q preservar os stats e amigos
+					
+					$document->friends = array_values(array_unique(array_merge((array)$doc_last_rev->friends, (array)$document->friends)));
+					
+					$document->cities = array_values(array_unique(array_merge((array)$doc_last_rev->cities, (array)$document->cities)));
+					$document->states = array_values(array_unique(array_merge((array)$doc_last_rev->states, (array)$document->states)));
+					$document->countries = array_values(array_unique(array_merge((array)$doc_last_rev->countries, (array)$document->countries)));
+				}
+				
 				$document->_rev = $doc_last_rev->_rev;
 
 				$this->save($document);

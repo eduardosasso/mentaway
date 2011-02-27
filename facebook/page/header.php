@@ -5,10 +5,10 @@ $cities = $controller->get_cities_visited($user_id);
 $states = $controller->get_states_visited($user_id);
 $countries = $controller->get_countries_visited($user_id);
 
-$friends = count($user->friends);
+$friends = count((array)$user->friends);
 ?>
 
-<a href="/user/<?php echo $user_id; ?>" class="redirect"><img src="<?php echo $profile_picture ?>" class="profile"></a>
+<a href="/user/<?php echo $user_id; ?>" class="redirect"><img src="<?php echo $profile_picture ?>" class="profile" id="user_photo" data-uid="<?php echo $user_id; ?>"></a>
 
 <div class="stats">
 	<div>

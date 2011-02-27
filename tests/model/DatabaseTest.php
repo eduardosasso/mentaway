@@ -20,9 +20,31 @@ class DatabaseTest extends PHPUnit_Framework_TestCase {
 		}
 		
 		public function test_inc_counter(){
+			//$uid = "1335915461";
 			$uid = "631466850";
 			
-			Notification::inc_counter($uid);
+			//$friends = array("631466850", "1335915461");
+			
+			$controller = new Controller();
+			$user = $controller->get_user($uid);
+			
+			$user->_rev = "266-b8d414905ba427a8ab196c7e4d93c16e";
+			$user->friends[] = "1111111";
+			$res = $controller->save($user);
+			
+			
+			//$user->friends = array_unique(array_merge((array)$user->friends, array("4444444")));
+			
+			var_dump($res);
+			
+			//$controller->save_user($user);
+						
+			
+			//Queue::add('notification_worker', $friends);
+			
+			
+			
+			//Notification::inc_counter($uid);
 			
 			// $key_secret = Settings::get_facebook_oauth_key();
 			// 
@@ -207,7 +229,7 @@ class DatabaseTest extends PHPUnit_Framework_TestCase {
 			$db->clean_database();
 		}
 		
-		public function test_clean_database_user(){
+		public function xtest_clean_database_user(){
 			$username = '631466850';
 			$db = DatabaseFactory::get_provider();
 			$db->clean_database_user($username);

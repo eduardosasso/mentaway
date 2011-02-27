@@ -8,7 +8,7 @@ class Twitter_Worker extends Worker {
 		$twitter = new Twitter();		
 		$twitter->get_updates($username);
 		
-		Queue::add('stats_worker', $username);
+		//Queue::add('stats_worker', $username);
 	}
 }
 

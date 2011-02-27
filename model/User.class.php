@@ -11,6 +11,9 @@ class User {
 	public $services = array(); 
 	public $trips = array();
 	public $friends = array();
+	public $cities = array();
+	public $states = array();
+	public $countries = array();
 	
 	function set_service(Service $service) {
 		$this->services[] = $service;

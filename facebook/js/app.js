@@ -1,7 +1,7 @@
 head.ready(function(){
 	$('a#states, #states_stats_btn').click(function(){
 		get_db_view("users", "stats", $(this).attr('data-uid'), function(data){
-			states_ = data.rows[0].value.states;
+			states_ = data.rows[0].value[1];
 			//pega os valores do objeto e converte em array. via underscore.js
 			states_ = _.values(states_);
 			
@@ -26,7 +26,7 @@ head.ready(function(){
 	
 	$('a#cities, #cities_stats_btn').click(function(){
 		get_db_view("users", "stats", $(this).attr('data-uid'), function(data){
-			cities_ = data.rows[0].value.cities;
+			cities_ = data.rows[0].value[2];
 			//pega os valores do objeto e converte em array. via underscore.js
 			cities_ = _.values(cities_);
 			
@@ -51,7 +51,7 @@ head.ready(function(){
 	
 	$('a#countries, #countries_stats_btn').click(function(){
 		get_db_view("users", "stats", $(this).attr('data-uid'), function(data){
-			countries_ = data.rows[0].value.countries;
+			countries_ = data.rows[0].value[0];
 			//pega os valores do objeto e converte em array. via underscore.js
 			countries_ = _.values(countries_);
 			

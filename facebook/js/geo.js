@@ -3,24 +3,24 @@ var Geo = {
 	geocoder: new google.maps.Geocoder(),
 	
 	update_placemarks: function(){
+		uid_ = $('#user_photo').attr('data-uid');
+		//console.log(uid_);
 		//recupera checkins que não tem pais, estado, cidade
-		FB.api('/me', function(me) {
-			get_db_view("placemark", "reverse_geo", me.id, function(data){
-				idx = 0;
-				for (var start = 1; start <= data.total_rows; start++) {
-					//espera 1seg a cada iteracao para não receber OVER_QUERY_LIMIT do gmap
-					_.delay(function(){
-						i_ = idx++;
+		get_db_view("placemark", "reverse_geo", uid_, function(data){
+			idx = 0;
+			for (var start = 1; start <= data.total_rows; start++) {
+				//espera 1seg a cada iteracao para não receber OVER_QUERY_LIMIT do gmap
+				_.delay(function(){
+					i_ = idx++;
 
-						lat_ = data.rows[i_].value.lat;
-						long_ = data.rows[i_].value.long;
-						id_ = data.rows[i_].id;
+					lat_ = data.rows[i_].value.lat;
+					long_ = data.rows[i_].value.long;
+					id_ = data.rows[i_].id;
 
-						Geo.reverse(id_, lat_, long_);
+					Geo.reverse(id_, lat_, long_);
 
-						}, 1000 * start);
-					}
-				});
+					}, 1000 * start);
+				}
 			});
 		},
 	
